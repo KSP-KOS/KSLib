@@ -33,8 +33,10 @@ description:
 
 args:
   * a Vessel, such as ``SHIP``.
+
 returns:
   * a number of degrees in the range [-90..90]
+
 description:
   * Returns the pitch above the horizon for the vessel's nose.
     Pitching up gets a positive number, Pitching down a negative number.
@@ -43,8 +45,10 @@ description:
 
 args:
   * a Vessel, such as ``SHIP``.
+
 returns:
   * a number of degrees in the range [-180..180]
+
 description:
   * Returns the roll relative to the horizon for the vessel's "top".
     Left roll gets a positive number, right roll a negative number.
