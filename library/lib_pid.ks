@@ -1,15 +1,7 @@
-// A generic PID controller routine to be used by other scripts.
-// This controller operates without being aware of the math
-// to perform the integral or derivative operations.  Instead
-// you just keep updating it with the position information and
-// it derives them from it as it goes.
+// This file is distributed under the terms of the MIT license, (c) the KSLib team
 
 @LAZYGLOBAL off.
 
-// ------------
-//   PID_init
-// ------------
-// Make a list of PID tuning parameters Kp, Ki, Kd.
 function PID_init {
   parameter
     Kp, // gain of position
@@ -40,23 +32,13 @@ function PID_init {
   return PID_array.
 }.
 
-// ------------
-//   PID_seek
-// ------------
-// Given a list of the tuning params made with PID_init, and
-// the desired value of the phenomenon, and the current value
-// for the phenomenon, it will automatically return what you should
-// set the controlling thing for that phenomenon to.
 function PID_seek {
   parameter
-    PID_array, // array built with PID_init, and updated with each call to me (PID_seek).
+    PID_array, // array built with PID_init.
     seekVal,   // value we want.
     curVal.    // value we currently have.
 
-  // We have no "static locals" so I'm doing a trick here.
-  // Since LIST()s are passed by ref instead of by value,
-  // I'm going to store the data needed between calls in the
-  // LIST(), so it gets persisted between calls of me.
+  // Using LIST() as a poor-man's struct.
 
   local Kp   is PID_array[0].
   local Ki   is PID_array[1].

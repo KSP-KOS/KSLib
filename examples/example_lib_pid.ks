@@ -1,4 +1,6 @@
+// This file is distributed under the terms of the MIT license, (c) the KSLib team
 clearscreen.
+SAS on.
 set seekAlt to 25.
 
 print "A simple test of libPID.".
