@@ -6,7 +6,7 @@ or in some cases the oiginal developers of the kOS mod.
 
 Due to a limitation in the current implementation of kOS, all
 kerboscript files have to live in the same directory, so when
-you copy these files you'll have to put them all in the same 
+you copy these files you'll have to put them all in the same
 place with no heirarchy.
 
 For the time being, just read the examples and copy the files
@@ -35,6 +35,16 @@ general patterns:
   * doc/
     * A place for you to describe your library and how to use it, in
       textual form, using ascii text, or Github markdown files (.md).
+  * library_ksm/
+    * The place where the .ksm files of your library go.
+      This directory **must not** contain files people can compile
+      locally from .ks files of your library. It is only for files made
+      or modified by external programs to allow stuff that isn't possible
+      in kerboscript but is possible in opcode. It is **highly recommended**
+      to minimize the amount of code placed in here because:
+      * Backwards compatibility for .ksm files is not guarantied
+        (e.g. some significant parser changes might break all old .ksm files).
+      * It is a lot more difficult to modify and improve .ksm files when .ks scripts.
 
 ## Credit:
 
@@ -49,4 +59,3 @@ although feel free to add your own, as long as it doesn't
 get out of hand with too many authors of the same file, in
 which case it may make more sense to just say it was edited
 by a consortium.
-
