@@ -35,3 +35,18 @@ general patterns:
   * doc/
     * A place for you to describe your library and how to use it, in
       textual form, using ascii text, or Github markdown files (.md).
+
+## Credit:
+
+If you want to have proper kudos and credit for a thing you invented,
+you are welcome to insert a comment in the script announcing that you
+wrote it.  Or you can just rely on people having to look up the file's
+git history to figure it out.  The choice is yours.
+
+If you modify a script in which someone else has put such a
+self-attribution commant into it, please don't remove it,
+although feel free to add your own, as long as it doesn't
+get out of hand with too many authors of the same file, in
+which case it may make more sense to just say it was edited
+by a consortium.
+
