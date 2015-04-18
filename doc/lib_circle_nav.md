@@ -34,7 +34,7 @@ description:
 args:
   * A pair of ``GeoCoordinates``.
   * The radius of the sphere around which you are measuring. eg: ``SHIP:BODY:RADIUS``.
-   * Note: if you are flying at constant altitude ``SHIP:BODY:RADIUS + ALTITUDE`` will give you a more acurate result.
+   * Note: if you are flying at constant altitude ``SHIP:BODY:RADIUS + ALTITUDE`` will give you a more accurate result.
 
 returns:
   * A distance in meters.
@@ -62,4 +62,4 @@ returns:
  * ``GeoCoordinates``
 
 description:
-  * Gives you the midpoint between point 1 and 2 along a great circle path. This is not as obviously useful as the others but I needed it for something I am working on so threw it in as well.
+  * Gives you the midpoint between point 1 and 2 along a great circle path.
