@@ -29,7 +29,7 @@ returns:
 description:
   * This will tell you the ``GeoCoordinates`` of a point along a great circle path given a starting position, distance and initial bearing. It can be used for checking ``terrainheight`` up ahead. So no more crashing into that cliff because you can only track changes in terrain as you pass over it.
 
-###circle_distance.ks
+###circle_distance
 
 args:
   * A pair of ``GeoCoordinates``.
@@ -53,7 +53,7 @@ PRINT distance.
 ```
 to give the distance total distance of your current rout.
 
-###circle_midpoint.ks
+###circle_midpoint
 
 args:
   * A pair of ``GeoCoordinates``.
