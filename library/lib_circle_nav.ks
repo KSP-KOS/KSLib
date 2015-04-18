@@ -4,7 +4,7 @@
 @LAZYGLOBAL OFF.
 
 //use to find the initial bearing for the shortest path around a sphere from...
-function o_bearing {
+function circle_bearing {
  parameter
   p1, //...this point...
   p2. //...to this point.
@@ -13,14 +13,14 @@ function o_bearing {
 }.
 
 //use to find where you will end up if you travel from...
-function o_destination {
+function circle_destination {
  parameter
   p1,     //...this point...
   b,      // ...with this as your intitial bearing...
   d,      // ...for this distance...
   radius. // ...around a sphere of this radious.
 
- local lat is to arcsin(sin(p1:lat)*cos((d*180)/(radius*constant():pi))+cos(p1:lat)*sin((d*180)/(radius*constant():pi))*cos(b)).
+ local lat is arcsin(sin(p1:lat)*cos((d*180)/(radius*constant():pi))+cos(p1:lat)*sin((d*180)/(radius*constant():pi))*cos(b)).
  local lng is 0.
  if abs(Lat) <> 90 {
   set lng to p1:lng+arctan2(sin(b)*sin((d*180)/(radius*constant():pi))*cos(p1:lat),cos((d*180)/(radius*constant():pi))-sin(p1:lat)*sin(lat)).
@@ -30,7 +30,7 @@ function o_destination {
 }.
 
 //use to find the distance from...
-function o_distance {
+function circle_distance {
  parameter
   p1,     //...this point...
   p2,     //...to this point...
@@ -41,7 +41,7 @@ function o_distance {
 }.
 
 //use to find the mid point on the outside of a sphere between...
-function o_midpoint {
+function circle_midpoint {
  parameter
   p1, //...this point...
   p2. //...and this point.
