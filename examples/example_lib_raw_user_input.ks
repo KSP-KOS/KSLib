@@ -1,4 +1,5 @@
-run user_input.
+// This file is distributed under the terms of the MIT license, (c) the KSLib team
+run lib_raw_user_input.
 local quit is false.
 until quit
 {
