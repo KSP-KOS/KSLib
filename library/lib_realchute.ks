@@ -3,7 +3,8 @@
 // adds support for RealChute 
 @LAZYGLOBAL OFF.
 declare function R_chutes {
+ parameter event.
  for RealChute in ship:modulesNamed("RealChuteModule") {
-  RealChute:doevent("Deploy chute").
+  RealChute:doevent(event).
  }.
 }.
