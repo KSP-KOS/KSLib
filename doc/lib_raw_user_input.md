@@ -18,4 +18,4 @@ returns:
 
 description:
   * Wait until user activates one of the action groups from ag_list,
-
+    return the number of the activated action group.
