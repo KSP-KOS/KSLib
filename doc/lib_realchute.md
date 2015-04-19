@@ -13,5 +13,5 @@ returns:
   * deployed chutes.
   
 description:
-  * This lets you use ``R_chutes().`` similar to how you would use ``Chutes on.``.
-    * Note: This will obay any rules that realchute sets for these chutes eg. they wont deploy on the way up if you have ticked ``Must go down to deploy``.
+  * This lets you use ``R_chutes().`` similar to how you would use ``Chutes on.``
+    * Note: This will obey any rules that realchute sets for these chutes eg. they wont deploy on the way up if you have ticked ``Must go down to deploy``.
