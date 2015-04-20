@@ -7,6 +7,8 @@
 // If you found a situation where this function is not working create an issue and explain what is going wrong.
 // See "run is weird" for more detailed information: [link is coming soon (tm)]
 
+@LAZYGLOBAL OFF.
+
 log "" to _execute.internal.
 delete _execute.internal.
 log "" to _execute.tmp.
