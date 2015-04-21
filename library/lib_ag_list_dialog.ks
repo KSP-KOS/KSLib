@@ -7,7 +7,7 @@ run lib_raw_user_input.
 function menu_dialog
 {
   parameter title.
-  parameter options. // a list of list(ag_number, menu_line)
+  parameter options. // a list of list(ag_name, menu_line)
 
   // print
   clearscreen.
@@ -26,13 +26,13 @@ function menu_dialog
   return wait_for_action_groups(ag_to_listen).
 }
 
-function list_chose_dialog
+function list_dialog
 {
   parameter title.
   parameter list. // to-do: add support for lists longer when the screen
   parameter status_text.
-  parameter ag_up, ag_down.
   parameter ag_exit_list.
+  parameter ag_up, ag_down.
 
   // print
   clearscreen.
@@ -42,23 +42,24 @@ function list_chose_dialog
   {
     print iter:value at (2, iter:index + 2).
   }
-  print status_text at (0, terminal:hieght - 1).
+  print status_text at (0, terminal:height - 1).
   // set up parameters for wait_for_actiongroups
   local ag_to_listen is ag_exit_list:copy().
-  ag_to_listen:add(ag_up)
+  ag_to_listen:add(ag_up).
   ag_to_listen:add(ag_down).
   // main loop
   local done is false.
   local old_selected_item is 0.
   local selected_item is 0.
+  local ag_index is -1.
   until done
   {
     // print marker
-    print " " at (0, old_selected_item).
-    print "*" at (0, selected_item).
+    print " " at (0, old_selected_item + 2).
+    print "*" at (0, selected_item + 2).
     set old_selected_item to selected_item.
     // main action
-    local ag_index is wait_for_action_groups(ag_to_listen).
+    set ag_index to wait_for_action_groups(ag_to_listen).
     if ag_index = ag_to_listen:length - 2 // up
     {
       set selected_item to max(0, selected_item - 1).
