@@ -14,7 +14,7 @@ args:
   * ag_list - list of strings, a list of action group names to listen.
 
 returns:
-  * string, a name of action group activated by user
+  * number, an index of action group activated by user in ag_list.
 
 description:
   * Wait until user activates one of the action groups from ag_list,
