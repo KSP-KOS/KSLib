@@ -33,5 +33,5 @@ function wait_for_action_groups
   execute("run " + tmp_file_name + ".").
   wait until _wait_for_ag__ag_index <> -1.
   delete tmp_file_name.
-  return ag_list[_wait_for_ag__ag_index].
+  return _wait_for_ag__ag_index.
 }
