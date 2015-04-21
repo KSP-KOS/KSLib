@@ -9,7 +9,7 @@ function circle_bearing {
   p1, //...this point...
   p2. //...to this point.
 
- return arctan2(sin(p2:lng-p1:lng)*cos(p2:lat),cos(p1:lat)*sin(p2:lat)-sin(p1:lat)*cos(p2:lat)*cos(p2:lng-p1:lng)).
+ return mod(360+arctan2(sin(p2:lng-p1:lng)*cos(p2:lat),cos(p1:lat)*sin(p2:lat)-sin(p1:lat)*cos(p2:lat)*cos(p2:lng-p1:lng)),360).
 }.
 
 //use to find where you will end up if you travel from...
