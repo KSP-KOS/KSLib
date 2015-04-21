@@ -18,16 +18,7 @@ function PID_init {
   // Because we don't have proper user structures in kOS (yet?)
   // I'll store the PID tracking values in a list like so:
   //
-  local PID_array is list().
-  PID_array:add(Kp).    // [0]
-  PID_array:add(Ki).    // [1]
-  PID_array:add(Kd).    // [2]
-  PID_array:add(SeekP). // [3]
-  PID_array:add(P).     // [4]
-  PID_array:add(I).     // [5]
-  PID_array:add(D).     // [6]
-  PID_array:add(oldT).  // [7]
-  PID_array:add(oldInput). // [8].
+  local PID_array is list(Kp, Ki, Kd, SeekP, P, I, D, oldT, oldInput).
 
   return PID_array.
 }.
