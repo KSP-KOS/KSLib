@@ -5,9 +5,9 @@ until quit
 {
   clearscreen.
   print "main menu".
-  print "1. submenu".
-  print "2. quit".
-  local menu_option is wait_for_action_groups(list("ag1", "ag2")).
+  print "3. submenu".
+  print "4. quit".
+  local menu_option is wait_for_action_groups(list("ag3", "ag4")).
   if menu_option = 1
   {
     set quit to true.
@@ -19,9 +19,9 @@ until quit
     {
       clearscreen.
       print "submenu".
-      print "1. say hello".
-      print "2. main menu".
-      local menu_option is wait_for_action_groups(list("ag1", "ag2")).
+      print "7. say hello".
+      print "8. main menu".
+      local menu_option is wait_for_action_groups(list("ag7", "ag8")).
       if menu_option = 0
       {
         print "hello".
