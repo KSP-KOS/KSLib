@@ -16,8 +16,8 @@ print "     Action Group 3 :  +1 hover altitude".
 print "     Action Group 4 : +10 hover altitude".
 print "     LANDING LEGS   : Deploy to exit script".
 print " ".
-print " Seek ALT_RADAR = ".
-print "  Cur ALT_RADAR = ".
+print " Seek ALT:RADAR = ".
+print "  Cur ALT:RADAR = ".
 print " ".
 print "       Throttle = ".
 
@@ -42,7 +42,7 @@ function display_block {
   parameter startCol, startRow. // define where the block of text should be positioned
 
   print round(seekAlt,2) + "m    " at (startCol,startRow).
-  print round(alt_radar,2) + "m    " at (startCol,startRow+1).
+  print round(alt:radar,2) + "m    " at (startCol,startRow+1).
   print round(myth,3) + "      " at (startCol,startRow+3).
 }.
 
@@ -58,7 +58,7 @@ set hoverPID to PID_init( 0.05, 0.01, 0.1 ). // Kp, Ki, Kd vals.
 gear on.  gear off. // on then off because of the weird KSP 'have to hit g twice' bug.
 
 until gear {
-  set myTh to PID_seek( hoverPID, seekAlt, alt_radar ).
+  set myTh to PID_seek( hoverPID, seekAlt, alt:radar ).
   display_block(18,13).
   wait 0.001.
 }.
