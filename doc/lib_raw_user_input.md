@@ -11,11 +11,11 @@ dependencies:
 ### wait_for_action_groups
 
 args:
-  * ag_list - list of numbers, a list of action group numbers to listen.
+  * ag_list - list of strings, a list of action group names to listen.
 
 returns:
-  * number, a number of action group pressed by user
+  * string, a name of action group activated by user
 
 description:
   * Wait until user activates one of the action groups from ag_list,
-    return the number of the activated action group.
+    return the name of the activated action group.
