@@ -45,7 +45,8 @@ function list_chose_dialog
   print status_text at (0, terminal:hieght - 1).
   // set up parameters for wait_for_actiongroups
   local ag_to_listen is ag_exit_list:copy().
-  ag_to_listen:add(ag_up, ag_down).
+  ag_to_listen:add(ag_up)
+  ag_to_listen:add(ag_down).
   // main loop
   local done is false.
   local old_selected_item is 0.
@@ -57,12 +58,12 @@ function list_chose_dialog
     print "*" at (0, selected_item).
     set old_selected_item to selected_item.
     // main action
-    local input_ag is wait_for_action_groups(ag_to_listen).
-    if input_ag = ag_up
+    local ag_index is wait_for_action_groups(ag_to_listen).
+    if ag_index = ag_to_listen:length - 2 // up
     {
       set selected_item to max(0, selected_item - 1).
     }
-    else if input_ag = ag_down
+    else if ag_index = ag_to_listen:length - 1 // down
     {
       set selected_item to min(list:length - 1, selected_item + 1).
     }
@@ -71,5 +72,5 @@ function list_chose_dialog
       set done to true.
     }
   }
-  return input_ag.
+  return list(ag_index, selected_item).
 }
