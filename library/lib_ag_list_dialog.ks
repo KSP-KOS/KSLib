@@ -8,6 +8,7 @@ function menu_dialog
 {
   parameter title.
   parameter options. // a list of list(ag_name, menu_line)
+  // to-do: what if list is empty?
 
   // print
   clearscreen.
@@ -30,9 +31,12 @@ function list_dialog
 {
   parameter title.
   parameter list. // to-do: add support for lists longer when the screen
+  parameter selected_item.
   parameter status_text.
-  parameter ag_exit_list.
+  parameter option_list.
   parameter ag_up, ag_down.
+
+  set selected_item to max(0, min(selected_item, list:length - 1)). // to-do: what if list is empty?
 
   // print
   clearscreen.
@@ -44,14 +48,13 @@ function list_dialog
   }
   print status_text at (0, terminal:height - 1).
   // set up parameters for wait_for_actiongroups
-  local ag_to_listen is ag_exit_list:copy().
+  local ag_to_listen is option_list:copy().
   ag_to_listen:add(ag_up).
   ag_to_listen:add(ag_down).
   // main loop
   local done is false.
-  local old_selected_item is 0.
-  local selected_item is 0.
-  local ag_index is -1.
+  local old_selected_item is selected_item.
+  local option_index is -1.
   until done
   {
     // print marker
@@ -59,12 +62,12 @@ function list_dialog
     print "*" at (0, selected_item + 2).
     set old_selected_item to selected_item.
     // main action
-    set ag_index to wait_for_action_groups(ag_to_listen).
-    if ag_index = ag_to_listen:length - 2 // up
+    set option_index to wait_for_action_groups(ag_to_listen).
+    if option_index = ag_to_listen:length - 2 // up
     {
       set selected_item to max(0, selected_item - 1).
     }
-    else if ag_index = ag_to_listen:length - 1 // down
+    else if option_index = ag_to_listen:length - 1 // down
     {
       set selected_item to min(list:length - 1, selected_item + 1).
     }
@@ -73,5 +76,5 @@ function list_dialog
       set done to true.
     }
   }
-  return list(ag_index, selected_item).
+  return list(option_index, selected_item).
 }
