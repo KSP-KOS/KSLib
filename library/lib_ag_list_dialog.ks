@@ -30,25 +30,25 @@ function menu_dialog
 function list_dialog
 {
   parameter title.
-  parameter list. // to-do: add support for lists longer when the screen
+  parameter element_list. // to-do: add support for lists longer when the screen
   parameter selected_item.
   parameter status_text.
-  parameter option_list.
+  parameter action_list.
   parameter ag_up, ag_down.
 
-  set selected_item to max(0, min(selected_item, list:length - 1)). // to-do: what if list is empty?
+  set selected_item to max(0, min(selected_item, element_list:length - 1)). // to-do: what if list is empty?
 
   // print
   clearscreen.
   print title.
-  local iter is list:iterator.
+  local iter is element_list:iterator.
   until not iter:next
   {
     print iter:value at (2, iter:index + 2).
   }
   print status_text at (0, terminal:height - 1).
   // set up parameters for wait_for_actiongroups
-  local ag_to_listen is option_list:copy().
+  local ag_to_listen is action_list:copy().
   ag_to_listen:add(ag_up).
   ag_to_listen:add(ag_down).
   // main loop
@@ -69,7 +69,7 @@ function list_dialog
     }
     else if option_index = ag_to_listen:length - 1 // down
     {
-      set selected_item to min(list:length - 1, selected_item + 1).
+      set selected_item to min(element_list:length - 1, selected_item + 1).
     }
     else
     {
