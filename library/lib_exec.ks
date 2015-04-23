@@ -1,5 +1,5 @@
 // This file is distributed under the terms of the MIT license, (c) the KSLib team
-// Originally created by abenkovskii
+// Originally developed by abenkovskii
 
 // The mess below declares a function execute that executes a command from it's string representation.
 // I'm 95% sure there is no easy way to achieve this behavior in the current version of kOS (0.17).
