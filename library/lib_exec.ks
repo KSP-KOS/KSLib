@@ -30,6 +30,7 @@ log
     "delete _execute.tmp. " +
     "log command to _execute.tmp. " +
     "run _execute.internal. " +
+    "log _execute__empty_string to _execute.tmp. " +
     "delete _execute.tmp. " +
   "}"
 to _execute.init.
