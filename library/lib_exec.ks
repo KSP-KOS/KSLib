@@ -1,10 +1,11 @@
 // This file is distributed under the terms of the MIT license, (c) the KSLib team
+// Originally developed by abenkovskii
 
 // The mess below declares a function execute that executes a command from it's string representation.
 // I'm 95% sure there is no easy way to achieve this behavior in the current version of kOS (0.17).
-// All easier solutions I know fail to work as expected in a huge range of special cases.
-// If you think you know an easy way to implement it create an issue in this repository and post your code there.
-// If you found a situation where this function is not working create an issue and explain what is going wrong.
+// All easier solutions I know fail to work as expected in a range of special cases.
+// If you think you know an easy way to implement it there are unit tests
+// in KSLib/unit_tests/lib_exec to test your implementation.
 // See "run is weird" for more detailed information: [link is coming soon (tm)]
 
 @LAZYGLOBAL OFF.
@@ -30,6 +31,7 @@ log
     "delete _execute.tmp. " +
     "log command to _execute.tmp. " +
     "run _execute.internal. " +
+    "log _execute__empty_string to _execute.tmp. " +
     "delete _execute.tmp. " +
   "}"
 to _execute.init.
