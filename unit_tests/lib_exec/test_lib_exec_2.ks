@@ -8,5 +8,7 @@ run lib_testing.
 execute("run test_lib_exec_2.internal_1.").
 
 assert(evaluate("true")).
+assert(evaluate("24") = 24).
+assert(evaluate("999" = 999)).
 
 test_success().

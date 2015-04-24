@@ -10,12 +10,15 @@ assert(evaluate("true")).
 run test_lib_exec_1.internal_2.
 
 assert(foo1() = 42).
-assert(foo2() = 42).
+assert(evaluate("true")).
+assert(foo2() = 58).
+assert(evaluate("230") = 230).
 
 run lib_exec.
 
 unset z.
 execute("set z to 640 * 480.").
 assert(z = 640 * 480).
+assert(evaluate("435") = 435).
 
 test_success().
