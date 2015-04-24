@@ -4,9 +4,11 @@
 
 function PID_init {
   parameter
-    Kp, // gain of position
-    Ki, // gain of integral
-    Kd. // gain of derivative
+    Kp,      // gain of position
+    Ki,      // gain of integral
+    Kd,      // gain of derivative
+    limmin,  // the return value below which I will be zeroed to prevent integral windup
+    limmax.  // the return value above which I will be zeroed to prevent integral windup
 
   local SeekP is 0. // desired value for P (will get set later).
   local P is 0.     // phenomenon P being affected.
@@ -18,7 +20,7 @@ function PID_init {
   // Because we don't have proper user structures in kOS (yet?)
   // I'll store the PID tracking values in a list like so:
   //
-  local PID_array is list(Kp, Ki, Kd, SeekP, P, I, D, oldT, oldInput).
+  local PID_array is list(Kp, Ki, Kd, limmin, limmax, SeekP, P, I, D, oldT, oldInput).
 
   return PID_array.
 }.
@@ -34,12 +36,14 @@ function PID_seek {
   local Kp   is PID_array[0].
   local Ki   is PID_array[1].
   local Kd   is PID_array[2].
-  local oldS is PID_array[3]. 
-  local oldP is PID_array[4].
-  local oldI is PID_array[5].
-  local oldD is PID_array[6].
-  local oldT is PID_array[7]. // Old Time
-  local oldInput is PID_array[8]. // prev return value, just in case we have to do nothing and return it again.
+  local limmin is PID_array[3].
+  local limmax is PID_array[4].
+  local oldS   is PID_array[5].
+  local oldP   is PID_array[6].
+  local oldI   is PID_array[7].
+  local oldD   is PID_array[8].
+  local oldT   is PID_array[9]. // Old Time
+  local oldInput is PID_array[10]. // prev return value, just in case we have to do nothing and return it again.
 
   local P is seekVal - curVal.
   local D is 0. // default if we do no work this time.
@@ -57,18 +61,20 @@ function PID_seek {
       set newInput to oldInput.
     } else {
       set D to (P - oldP)/dT. // crude fake derivative of P
-      set I to oldI + P*dT. // crude fake integral of P
+      if Kp*P+kD*D > limmin or Kp*P+kD*D < limmax {
+       set I to oldI + P*dT. // crude fake integral of P
+      }.
       set newInput to Kp*P + Ki*I + Kd*D.
     }.
   }.
 
   // remember old values for next time.
-  set PID_array[3] to seekVal.
-  set PID_array[4] to P.
-  set PID_array[5] to I.
-  set PID_array[6] to D.
-  set PID_array[7] to t.
-  set PID_array[8] to newInput.
+  set PID_array[5] to seekVal.
+  set PID_array[6] to P.
+  set PID_array[7] to I.
+  set PID_array[8] to D.
+  set PID_array[9] to t.
+  set PID_array[10] to newInput.
 
   return newInput.
 }.
