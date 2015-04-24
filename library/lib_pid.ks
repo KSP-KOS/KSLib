@@ -61,7 +61,7 @@ function PID_seek {
       set newInput to oldInput.
     } else {
       set D to (P - oldP)/dT. // crude fake derivative of P
-      if Kp*P+kD*D > limmin or Kp*P+kD*D < limmax {
+      if Kp*P+kD*D > limmin and Kp*P+kD*D < limmax {
        set I to oldI + P*dT. // crude fake integral of P
       }.
       set newInput to Kp*P + Ki*I + Kd*D.
