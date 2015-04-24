@@ -59,10 +59,11 @@ function PID_seek {
   } else {
     if dT > 0 { // Do nothing if no physics tick has passed from prev call to now.
      set D to (P - oldP)/dT. // crude fake derivative of P
-     if (oldI > 0 or Kp*P+kD*D > cMin) and (oldI < 0 or Kp*P+kD*D < cMax) { // only do the I turm when within the control range
+     local onlyPD is Kp*P + Kd+D.
+     if (oldI > 0 or onlyPD > cMin) and (oldI < 0 or onlyPD < cMax) { // only do the I turm when within the control range
       set I to oldI + P*dT. // crude fake integral of P
      }.
-     set newInput to Kp*P + Ki*I + Kd*D.
+     set newInput to onlyPD + Ki*I.
     }.
   }.
 
