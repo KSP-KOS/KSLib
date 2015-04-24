@@ -4,68 +4,35 @@
 
 run lib_exec.
 
-// function wait_for_action_groups
-// {
-//   parameter ag_list.
-//   // I believe it's faster when executing each trigger manually
-//   local tmp_file_name is "wait_for_action_groups".
-//   for ag_name in ag_list
-//   {
-//     set tmp_file_name to tmp_file_name + "_" + ag_name.
-//   }
-//   set tmp_file_name to tmp_file_name + ".tmp".
-//   log "" to tmp_file_name.
-//   delete tmp_file_name.
-//
-//   for ag_name in ag_list
-//   {
-//     log "set " + ag_name + " to false." to tmp_file_name.
-//   }
-//   local ag_iter is ag_list:iterator.
-//   until not ag_iter:next
-//   {
-//     log
-//       "when _wait_for_ag__ag_index <> -1 or " + ag_iter:value + " then " +
-//         "if _wait_for_ag__ag_index = -1 " +
-//           "set _wait_for_ag__ag_index to " + ag_iter:index + "."
-//     to tmp_file_name.
-//   }
-//   global _wait_for_ag__ag_index is -1.
-//   execute("run " + tmp_file_name + ".").
-//   wait until _wait_for_ag__ag_index <> -1.
-//   delete tmp_file_name.
-//   return _wait_for_ag__ag_index.
-// }
-
-function first_diff
-{
-  parameter list_a.
-  parameter list_b.
-
-  local iter_a is list_a:iterator.
-  local iter_b is list_b:iterator.
-
-  until not (iter_a:next and iter_b:next)
-  {
-    if iter_a:value <> iter_b:value
-    {
-      break.
-    }
-  }
-  local result is iter_a:index.
-  if iter_a:atend and iter_b:atend
-  {
-    set result to -1.
-  }
-  return result.
-}
-
 function wait_for_action_groups
 {
   parameter ag_list. // list of strings
 
+  function first_diff
+  {
+    parameter list_a.
+    parameter list_b.
+
+    local iter_a is list_a:iterator.
+    local iter_b is list_b:iterator.
+
+    until not (iter_a:next and iter_b:next)
+    {
+      if iter_a:value <> iter_b:value
+      {
+        break.
+      }
+    }
+    local result is iter_a:index.
+    if iter_a:atend and iter_b:atend
+    {
+      set result to -1.
+    }
+    return result.
+  }
+
   local arg_string is "".
-  local  is "".
+  local separator is "".
 
   for ag_name in ag_list
   {
