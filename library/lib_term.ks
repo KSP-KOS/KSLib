@@ -1,3 +1,6 @@
+// This file is distributed under the terms of the MIT license, (c) the KSLib team
+// Original starting work by Github user: Dunbaratu
+
 // terminal manipulations
 //
 @lazyglobal off.
