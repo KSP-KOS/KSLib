@@ -7,8 +7,8 @@ function PID_init {
     Kp,      // gain of position
     Ki,      // gain of integral
     Kd,      // gain of derivative
-    limmin,  // the return value below which I will be zeroed to prevent integral windup
-    limmax.  // the return value above which I will be zeroed to prevent integral windup
+    limmin,  // the bottom limit of the control range (to protect against integral windup)
+    limmax.  // the the upper limit of the control range (to protect against integral windup)
 
   local SeekP is 0. // desired value for P (will get set later).
   local P is 0.     // phenomenon P being affected.
