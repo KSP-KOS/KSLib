@@ -7,8 +7,8 @@ function PID_init {
     Kp,      // gain of position
     Ki,      // gain of integral
     Kd,      // gain of derivative
-    limmin,  // the bottom limit of the control range (to protect against integral windup)
-    limmax.  // the the upper limit of the control range (to protect against integral windup)
+    cMin,  // the bottom limit of the control range (to protect against integral windup)
+    cMax.  // the the upper limit of the control range (to protect against integral windup)
 
   local SeekP is 0. // desired value for P (will get set later).
   local P is 0.     // phenomenon P being affected.
@@ -20,7 +20,7 @@ function PID_init {
   // Because we don't have proper user structures in kOS (yet?)
   // I'll store the PID tracking values in a list like so:
   //
-  local PID_array is list(Kp, Ki, Kd, limmin, limmax, SeekP, P, I, D, oldT, oldInput).
+  local PID_array is list(Kp, Ki, Kd, cMin, cMax, SeekP, P, I, D, oldT, oldInput).
 
   return PID_array.
 }.
@@ -36,8 +36,8 @@ function PID_seek {
   local Kp   is PID_array[0].
   local Ki   is PID_array[1].
   local Kd   is PID_array[2].
-  local limmin is PID_array[3].
-  local limmax is PID_array[4].
+  local cMin is PID_array[3].
+  local cMax is PID_array[4].
   local oldS   is PID_array[5].
   local oldP   is PID_array[6].
   local oldI   is PID_array[7].
@@ -46,8 +46,8 @@ function PID_seek {
   local oldInput is PID_array[10]. // prev return value, just in case we have to do nothing and return it again.
 
   local P is seekVal - curVal.
-  local D is 0. // default if we do no work this time.
-  local I is 0. // default if we do no work this time.
+  local D is oldD. // default if we do no work this time.
+  local I is oldI. // default if we do no work this time.
   local newInput is oldInput. // default if we do no work this time.
 
   local t is time:seconds.
@@ -57,14 +57,12 @@ function PID_seek {
     // I have never been called yet - so don't trust any
     // of the settings yet.
   } else {
-    if dT = 0 { // Do nothing if no physics tick has passed from prev call to now.
-      set newInput to oldInput.
-    } else {
-      set D to (P - oldP)/dT. // crude fake derivative of P
-      if Kp*P+kD*D > limmin and Kp*P+kD*D < limmax {
-       set I to oldI + P*dT. // crude fake integral of P
-      }.
-      set newInput to Kp*P + Ki*I + Kd*D.
+    if dT > 0 { // Do nothing if no physics tick has passed from prev call to now.
+     set D to (P - oldP)/dT. // crude fake derivative of P
+     if (oldI > 0 or Kp*P+kD*D > cMin) and (oldI < 0 or Kp*P+kD*D < cMax) { // only do the I turm when within the control range
+      set I to oldI + P*dT. // crude fake integral of P
+     }.
+     set newInput to Kp*P + Ki*I + Kd*D.
     }.
   }.
 
