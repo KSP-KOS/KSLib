@@ -73,7 +73,7 @@ function PID_seek {
   set PID_array[7] to I.
   set PID_array[8] to D.
   set PID_array[9] to t.
-  set PID_array[10] to newInput.
+  set PID_array[10] to max(cMin,min(cMax,newInput)).
 
   return newInput.
 }.
