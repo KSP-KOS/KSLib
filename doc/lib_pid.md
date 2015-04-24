@@ -10,8 +10,8 @@ args:
   * Kp - number, the tuning gain for the Proportional (position) term.
   * Ki - number, the tuning gain for the Integral term.
   * Kd - number, the tuning gain for the Derivative term.
-  * limmin - number, the bottom limit of the control range (to protect against integral windup)
-  * limmax - number, the upper limit of the control range (to protect against integral windup)
+  * cMin - number, the bottom limit of the control range (to protect against integral windup)
+  * cMax - number, the upper limit of the control range (to protect against integral windup)
 
 returns:
   * PID_array - a data structure holding info to be passed to PID_seek.
