@@ -5,7 +5,7 @@
 function numString {
  parameter
   number,  //input number
-  ip,      //number of figues before the decimal point.
+  ip,      //number of digits before the decimal point.
   dp.      //number of decimal places
 
  local string is "".
