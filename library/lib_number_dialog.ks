@@ -47,4 +47,6 @@ function open_number_dialog
       set increment to increment / 10.
 		}
   }
+
+  clearscreen.
 }
