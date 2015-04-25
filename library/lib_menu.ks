@@ -1,12 +1,14 @@
 // This script shows a menu on the terminal allowing user to
 // select one of the options and return it to calling script.
 
+// This file is distributed under the terms of the MIT license, (c) the KSLib team
+
 @lazyglobal off.
 
-function make_menu{
+function open_menu{
 	parameter title.
 	parameter list_of_names.
-	
+
 	local current_option is 0.
 	local len is list_of_names:length().
 	local eq_string is "+".
@@ -59,66 +61,4 @@ function make_menu{
 
 	clearscreen.
 	return list_of_names[current_option].
-}
-
-// This script shows a number enter menu on the terminal allowing user to
-// type in any number (including floating point ones) and return
-// it to calling script.
-function input_number{
-	parameter title.
-	clearscreen.
-	local num1 is 0.
-	local num2 is 0.
-	local dot_encountered is 0.
-	local choices is list(0,1,2,3,4,5,6,7,8,9,".","Clear","Enter").
-	until false{
-		local t is "".
-		if dot_encountered=0{
-			set t to num1+"_".
-		}
-		else if dot_encountered=1{
-			set t to num1+"._".
-		}
-		else{
-			set t to num1+".".
-			if num2=0{
-				local i is 1.
-				until i=dot_encountered{
-					set t to t+"0".
-					set i to i+1.
-				}
-			}
-			else{
-				local i is dot_encountered-2.
-				until num2>(10^i - 0.00000001){
-					set t to t+"0".
-					set i to i-1.
-				}
-				set t to t+num2.
-			}
-			set t to t+"_".
-		}
-		wait 0.0001.
-		local choice is make_menu(title+" "+t,choices).
-		if choice="Enter"{
-			return num1+0.1^dot_encountered*num2*10.
-		}
-		else if choice ="Clear"{
-			set num1 to 0.
-			set num2 to 0.
-			set dot_encountered to 0.
-		}
-		else if choice="."{
-			set dot_encountered to 1.
-		}
-		else{
-			if dot_encountered{
-				set num2 to num2*10+choice.
-				set dot_encountered to dot_encountered+1.
-			}
-			else{
-				set num1 to num1*10+choice.
-			}
-		}
-	}
 }
