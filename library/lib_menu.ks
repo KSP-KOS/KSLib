@@ -1,6 +1,8 @@
 // This script shows a menu on the terminal allowing user to
 // select one of the options and return it to calling script.
 
+// This file is distributed under the terms of the MIT license, (c) the KSLib team
+
 @lazyglobal off.
 
 function open_menu{
