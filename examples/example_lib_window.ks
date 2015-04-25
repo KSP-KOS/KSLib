@@ -3,12 +3,8 @@ run lib_window_vessel_stats.
 run lib_window_menu.
 run lib_process.
 
-// this code shows two parallel windows on a screen, like this: [][]
-// first one being number input dialog (no real reason why, just demonstrating)
-// and the second one shows some vessel stats. Note that the stats update in background
-// even while you select other number.
-
 clearscreen.
+ag1 off.
 
 set fraction to 0.5.//fraction of screen to left window
 set first_window_share to round((terminal:width-3)*fraction).
@@ -38,10 +34,8 @@ until false{
 			first_window_share,terminal:height-3).
 		set window2 to create_window(window1[0]+window1[2]+1,0,
 			terminal:width-window1[0]-window1[2]-3,terminal:height-3).
-		set all_proc[0][0][1] to window1. //new resolution
-		set all_proc[1][0][1] to window2. //new resolution
-		set all_proc[0][0][3] to true. //please redraw
-		set all_proc[1][0][3] to true. //please redraw
+		change_process_window(all_proc[0],window1).
+		change_process_window(all_proc[1],window2).
 
 		set old_terminal_width to terminal:width.
 		set old_terminal_height to terminal:height.
