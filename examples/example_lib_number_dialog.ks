@@ -2,4 +2,4 @@
 
 run lib_number_dialog.
 
-print(open_number_dialog("enter any number", 0, 1)).
+print(open_number_dialog("enter any number", 0)).

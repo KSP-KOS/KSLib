@@ -4,9 +4,9 @@ function open_number_dialog
 {
   parameter
     title,
-    number,
-    increment.
+    number.
 
+  local increment is 1.
 
   clearscreen.
 
