@@ -1,4 +1,5 @@
 @lazyglobal off.
+
 function terminal_dialog
 {
   parameter
@@ -25,12 +26,20 @@ function terminal_dialog
     if old_previous <> ag7
     {
       set old_previous to ag7.
-      set index to mod(index - 1, len).
+      set index to index - 1.
+      if index < 0  // no mod() function here because of issue #897
+      {
+        set index to index + len.
+      }
     }
     if old_next <> ag8
     {
       set old_next to ag8.
-      set index to mod(index + 1, len).
+      set index to index + 1.
+      if index > len - 1
+      {
+        set index to index - len.
+      }
     }
     if old_enter <> ag9
     {
