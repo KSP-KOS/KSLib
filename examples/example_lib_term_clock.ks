@@ -1,3 +1,6 @@
+// This file is distributed under the terms of the MIT license, (c) the KSLib team
+// Original starting work by Github user: Dunbaratu
+
 // Example that uses some of the lib_term line drawing
 // routines to make a Kerbal clock showing the current
 // kerbin time.
