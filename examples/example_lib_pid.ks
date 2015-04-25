@@ -53,7 +53,7 @@ set myTh to 0.
 
 lock throttle to myTh.
 
-set hoverPID to PID_init( 0.05, 0.01, 0.1 ). // Kp, Ki, Kd vals.
+set hoverPID to PID_init( 0.05, 0.01, 0.1, 0, 1 ). // Kp, Ki, Kd, min, max control  range vals.
 
 gear on.  gear off. // on then off because of the weird KSP 'have to hit g twice' bug.
 

@@ -10,6 +10,8 @@ args:
   * Kp - number, the tuning gain for the Proportional (position) term.
   * Ki - number, the tuning gain for the Integral term.
   * Kd - number, the tuning gain for the Derivative term.
+  * cMin - number, the bottom limit of the control range (to protect against integral windup)
+  * cMax - number, the upper limit of the control range (to protect against integral windup)
 
 returns:
   * PID_array - a data structure holding info to be passed to PID_seek.
@@ -20,6 +22,11 @@ description:
     initial tuning parameters.  This is a very simple PID controller
     that makes no attempts to tune its parameters.  You must supply them
     for it.  Call PID_init once before your controlling loop begins.
+  * When calling it, set cMin and cMax to define the range of valid values
+    it should be allowed to return for the control input.  For example if
+    using it for a LOCK THROTTLE, you should set cMin to 0 and cMax to 1.
+    if using it for, say, a SHIP:CONTROL:YAW, it should be a cMin of -1
+    and a cMax of +1.
 
 ### PID_seek
 
