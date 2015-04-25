@@ -3,7 +3,7 @@
 
 @lazyglobal off.
 
-function make_menu{
+function open_menu{
 	parameter title.
 	parameter list_of_names.
 
