@@ -22,8 +22,11 @@ description:
     initial tuning parameters.  This is a very simple PID controller
     that makes no attempts to tune its parameters.  You must supply them
     for it.  Call PID_init once before your controlling loop begins.
-  * NOTE: limmin and limmax will not limit the value returned by PID_seek, they will however
-    zero out the integral value if the they are exceeded to prevent integral windup.
+  * When calling it, set cMin and cMax to define the range of valid values
+    it should be allowed to return for the control input.  For example if
+    using it for a LOCK THROTTLE, you should set cMin to 0 and cMax to 1.
+    if using it for, say, a SHIP:CONTROL:YAW, it should be a cMin of -1
+    and a cMax of +1.
 
 ### PID_seek
 
