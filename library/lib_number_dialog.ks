@@ -11,9 +11,9 @@ function open_number_dialog
   clearscreen.
 
   print title at (0, 0).
-  print "ag6/ag7 - increase/decrease number by increment" at (0, 3).
-  print "ag8/ag9 - multiply/divide increment by 10" at (0, 4).
-  print "ag10 - enter" at (0, 5).
+  print "ag6/ag7 - increase/decrease number by increment" at (0, 5).
+  print "ag8/ag9 - multiply/divide increment by 10" at (0, 6).
+  print "ag10 - enter" at (0, 7).
 
   local old_increase is ag6.
   local old_decrease is ag7.
@@ -21,10 +21,10 @@ function open_number_dialog
   local old_div10 is ag9.
   local old_enter is ag10.
 
-  until old_enter <> ag10.
+  until old_enter <> ag10
   {
-    print "number: " + number + "                " at (0, 1).
-    print "increment: " + increment + "                " at (0, 2).
+    print "number: " + number + "                " at (0, 2).
+    print "increment: " + increment + "                " at (0, 3).
 
 		if old_increase <> ag6
     {
@@ -49,4 +49,6 @@ function open_number_dialog
   }
 
   clearscreen.
+
+  return number.
 }
