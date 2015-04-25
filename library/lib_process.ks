@@ -34,3 +34,11 @@ function update_all_processes{
 		}
 	}
 }
+
+function change_process_window{
+	parameter process.
+	parameter window.
+
+	set process[0][1] to window.
+	set process[0][3] to true.
+}
