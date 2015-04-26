@@ -40,6 +40,12 @@ function change_process_window{
 	set process[0][3] to true.
 }
 
+function invalidate_process_window{
+	parameter process.
+
+	set process[0][3] to true.
+}
+
 function update_process{
 	parameter process.
 	//process is a struct (list) containing process system info
@@ -61,7 +67,6 @@ function update_all_processes{
 	local i is 0.
 	until i=process_list:length(){
 		local proc is process_list[i].
-		update_process(proc).
 		if process_finished(proc){
 			process_list:remove(i).
 			if is_process_gui(proc){
@@ -69,6 +74,7 @@ function update_all_processes{
 			}
 		}
 		else{
+			update_process(proc).
 			set i to i+1.
 		}
 	}
