@@ -2,7 +2,7 @@
 
 @LAZYGLOBAL off.
 
-function numString {
+function num_to_str {
  parameter
   number,  //input number
   ip,      //number of digits before the decimal point.
