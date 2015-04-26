@@ -10,7 +10,7 @@ function open_window_akros_main_menu{
 
 	local process_state to list(
 		list(false,list_of_windows[0],"update_window_akros_main_menu",false),
-		"title_screen",abort,"child_proc_place",all_proc,list_of_windows,
+		"title_screen",ag1,"child_proc_place",all_proc,list_of_windows,
 		"selected_program"
 	).
 	draw_window_akros_main_menu(process_state).
@@ -32,29 +32,12 @@ function draw_window_akros_main_menu{
 	print "a a  kk  r   O  O    S" at(window[0]+2,window[1]+5).
 	print "aaaa k k r   OOOO SSSS" at(window[0]+2,window[1]+6).
 
-	print "Press Abort to start. " at(window[0]+2,window[1]+8).
+	print "Press 1 to start." at(window[0]+2,window[1]+8).
 
-	print "akrOS, by akrasuski1" at(window[0]+window[2]-21,
+	print "v1.0, by akrasuski1" at(window[0]+window[2]-20,
 									window[1]+window[3]-1).
 	
 	set process_state[0][3] to false. // redraw no longer needed
-}
-
-function get_process_from_name{
-	parameter
-		program_name,
-		list_of_windows,
-		list_of_processes,
-		selected_window_index.
-	
-	if program_name="Vessel stats"{
-		return open_window_vessel_stats(
-			list_of_windows[selected_window_index]
-		).
-	}
-	else if program_name="qweqweqwe"{
-		//etc.
-	}
 }
 
 function update_window_akros_main_menu{
@@ -62,6 +45,9 @@ function update_window_akros_main_menu{
 
 	local run_mode is process_state[1].
 	local wnd is get_process_window(process_state).
+	local last_ag1 is process_state[2].
+	set process_state[2] to ag1.
+	local current_ag1 is process_state[2].
 	
 	if run_mode="title_screen"{
 		if process_needs_redraw(process_state){
@@ -69,9 +55,8 @@ function update_window_akros_main_menu{
 		}
 
 		local wnd is get_process_window(process_state).
-		local last_abort is process_state[2].
 
-		if abort<>last_abort{
+		if current_ag1<>last_ag1{
 			draw_outline(wnd).
 			set process_state[1] to "program_selection".
 			local child_process is open_window_menu(
@@ -159,9 +144,16 @@ function update_window_akros_main_menu{
 			invalidate_process_window(process_state).
 			set process_state[1] to "title_screen".
 		}
+		else if current_ag1<>last_ag1{
+			//this is fail-safe check to enable menu even if
+			//user turns on non-interactive process on window 0.
+			//On ag1, it is immediately killed.
+			set process_state[1] to "title_screen".
+			draw_outline(wnd).
+			invalidate_process_window(process_state).
+		}
 	}
 	
 
-	set process_state[2] to abort.
 	return -1.
 }
