@@ -34,8 +34,6 @@ resize_windows().
 
 set all_proc to list().
 all_proc:add(open_window_akros_main_menu(list_of_windows,all_proc)).
-//all_proc:add(open_window_number_dialog("Apoapsis: ",100000,window1)).
-//all_proc:add(open_window_vessel_stats(list_of_windows[1])).
 
 set old_terminal_width to terminal:width.
 set old_terminal_height to terminal:height.
