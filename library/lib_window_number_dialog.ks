@@ -10,14 +10,18 @@ function open_window_number_dialog{
 	local process_state is list(
 		list(false, window, "update_window_number_dialog",false),
 		title,number,ag6,ag7,ag8,ag9,ag10,"      ",1).
-	redraw_window_number_dialog(process_state).
+	draw_window_number_dialog(process_state).
 	return process_state.
 }
 
-function redraw_window_number_dialog{
+function draw_window_number_dialog{
 	parameter process_state.
 
-	local window is process_state[0][1].
+	if not is_process_gui(process_state){
+		return.
+	}
+
+	local window is get_process_window(process_state).
 	
 	print "6/7 - number    -/+" at (window[0]+2, window[1]+5).
 	print "8/9 - increment -/+" at (window[0]+2, window[1]+6).
@@ -28,7 +32,7 @@ function update_window_number_dialog{
 	parameter process_state.
 
 	local title is process_state[1].
-	local window is process_state[0][1].
+	local window is get_process_window(process_state).
 	local number is process_state[2].
 	local old_decrease is process_state[3].
 	local old_increase is process_state[4].
@@ -38,12 +42,12 @@ function update_window_number_dialog{
 	local spaces is process_state[8].
 	local increment is process_state[9].
 	
-	if process_state[0][3]{
-		redraw_window_number_dialog(process_state).
+	if process_needs_redraw(process_state){
+		draw_window_number_dialog(process_state).
 	}
 
 	if old_enter<>ag10{
-		set process_state[0][0] to true.//finished
+		end_process(process_state).
 		return number.
 	}
 	print title +" "+ number+spaces at(window[0]+2,window[1]+2).
