@@ -9,14 +9,18 @@ function open_window_vessel_stats{
 	local process_state to list(
 		list(false,window,"update_window_vessel_stats",false)
 	).
-	redraw_window_vessel_stats(process_state).
+	draw_window_vessel_stats(process_state).
 	return process_state.
 }
 
-function redraw_window_vessel_stats{
+function draw_window_vessel_stats{
 	parameter process_state.
 
-	local window is process_state[0][1].
+	if not is_process_gui(process_state){
+		return.
+	}
+
+	local window is get_process_window(process_state).
 
 	print "Vessel stats: (AG1 closes)" at(window[0]+2,window[1]+2).
 	print "Latitude: " at(window[0]+2,window[1]+4).
@@ -35,13 +39,13 @@ function redraw_window_vessel_stats{
 function update_window_vessel_stats{
 	parameter process_state.
 
-	if process_state[0][3]{
-		redraw_window_vessel_stats(process_state).
+	if process_needs_redraw(process_state){
+		draw_window_vessel_stats(process_state).
 	}
 
-	local wnd is process_state[0][1].
+	local wnd is get_process_window(process_state).
 	if ag1{
-		set process_state[0][0] to true. //finished
+		end_process(process_state). //finished
 		return 0.
 	}
 	local sason is "OFF".
@@ -73,7 +77,7 @@ function update_window_vessel_stats{
 	print sason                         at(wnd[0]+7, wnd[1]+10).
 	print rcson                         at(wnd[0]+7, wnd[1]+11).
 	print gearon                        at(wnd[0]+8, wnd[1]+12).
-	print lightson                      at(wnd[0]+10, wnd[1]+13).
-	print panelson                      at(wnd[0]+10, wnd[1]+14).
+	print lightson                      at(wnd[0]+10,wnd[1]+13).
+	print panelson                      at(wnd[0]+10,wnd[1]+14).
 	return -1.
 }
