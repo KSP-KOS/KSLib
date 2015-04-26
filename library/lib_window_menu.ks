@@ -22,13 +22,17 @@ function open_window_menu{
 		list(false,window,"update_window_menu",false),
 		current_option,last_up,last_down,last_sel,list_of_names,title
 	).
-	redraw_window_menu(process_state).
+	draw_window_menu(process_state).
 	return process_state.
 }
 
-function redraw_window_menu{ //this is opt-in function. If other programs'
+function draw_window_menu{ //this is opt-in function. If other programs'
 	//developers don't want to react to terminal change, fine.
 	parameter process_state.
+
+	if not is_process_gui(process_state){
+		return.
+	}
 
 	local x is process_state[0][1][0].
 	local y is process_state[0][1][1].
@@ -51,7 +55,8 @@ function redraw_window_menu{ //this is opt-in function. If other programs'
 
 function update_window_menu{
 	parameter process_state.
-	local window is process_state[0][1].
+
+	local window is get_process_window(process_state).
 	local x is window[0].
 	local y is window[1].
 	local current_option is process_state[1].
@@ -60,9 +65,8 @@ function update_window_menu{
 	local last_sel is process_state[4].
 	local len is process_state[5]:length().
 	
-	local window_changed is process_state[0][3].
-	if window_changed{
-		redraw_window_menu(process_state).
+	if process_needs_redraw(process_state){
+		draw_window_menu(process_state).
 	}
 
 	if ag7<>last_up{
@@ -80,7 +84,7 @@ function update_window_menu{
 		set process_state[1] to current_option.
 	}
 	else if ag9<>last_sel{
-		set process_state[0][0] to true.
+		end_process(process_state).
 		return process_state[5][current_option].
 	}
 	return "".
