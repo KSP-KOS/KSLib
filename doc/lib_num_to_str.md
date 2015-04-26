@@ -1,10 +1,10 @@
 // This file is distributed under the terms of the MIT license, (c) the KSLib team
 
-##lib_number_string
+##lib_num_to_str
 
-``lib_number_string.ks`` can be used to to format a number in a string of constant length for use in a display.
+``lib_num_to_str.ks`` can be used to to format a number in a string of constant length for use in a display.
 
-###numString
+###num_to_str
 
 args:
   * The number that you want converted.
