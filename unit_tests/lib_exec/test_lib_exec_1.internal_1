@@ -11,3 +11,5 @@ function foo1
 unset x.
 execute("set x to 01234567.").
 assert(x = 1234567).
+execute("set x to 885.").
+assert(x = 885).

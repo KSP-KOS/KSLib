@@ -63,4 +63,12 @@ function recursive
 
 assert(recursive(20) = 8).
 
+
+set expr to "12 * 3".
+assert(evaluate("evaluate(expr)")).
+
+// misc
+
+assert(evaluate("ship:mass") = ship:mass).
+
 test_success().
