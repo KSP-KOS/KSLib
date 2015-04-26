@@ -34,8 +34,9 @@ function draw_window_menu{ //this is opt-in function. If other programs'
 		return.
 	}
 
-	local x is process_state[0][1][0].
-	local y is process_state[0][1][1].
+	local window is get_process_window(process_state).
+	local x is window[0].
+	local y is window[1].
 	local list_of_names is process_state[5].
 	local len is process_state[5]:length().
 	local title is process_state[6].
