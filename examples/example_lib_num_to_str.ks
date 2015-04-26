@@ -13,6 +13,8 @@ print "Range is -180 to 180 to show the '-' indicator".
 print " ".
 Print "ag1 to exit.".
 
+set ag1 to false.
+
 until ag1 {
  set num to mod(-ship:bearing+180,360)-180.
  print num_to_str(num,3,2) at (12,2).
