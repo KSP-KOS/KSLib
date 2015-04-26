@@ -2,6 +2,44 @@
 
 run lib_exec.
 
+function process_finished{
+	parameter process.
+	return process[0][0].
+}
+
+function get_process_window{
+	parameter process.
+	return process[0][1].
+}
+
+function get_process_update_function{
+	parameter process.
+	return process[0][2].
+}
+
+function process_needs_redraw{
+	parameter process.
+	return process[0][3].
+}
+
+function end_process{
+	parameter process.
+	set process[0][0] to true.
+}
+
+function is_process_gui{
+	parameter process.
+	return process[0][1]:length>0.
+}
+
+function change_process_window{
+	parameter process.
+	parameter window.
+
+	set process[0][1] to window.
+	set process[0][3] to true.
+}
+
 function update_process{
 	parameter process.
 	//process is a struct (list) containing process system info
@@ -12,7 +50,9 @@ function update_process{
 	//[2] - Update_function (string)
 	//[3] - Please_redraw (bool)
 	global __process_state is process.
-	return evaluate(process[0][2]+"(__process_state)").
+	return evaluate(
+		get_process_update_function(process)+"(__process_state)"
+	).
 	//TODO: update above line when new lib_exec comes
 }
 
@@ -22,23 +62,14 @@ function update_all_processes{
 	until i=process_list:length(){
 		local proc is process_list[i].
 		update_process(proc).
-		if proc[0][0]=true{ //finished
+		if process_finished(proc){
 			process_list:remove(i).
-			if proc[0][1]:length()>0{
-				local wnd to proc[0][1].
-				create_window(wnd[0],wnd[1],wnd[2],wnd[3]).
+			if is_process_gui(proc){
+				draw_outline(get_process_window(proc)).
 			}
 		}
 		else{
 			set i to i+1.
 		}
 	}
-}
-
-function change_process_window{
-	parameter process.
-	parameter window.
-
-	set process[0][1] to window.
-	set process[0][3] to true.
 }
