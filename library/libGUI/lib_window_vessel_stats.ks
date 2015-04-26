@@ -22,7 +22,7 @@ function draw_window_vessel_stats{
 
 	local window is get_process_window(process_state).
 
-	print "Vessel stats: (AG1 closes)" at(window[0]+2,window[1]+2).
+	print "Vessel stats:" at(window[0]+2,window[1]+2).
 	print "Latitude: " at(window[0]+2,window[1]+4).
 	print "Longitude: " at(window[0]+2,window[1]+5).
 	print "Compass: " at(window[0]+2,window[1]+6).
@@ -44,10 +44,6 @@ function update_window_vessel_stats{
 	}
 
 	local wnd is get_process_window(process_state).
-	if ag1{
-		end_process(process_state). //finished
-		return 0.
-	}
 	local sason is "OFF".
 	if sas{
 		set sason to "ON ".
