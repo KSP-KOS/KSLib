@@ -1,18 +1,15 @@
-run lib_window_number_dialog.
-run lib_window_vessel_stats.
-run lib_window_menu.
 run lib_window_akros_main_menu.
 run lib_process.
+run gui_programs.
 
 // This is main file of akrOS, basic operating system developed by akrasuski1
 
-ag1 off.
 set terminal:height to 20.
 set terminal:width to 60.
 
 set list_of_windows to list(list(0,0,0,0),list(0,0,0,0)).
 
-function set_windows{
+function resize_windows{
 	clearscreen.
 	set fraction to 0.5.//fraction of screen for left window
 	set first_window_share to round((terminal:width-1)*fraction).
@@ -33,7 +30,7 @@ function set_windows{
 	}
 }
 
-set_windows.
+resize_windows().
 
 set all_proc to list().
 all_proc:add(open_window_akros_main_menu(list_of_windows,all_proc)).
@@ -47,7 +44,7 @@ until all_proc:length=0{
 	if terminal:width<>old_terminal_width or
 		terminal:height<>old_terminal_height{
 
-		set_windows.
+		resize_windows().
 		
 		for proc in all_proc{
 			invalidate_process_window(proc).
