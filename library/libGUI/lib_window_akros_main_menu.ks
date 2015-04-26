@@ -34,7 +34,7 @@ function draw_window_akros_main_menu{
 
 	print "Press 1 to start." at(window[0]+2,window[1]+8).
 
-	print "v1.0, by akrasuski1" at(window[0]+window[2]-20,
+	print "v0.0, by akrasuski1" at(window[0]+window[2]-20,
 									window[1]+window[3]-1).
 	
 	set process_state[0][3] to false. // redraw no longer needed
@@ -60,9 +60,9 @@ function update_window_akros_main_menu{
 			draw_outline(wnd).
 			set process_state[1] to "program_selection".
 			local child_process is open_window_menu(
+				wnd,
 				"Select program:",
-				list("Vessel stats","Back","Quit akrOS"),
-				wnd
+				list("Vessel stats","Back","Quit akrOS")
 			).
 			set process_state[3] to child_process.
 		}
@@ -98,7 +98,7 @@ function update_window_akros_main_menu{
 					set i to i+1.
 				}
 				set child_process to open_window_menu(
-					"Select window",lw,wnd
+					wnd,"Select window",lw
 				).
 				set process_state[1] to "window_selection".
 				set process_state[3] to child_process.
