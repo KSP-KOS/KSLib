@@ -1,6 +1,6 @@
 // This file is distributed under the terms of the MIT license, (c) the KSLib team
 
-run lib_number_string.
+run lib_num_to_str.
 local num is 0.
 clearscreen.
 
