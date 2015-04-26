@@ -9,6 +9,10 @@ function open_menu{
 	parameter title.
 	parameter list_of_names.
 
+	if list_of_names:empty {
+		print "error: list_of_names should not be empty". print 1/0.
+	}
+
 	local current_option is 0.
 	local len is list_of_names:length().
 	local eq_string is "+".
