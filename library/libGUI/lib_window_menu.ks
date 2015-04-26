@@ -5,9 +5,9 @@
 run lib_window.
 
 function open_window_menu{
+	parameter window.
 	parameter title.
 	parameter list_of_names.
-	parameter window.
 
 	local x is window[0].
 	local y is window[1].
