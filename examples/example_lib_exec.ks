@@ -39,3 +39,11 @@ until x > 8
   print "g(" + x + ") = " + expr.
   set x to x + step.
 }
+
+function foo
+{
+  parameter x.
+  return x ^ 2.
+}
+
+print evaluate_function("foo", list(10)).
