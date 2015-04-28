@@ -62,6 +62,10 @@ FUNCTION LAZcalc {
 		SET launchAzimuth TO 180 - launchAzimuth.
 	}.
 	
+	IF launchAzimuth < 0 {
+		SET launchAzimuth TO 360 + launchAzimuth.		//Converts negative degrees from north into heading
+	}.
+	
 	RETURN launchAzimuth.
 
 	//#close Output
