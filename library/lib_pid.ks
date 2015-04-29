@@ -67,13 +67,15 @@ function PID_seek {
     }.
   }.
 
+  set newInput to max(cMin,min(cMax,newInput)).
+
   // remember old values for next time.
   set PID_array[5] to seekVal.
   set PID_array[6] to P.
   set PID_array[7] to I.
   set PID_array[8] to D.
   set PID_array[9] to t.
-  set PID_array[10] to max(cMin,min(cMax,newInput)).
+  set PID_array[10] to newInput.
 
   return newInput.
 }.
