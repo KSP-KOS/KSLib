@@ -22,6 +22,9 @@ PRINT "--------------------------------------------------".
 SET launchAzimuth TO LAZcalc(500,-60).
 PRINT "  500km    |  60deg     | Dec     | " +  ROUND(launchAzimuth,2) + "deg".
 PRINT "--------------------------------------------------".
+SET launchAzimuth TO LAZcalc(130,-180).
+PRINT "  130km    |  180deg    | Dec     | " +  ROUND(launchAzimuth,2) + "deg".
+PRINT "--------------------------------------------------".
 SET launchAzimuth TO LAZcalc(250,120).
 PRINT "  250km    |  120deg    | Asc     | " +  ROUND(launchAzimuth,2) + "deg".
 PRINT "--------------------------------------------------".
