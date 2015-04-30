@@ -47,8 +47,29 @@ delete _execute.tmp.
 function evaluate
 {
   parameter expression.
+
   execute("global _evaluate_result is " + expression + ".").
   local result is _evaluate_result.
   unset _evaluate_result.
   return result.
+}
+
+function evaluate_function
+{
+  parameter
+    function_name,
+    parameter_list.
+
+  global _exec__param_list is parameter_list.
+  local expression is "".
+  local separator is "".
+  local index is 0.
+  until index = parameter_list:length
+  {
+    set expression to expression + separator + "_exec__param_list[" + index + "]".
+    set separator to ", ".
+    set index to index + 1.
+  }
+  set expression to function_name + "(" + expression + ")".
+  return evaluate(expression).
 }
