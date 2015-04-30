@@ -36,13 +36,11 @@ FUNCTION LAZcalc {
 	//Orbital inclination can't be less than launch latitude or greater than 180 - launch latitude
 	IF ABS(desiredInc) < ABS(currentLatitude) {
 		SET desiredInc TO ABS(currentLatitude).
-		PRINT "Inclination impossible from current latitude".
-		PRINT "Setting inclination to latitude, eastward launch".
+		HUDTEXT("Inclination impossible from current latitude, setting inclination to latitude, eastward launch", 10, 2, 30, RED, FALSE).
 		
 	} ELSE IF ABS(desiredInc) > (180 - ABS(currentLatitude)) {
 		SET desiredInc TO (180 - ABS(currentLatitude)).
-		PRINT "Inclination impossible from current latitude".
-		PRINT "Setting inclination to latitude, westward launch".
+		HUDTEXT("Inclination impossible from current latitude, setting inclination to latitude, westward launch", 10, 2, 30, RED, FALSE).
 	}.
 	
 	IF desiredInc < 0 {
