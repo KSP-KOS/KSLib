@@ -14,6 +14,7 @@ FUNCTION LAZcalc {
 	DECLARE PARAMETER desiredInc.		//Inclination of desired target orbit
 
 	LOCAL launchNode TO "A".		//Whether the launch should be at the ascending or descending node. Defaults to ascending.
+	LOCAL currentLatitude TO SHIP:LATITUDE.		//Pulls the current latitude to avoid having a slightly different latitude used for different parts of the calculation due to them occuring in different physics ticks
 	LOCAL inertialAzimuth TO -1.		//Launch azimuth before taking into account the rotation of the planet
 	LOCAL launchAzimuth TO -1.			//Launch azimuth after taking into account the rotation of the planet
 	LOCAL targetOrbVel TO -1.			//Orbital velocity of the desired target orbit
@@ -28,12 +29,18 @@ FUNCTION LAZcalc {
 
 	//Orbital altitude can't be less than sea level
 	IF desiredAlt <= 0 {
-		SET desiredAlt to 100.
+		PRINT "Target altitude cannot be below sea level".
+		SET launchAzimuth TO 1/0.		//Throws error
 	}.
 
-	//Orbital inclination can't be less than launch latitude or greater than 180
-	IF ABS(desiredInc) < ABS(SHIP:LATITUDE) OR ABS(desiredInc) > (180 - SHIP:LATITUDE) {
-		SET desiredInc TO SHIP:LATITUDE.
+	//Orbital inclination can't be less than launch latitude or greater than 180 - launch latitude
+	IF ABS(desiredInc) < ABS(currentLatitude) {
+		SET desiredInc TO ABS(currentLatitude).
+		HUDTEXT("Inclination impossible from current latitude, setting inclination to latitude, eastward launch", 10, 2, 30, RED, FALSE).
+		
+	} ELSE IF ABS(desiredInc) > (180 - ABS(currentLatitude)) {
+		SET desiredInc TO (180 - ABS(currentLatitude)).
+		HUDTEXT("Inclination impossible from current latitude, setting inclination to latitude, westward launch", 10, 2, 30, RED, FALSE).
 	}.
 	
 	IF desiredInc < 0 {
@@ -49,8 +56,8 @@ FUNCTION LAZcalc {
 	SET targetOrbSMA TO desiredAlt + BODY:RADIUS.
 	SET targetOrbVel TO SQRT(BODY:MU / (targetOrbSMA)).
 	SET equatorialVel TO (2 * CONSTANT():PI * BODY:RADIUS) / BODY:ROTATIONPERIOD.
-	SET inertialAzimuth TO ARCSIN(COS(desiredInc) / COS(SHIP:LATITUDE)).
-	SET VXRot TO (targetOrbVel * SIN(inertialAzimuth)) - (equatorialVel * COS(SHIP:LATITUDE)).
+	SET inertialAzimuth TO ARCSIN(COS(desiredInc) / COS(currentLatitude)).
+	SET VXRot TO (targetOrbVel * SIN(inertialAzimuth)) - (equatorialVel * COS(currentLatitude)).
 	SET VYRot TO (targetOrbVel * COS(inertialAzimuth)).
 	SET launchAzimuth TO ARCTAN(VXRot / VYRot).
 
