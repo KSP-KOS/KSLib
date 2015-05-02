@@ -26,7 +26,6 @@ function open_menu_indexed{
 
 	clearscreen.
 	print eq_string at(0,0).
-	print "MENU" at (terminal:width/2-1,0).
 	set i to 0.
 	until i=len+8{
 		print "|" at(0,i+1).
