@@ -30,7 +30,7 @@ function open_list_dialog {
       set page_start to max(0, page_start - page_height).
     }
   }
-  return result.
+  return page_start + result.
 }
 
 function open_cancelable_list_dialog {
@@ -55,7 +55,7 @@ function open_cancelable_list_dialog {
         set page_start to max(0, page_start - page_height).
       }
     }
-    return result.
+    return page_start + result.
 }
 
 // private:
