@@ -5,9 +5,9 @@ run lib_testing.
 // importing lib_exec multiple times should be safe
 
 // imagine internal_1 and internal_2 are two libraries that both use lib_exec
-run test_lib_exec_1.internal_1.
+run test_lib_exec_1.internal_1.ks.
 assert(evaluate("true")).
-run test_lib_exec_1.internal_2.
+run test_lib_exec_1.internal_2.ks.
 
 assert(foo1() = 42).
 assert(evaluate("true")).
