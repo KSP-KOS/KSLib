@@ -16,6 +16,11 @@ returns:
 description:
   Open a multipage list dialog, return an index of option chosen by user.
 
+controlled by action groups:
+  * AG 7 - move up
+  * AG 8 - move down
+  * AG9 - select
+
 ### open_cancelable_list_dialog
 
 args:
