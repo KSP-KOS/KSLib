@@ -6,9 +6,9 @@ for i in numbers {
     options:add(i + j).
   }
 }
-print "your first choice is: " + options[open_list_dialog("chose an option", options)].
+print "your first choice is: " + options[open_list_dialog("choose an option:", options)].
 wait 2.
-set choice to open_cancelable_list_dialog("chose an option", options).
+set choice to open_cancelable_list_dialog("choose an option:", options).
 if choice = -1 {
   print "you canceled the dialog".
 } else {

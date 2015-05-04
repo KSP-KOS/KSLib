@@ -9,7 +9,7 @@ function open_list_dialog {
     title,
     option_list.
 
-  local action_list is list("next page", "previous page"). // 1
+  local action_list is list("Next page", "Previous page").
   return _list_dialog(title, option_list, action_list, -1).
 }
 
@@ -18,7 +18,7 @@ function open_cancelable_list_dialog {
     title,
     option_list.
 
-  local action_list is list("next page", "previous page", "cancel").
+  local action_list is list("Next page", "Previous page", "Cancel").
   return _list_dialog(title, option_list, action_list, -2).
 }
 
@@ -43,7 +43,7 @@ function _list_dialog {
     for option in option_list:sublist(page_start, page_height) {
       menu_list:add(option).
     }
-    local title is title + " page " + (page_start / page_height + 1) + " / " + (ceiling(option_list:length/page_height)).
+    local title is title + " [Page: " + (page_start / page_height + 1) + " / " + (ceiling(option_list:length/page_height)) + "]".
     set result to open_menu_indexed(title, menu_list) - action_list:length.
     if result = internal_action_offset - 1 { // next
       set page_start to min(page_start + page_height, option_list:length).
