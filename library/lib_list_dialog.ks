@@ -51,5 +51,8 @@ function _list_dialog {
       set page_start to max(0, page_start - page_height).
     }
   }
-  return page_start + result.
+  if result >= 0 {
+    set result to page_start + result.
+  }
+  return result.
 }
