@@ -22,6 +22,8 @@ function open_cancelable_list_dialog {
   return _list_dialog(title, option_list, action_list, -2).
 }
 
+
+// this function is internal and should not be used outside lib_list_dialog
 function _list_dialog {
   parameter
     title,
