@@ -2,9 +2,23 @@
 
 ## lib_exec
 
-Any good scripting language should be able to run it's own interpreter.
-Warning there are some complex situations that might cause this library
-to stop working correctly. I'll add the documentation for those cases soon (tm).
+This library is a powerful tool for unhardcoding program's behavior.
+As far as I know it works fine in all possible special cases.
+
+### Caveat:
+```
+execute("run foo.").
+delete foo.
+rename bar to foo.
+execute("run foo.").  // will still run the first version of foo
+```
+As well as:
+```
+run foo.
+delete foo.
+rename bar to foo.
+run foo.  // will still run the first version of foo
+```
 
 ### execute
 
@@ -13,6 +27,9 @@ args:
 
 description:
   * Execute a command.
+
+example:
+  `execute("set x to 42. print x.").`
 
 ### evaluate
 
@@ -24,3 +41,51 @@ returns:
 
 description:
   * Evaluate an expression.
+
+example:
+  `print evaluate("x*x + x + 8").`
+
+### evaluate_function
+
+args:
+  * function_name - string, a name of function to evaluate
+  * parameter_list - list of strings, parameters to pass to the function
+
+returns:
+  * result - result of function evaluation.
+
+example:
+  `print evaluate_function("foo", list(42, true, "hello")).`
+  does exactly the same as:
+  `print foo(42, true, "hello").`
+
+### useful tips
+
+* Compilation is a slow process. Each call of lib_exec's functions causes
+  a compilation. If you want to speed your main loop up try this techinque:
+  ```
+  lock my_expr to 0.  // or kOS compiler won't threat my_expr as locked
+  execute("lock my_expr to x*x + x + 8."). // insert your expression here
+  set done to false.
+  until done {
+    print my_expr.  // insert your main loop code here
+  }
+  ```
+
+* If for some weird reason you don't want to use this library, a simple mediator
+  helps in some simple cases (but fails in others):
+
+  mediator.ks:
+  ```
+  run foo.
+  ```
+  main.ks:
+  ```
+  run mediator.
+  delete foo.
+  rename bar to foo.
+  run mediator.  // actually runs the second version
+  ```
+
+  P.S. If the "mediator" above doesn't work for you, don't ask me why, just use
+  lib_exec.
