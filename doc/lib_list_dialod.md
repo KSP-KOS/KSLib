@@ -7,7 +7,7 @@ This library helps when you want the user to choose a value from a long list.
 ### open_list_dialog
 
 args:
-  * title - string, a title to display at the top of a dialog
+  * title - string, a title to display at the top of the dialog
   * option_list - list of strings, options from which the user will choose
 
 returns:
