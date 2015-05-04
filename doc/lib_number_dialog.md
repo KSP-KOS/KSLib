@@ -14,4 +14,4 @@ returns:
   * number, a number that the user entered.
 
 description:
-
+  Open number dialog, return a number entered by  the user.
