@@ -4,6 +4,9 @@
 
 This library helps when you want the user to choose a value from a long list.
 
+dependencies:
+  * lib_menu
+
 ### open_list_dialog
 
 args:
