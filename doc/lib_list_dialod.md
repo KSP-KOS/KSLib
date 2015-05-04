@@ -14,7 +14,7 @@ returns:
   * number, an index of option chosen by user
 
 description:
-  Open a multipage list dialog, return an index of option chosen by user
+  Open a multipage list dialog, return an index of option chosen by user.
 
 ### open_cancelable_list_dialog
 
@@ -32,4 +32,4 @@ description:
 ### _list_dialog
 
 description:
-  this function is internal and should not be used outside lib_list_dialog
+  This function is internal and should not be used outside of lib_list_dialog.
