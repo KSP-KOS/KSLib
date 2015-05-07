@@ -4,8 +4,8 @@
 function draw_custom_gui_box {
 	parameter
 		x, y, w, h,
-		top_char,
-		side_char,
+		horizontal_char,
+		vertical_char,
     corner_char.
 
   // to-discuss: should we sanitize the input?
@@ -14,7 +14,7 @@ function draw_custom_gui_box {
 	local horizontal_str is corner_char.
 	local i is 0.
 	until i >= w - 2 {
-		set horizontal_str to horizontal_str + top_char.
+		set horizontal_str to horizontal_str + horizontal_char.
 		set i to i + 1.
 	}
 	set horizontal_str to horizontal_str + corner_char.
@@ -22,8 +22,8 @@ function draw_custom_gui_box {
 	print horizontal_str at(x, y + h - 1).
 	set i to 1.
 	until i >= h - 1 {
-		print side_char at(x , y + i).
-		print side_char at(x + w - 1, y + i).
+		print vertical_char at(x , y + i).
+		print vertical_char at(x + w - 1, y + i).
 		set i to i + 1.
 	}
 }
