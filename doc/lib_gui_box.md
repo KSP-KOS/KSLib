@@ -30,6 +30,14 @@ description:
   +====+
   ```
 
+### warning
+
+  Due to how terminal works you can't use `draw_gui_box(0, 0, terminal:width, terminal:height).`
+  because printing at the bottom right corner  will cause it to move everything
+  already drawn up by one line and mess up the alignment. The solution is to use
+  `draw_gui_box(0, 0, terminal:width, terminal:height - 1).` instead. Same for
+  other commands.
+
 ### draw_one_char_gui_box
 
   args:
