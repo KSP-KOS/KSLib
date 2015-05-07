@@ -1,5 +1,7 @@
 // This file is distributed under the terms of the MIT license, (c) the KSLib team
 
+run lib_gui_box.
+
 function open_number_dialog
 {
 	parameter title.
@@ -8,24 +10,8 @@ function open_number_dialog
 	local increment is 1.
 
 	clearscreen.
-	
-	local eq_string is "+".
-	local space_string is "|".
-	local i is 0.
-	until i+2=terminal:width{
-		set eq_string to eq_string+"=".
-		set space_string to space_string+" ".
-		set i to i+1.
-	}
-	set space_string to space_string+"|".
-	set eq_string to eq_string+"+".
-	print eq_string at(0,0).
-	set i to 0.
-	until i=8{
-		print space_string at(0,1+i).
-		set i to i+1.
-	}
-	print eq_string at(0,9).
+
+	draw_gui_box(0, 0, terminal:width, 10).
 
 	print "6/7 - number    -/+" at (2, 5).
 	print "8/9 - increment -/+" at (2, 6).

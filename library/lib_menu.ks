@@ -5,6 +5,8 @@
 
 @lazyglobal off.
 
+run lib_gui_box.
+
 function open_menu{
 	parameter title.
 	parameter list_of_names.
@@ -15,32 +17,18 @@ function open_menu{
 
 	local current_option is 0.
 	local len is list_of_names:length().
-	local eq_string is "+".
-	local i is 0.
-	until i+2=terminal:width{
-		set eq_string to eq_string+"=".
-		set i to i+1.
-	}
-	set eq_string to eq_string+"+".
 
 	clearscreen.
-	print eq_string at(0,0).
 	print "MENU" at (terminal:width/2-1,0).
-	set i to 0.
-	until i=len+8{
-		print "|" at(0,i+1).
-		print "|" at(terminal:width-1,i+1).
-		set i to i+1.
-	}
 	print title at(2,2).
-	set i to 0.
+	local i is 0.
 	until i=len{
 		print "[ ] "+list_of_names[i] at(2,i+4).
 		set i to i+1.
 	}
-	print eq_string at(0,len+5).
+	draw_gui_box(0, 0, terminal:width, len + 6).
 	print "AG7/8 - move up/down, AG9 - select" at(2,len+7).
-	print eq_string at(0,len+9).
+	draw_gui_box(0, len + 5, terminal:width, 5).
 	print "*" at(3,4).
 
 	until false{
