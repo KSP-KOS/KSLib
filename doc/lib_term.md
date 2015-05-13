@@ -23,7 +23,7 @@ Here is an example clock display from the examples folder, using
 the char_circle and char_line primitives to draw the clock face
 and the hands:
 
-![example image showing a clock](example_lib_term.png)
+![example image showing a clock](lib_term_illustration.png)
 
 ### char_line
 
@@ -88,4 +88,3 @@ description:
     GOTCHAS: Be aware that on the terminal screen, positive Y is DOWN,
     not UP, which may yield confusing results about which way is
     positive degrees of the arc, if you're not taking it into account.
-
