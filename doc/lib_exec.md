@@ -8,7 +8,9 @@ As far as I know it works fine in all possible special cases.
 ### execute
 
 args:
-  * command - a command or a sequence of commands to execute
+  * command - a command or a sequence of commands to execute.
+    example: "list files in f_list. print f_list[0].". Note:
+    the command should end with `.` (dot).
 
 description:
   * Execute a command.
@@ -37,7 +39,8 @@ execute("run foo.").  // will still run the first version of foo
 ### evaluate
 
 args:
-  * expression - an expression to evaluate.
+  * expression - an expression to evaluate. Unlike "command" parameter from function
+    `execute` an expression should **not** end with dot: `evaluate("7 * a + 2").`.
 
 returns:
   * result - result of expression evaluation.
