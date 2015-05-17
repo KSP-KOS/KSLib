@@ -23,7 +23,7 @@ Here is an example clock display from the examples folder, using
 the char_circle and char_line primitives to draw the clock face
 and the hands:
 
-![example image showing a clock](lib_term_illustration.png)
+![example image showing a clock](img/example_lib_term.png)
 
 ### char_line
 
