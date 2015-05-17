@@ -65,10 +65,7 @@ example:
 
 args:
   * function_name - string, a name of function to evaluate
-  * parameter_list - list, parameters to pass to the function. Each element's
-    string representation should be a valid expression.
-    e.g.: `evaluate_function("foo", list("abc", list(1, 2, 3)))` won't work.
-    Use `evaluate_function("foo", list("abc", "list(1, 2, 3)"))` instead.
+  * parameter_list - list of anything, parameters to pass to the function
 
 returns:
   * result - result of function evaluation.
