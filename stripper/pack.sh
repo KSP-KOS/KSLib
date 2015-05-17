@@ -9,7 +9,11 @@
 FILES=`ls *.ks`
 echo $FILES
 for f in $FILES; do
-	sed -e 's/\/\/.*//g' -e 's/^\( \|\t\)*//g' -e 's/\( \|\t\)*$//g' $f > packed/$f;
+	sed \
+	-e 's/^\(\([^"]*\)\("[^"]*"[^"]*\)*\)\/\/.*/\1/g' \
+	-e 's/^\( \|\t\)*//g' \
+	-e 's/\( \|\t\)*$//g' \
+	$f > packed/$f;
 	# the first line strips comments
 	# the second line strips leading whitespace
 	# the third line strips trailing whitespace
