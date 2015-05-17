@@ -7,11 +7,11 @@
 
 run lib_gui_box.
 
-function open_menu{
+function open_menu_indexed{
 	parameter title.
 	parameter list_of_names.
 
-	if list_of_names:empty {
+	if list_of_names:empty{
 		print "error: list_of_names should not be empty". print 1/0.
 	}
 
@@ -19,7 +19,6 @@ function open_menu{
 	local len is list_of_names:length().
 
 	clearscreen.
-	print "MENU" at (terminal:width/2-1,0).
 	print title at(2,2).
 	local i is 0.
 	until i=len{
@@ -52,5 +51,12 @@ function open_menu{
 	}
 
 	clearscreen.
-	return list_of_names[current_option].
+	return current_option.
+}
+
+function open_menu{
+	parameter title.
+	parameter list_of_names.
+
+	return list_of_names[open_menu_indexed(title, list_of_names)].
 }
