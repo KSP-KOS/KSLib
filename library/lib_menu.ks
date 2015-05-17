@@ -5,11 +5,12 @@
 
 @lazyglobal off.
 
-function open_menu{
+
+function open_menu_indexed{
 	parameter title.
 	parameter list_of_names.
 
-	if list_of_names:empty {
+	if list_of_names:empty{
 		print "error: list_of_names should not be empty". print 1/0.
 	}
 
@@ -25,7 +26,6 @@ function open_menu{
 
 	clearscreen.
 	print eq_string at(0,0).
-	print "MENU" at (terminal:width/2-1,0).
 	set i to 0.
 	until i=len+8{
 		print "|" at(0,i+1).
@@ -64,5 +64,12 @@ function open_menu{
 	}
 
 	clearscreen.
-	return list_of_names[current_option].
+	return current_option.
+}
+
+function open_menu{
+	parameter title.
+	parameter list_of_names.
+
+	return list_of_names[open_menu_indexed(title, list_of_names)].
 }
