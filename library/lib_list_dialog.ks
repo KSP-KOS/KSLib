@@ -31,11 +31,11 @@ function _list_dialog {
     action_list,
     internal_action_offset.
 
-  local inaccessibe_lines is 11.
+  local inaccessible_lines is 11.
   local page_start is 0.
   local result is internal_action_offset.
   until result > internal_action_offset {
-    local page_height is terminal:height - inaccessibe_lines - action_list:length.
+    local page_height is terminal:height - inaccessible_lines - action_list:length.
     set page_start to page_start - mod(page_start, page_height).
     local menu_list is action_list:copy.
     for option in option_list:sublist(page_start, page_height) {
