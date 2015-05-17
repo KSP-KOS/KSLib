@@ -18,7 +18,7 @@ description:
 example:
   `execute("set x to 42. print x.").`
   
-caveat:
+caveat #1:
   * run command in the current version of kOS works in a weird way:
 ```
 run foo.
@@ -35,6 +35,16 @@ execute("run foo.").  // will still run the first version of foo
 ```
   * you'll have to change the name of file every time if you want it to be recompiled
 
+caveat #2:
+  * the command will be executed in the global scope. i.e. this won't work:
+```
+{
+  local my_example_var is 42.
+  execute("print my_example_var.").
+}
+```
+
+##### The same caveats apply to other functions from this library.
 
 ### evaluate
 
