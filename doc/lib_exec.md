@@ -5,21 +5,6 @@
 This library is a powerful tool for unhardcoding program's behavior.
 As far as I know it works fine in all possible special cases.
 
-### Caveat:
-```
-execute("run foo.").
-delete foo.
-rename bar to foo.
-execute("run foo.").  // will still run the first version of foo
-```
-As well as:
-```
-run foo.
-delete foo.
-rename bar to foo.
-run foo.  // will still run the first version of foo
-```
-
 ### execute
 
 args:
@@ -30,6 +15,24 @@ description:
 
 example:
   `execute("set x to 42. print x.").`
+  
+caveat:
+  * run command in the current version of kOS works in a weird way:
+```
+run foo.
+delete foo.
+rename bar to foo.
+run foo.  // will still run the first version of foo
+```
+  * lib_exec can't fix it:
+```
+execute("run foo.").
+delete foo.
+rename bar to foo.
+execute("run foo.").  // will still run the first version of foo
+```
+  * you'll have to change the name of file every time if you want it to be recompiled
+
 
 ### evaluate
 
