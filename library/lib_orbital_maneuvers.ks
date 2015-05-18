@@ -19,7 +19,7 @@ function make_node_t_deltav{
 
 // This function gets time as a parameter, and returns a maneuver
 // node representing velocity change leading to circular orbit
-// with that burn happening at specified time. If you want to 
+// with that burn happening at specified time. E.g. if you want to 
 // circularize at apoapsis, use: 
 // circularize_at_time(time:seconds+eta:apoapsis).
 function circularize_at_time{
@@ -135,25 +135,24 @@ function match_orbits{
 	return make_node_t_deltav(time:seconds+t,expected_vel-actual_vel).
 }
 
-// This function takes two identical orbits as arguments (though they
-// differ in ship's current position). Function returns a node, that in
-// N orbits (N is integer parameter) will match phase of both ships (put
-// them in almost exact same place).
+// This function takes an orbit as an argument. It should be IDENTICAL to
+// your ship's orbit, other than phase (the other ship or body can be in
+// different position in the orbit). The function will then return a node
+// that in N orbits (where N is integer argument) will match your position.
 function match_orbital_phase{
 	parameter
-		orb1,
-		orb2,
+		orb,
 		n.
 	
-	local t1 is time_to_true_anomaly(orb1,0).
-	local t2 is time_to_true_anomaly(orb2,0).
+	local t1 is time_to_true_anomaly(obt,0).
+	local t2 is time_to_true_anomaly(orb,0).
 	
-	local period is orb1:period.
+	local period is obt:period.
 	local dt is mod(t2-t1+period*1.5,period)-period/2.
 	// now dt is time difference [-period/2,period/2] between target's
 	// and my periapsis
-	local h is 2*orb1:semimajoraxis*(1+dt/n/period)^(2/3)-
-		orb1:periapsis-2*orb1:body:radius.
+	local h is 2*obt:semimajoraxis*(1+dt/n/period)^(2/3)-
+		obt:periapsis-2*obt:body:radius.
 	return change_opposite_height(time:seconds+t1,h).
 }
 
