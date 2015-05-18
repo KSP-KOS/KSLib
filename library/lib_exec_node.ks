@@ -28,7 +28,7 @@ function exec_node{
 
 	lock steering to nd.
 	wait until nd:eta<burntime/2.
-	local timeout is time:seconds+burntime*2. // just a guess
+	local timeout is time:seconds+max(burntime*2,100). // just a guess
 
 	lock throttle to cos(vang(nd:deltav,ship:facing:vector)).
 	// Thanks to cosine, we burn only when we face the correct direction.
