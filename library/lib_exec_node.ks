@@ -1,5 +1,11 @@
 @lazyglobal off.
 
+// This file is currently just a placeholder for a more robust version,
+// uploaded solely because it is a very basic function for KSP.
+// I would be glad if anyone helps to develop it (add staging,
+// perhaps improve burntime calculations, add special cases such
+// as not enough fuel, etc.)
+
 function MaxShipThrust{ 
 	// this function is needed as a workaround
 	// to kOS bug regarding ship thrust.
@@ -21,23 +27,24 @@ function exec_node{
 	lock burntime to nd:deltav:mag/(mth/mass).
 
 	lock steering to nd.
-	wait until nd:eta<burntime.
+	wait until nd:eta<burntime/2.
+	local timeout is time:seconds+burntime*2. // just a guess
 
 	lock throttle to cos(vang(nd:deltav,ship:facing:vector)).
 	// Thanks to cosine, we burn only when we face the correct direction.
 
-	wait until burntime<5. // last 5 seconds of burn should be slower
+	wait until burntime<5 or time:seconds>timeout. 
+	// last 5 seconds of burn should be slower
 	local scale is nd:deltav:mag.
 
 	lock throttle to nd:deltav:mag/scale*
 		cos(vang(nd:deltav,ship:facing:vector)).
 	// We burn slower and slower.
-
-	wait until nd:deltav:mag<scale*0.01.
+	
+	local timeout is time:seconds+100.
+	wait until nd:deltav:mag<scale*0.01 or time:seconds>timeout.
 	lock throttle to 0.
 
 	unlock throttle.
 	unlock steering.
 }
-
-exec_node(nextnode).
