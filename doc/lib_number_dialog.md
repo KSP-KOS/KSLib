@@ -8,7 +8,7 @@ A dialog where the user can enter any number (including negative and fractional)
 
 args:
   * title - string, a title to display at the top of the dialog.
-	* number - number, a default value to start with.
+  * number - number, a default value to start with.
 
 returns:
   * number, a number that the user entered.
