@@ -1,5 +1,6 @@
 //LIB_LAZcalc.ks testing example
 //This file is distributed under the terms of the MIT license, (c) the KSLib team
+//Authored by space_is_hard
 
 SWITCH TO 0.
 RUN lib_lazcalc.ks.
