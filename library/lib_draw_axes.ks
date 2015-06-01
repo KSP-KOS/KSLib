@@ -1,4 +1,6 @@
 //LIB_draw_axes.ks
+//This file is distributed under the terms of the MIT license, (c) the KSLib team
+//Authored by Dunbaratu, adapted by space_is_hard
 
 @LAZYGLOBAL OFF.
 

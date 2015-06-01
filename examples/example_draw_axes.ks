@@ -1,4 +1,6 @@
 //example_draw_axes.ks
+// This file is distributed under the terms of the MIT license, (c) the KSLib team
+//Authored by space_is_hard
 
 SWITCH TO 0.
 RUN LIB_draw_axes.ks.
