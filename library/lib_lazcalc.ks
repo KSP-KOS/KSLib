@@ -13,8 +13,11 @@ FUNCTION LAZcalc_init {
   
  LOCAL struct IS LIST().   // A list is used to store information used by LAZcalc
 
-//#open Input Sterilization
-
+ //#open Input Sterilization
+ 
+ //Converts kilometers to meters (coment out to input in meters).
+ set desiredAlt to desiredAlt*1000.
+ 
  //Orbital altitude can't be less than sea level
  IF desiredAlt <= 0 {
 	PRINT "Target altitude cannot be below sea level".
