@@ -1,8 +1,11 @@
+//This file is distributed under the terms of the MIT license, (c) the KSLib team
 //=====LAUNCH AZIMUTH CALCULATOR=====
 //~~LIB_LAZcalc.ks~~
 //~~Version 2.0~~
+//~~Created by space-is-hard~~
+//~~Updated by TDW89~~
 
-//To use: RUN LAZcalc.ks. SET myLaunchAzimuth TO LAZcalc([desired circular orbit altitude in kilometers],[desired orbital inclination; negative if launching from descending node, positive otherwise])
+//To use: RUN LAZcalc.ks. SET data TO LAZcalc_init([desired circular orbit altitude in kilometers],[desired orbital inclination; negative if launching from descending node, positive otherwise]). Then loop SET myAzimuth TO LAZcalc(data).
 
 @LAZYGLOBAL OFF.
 
