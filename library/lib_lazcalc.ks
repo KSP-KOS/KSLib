@@ -11,7 +11,7 @@ FUNCTION LAZcalc_init {
   desiredAlt, //Altitude of desired target orbit (in meters)
   desiredInc. //Inclination of desired target orbit
   
- LOCAL struct IS LIST().   // A list is used to store information used by LAZcalc
+ LOCAL data IS LIST().   // A list is used to store information used by LAZcalc
 
  //#open Input Sterilization
  
@@ -36,19 +36,19 @@ FUNCTION LAZcalc_init {
  LOCAL launchLatitude IS SHIP:LATITUDE.
  LOCAL equatorialVel IS (2 * CONSTANT():Pi * BODY:RADIUS) / BODY:ROTATIONPERIOD.
  LOCAL targetOrbVel IS SQRT(BODY:MU/ (BODY:RADIUS + desiredAlt)).
- struct:ADD(desiredInc).     //[0]
- struct:ADD(launchLatitude). //[1]
- struct:ADD(equatorialVel).  //[2]
- struct:ADD(targetOrbVel).   //[3]
- RETURN struct.
+ data:ADD(desiredInc).     //[0]
+ data:ADD(launchLatitude). //[1]
+ data:ADD(equatorialVel).  //[2]
+ data:ADD(targetOrbVel).   //[3]
+ RETURN data.
 }.
 
 function LAZcalc {
  PARAMETER
-  struct. //pointer to the list created by LAZcalc_init
- LOCAL inertialAzimuth IS ARCSIN(COS(struct[0])/COS(SHIP:LATITUDE)).
- LOCAL VXRot IS struct[3]*SIN(inertialAzimuth)-struct[2]*COS(struct[1]).
- LOCAL VYRot IS struct[3]*COS(inertialAzimuth).
+  data. //pointer to the list created by LAZcalc_init
+ LOCAL inertialAzimuth IS ARCSIN(COS(data[0])/COS(SHIP:LATITUDE)).
+ LOCAL VXRot IS data[3]*SIN(inertialAzimuth)-data[2]*COS(data[1]).
+ LOCAL VYRot IS data[3]*COS(inertialAzimuth).
  LOCAL Azimuth IS ARCTAN2(VXRot,VYRot).
 
  // This clamps the result to values between 0 and 360.
