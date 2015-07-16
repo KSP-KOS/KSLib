@@ -30,5 +30,5 @@ description:
   * Returns the heading (0 to 360) towards which the vessel should launch from its current geoposition in order to
     achieve the desired orbital inclination at the target circular orbit altitude.
   * To use:
-   *First `SET `[stored data]` TO LAZcalc_init(`[target orbit]`,`[target inclination]`.`
-   *Then loop `SET `[heading]` TO LAZcalc(`[stored data]`).` to continuously update your target heading.
+    *First `SET `[stored data]` TO LAZcalc_init(`[target orbit]`,`[target inclination]`.`
+    *Then loop `SET `[heading]` TO LAZcalc(`[stored data]`).` to continuously update your target heading.
