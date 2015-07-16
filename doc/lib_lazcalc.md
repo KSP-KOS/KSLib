@@ -3,7 +3,7 @@
 ## lib_LAZcalc.
 
 ``lib_LAZcalc.ks`` provides the user with a launch azimuth based on a desired target orbit altitude and
-inclination and can contunued to be used throughout accent to update the heading. It bases this calculation on the vessel's launch and current geoposition.
+inclination and can continued to be used throughout accent to update the heading. It bases this calculation on the vessel's launch and current geoposition.
 
 ## LAZcalc_init()
 
@@ -16,7 +16,7 @@ returns:
   * A a list.
 
 description:
-  * Returns a list to be used by the `LAZcalc` function containing all the relivent calcualtions that can or need to be performed from the launch site.
+  * Returns a list to be used by the `LAZcalc` function containing all the relevant calcualtions that can or need to be performed from the launch site.
 
 ## LAZcalc()
 
