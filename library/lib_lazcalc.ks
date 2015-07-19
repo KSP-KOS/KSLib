@@ -11,7 +11,7 @@
 
 FUNCTION LAZcalc_init {
  PARAMETER
-  desiredAlt, //Altitude of desired target orbit (in meters)
+  desiredAlt, //Altitude of desired target orbit (in kilometers)
   desiredInc. //Inclination of desired target orbit
   
  LOCAL data IS LIST().   // A list is used to store information used by LAZcalc
