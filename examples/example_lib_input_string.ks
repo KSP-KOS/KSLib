@@ -3,10 +3,10 @@
 // This is intended to be run as a boot script.
 
 run lib_input_string.
-run lib_dep_check.
+run lib_file_exists.
 run spec_char.
 
-if not dep_check("acount.ksm") {
+if not file_exists("acount.ksm") {
  set newuser to true.
 } else {
  set newuser to false.
