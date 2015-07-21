@@ -2,7 +2,7 @@
 
 @LAZYGLOBAL off.
 
-function dep_check {
+function file_exists{
  parameter fileName.
  local fileList is list().
  local found is false.
