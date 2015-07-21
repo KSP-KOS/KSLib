@@ -2,7 +2,7 @@
 
 @LAZYGLOBAL off.
 
-run lib_dep_check.
+run lib_file_exists.
 
 function input_string
 {
@@ -116,7 +116,7 @@ function input_string
  local blink is false.
 
  local quote is " ".
- if dep_check(spec_char.ksm) {
+ if file_exists(spec_char.ksm) {
   run spec_char.
  }.
 
