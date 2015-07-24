@@ -24,10 +24,6 @@ until false {
  seven_seg(mod(hours/10,10),3,2).
  seven_seg(mod(hours,10),6,2).
 
-// print timer   + "    " at (0,9).
-// print seconds + "    " at (0,10).
-// print minutes + "    " at (0,11).
-// print hours   + "    " at (0,12).
  set timer to timer + 1.
  wait 1.
 }
