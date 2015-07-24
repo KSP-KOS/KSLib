@@ -15,5 +15,8 @@ A global variable set to a value of one quote.
 
 ### endl
 
-A global variable set to a line feed symbol
+A global variable set to a line feed symbol.
 
+### beep
+
+A global variable that sounds a beep in the ingame and any connected telnet terminals.
