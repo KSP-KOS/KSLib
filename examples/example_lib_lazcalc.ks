@@ -10,30 +10,39 @@ LOCAL launchAzimuth TO 0.
 
 PRINT "Target Alt | Target Inc | Node    | Launch Azimuth".
 PRINT "--------------------------------------------------".
-SET launchAzimuth TO LAZcalc(130,0).
+SET struct to LAZcalc_init(130,0)
+SET launchAzimuth TO LAZcalc(struct).
 PRINT "  130km    |  0deg      | Asc     | " +  ROUND(launchAzimuth,2) + "deg".
 PRINT "--------------------------------------------------".
-SET launchAzimuth TO LAZcalc(450,51.6).
+SET struct to LAZcalc_init(450,51.6).
+SET launchAzimuth TO LAZcalc(struct).
 PRINT "  450km    |  51.6deg   | Asc     | " +  ROUND(launchAzimuth,2) + "deg".
 PRINT "--------------------------------------------------".
-SET launchAzimuth TO LAZcalc(120,40).
+SET struct to LAZcalc_init(120,40).
+SET launchAzimuth TO LAZcalc(struct).
 PRINT "  120km    |  40deg     | Asc     | " +  ROUND(launchAzimuth,2) + "deg".
 PRINT "--------------------------------------------------".
-SET launchAzimuth TO LAZcalc(500,-60).
+SET struct to LAZcalc_init(500,-60).
+SET launchAzimuth TO LAZcalc(struct).
 PRINT "  500km    |  60deg     | Dec     | " +  ROUND(launchAzimuth,2) + "deg".
 PRINT "--------------------------------------------------".
-SET launchAzimuth TO LAZcalc(130,-180).
+SET struct to LAZcalc_init(130,-180).
+SET launchAzimuth TO LAZcalc(struct).
 PRINT "  130km    |  180deg    | Dec     | " +  ROUND(launchAzimuth,2) + "deg".
 PRINT "--------------------------------------------------".
-SET launchAzimuth TO LAZcalc(250,120).
+SET struct to LAZcalc_init(250,120).
+SET launchAzimuth TO LAZcalc(struct).
 PRINT "  250km    |  120deg    | Asc     | " +  ROUND(launchAzimuth,2) + "deg".
 PRINT "--------------------------------------------------".
-SET launchAzimuth TO LAZcalc(150,-90).
+SET struct to LAZcalc_init(150,-90).
+SET launchAzimuth TO LAZcalc(struct).
 PRINT "  150km    |  90deg     | Dec     | " +  ROUND(launchAzimuth,2) + "deg".
 PRINT "--------------------------------------------------".
-SET launchAzimuth TO LAZcalc(250,90).
+SET struct to LAZcalc_init(250,90).
+SET launchAzimuth TO LAZcalc(struct).
 PRINT "  250km    |  90deg     | Asc     | " +  ROUND(launchAzimuth,2) + "deg".
 PRINT "--------------------------------------------------".
-SET launchAzimuth TO LAZcalc(1000,-105).
+SET struct to LAZcalc_init(1000,-105).
+SET launchAzimuth TO LAZcalc(struct).
 PRINT "  1000km   |  105deg    | Dec     | " +  ROUND(launchAzimuth,2) + "deg".
 PRINT "--------------------------------------------------".
