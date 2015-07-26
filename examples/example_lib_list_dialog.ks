@@ -1,3 +1,5 @@
+// This file is distributed under the terms of the MIT license, (c) the KSLib team
+
 run lib_list_dialog.
 set numbers to list("0", "1", "2", "3", "4", "5", "6", "7", "8", "9").
 set options to list().
