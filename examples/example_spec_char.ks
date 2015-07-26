@@ -3,3 +3,4 @@
 run spec_char.
 print "this line contains quote: " + quote.
 print "two" + endl + "lines".
+print "You will hear a beep " + beep + "in the ksp and or any connected telnet termianls".
