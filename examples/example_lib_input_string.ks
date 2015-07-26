@@ -6,11 +6,11 @@ run lib_input_string.
 run lib_file_exists.
 run spec_char.
 
-if not file_exists("acount.ksm") {
+if not file_exists("account.ksm") {
  set newuser to true.
 } else {
  set newuser to false.
- run acount.ksm.
+ run account.ksm.
 }
 clearscreen.
 
@@ -26,7 +26,7 @@ print "|                                         |" at (3,15).
 print "+-----------------------------------------+" at (3,16).
 
 If newuser {
- print "Welcome please create a new acount." at (5,3).
+ print "Welcome please create a new account." at (5,3).
 } else {
  print "Secure terminal:" at (2,2).
  print "Please enter your user name and password." at (2,3).
@@ -41,13 +41,13 @@ if not newuser {
   reboot.
  }
 } else {
- log "" to acount.ks.
- delete acount.ks.
- log "@LAZYGLOBAL off." to acount.ks.
- log "function user_check { parameter user. return user = "+quote+username+quote+". }." to acount.ks.
- log "function password_check { parameter pass. return pass = "+quote+password+quote+". }." to acount.ks.
- compile acount.ks.
- delete acount.ks.
+ log "" to account.ks.
+ delete account.ks.
+ log "@LAZYGLOBAL off." to account.ks.
+ log "function user_check { parameter user. return user = "+quote+username+quote+". }." to account.ks.
+ log "function password_check { parameter pass. return pass = "+quote+password+quote+". }." to account.ks.
+ compile account.ks.
+ delete account.ks.
 }
 clearscreen.
 print "welcome "+username.
