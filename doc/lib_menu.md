@@ -16,7 +16,7 @@ returns:
 description:
   * Show a menu, return user's choice.
   * This should be preferred to open_menu_indexed when making a menu
-    because strings as return values are more self-explanetory.
+    because strings as return values are more self-explanatory.
 
 ### open_menu_indexed
 
