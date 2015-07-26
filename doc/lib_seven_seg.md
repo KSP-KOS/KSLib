@@ -6,4 +6,4 @@ args:
   * Line  ``Number``. The top line of the display (it is 3 lines hight).
   
 description:
-  * Prints a seven segmant display on the terminal showing the input value at the location specified.
+  * Prints a seven segment display on the terminal showing the input value at the location specified.
