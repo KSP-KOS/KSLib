@@ -6,32 +6,27 @@ function draw_custom_gui_box {
 		x, y, w, h,
 		horizontal_char,
 		vertical_char,
-                corner_char.
+    corner_char.
 
   // Start Input Sanitization
-        if x < 0 or x >= terminal:height {
-         set x to max(0,min(terminal:height-1,x)).
+        if x < 0 or x >= terminal:width - 2 {
+         set x to max(0,min(terminal:width - 3,x)).
          HUDTEXT("Error: [draw_custom_gui_box] X value outside terminal.", 10, 2, 30, RED, FALSE).
         }
         
-        if y < 0 or y >= (terminal:width - 2 ) { 
-         set y to max(0,min(terminal:width-3,y)).
+        if y < 0 or y >= (terminal:height ) {
+         set y to max(0,min(terminal:height - 1,y)).
          HUDTEXT("Error: [draw_custom_gui_box] Y value outside terminal", 10, 2, 30, RED, FALSE).
         }
         
-        if w < 2 or x + w >= terminal:width { 
-         set w to max(2,min(terminal:width - 1 - x,w)).
+        if x + w >= terminal:width { //no need to check for w < 2 as the script already handles this
+         set w to min(terminal:width - 1 - x,w).
          HUDTEXT("Error: [draw_custom_gui_box] W value outside terminal.", 10, 2, 30, RED, FALSE).
         }
         
-        if h < 0 or y + h >= terminal:height { 
-         set w to max(2,min(terminal:height - 1 - y,h)).
+        if y + h >= terminal:height { //no need to check for h < 1 as the script already handles this
+         set h to min(terminal:height - y,h).
          HUDTEXT("Error: [draw_custom_gui_box] H value outside terminal.", 10, 2, 30, RED, FALSE).
-        }
-        
-        if h < 2 { 
-         set w to 2.
-         HUDTEXT("Error: [draw_custom_gui_box] W cannot be less than 2.", 10, 2, 30, RED, FALSE).
         }
 // End Input Sanitization
         
