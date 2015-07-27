@@ -4,10 +4,10 @@
 
 This library contains functions to draw boxes like this:
 ```
-+=====+
++-----+
 |     |
 |     |
-+=====+
++-----+
 ```
 in the terminal.
 
@@ -23,12 +23,12 @@ returns:
 
 description:
   * `draw_gui_box(0, 0, 6, 4).` draws this:
-  ```
-  +====+
-  |    |
-  |    |
-  +====+
-  ```
+```
++----+
+|    |
+|    |
++----+
+```
 
 ### warning
 
