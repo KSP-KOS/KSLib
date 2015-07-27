@@ -6,11 +6,35 @@ function draw_custom_gui_box {
 		x, y, w, h,
 		horizontal_char,
 		vertical_char,
-    corner_char.
+                corner_char.
 
-  // to-discuss: should we sanitize the input?
-  // x >= 0, y >= 0, w >= 2, h >= 0, x + w <= terminal:width, y + h <= terminal:height
-
+  // Start Input Sanitization
+        if x < 0 or x >= terminal:height {
+         set x to max(0,min(teminal:height-1,x)).
+         HUDTEXT("Error: [draw_custom_gui_box] X value outside terminal.", 10, 2, 30, RED, FALSE).
+        }
+        
+        if y < 0 or y >= (terminal:width - 2 ) { 
+         set y to max(0,min(terminal:width-3,y)).
+         HUDTEXT("Error: [draw_custom_gui_box] Y value outside terminal", 10, 2, 30, RED, FALSE).
+        }
+        
+        if w < 2 or x + w >= termianl:width { 
+         set w to max(2,min(terminal:width - 1 - x,w)).
+         HUDTEXT("Error: [draw_custom_gui_box] W value outside terminal.", 10, 2, 30, RED, FALSE).
+        }
+        
+        if h < 0 or y + h >= termianl:height { 
+         set w to max(2,min(terminal:height - 1 - y,h)).
+         HUDTEXT("Error: [draw_custom_gui_box] H value outside terminal.", 10, 2, 30, RED, FALSE).
+        }
+        
+        if h < 2 { 
+         set w to 2.
+         HUDTEXT("Error: [draw_custom_gui_box] W cannot be less than 2.", 10, 2, 30, RED, FALSE).
+        }
+// End Input Sanitization
+        
 	local horizontal_str is corner_char.
 	local i is 0.
 	until i >= w - 2 {
