@@ -30,13 +30,10 @@ description:
 +----+
 ```
 
-### warning
+### Note
 
-  Due to how terminal works you can't use `draw_gui_box(0, 0, terminal:width, terminal:height).`
-  because printing at the bottom right corner  will cause it to move everything
-  already drawn up by one line and mess up the alignment. The solution is to use
-  `draw_gui_box(0, 0, terminal:width, terminal:height - 1).` instead. Same for
-  other commands.
+  Due to how terminal works printing at the bottom right corner  will cause it to move everything
+  already drawn up by one line and mess up the alignment. To solve this the inputs have been bound to prevent the box from extending outside the terminal or using the bottom line.
 
 ### draw_one_char_gui_box
 
