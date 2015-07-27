@@ -16,8 +16,8 @@ function draw_custom_gui_box {
   HUDTEXT("Error: [draw_custom_gui_box] X value outside terminal.", 10, 2, 30, RED, FALSE).
  }
 
- if y < 0 or y >= (terminal:height ) {
-  set y to max(0,min(terminal:height - 1,y)).
+ if y < 0 or y >= (terminal:height - 1) {
+  set y to max(0,min(terminal:height - 2,y)).
   HUDTEXT("Error: [draw_custom_gui_box] Y value outside terminal", 10, 2, 30, RED, FALSE).
  }
 
