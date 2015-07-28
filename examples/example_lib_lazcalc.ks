@@ -10,7 +10,7 @@ LOCAL launchAzimuth TO 0.
 
 PRINT "Target Alt | Target Inc | Node    | Launch Azimuth".
 PRINT "--------------------------------------------------".
-SET struct to LAZcalc_init(130,0)
+SET struct to LAZcalc_init(130,0).
 SET launchAzimuth TO LAZcalc(struct).
 PRINT "  130km    |  0deg      | Asc     | " +  ROUND(launchAzimuth,2) + "deg".
 PRINT "--------------------------------------------------".
