@@ -29,8 +29,12 @@ FUNCTION LAZcalc_init {
 
  //Orbital inclination can't be less than launch latitude or greater than 180 - launch latitude
  if abs(ship:geoposition:lat) > abs(desiredInc) {
-  set inc to ship:geoposition:lat*(desiredInc/abs(desiredInc)).
- 	HUDTEXT("Inclination impossible from current latitude, setting for closest possible inclination.", 10, 2, 30, RED, FALSE).
+  set inc to abs(ship:geoposition:lat).
+  HUDTEXT("Inclination impossible from current latitude, setting for closest possible inclination.", 10, 2, 30, RED, FALSE).
+ }.
+ if 180-abs(ship:geoposition:lat) < abs(desiredInc) {
+  set inc to 180-abs(ship:geoposition:lat).
+  HUDTEXT("Inclination impossible from current latitude, setting for closest possible inclination.", 10, 2, 30, RED, FALSE).
  }.
  
  //#close Input Sterilization
