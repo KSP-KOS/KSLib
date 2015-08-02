@@ -53,7 +53,7 @@ FUNCTION LAZcalc_init {
 function LAZcalc {
  PARAMETER
   data. //pointer to the list created by LAZcalc_init
- LOCAL inertialAzimuth IS ARCSIN(COS(data[0])/COS(SHIP:LATITUDE)).
+ LOCAL inertialAzimuth IS ARCSIN(max(min(COS(data[0])/COS(SHIP:LATITUDE),1),-1)).
  LOCAL VXRot IS data[3]*SIN(inertialAzimuth)-data[2]*COS(data[1]).
  LOCAL VYRot IS data[3]*COS(inertialAzimuth).
  LOCAL Azimuth IS ARCTAN2(VXRot,VYRot).
