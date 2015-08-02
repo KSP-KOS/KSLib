@@ -1,5 +1,5 @@
 // This file is distributed under the terms of the MIT license, (c) the KSLib team
-
+// Origonal equations taken from this site: http://www.movable-type.co.uk/scripts/latlong.html
 
 @LAZYGLOBAL OFF.
 
@@ -10,6 +10,16 @@ function circle_bearing {
   p2. //...to this point.
 
  return mod(360+arctan2(sin(p2:lng-p1:lng)*cos(p2:lat),cos(p1:lat)*sin(p2:lat)-sin(p1:lat)*cos(p2:lat)*cos(p2:lng-p1:lng)),360).
+}.
+
+//returns angular distance between 2 latlng points.
+function circle_angular_distance {
+ parameter
+  p1,
+  p2.
+ local A is sin((p1:lat-p2:lat)/2)^2 + cos(p1:lat)*cos(p2:lat)*sin((p1:lng-p2:lng)/2)^2.
+
+ return 2*arctan2(sqrt(A),sqrt(1-A)).
 }.
 
 //use to find where you will end up if you travel from...
@@ -35,9 +45,8 @@ function circle_distance {
   p1,     //...this point...
   p2,     //...to this point...
   radius. //...around a body of this radius. (note: if you are flying you may want to use ship:body:radius + altitude).
- local A is sin((p1:lat-p2:lat)/2)^2 + cos(p1:lat)*cos(p2:lat)*sin((p1:lng-p2:lng)/2)^2.
- 
- return radius*constant():PI*arctan2(sqrt(A),sqrt(1-A))/90.
+
+ return (constant():PI/180) * circle_angular_distance(p1,p2) * radius.
 }.
 
 //use to find the mid point on the outside of a sphere between...
@@ -49,4 +58,25 @@ function circle_midpoint {
  local B is cos(p2:lat)*sin(p2:lng-P1:lng).
  
  return latlng(arctan2(sin(p1:lat)+sin(p2:lat),sqrt((cos(p1:lat)+resultA)^2+resultB^2)),p1:lng+arctan2(resultB,cos(p1:lat)+resultA)).
+}.
+
+//returns the angular distance of point 3 from the great circle defined by point 1 and 2.
+function circle_x_track_angle {
+ parameter
+  p1,     //1st point on the circle path
+  p2,     //2nd point on the circle path
+  p3.     //point off the circle path
+
+ return arcsin(sin(circle_angular_distance(p1,p3)) * sin(circle_bearing(p1,p3)-circle_bearing(p1,p2))).
+}.
+
+//returns the distance (in meters) between point 3 and the great circle defined by point 1 and 2.
+function circle_x_track_distance {
+ parameter
+  p1,     //1st point on the circle path
+  p2,     //2nd point on the circle path
+  p3,     //point off the circle path
+  radius. //radius of sphere (body:radius + ship:altitude)
+
+ return (constant():PI/180) * circle_x_track_angle(p1,p2,p3) * radius.
 }.
