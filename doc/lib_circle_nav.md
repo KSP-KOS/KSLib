@@ -17,6 +17,14 @@ description:
   * This equation will give you the initial bearing along the great circle path from point 1 to point 2.
 Not overly useful when run once but by repeatedly running this with your current position as point 1 you will get a continuously updating bearing along the shortest path to point 2.
 
+###circle_angular_distance
+
+args:
+ * A pair of ``GeoCoordinates``.
+
+returns:
+* the angle between two points on the surface of a sphere. This is mostly an internal function but can be used independently.
+
 ###circle_destination
 
 args:
@@ -64,4 +72,29 @@ returns:
  * ``GeoCoordinates``
 
 description:
-  * Gives you the midpoint between point 1 and 2 along a great circle path.
+ * Gives you the midpoint between point 1 and 2 along a great circle path.
+
+###circle_x_track_distance
+
+args:
+ * A pair of ``GeoCoordinates`` to define the great circle.
+ * A ``GeoCoordinate`` for the point off the great circle.
+ * The radius of sphere (ship:body:radius + ship:altitude).
+
+returns:
+* A distance in ``meters``. (sign will tell you which side you are).
+
+Description:
+* Used to find the distance between p3 and the great circle defined by p1 and p2. It is useful for lining up a runway approach.
+
+###circle_x_track_angle
+
+args:
+ * A pair of ``GeoCoordinates`` to define the great circle.
+ * A ``GeoCoordinate`` for the point off the great circle.
+
+returns:
+* An angle in ``degrees``. (sign will tell you which side you are).
+
+Description:
+ * Used to find the angle between p3 and the great circle defined by p1 and p2. It is useful for lining up a runway approach. 
