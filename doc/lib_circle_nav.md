@@ -85,7 +85,7 @@ returns:
 * A distance in ``meters``. (sign will tell you which side you are).
 
 Description:
-* Used to find the distance between p3 and the great circle defined by p1 and p2. It is useful for lining up a runway approach.
+* Used to find the distance between p3 and the great circle defined by p1 and p2. This is known as the cross track distance or cross track error. It can be used for lining up a runway approach.
 
 ###circle_x_track_angle
 
