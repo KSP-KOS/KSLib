@@ -20,7 +20,7 @@ FUNCTION running_average_filter_init {
     
     LOCAL inputList TO LIST().
 
-    FROM {SET i TO 0.} UNTIL i >= maxLength STEP {SET i TO i + 1.} DO {
+    FROM {LOCAL i TO 0.} UNTIL i >= maxLength STEP {SET i TO i + 1.} DO {
         inputList:ADD(initValue).
     }.
 
