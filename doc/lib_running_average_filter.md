@@ -5,6 +5,8 @@
 
 ``lib_running_average_filter.ks`` provides a function that will filter out noise from a dataset by storing a number of previous values of that dataset and outputting the average (mean) of those values. It's useful for removing noise from a dataset that is expected to remain relatively stable. It will lag behind any large or continuous changes in the dataset.
 
+**Note: When feeding values into the filter, be sure to include a small `WAIT` command to ensure that the game has advanced at least one physics tick in between. This will prevent you from sampling the same value twice before the game can update it.**
+
 ### running_average_filter_init
 
 args:
