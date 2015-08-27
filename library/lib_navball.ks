@@ -40,11 +40,11 @@ function roll_for {
   local raw is vang(ves:up:vector, ves:facing:starvector).
   if vang(ves:up:vector, ves:facing:topvector) > 90 {
     if raw > 90 {
-      return raw - 270.
+      return 270 - raw.
     } else {
-      return raw + 90.
+      return -90 - raw.
     }
   } else {
-    return 90 - raw.
+    return raw - 90.
   }
 }.
