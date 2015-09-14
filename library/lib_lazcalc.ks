@@ -33,7 +33,7 @@ FUNCTION LAZcalc_init {
   HUDTEXT("Inclination impossible from current latitude, setting for closest possible inclination.", 10, 2, 30, RED, FALSE).
  }.
  if 180-abs(ship:geoposition:lat) < abs(desiredInc) {
-  set inc to 180-abs(ship:geoposition:lat).
+  set desiredInc to 180-abs(ship:geoposition:lat).
   HUDTEXT("Inclination impossible from current latitude, setting for closest possible inclination.", 10, 2, 30, RED, FALSE).
  }.
  
