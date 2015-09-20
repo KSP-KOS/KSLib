@@ -10,6 +10,7 @@ function file_exists{
  for file in fileList {
   if file = fileName {
    set found to true.
+   break.
   }
  }
  return found.
