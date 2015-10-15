@@ -36,15 +36,19 @@ function pitch_for {
 
 function roll_for {
   parameter ves.
-
-  local raw is vang(ves:up:vector, ves:facing:starvector).
-  if vang(ves:up:vector, ves:facing:topvector) > 90 {
-    if raw > 90 {
-      return 270 - raw.
-    } else {
-      return -90 - raw.
-    }
+  
+  if vang(ship:facing:vector,ship:up:vector) < 0.2 { //this is the dead zone for roll when the ship is vertical
+    return 0.
   } else {
-    return raw - 90.
-  }
+    local raw is vang(vxcl(ship:facing:vector,ship:up:vector), ves:facing:starvector).
+    if vang(ves:up:vector, ves:facing:topvector) > 90 {
+      if raw > 90 {
+        return 270 - raw.
+      } else {
+        return -90 - raw.
+      }
+    } else {
+      return raw - 90.
+    }
+  } 
 }.
