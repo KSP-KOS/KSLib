@@ -2,9 +2,9 @@
 
 function geo2dec {
 	parameter
-		_____vlat,
-		_____vlng,
-		_____valt.
+		_____vlat, //geoposition:lat
+		_____vlng, //geoposition:lng
+		_____valt. //altitude
 	local _____talt is body:radius+_____valt.
 	local _____tlat is _____vlat+90.
 	local _____tsin is sin(_____tlat).
@@ -18,9 +18,9 @@ function geo2dec {
 
 function dec2geo {
 	parameter
-		_____vx,
-		_____vy,
-		_____vz.
+		_____vx, //x from geo2dec array[0]
+		_____vy, //y from geo2dec array[1]
+		_____vz. //z from geo2dec array[2]
 	local _____tsqrt is sqrt(_____vx*_____vx+_____vy*_____vy+_____vz*_____vz).
 	local _____vgeo is list(
 		arccos(_____vz/_____tsqrt)-90,
