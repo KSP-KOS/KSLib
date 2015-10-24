@@ -19,7 +19,7 @@ function dec2geo {
 		_____vy,
 		_____vz.
 	local _____vgeo is list(
-		arctan(sqrt(_____vx*_____vx+_____vy*_____vy)/_____vz)-90,
+		arccos(_____vz/sqrt(_____vx*_____vx+_____vy*_____vy+_____vz*_____vz))-90,
 		arctan(_____vy/_____vx),
 		sqrt(_____vx*_____vx+_____vy*_____vy+_____vz*_____vz)-body:radius
 	).
