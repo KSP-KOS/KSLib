@@ -1,0 +1,27 @@
+@LAZYGLOBAL off.
+
+function geo2dec {
+	parameter
+		_____vlat,
+		_____vlng,
+		_____valt.
+	local _____vdec is list(
+		(body:radius+_____valt)*sin(_____vlat+90)*cos(_____vlng),
+		(body:radius+_____valt)*sin(_____vlat+90)*sin(_____vlng),
+		(body:radius+_____valt)*cos(_____vlat+90)
+	).
+	return _____vdec.
+}.
+
+function dec2geo {
+	parameter
+		_____vx,
+		_____vy,
+		_____vz.
+	local _____vgeo is list(
+		arctan(sqrt(_____vx*_____vx+_____vy*_____vy)/_____vz)-90,
+		arctan(_____vy/_____vx),
+		sqrt(_____vx*_____vx+_____vy*_____vy+_____vz*_____vz)-body:radius
+	).
+	return _____vgeo.
+}.
