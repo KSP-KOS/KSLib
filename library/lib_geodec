@@ -24,7 +24,7 @@ function dec2geo {
 	local _____tsqrt is sqrt(_____vx*_____vx+_____vy*_____vy+_____vz*_____vz).
 	local _____vgeo is list(
 		arccos(_____vz/_____tsqrt)-90,
-		arctan(_____vy/_____vx),
+		arctan2(_____vy,_____vx),
 		_____tsqrt-body:radius
 	).
 	return _____vgeo.
