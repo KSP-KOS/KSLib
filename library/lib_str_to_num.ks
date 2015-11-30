@@ -19,10 +19,8 @@ function str_to_num {
   parameter s.
 
   // Handle negative numbers
-  local n is 1.
   if s:startswith("-") {
-    set n to -1.
-    set s to s:substring(1,s:length-1).
+    return str_to_num(s:substring(1,s:length-1)) * -1.
   }
 
   // Scientific Notation
@@ -36,9 +34,9 @@ function str_to_num {
     local p1 is str_to_num(p[1]).
     if p0 = "NaN" or p1 = "NaN" { return "NaN". }
     if m = "+" {
-      return p0 * 10^p1 * n.
+      return p0 * 10^p1.
     } else {
-      return (p0 / 10^p1) * n.
+      return (p0 / 10^p1).
     }
   }
 
@@ -49,7 +47,7 @@ function str_to_num {
     local p0 is str_to_num(p[0]).
     local p1 is str_to_num(p[1]).
     if p0 = "NaN" or p1 = "NaN" { return "NaN". }
-    return (p0 + (p1 / (10^p[1]:length))) * n.
+    return p0 + (p1 / (10^p[1]:length)).
   }
 
   // Integers (match on tokens, and bit-shift)
@@ -58,6 +56,6 @@ function str_to_num {
     if num_lex:haskey(i) { set v to v + num_lex[i]. } else { return "NaN". }
     set v TO v * 10.
   }
-  return v / 10 * n.
+  return v / 10.
 
 }
