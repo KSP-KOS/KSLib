@@ -1,3 +1,4 @@
+// This file is distributed under the terms of the MIT license, (c) the KSLib team
 // Note: This requires KSpec - see https://github.com/gisikw/kspec
 
 describe("lib_enum").
