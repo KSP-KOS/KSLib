@@ -2,7 +2,7 @@
 
 ## lib_enum
 
-``lib_enum.ks`` provides a set of functions for manipulating lists using the new delegates syntax introduced in kOS version 0.18.3. It allows you to transform and execute on lists by passing in a delegate function, and is designed to contain all the core components of an enumerable library.
+``lib_enum.ks`` provides a set of functions for manipulating lists using the new delegates syntax introduced in kOS version 0.19.0. It allows you to transform and execute on lists by passing in a delegate function, and is designed to contain all the core components of an enumerable library.
 
 function              | arguments                     | return type       | description
 --------------------- | ----------------------------- | ----------------- | -----------
