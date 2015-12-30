@@ -4,7 +4,7 @@
 
 ``lib_enum.ks`` provides a set of functions for manipulating lists, queues, and stacks using the new delegates syntax introduced in kOS version 0.19.0. It allows you to transform and execute on lists, queues, and stacks by passing in a delegate function, and is designed to contain all the core components of an enumerable library.
 
-Each of the functions is made available through the `enum` [lexicon](http://ksp-kos.github.io/KOS_DOC/structures/misc/lexicon.html), to minimize the number of variables used in the global namespace. They can be called using the following syntax: `run lib_enum. enum["max"](list(1,2,3)) // 3` All functions work on [Lists](http://ksp-kos.github.io/KOS_DOC/structures/misc/list.html), [Stacks](http://ksp-kos.github.io/KOS_DOC/structures/misc/stack.html), and [Queues](http://ksp-kos.github.io/KOS_DOC/structures/misc/queue.html), and when collections are returned, they will be of the same type as the original input.
+Each of the functions is made available through the `enum` [lexicon](http://ksp-kos.github.io/KOS_DOC/structures/misc/lexicon.html), to minimize the number of variables used in the global namespace. They can be called using the following syntax: `run lib_enum. enum["max"](list(1,2,3)). // 3` All functions work on [Lists](http://ksp-kos.github.io/KOS_DOC/structures/misc/list.html), [Stacks](http://ksp-kos.github.io/KOS_DOC/structures/misc/stack.html), and [Queues](http://ksp-kos.github.io/KOS_DOC/structures/misc/queue.html), and when collections are returned, they will be of the same type as the original input.
 
 function        | arguments                     | return type   | description
 ----------------| ----------------------------- | ------------- | -----------
@@ -257,7 +257,9 @@ Parameters:
 Return Type:
   * List(collection, collection)
 
-Returns a new list containing a collection of elements for which the match_fn returned `true`, and a collection of elements for which the match_fn returned `false`. *Note: the result from `enum["partition"]` will always be a list, regardless of whether the initial collection is a list, queue, or stack. However, the nested collections will be of the same type as the original collection. For example, if you split a queue, `set split to enum["partition"](queue(1,2,3), my_split_fn@).`, then `split[0]` will also be a queue.*
+Returns a new list containing a collection of elements for which the match_fn returned `true`, and a collection of elements for which the match_fn returned `false`.
+
+*Note: the result from `enum["partition"]` will always be a list, regardless of whether the initial collection is a list, queue, or stack. However, the nested collections will be of the same type as the original collection. For example, if you partition a queue, `set split to enum["partition"](queue(1,2,3), my_split_fn@).`, then `split[0]` will also be a queue.*
 
 Example:
 ```
