@@ -1,124 +1,166 @@
-// This file is distributed under the terms of the MIT license, (c) the KSLib team
+// This file is distributed under the terms of the MIT license,
+// (c) the KSLib team
 // Note: This requires KSpec - see https://github.com/gisikw/kspec
 
+RUN lib_enum.
+function is_even { parameter n. return mod(n,2) = 0. }
+
 describe("lib_enum").
-  RUN lib_enum.
-  function is_even { parameter n. return mod(n,2) = 0. }
+  it("exposes a global enum module", "test_module").
+    function test_module {
+      enum. assert(true).
+    }
+  end.
 
-  describe("enum_all").
-    it("accepts two arguments", "test_enum_all_args").
-      function test_enum_all_args {
-        enum_all(list(), false). assert(true).
-      }
-    end.
+  it("has a version property equal to 0.1.1", "test_version").
+    function test_version {
+      assert_equal(enum["version"], "0.1.1").
+    }
+  end.
 
-    context("when all elements meet the assertion").
-      it("returns true", "test_enum_all_pass").
-        function test_enum_all_pass {
-          assert(enum_all(list(2, 4, 6), is_even@)).
+  describe("all").
+    context("when every element passes the condition").
+      it("returns true", "test_all_true").
+        function test_all_true {
+          assert(enum["all"](list(2,4,6), is_even@)).
+          assert(enum["all"](queue(2,4,6), is_even@)).
+          assert(enum["all"](stack(2,4,6), is_even@)).
         }
       end.
     end.
 
-    context("when an element fails the assertion").
-      it("returns false", "test_enum_all_fail").
-        function test_enum_all_fail {
-          assert(enum_all(list(2, 4, 7), is_even@) = false).
+    context("when one element fail the condition").
+      it("returns false", "test_all_false").
+        function test_all_false {
+          assert(not enum["all"](list(2,5,6), is_even@)).
+          assert(not enum["all"](queue(2,5,6), is_even@)).
+          assert(not enum["all"](stack(2,5,6), is_even@)).
         }
       end.
     end.
   end.
 
-  describe("enum_any").
-    it("accepts two arguments", "test_enum_any_args").
-      function test_enum_any_args {
-        enum_any(list(), false). assert(true).
-      }
-    end.
-
-    context("when no elements meet the assertion").
-      it("returns false", "test_enum_any_fail").
-        function test_enum_any_fail {
-          assert(enum_any(list(3, 5, 7), is_even@) = false).
+  describe("any").
+    context("when one element passes the condition").
+      it("returns true", "test_any_true").
+        function test_any_true {
+          assert(enum["any"](list(1,4,5), is_even@)).
+          assert(enum["any"](queue(1,4,5), is_even@)).
+          assert(enum["any"](stack(1,4,5), is_even@)).
         }
       end.
     end.
 
-    context("when any element passes the assertion").
-      it("returns true", "test_enum_any_pass").
-        function test_enum_any_pass {
-          assert(enum_any(list(3, 5, 6), is_even@)).
+    context("when all elements fail the condition").
+      it("returns false", "test_any_false").
+        function test_any_false {
+          assert(not enum["any"](list(1,3,5), is_even@)).
+          assert(not enum["any"](queue(1,3,5), is_even@)).
+          assert(not enum["any"](stack(1,3,5), is_even@)).
         }
       end.
     end.
   end.
 
-  describe("enum_count").
-    it("accepts two arguments", "test_enum_count_args").
-      function test_enum_count_args {
-        enum_count(list(), false). assert(true).
-      }
-    end.
-
-    it("returns the number of elements that match the condition", "test_enum_count").
-      function test_enum_count {
-        assert_equal(enum_count(list(1,2,3,4,5), is_even@), 2).
+  describe("count").
+    it("returns the number of items that meet the condition", "test_count").
+      function test_count {
+        assert_equal(enum["count"](list(1,2,3,4,5), is_even@), 2).
+        assert_equal(enum["count"](queue(1,2,3,4,5), is_even@), 2).
+        assert_equal(enum["count"](stack(1,2,3,4,5), is_even@), 2).
       }
     end.
   end.
 
-  describe("enum_each").
-    it("accepts two arguments", "test_enum_each_args").
-      function test_enum_each_args {
-        enum_each(list(), false). assert(true).
-      }
-    end.
-
-    it("calls the delegate with each element", "test_enum_each").
-      function test_enum_each {
+  describe("each").
+    it("yields to the delegate with each item as the argument", "test_each").
+      function test_each {
+        // List
         local yielded is list().
-        function add_to_yielded { parameter i. yielded:add(i). }
-        enum_each(list(1,2,3), add_to_yielded@).
-        assert_equal(yielded[0], 1).
-        assert_equal(yielded[1], 2).
-        assert_equal(yielded[2], 3).
+        function yield { parameter i. yielded:add(i). }
+        enum["each"](list(2,4,7), yield@).
+        assert_equal(yielded[0], 2).
+        assert_equal(yielded[1], 4).
+        assert_equal(yielded[2], 7).
+
+        // Queue
+        local yielded is list().
+        function yield { parameter i. yielded:add(i). }
+        enum["each"](queue(2,4,7), yield@).
+        assert_equal(yielded[0], 2).
+        assert_equal(yielded[1], 4).
+        assert_equal(yielded[2], 7).
+
+        // Stack
+        local yielded is list().
+        function yield { parameter i. yielded:add(i). }
+        enum["each"](stack(2,4,7), yield@).
+        assert_equal(yielded[0], 7).
+        assert_equal(yielded[1], 4).
+        assert_equal(yielded[2], 2).
       }
     end.
   end.
 
-  describe("enum_each_slice").
-    it("accepts three arguments", "test_enum_each_slice_args").
-      function test_enum_each_slice_args {
-        enum_each_slice(list(), 2, false). assert(true).
-      }
-    end.
-
-    it("calls the delegate with a list of the correct size", "test_enum_each_slice").
+  describe("each_slice").
+    it("yields to the delegate with a collection of the correct size", "test_enum_each_slice").
       function test_enum_each_slice {
+        // List
         local yielded is list().
-        function add_to_yielded { parameter i. yielded:add(i). }
-        enum_each_slice(list(1,2,3,4,5), 2, add_to_yielded@).
+        function yield { parameter i. yielded:add(i). }
+        enum["each_slice"](list(1,2,3,4,5), 2, yield@).
         assert_equal(yielded[0][0], 1).
         assert_equal(yielded[0][1], 2).
         assert_equal(yielded[1][0], 3).
         assert_equal(yielded[1][1], 4).
         assert_equal(yielded[2][0], 5).
+
+        // Queue
+        local yielded is list().
+        function yield { parameter i. yielded:add(i). }
+        enum["each_slice"](queue(1,2,3,4,5), 2, yield@).
+        assert_equal(yielded[0]:pop(), 1).
+        assert_equal(yielded[0]:pop(), 2).
+        assert_equal(yielded[1]:pop(), 3).
+        assert_equal(yielded[1]:pop(), 4).
+        assert_equal(yielded[2]:pop(), 5).
+
+        // Stack
+        local yielded is list().
+        function yield { parameter i. yielded:add(i). }
+        enum["each_slice"](stack(5,4,3,2,1), 2, yield@).
+        assert_equal(yielded[0]:pop(), 1).
+        assert_equal(yielded[0]:pop(), 2).
+        assert_equal(yielded[1]:pop(), 3).
+        assert_equal(yielded[1]:pop(), 4).
+        assert_equal(yielded[2]:pop(), 5).
       }
     end.
   end.
 
-  describe("enum_each_with_index").
-    it("accepts two arguments", "test_enum_each_with_index_args").
-      function test_enum_each_with_index_args {
-        enum_each_with_index(list(), false). assert(true).
-      }
-    end.
-
-    it("calls the delegate with each element and index", "test_enum_each_with_index").
-      function test_enum_each_with_index {
+  describe("each_with_index").
+    it("yields to the delegate with each item and index as argument", "test_each_with_index").
+      function test_each_with_index {
+        // List
         local yielded is list().
-        function add_with_index { parameter s, i. yielded:add(i + ": " + s). }
-        enum_each_with_index(list("foo","bar","baz"), add_with_index@).
+        function yield { parameter s, i. yielded:add(i + ": " + s). }
+        enum["each_with_index"](list("foo","bar","baz"), yield@).
+        assert_equal(yielded[0], "1: foo").
+        assert_equal(yielded[1], "2: bar").
+        assert_equal(yielded[2], "3: baz").
+
+        // Queue
+        local yielded is list().
+        function yield { parameter s, i. yielded:add(i + ": " + s). }
+        enum["each_with_index"](queue("foo","bar","baz"), yield@).
+        assert_equal(yielded[0], "1: foo").
+        assert_equal(yielded[1], "2: bar").
+        assert_equal(yielded[2], "3: baz").
+
+        // Stack
+        local yielded is list().
+        function yield { parameter s, i. yielded:add(i + ": " + s). }
+        enum["each_with_index"](stack("baz","bar","foo"), yield@).
         assert_equal(yielded[0], "1: foo").
         assert_equal(yielded[1], "2: bar").
         assert_equal(yielded[2], "3: baz").
@@ -126,267 +168,285 @@ describe("lib_enum").
     end.
   end.
 
-  describe("enum_find").
-    it("accepts two arguments", "test_enum_find_args").
-      function test_enum_find_args {
-        enum_find(list(), false). assert(true).
+  describe("find").
+    it("returns the first element which matches the delegate", "test_find").
+      function test_find {
+        assert_equal(enum["find"](list(1,2,3), is_even@), 2).
+        assert_equal(enum["find"](queue(1,2,3), is_even@), 2).
+        assert_equal(enum["find"](stack(1,2,3), is_even@), 2).
       }
     end.
+  end.
 
+  describe("find_index").
     context("when no such element exists").
-      it("returns false", "test_enum_find_fail").
-        function test_enum_find_fail {
-          assert(enum_find(list(1,3,5), is_even@) = false).
+      it("returns -1", "test_find_index_fail").
+        function test_find_index_fail {
+          assert_equal(enum["find_index"](list(1,3,5), is_even@), -1).
+          assert_equal(enum["find_index"](queue(1,3,5), is_even@), -1).
+          assert_equal(enum["find_index"](stack(1,3,5), is_even@), -1).
         }
       end.
     end.
 
     context("when the element exists").
-      it("returns the element", "test_enum_find_match").
-        function test_enum_find_match {
-          assert_equal(enum_find(list(1,3,4), is_even@), 4).
+      it("returns the index", "test_find_index_match").
+        function test_find_index_match {
+          assert_equal(enum["find_index"](list(1,3,4), is_even@), 2).
+          assert_equal(enum["find_index"](queue(1,3,4), is_even@), 2).
+          assert_equal(enum["find_index"](stack(4,3,1), is_even@), 2).
         }
       end.
     end.
   end.
 
-  describe("enum_find_index").
-    it("accepts two arguments", "test_enum_find_index_args").
-      function test_enum_find_index_args {
-        enum_find_index(list(), false). assert(true).
-      }
-    end.
-
-    context("when no such element exists").
-      it("returns -1", "test_enum_find_index_fail").
-        function test_enum_find_index_fail {
-          assert_equal(enum_find_index(list(1,3,5), is_even@), -1).
-        }
-      end.
-    end.
-
-    context("when the element exists").
-      it("returns the index", "test_enum_find_index_match").
-        function test_enum_find_index_match {
-          assert_equal(enum_find_index(list(1,3,4), is_even@), 2).
-        }
-      end.
-    end.
-  end.
-
-  describe("enum_group_by").
-    it("accepts two arguments", "test_enum_group_by_args").
-      function test_enum_group_by_args {
-        enum_group_by(list(), false). assert(true).
-      }
-    end.
-
-    it("returns a lexicon", "test_enum_group_by_lex").
-      function test_enum_group_by_lex {
-        assert(list(enum_group_by(list(), false)):dump:substring(25,7) = "LEXICON").
-      }
-    end.
-
-    it("sorts the elements by the operation return value", "test_enum_group_by").
-      function test_enum_group_by {
+  describe("group_by").
+    it("partitions the elements by the delegate return value", "test_group_by").
+      function test_group_by {
         function even_or_odd { parameter n. if mod(n,2) = 0 return "even". return "odd". }
-        local result is enum_group_by(list(1,2,3,4,5), even_or_odd@).
+
+        // List
+        local result is enum["group_by"](list(1,2,3,4,5), even_or_odd@).
         assert_equal(result["even"][0], 2).
         assert_equal(result["even"][1], 4).
         assert_equal(result["odd"][0], 1).
         assert_equal(result["odd"][1], 3).
         assert_equal(result["odd"][2], 5).
+
+        // Queue
+        local result is enum["group_by"](queue(1,2,3,4,5), even_or_odd@).
+        assert_equal(result["even"]:pop(), 2).
+        assert_equal(result["even"]:pop(), 4).
+        assert_equal(result["odd"]:pop(), 1).
+        assert_equal(result["odd"]:pop(), 3).
+        assert_equal(result["odd"]:pop(), 5).
+
+        // Stack
+        local result is enum["group_by"](stack(5,4,3,2,1), even_or_odd@).
+        assert_equal(result["even"]:pop(), 2).
+        assert_equal(result["even"]:pop(), 4).
+        assert_equal(result["odd"]:pop(), 1).
+        assert_equal(result["odd"]:pop(), 3).
+        assert_equal(result["odd"]:pop(), 5).
       }
     end.
   end.
 
-  describe("enum_map").
-    it("accepts two arguments", "test_enum_map_args").
-      function test_enum_map_args {
-        enum_map(list(), false). assert(true).
-      }
-    end.
-
-    it("returns a transformed list", "test_enum_map").
-      function test_enum_map {
-        local result is enum_map(list(1,2,3), is_even@).
+  describe("map").
+    it("returns a transformed enumerable", "test_map").
+      function test_map {
+        // List
+        local result is enum["map"](list(1,2,3), is_even@).
+        assert_equal(result:dump:split(" ")[0], "LIST").
         assert_equal(result[0], false).
         assert_equal(result[1], true).
         assert_equal(result[2], false).
+
+        // Queue
+        local result is enum["map"](queue(1,2,3), is_even@).
+        assert_equal(result:dump:split(" ")[0], "QUEUE").
+        assert_equal(result:pop(), false).
+        assert_equal(result:pop(), true).
+        assert_equal(result:pop(), false).
+
+        // Stack
+        local result is enum["map"](stack(3,2,1), is_even@).
+        assert_equal(result:dump:split(" ")[0], "STACK").
+        assert_equal(result:pop(), false).
+        assert_equal(result:pop(), true).
+        assert_equal(result:pop(), false).
       }
     end.
   end.
 
-  describe("enum_map_with_index").
-    it("accepts two arguments", "test_enum_map_with_index_args").
-      function test_enum_map_with_index_args {
-        enum_map_with_index(list(), false). assert(true).
-      }
-    end.
-
-    it("returns a transformed list", "test_enum_map_with_index").
-      function test_enum_map_with_index {
+  describe("map_with_index").
+    it("returns a transformed enumerable", "test_map_with_index").
+      function test_map_with_index {
         function enumerate { parameter s, i. return i + ": " + s. }
-        local result is enum_map_with_index(list("foo","bar","baz"), enumerate@).
+
+        // List
+        local result is enum["map_with_index"](list("foo","bar","baz"), enumerate@).
+        assert_equal(result:dump:split(" ")[0], "LIST").
         assert_equal(result[0], "1: foo").
         assert_equal(result[1], "2: bar").
         assert_equal(result[2], "3: baz").
+
+        // Queue
+        local result is enum["map_with_index"](queue("foo","bar","baz"), enumerate@).
+        assert_equal(result:dump:split(" ")[0], "QUEUE").
+        assert_equal(result:pop(), "1: foo").
+        assert_equal(result:pop(), "2: bar").
+        assert_equal(result:pop(), "3: baz").
+
+        // Stack
+        local result is enum["map_with_index"](stack("baz","bar","foo"), enumerate@).
+        assert_equal(result:dump:split(" ")[0], "STACK").
+        assert_equal(result:pop(), "1: foo").
+        assert_equal(result:pop(), "2: bar").
+        assert_equal(result:pop(), "3: baz").
       }
     end.
   end.
 
-  describe("enum_max").
-    it("accepts one argument", "test_enum_max_args").
-      function test_enum_max_args {
-        enum_max(list()). assert(true).
-      }
-    end.
-
-    it("returns the largest value in the list", "test_enum_max").
-      function test_enum_max {
-        assert_equal(enum_max(list(1,5,2)), 5).
+  describe("max").
+    it("returns the largest value in the collection", "test_max").
+      function test_max {
+        assert_equal(enum["max"](list(1,5,2)), 5).
+        assert_equal(enum["max"](queue(1,5,2)), 5).
+        assert_equal(enum["max"](stack(1,5,2)), 5).
       }
     end.
   end.
 
-  describe("enum_min").
-    it("accepts one argument", "test_enum_min_args").
-      function test_enum_min_args {
-        enum_min(list()). assert(true).
-      }
-    end.
-
-    it("returns the smallest value in the list", "test_enum_min").
-      function test_enum_min {
-        assert_equal(enum_min(list(1,5,2)), 1).
+  describe("min").
+    it("returns the smallest value in the collection", "test_min").
+      function test_min {
+        assert_equal(enum["min"](list(3,5,2)), 2).
+        assert_equal(enum["min"](queue(3,5,2)), 2).
+        assert_equal(enum["min"](stack(3,5,2)), 2).
       }
     end.
   end.
 
-  describe("enum_partition").
-    it("accepts two arguments", "test_enum_partition_args").
-      function test_enum_partition_args {
-        enum_partition(list(), false). assert(true).
-      }
-    end.
-
-    it("returns a passing and failing list", "test_enum_partition").
-      function test_enum_partition {
-        local result is enum_partition(list(1,2,3,4,5), is_even@).
+  describe("partition").
+    it("returns a passing and failing list", "test_partition").
+      function test_partition {
+        // List
+        local result is enum["partition"](list(1,2,3,4,5), is_even@).
+        assert_equal(result[0]:dump:split(" ")[0], "LIST").
+        assert_equal(result[1]:dump:split(" ")[0], "LIST").
         assert_equal(result[0][0], 2).
         assert_equal(result[0][1], 4).
         assert_equal(result[1][0], 1).
         assert_equal(result[1][1], 3).
         assert_equal(result[1][2], 5).
+
+        // Queue
+        local result is enum["partition"](queue(1,2,3,4,5), is_even@).
+        assert_equal(result[0]:dump:split(" ")[0], "QUEUE").
+        assert_equal(result[1]:dump:split(" ")[0], "QUEUE").
+        assert_equal(result[0]:pop(), 2).
+        assert_equal(result[0]:pop(), 4).
+        assert_equal(result[1]:pop(), 1).
+        assert_equal(result[1]:pop(), 3).
+        assert_equal(result[1]:pop(), 5).
+
+        // Stack
+        local result is enum["partition"](stack(5,4,3,2,1), is_even@).
+        assert_equal(result[0]:dump:split(" ")[0], "STACK").
+        assert_equal(result[1]:dump:split(" ")[0], "STACK").
+        assert_equal(result[0]:pop(), 2).
+        assert_equal(result[0]:pop(), 4).
+        assert_equal(result[1]:pop(), 1).
+        assert_equal(result[1]:pop(), 3).
+        assert_equal(result[1]:pop(), 5).
       }
     end.
   end.
 
-  describe("enum_reduce").
-    it("accepts three arguments", "test_enum_reduce_args").
-      function test_enum_reduce_args {
-        enum_reduce(list(), 2, false). assert(true).
-      }
-    end.
-
-    it("applies the reduction function to each pair and returns the result", "test_enum_reduce").
-      function test_enum_reduce {
+  describe("reduce").
+    it("applied the reduction delegate to each pair and returns the result", "test_reduce").
+      function test_reduce {
         function sum { parameter memo, i. return memo + i. }
-        assert_equal(enum_reduce(list(1,2,3,4,5), 0, sum@), 15).
+        assert_equal(enum["reduce"](list(1,2,3,4,5), 0, sum@), 15).
+        assert_equal(enum["reduce"](queue(1,2,3,4,5), 0, sum@), 15).
+        assert_equal(enum["reduce"](stack(5,4,3,2,1), 0, sum@), 15).
       }
     end.
   end.
 
-  describe("enum_reject").
-    it("accepts two arguments", "test_enum_reject_args").
-      function test_enum_reject_args {
-        enum_reject(list(), false). assert(true).
-      }
-    end.
-
-    it("returns a list of elements which fail the delegate", "test_enum_reject").
-      function test_enum_reject {
-        local result is enum_reject(list(1,2,3,4,5), is_even@).
+  describe("reject").
+    it("returns a collection of items which fail the delegate", "test_reject").
+      function test_reject {
+        // List
+        local result is enum["reject"](list(1,2,3,4,5), is_even@).
+        assert_equal(result:dump:split(" ")[0], "LIST").
         assert_equal(result[0], 1).
         assert_equal(result[1], 3).
         assert_equal(result[2], 5).
+
+        // Queue
+        local result is enum["reject"](queue(1,2,3,4,5), is_even@).
+        assert_equal(result:dump:split(" ")[0], "QUEUE").
+        assert_equal(result:pop(), 1).
+        assert_equal(result:pop(), 3).
+        assert_equal(result:pop(), 5).
+
+        // Stack
+        local result is enum["reject"](stack(5,4,3,2,1), is_even@).
+        assert_equal(result:dump:split(" ")[0], "STACK").
+        assert_equal(result:pop(), 1).
+        assert_equal(result:pop(), 3).
+        assert_equal(result:pop(), 5).
       }
     end.
   end.
 
-  describe("enum_reverse").
-    it("accepts one argument", "test_enum_reverse_args").
-      function test_enum_reverse_args {
-        enum_reverse(list()). assert(true).
-      }
-    end.
-
-    it("returns a reversed copy of the list", "test_enum_reverse").
-      function test_enum_reverse {
-        local result is enum_reverse(list(1,2,3)).
+  describe("reverse").
+    it("returns a reversed copy of the list", "test_reverse").
+      function test_reverse {
+        // List
+        local result is enum["reverse"](list(1,2,3)).
+        assert_equal(result:dump:split(" ")[0], "LIST").
         assert_equal(result[0], 3).
         assert_equal(result[1], 2).
         assert_equal(result[2], 1).
+
+        // Queue
+        local result is enum["reverse"](queue(1,2,3)).
+        assert_equal(result:dump:split(" ")[0], "QUEUE").
+        assert_equal(result:pop(), 3).
+        assert_equal(result:pop(), 2).
+        assert_equal(result:pop(), 1).
+
+        // Stack
+        local result is enum["reverse"](stack(1,2,3)).
+        assert_equal(result:dump:split(" ")[0], "STACK").
+        assert_equal(result:pop(), 1).
+        assert_equal(result:pop(), 2).
+        assert_equal(result:pop(), 3).
       }
     end.
   end.
 
-  describe("enum_select").
-    it("accepts two arguments", "test_enum_select_args").
-      function test_enum_select_args {
-        enum_select(list(), false). assert(true).
-      }
-    end.
-
-    it("returns a list of elements which pass the delegate", "test_enum_select").
-      function test_enum_select {
-        local result is enum_select(list(1,2,3,4,5), is_even@).
+  describe("select").
+    it("returns a list of items which pass the delegate", "test_select").
+      function test_select {
+        // List
+        local result is enum["select"](list(1,2,3,4,5), is_even@).
+        assert_equal(result:dump:split(" ")[0], "LIST").
         assert_equal(result[0], 2).
         assert_equal(result[1], 4).
+
+        // Queue
+        local result is enum["select"](queue(1,2,3,4,5), is_even@).
+        assert_equal(result:dump:split(" ")[0], "QUEUE").
+        assert_equal(result:pop(), 2).
+        assert_equal(result:pop(), 4).
+
+        // Stack
+        local result is enum["select"](stack(5,4,3,2,1), is_even@).
+        assert_equal(result:dump:split(" ")[0], "STACK").
+        assert_equal(result:pop(), 2).
+        assert_equal(result:pop(), 4).
       }
     end.
   end.
 
-  describe("enum_sort").
+  describe("sort").
+    it("returns a sorted list", "test_sort").
+      function test_sort {
 
-    function identity {
-      parameter a, b. return a - b.
-    }
-
-    it("accepts two arguments", "enum_sort_arg_test").
-      function enum_sort_arg_test {
-        enum_sort(list(), false). assert(true).
-      }
-    end.
-
-    it("returns a new list", "enum_sort_nonmutate").
-      function enum_sort_nonmutate {
-        local start is list(2,3,1).
-        local sorted is enum_sort(start, identity@).
-        assert_equal(start[0], 2).
-        assert_equal(start[1], 3).
-        assert_equal(start[2], 1).
-        assert(start <> sorted).
-      }
-    end.
-
-    it("sorts according to an arbitrary delegate", "enum_sort_arbitrary").
-      function enum_sort_arbitrary {
-        local sorted is enum_sort(list(2,3,1), identity@).
-        assert_equal(sorted[0], 1).
-        assert_equal(sorted[1], 2).
-        assert_equal(sorted[2], 3).
-      }
-    end.
-
-    it("allows sorting on complex conditions", "enum_sort_complex").
-      function enum_sort_complex {
-        local start is list("foo", "foobar", "foobarbaz").
         function str_len_comp_desc { parameter a, b. return b:length - a:length. }
         function str_len_comp_asc  { parameter a, b. return a:length - b:length. }
 
-        local sorted_desc is enum_sort(start, str_len_comp_desc@).
-        local sorted_asc  is enum_sort(start, str_len_comp_asc@).
+        // List
+        local collection is list("foobar", "foo", "foobarbaz").
+        local sorted_desc is enum["sort"](collection, str_len_comp_desc@).
+        local sorted_asc  is enum["sort"](collection, str_len_comp_asc@).
+
+        assert_equal(sorted_desc:dump:split(" ")[0], "LIST").
+        assert_equal(sorted_asc:dump:split(" ")[0], "LIST").
 
         assert_equal(sorted_desc[0], "foobarbaz").
         assert_equal(sorted_desc[1], "foobar").
@@ -395,8 +455,40 @@ describe("lib_enum").
         assert_equal(sorted_asc[0], "foo").
         assert_equal(sorted_asc[1], "foobar").
         assert_equal(sorted_asc[2], "foobarbaz").
+
+        // Queue
+        local collection is queue("foobar", "foo", "foobarbaz").
+        local sorted_desc is enum["sort"](collection, str_len_comp_desc@).
+        local sorted_asc  is enum["sort"](collection, str_len_comp_asc@).
+
+        assert_equal(sorted_desc:dump:split(" ")[0], "QUEUE").
+        assert_equal(sorted_asc:dump:split(" ")[0], "QUEUE").
+
+        assert_equal(sorted_desc:pop(), "foobarbaz").
+        assert_equal(sorted_desc:pop(), "foobar").
+        assert_equal(sorted_desc:pop(), "foo").
+
+        assert_equal(sorted_asc:pop(), "foo").
+        assert_equal(sorted_asc:pop(), "foobar").
+        assert_equal(sorted_asc:pop(), "foobarbaz").
+
+        // Stack
+        local collection is stack("foobarbaz", "foo", "foobar").
+        local sorted_desc is enum["sort"](collection, str_len_comp_desc@).
+        local sorted_asc  is enum["sort"](collection, str_len_comp_asc@).
+
+        assert_equal(sorted_desc:dump:split(" ")[0], "STACK").
+        assert_equal(sorted_asc:dump:split(" ")[0], "STACK").
+
+        assert_equal(sorted_desc:pop(), "foobarbaz").
+        assert_equal(sorted_desc:pop(), "foobar").
+        assert_equal(sorted_desc:pop(), "foo").
+
+        assert_equal(sorted_asc:pop(), "foo").
+        assert_equal(sorted_asc:pop(), "foobar").
+        assert_equal(sorted_asc:pop(), "foobarbaz").
       }
     end.
-
   end.
+
 end.
