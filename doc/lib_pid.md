@@ -1,5 +1,9 @@
 // This file is distributed under the terms of the MIT license, (c) the KSLib team
 
+## Notice:
+  This library file has been superseded by the kOS inbuilt PIDloop() function.
+  It is maintained for example purposes only, please see the kOS documentation for more.
+
 ## lib_pid
 
 A library of routines to implement a simple generic PID controller.
