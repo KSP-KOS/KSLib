@@ -20,6 +20,13 @@ print " Seek ALT:RADAR = ".
 print "  Cur ALT:RADAR = ".
 print " ".
 print "       Throttle = ".
+print " ".
+print " ".
+print " ".
+print "This library file has been superseded by the kOS".
+print "inbuilt PIDloop() function.".
+print "It is maintained for example purposes only,".
+print "please see the kOS documentation for more.".
 
 // load the functions I'm using:
 run lib_PID.
