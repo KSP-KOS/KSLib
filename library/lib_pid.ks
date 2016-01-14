@@ -1,5 +1,8 @@
 // This file is distributed under the terms of the MIT license, (c) the KSLib team
 
+HUDTEXT("This library file has been superseded by the kOS inbuilt PIDloop() function.", 30, 2, 30, RED, FALSE).
+HUDTEXT("It is maintained for example purposes only, please see the kOS documentation for more.", 30, 2, 30, RED, FALSE).
+
 @LAZYGLOBAL off.
 
 function PID_init {
