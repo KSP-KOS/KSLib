@@ -23,7 +23,7 @@ print "       Throttle = ".
 print " ".
 print " ".
 print " ".
-print "This library file has been superseded by the kOS".
+print "lib_pid.ks has been superseded by the kOS".
 print "inbuilt PIDloop() function.".
 print "It is maintained for example purposes only,".
 print "please see the kOS documentation for more.".
