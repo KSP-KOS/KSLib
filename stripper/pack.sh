@@ -1,6 +1,6 @@
 # This file is distributed under the terms of the MIT license, (c) the KSLib team
 
-# The purpose of this file is to decrease size of .ks files for the final flight. However, please upload 
+# The purpose of this file is to decrease size of .ks files for the final flight. However, please upload
 # UNPACKED versions of programs to KSLib.
 
 # This version works in Unix environments.
@@ -16,6 +16,6 @@ for f in $FILES; do
         -e 's|^\s*\(.*)\s*$|\1|g' \
         -e '/^$/d'
 	$f > packed/$f;
-        # the first line strips comments (doubled to catch pesky URLs in comments)
+  # the first line strips comments (doubled to catch pesky URLs in comments)
 	# the second line strips leading and trailing whitespace
-        # the third line removes all empty lines (which should be stripped down by the second line)
+  # the third line removes all empty lines (which should be stripped down by the second line)
