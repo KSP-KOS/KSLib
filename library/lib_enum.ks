@@ -1,11 +1,7 @@
 // This file is distributed under the terms of the MIT license, (c) the KSLib
 // team
 
-set enum to lexicon().
-set enum["version"] to "0.1.1".
-
-{
-local y is true. local n is false.
+{local y is true. local n is false.
 
 function cast{
   parameter a,b,r is 0.
@@ -26,9 +22,9 @@ function any{parameter l,c. for i in l if c(i) return y. return n.}
 function count{
   parameter l,c,r is 0. for i in l if c(i) set r to r+1. return r.}
 
-function each {parameter l,o. for i in l o(i).}
+function each{parameter l,o. for i in l o(i).}
 
-function each_slice {
+function each_slice{
   parameter l,m,o,c is to_l(l),i is 0.
   until i > c:length-1 {
     o(cast(c:sublist(i,min(m,c:length-1)),l:typename)). set i to i+m.}}
@@ -60,7 +56,7 @@ function _max{parameter l,c is to_l(l). if c:length=0 return n.
 function _min{parameter l, c is to_l(l). if c:length=0 return n.
   local r is c[0]. for i in c if i<r set r to i. return r.}
 
-function partition { parameter l,o,c is to_l(l), r is list(list(),list()).
+function partition{parameter l,o,c is to_l(l), r is list(list(),list()).
   for i in c { if o(i) r[0]:add(i). else r[1]:add(i). }
   set r[0] to cast(r[0],l:typename). set r[1] to cast(r[1],l:typename).
   return r.
@@ -77,7 +73,7 @@ function reverse{parameter l,r is stack().
 function select{parameter l,c,r is list().
   for i in to_l(l) if c(i) r:add(i). return cast(r,l:typename).}
 
-function sort {
+function sort{
   parameter l,c,r is to_l(l):copy.
   function qs{parameter A,lo,hi.
     if lo<hi{local p is pt(A, lo, hi). qs(A, lo, p). qs(A, p + 1, hi).}}
@@ -91,23 +87,25 @@ function sort {
   qs(r,0,r:length-1). return cast(r,l:typename).
 }
 
-set enum["all"] to all@.
-set enum["any"] to any@.
-set enum["count"] to count@.
-set enum["each"] to each@.
-set enum["each_slice"] to each_slice@.
-set enum["each_with_index"] to each_with_index@.
-set enum["find"] to find@.
-set enum["find_index"] to find_index@.
-set enum["group_by"] to group_by@.
-set enum["map"] to map@.
-set enum["map_with_index"] to map_with_index@.
-set enum["max"] to _max@.
-set enum["min"] to _min@.
-set enum["partition"] to partition@.
-set enum["reduce"] to reduce@.
-set enum["reject"] to reject@.
-set enum["reverse"] to reverse@.
-set enum["select"] to select@.
-set enum["sort"] to sort@.
-}
+global enum is lexicon(
+"version", "0.1.1"
+"all", all@,
+"any", any@,
+"count", count@,
+"each", each@,
+"each_slice", each_slice@,
+"each_with_index", each_with_index@,
+"find", find@,
+"find_index", find_index@,
+"group_by", group_by@,
+"map", map@,
+"map_with_index", map_with_index@,
+"max", _max@,
+"min", _min@,
+"partition", partition@,
+"reduce", reduce@,
+"reject", reject@,
+"reverse", reverse@,
+"select", select@,
+"sort", sort@,
+).}
