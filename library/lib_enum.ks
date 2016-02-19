@@ -88,7 +88,7 @@ function sort{
 }
 
 global enum is lexicon(
-"version", "0.1.1"
+"version", "0.1.1",
 "all", all@,
 "any", any@,
 "count", count@,
@@ -107,5 +107,5 @@ global enum is lexicon(
 "reject", reject@,
 "reverse", reverse@,
 "select", select@,
-"sort", sort@,
+"sort", sort@
 ).}
