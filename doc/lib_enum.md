@@ -4,7 +4,7 @@
 
 ``lib_enum.ks`` provides a set of functions for manipulating lists, queues, and stacks using the new delegates syntax introduced in kOS version 0.19.0. It allows you to transform and execute on lists, queues, and stacks by passing in a delegate function, and is designed to contain all the core components of an enumerable library.
 
-Each of the functions is made available through the `enum` [lexicon](http://ksp-kos.github.io/KOS_DOC/structures/misc/lexicon.html), to minimize the number of variables used in the global namespace. They can be called using the following syntax: `run lib_enum. enum["max"](list(1,2,3)). // 3` All functions work on [Lists](http://ksp-kos.github.io/KOS_DOC/structures/misc/list.html), [Stacks](http://ksp-kos.github.io/KOS_DOC/structures/misc/stack.html), and [Queues](http://ksp-kos.github.io/KOS_DOC/structures/misc/queue.html), and when collections are returned, they will be of the same type as the original input.
+Each of the functions is made available through the `Enum` [lexicon](http://ksp-kos.github.io/KOS_DOC/structures/misc/lexicon.html), to minimize the number of variables used in the global namespace. They can be called using the following syntax: `run lib_enum. Enum["max"](list(1,2,3)). // 3` All functions work on [Lists](http://ksp-kos.github.io/KOS_DOC/structures/misc/list.html), [Stacks](http://ksp-kos.github.io/KOS_DOC/structures/misc/stack.html), and [Queues](http://ksp-kos.github.io/KOS_DOC/structures/misc/queue.html), and when collections are returned, they will be of the same type as the original input.
 
 function        | arguments                     | return type   | description
 ----------------| ----------------------------- | ------------- | -----------
@@ -28,7 +28,7 @@ reverse         | elements                      | collection    | Return a copy 
 select          | elements, match_fn@           | collection    | Return a new collection with all items for which the delegate returns true
 sort            | elements, compare_fn@         | collection    | Return a new collection with the original elements sorted by the delegate
 
-### enum["all"]
+### Enum["all"]
 
 Parameters:
   * elements (list/queue/stack) -- the elements you wish to check
@@ -42,11 +42,11 @@ Returns `true` if the match_fn returns `true` for every element in the collectio
 Example:
 ```
 function is_even { parameter n. return mod(n,2) = 0. }
-enum["all"](list(2,4,5), is_even@). // false
-enum["all"](queue(2,4,6), is_even@). // true
+Enum["all"](list(2,4,5), is_even@). // false
+Enum["all"](queue(2,4,6), is_even@). // true
 ```
 
-### enum["any"]
+### Enum["any"]
 
 Parameters:
   * elements (list/queue/stack) -- the elements you wish to check
@@ -60,11 +60,11 @@ Returns `true` if the match_fn returns `true` for any element in the collection.
 Example:
 ```
 function is_even { parameter n. return mod(n,2) = 0. }
-enum["any"](stack(1,3,5), is_even@). // false
-enum["any"](queue(1,3,6), is_even@). // true
+Enum["any"](stack(1,3,5), is_even@). // false
+Enum["any"](queue(1,3,6), is_even@). // true
 ```
 
-### enum["count"]
+### Enum["count"]
 
 Parameters:
   * elements (list/queue/stack) -- the elements you wish to check
@@ -78,10 +78,10 @@ Calls the match_fn with each element in the collection, and returns the number o
 Example:
 ```
 function is_even { parameter n. return mod(n,2) = 0. }
-enum_count(queue(1,2,3,4,5), is_even@). // 2
+Enum_count(queue(1,2,3,4,5), is_even@). // 2
 ```
 
-### enum["each"]
+### Enum["each"]
 
 Parameters:
   * elements (list/queue/stack) -- the elements you wish to iterate over
@@ -92,31 +92,31 @@ Calls the operation_fn for every element in the collection.
 Example:
 ```
 function notify { parameter n. print n. }
-enum["each"](list(1,2,3), notify@).
+Enum["each"](list(1,2,3), notify@).
 // 1
 // 2
 // 3
 ```
 
-### enum["each_slice"]
+### Enum["each_slice"]
 
 Parameters:
   * elements (list/queue/stack) -- the elements you wish to iterate over
   * size (integer) -- the size of "chunks" to be passed to the operation_fn
   * operation_fn@ (delegate function) -- a function accepting a collection of elements
 
-Calls the operation_fn with chunks of the collection, based on the size parameter. When the elements collection does not divide neatly, a smaller chunk will be used at the end. For example, if the elements collection is `queue(1,2,3)`, and the size is `2`, `enum["each_slice"]` will call `operation_fn` with `queue(1,2)`, and then with `queue(3)`.
+Calls the operation_fn with chunks of the collection, based on the size parameter. When the elements collection does not divide neatly, a smaller chunk will be used at the end. For example, if the elements collection is `queue(1,2,3)`, and the size is `2`, `Enum["each_slice"]` will call `operation_fn` with `queue(1,2)`, and then with `queue(3)`.
 
 Example:
 ```
 function notify { parameter n. print n. }
-enum["each_slice"](list(1,2,3,4,5), 2, notify@).
+Enum["each_slice"](list(1,2,3,4,5), 2, notify@).
 // list(1,2)
 // list(3,4)
 // list(5)
 ```
 
-### enum["each_with_index"]
+### Enum["each_with_index"]
 
 Parameters:
   * elements (list/queue/stack) -- the elements you wish to iterate over
@@ -127,13 +127,13 @@ Calls the operation_fn for every element in the collection, passing in the eleme
 Example:
 ```
 function notify { parameter s, i. print i + ": " + s. }
-enum["each_with_index"](stack("baz","bar","foo"), notify@).
+Enum["each_with_index"](stack("baz","bar","foo"), notify@).
 // 1: foo
 // 2: bar
 // 3: baz
 ```
 
-### enum["find"]
+### Enum["find"]
 
 Parameters:
   * elements (list/queue/stack) -- the elements you wish to search
@@ -147,10 +147,10 @@ Returns the first element in the collection for which match_fn returns `true`.
 Example:
 ```
 function is_even { parameter n. return mod(n,2) = 0. }
-enum_find(list(1,2,3,4,5), is_even@). // 2
+Enum_find(list(1,2,3,4,5), is_even@). // 2
 ```
 
-### enum["find_index"]
+### Enum["find_index"]
 
 Parameters:
   * elements (list/queue/stack) -- the elements you wish to search
@@ -164,10 +164,10 @@ Returns the index of the first element in the collection for which match_fn retu
 Example:
 ```
 function is_even { parameter n. return mod(n,2) = 0. }
-enum_find_index(list(1,2,3,4,5), is_even@). // 1
+Enum_find_index(list(1,2,3,4,5), is_even@). // 1
 ```
 
-### enum["group_by"]
+### Enum["group_by"]
 
 Parameters:
   * elements (list/queue/stack) -- the elements you wish to group
@@ -181,10 +181,10 @@ Returns a Lexicon with keys matching the return values of the transform_fn, with
 Example:
 ```
 function even_or_odd { parameter n. if mod(n,2) = 0 return "even". return "odd". }
-enum["group_by"](queue(1,2,3,4,5), even_or_odd@). // lexicon("odd" => queue(1,3,5), "even" => queue(2,4))
+Enum["group_by"](queue(1,2,3,4,5), even_or_odd@). // lexicon("odd" => queue(1,3,5), "even" => queue(2,4))
 ```
 
-### enum["map"]
+### Enum["map"]
 
 Parameters:
   * elements (list/queue/stack) -- the elements you wish to transform
@@ -198,10 +198,10 @@ Returns a new collection containing the results of applying the transform_fn to 
 Example:
 ```
 function even_or_odd { parameter n. if mod(n,2) = 0 return "even". return "odd". }
-enum["map"](stack(1,2,3,4,5), even_or_odd@). // stack("odd","even","odd","even","odd")
+Enum["map"](stack(1,2,3,4,5), even_or_odd@). // stack("odd","even","odd","even","odd")
 ```
 
-### enum["map_with_index"]
+### Enum["map_with_index"]
 
 Parameters:
   * elements (list/queue/stack) -- the elements you wish to transform
@@ -215,10 +215,10 @@ Returns a new collection containing the results of applying the transform_fn to 
 Example:
 ```
 function enumerate { parameter element, index. return index + ": " + element. }
-enum["map_with_index"](list("foo","bar","baz"), enumerate@). // list("1: foo", "2: bar", "3: baz")
+Enum["map_with_index"](list("foo","bar","baz"), enumerate@). // list("1: foo", "2: bar", "3: baz")
 ```
 
-### enum["max"]
+### Enum["max"]
 
 Parameters:
   * elements (list/queue/stack) -- the elements for which you want to find the largest value
@@ -230,10 +230,10 @@ Returns the largest value in the collection.
 
 Example:
 ```
-enum["max"](stack(3,7,2)). // 7
+Enum["max"](stack(3,7,2)). // 7
 ```
 
-### enum["min"]
+### Enum["min"]
 
 Parameters:
   * elements (list/queue/stack) -- the elements for which you want to find the smallest value
@@ -245,10 +245,10 @@ Returns the smallest value in the collection.
 
 Example:
 ```
-enum["min"](queue(3,7,2)). // 2
+Enum["min"](queue(3,7,2)). // 2
 ```
 
-### enum["partition"]
+### Enum["partition"]
 
 Parameters:
   * elements (list/queue/stack) -- the elements you wish to partition
@@ -259,15 +259,15 @@ Return Type:
 
 Returns a new list containing a collection of elements for which the match_fn returned `true`, and a collection of elements for which the match_fn returned `false`.
 
-*Note: the result from `enum["partition"]` will always be a list, regardless of whether the initial collection is a list, queue, or stack. However, the nested collections will be of the same type as the original collection. For example, if you partition a queue, `set split to enum["partition"](queue(1,2,3), my_split_fn@).`, then `split[0]` will also be a queue.*
+*Note: the result from `Enum["partition"]` will always be a list, regardless of whether the initial collection is a list, queue, or stack. However, the nested collections will be of the same type as the original collection. For example, if you partition a queue, `set split to Enum["partition"](queue(1,2,3), my_split_fn@).`, then `split[0]` will also be a queue.*
 
 Example:
 ```
 function is_even { parameter n. return mod(n,2) = 0. }
-enum["partition"](stack(1,2,3,4,5), is_even@). // list(stack(2,4), stack(1,3,5))
+Enum["partition"](stack(1,2,3,4,5), is_even@). // list(stack(2,4), stack(1,3,5))
 ```
 
-### enum["reduce"]
+### Enum["reduce"]
 
 Parameters:
   * elements (list/queue/stack) -- the elements you wish to reduce
@@ -277,18 +277,18 @@ Parameters:
 Return Type:
   * value
 
-Allows you to combine a collection by calling the reduce_fn on each element, with the first argument to the reduce function being the current reduction value. On the first call to the reduce function, the starting value will be the second argument passed to `enum["reduce"]`.
+Allows you to combine a collection by calling the reduce_fn on each element, with the first argument to the reduce function being the current reduction value. On the first call to the reduce function, the starting value will be the second argument passed to `Enum["reduce"]`.
 
 Example:
 ```
 function concat { parameter memo, string. return memo + string. }
-enum["reduce"](queue("foo",'bar","baz"), "", concat@). // "foobarbaz"
+Enum["reduce"](queue("foo",'bar","baz"), "", concat@). // "foobarbaz"
 
 function multiply { parameter memo, n. return memo * n. }
-enum["reduce"](list(1,2,3,4,5), 1, multiply@). // 120
+Enum["reduce"](list(1,2,3,4,5), 1, multiply@). // 120
 ```
 
-### enum["reject"]
+### Enum["reject"]
 
 Parameters:
   * elements (list/queue/stack) -- the elements you wish to match
@@ -302,10 +302,10 @@ Returns a new collection containing only the elements for which match_fn *did no
 Example:
 ```
 function is_even { parameter n. return mod(n,2) = 0. }
-enum["reject"](stack(1,2,3,4,5), is_even@). // stack(1,3,5)
+Enum["reject"](stack(1,2,3,4,5), is_even@). // stack(1,3,5)
 ```
 
-### enum["reverse"]
+### Enum["reverse"]
 
 Parameters:
   * elements (list/queue/stack) -- the elements you wish to reverse
@@ -317,10 +317,10 @@ Returns a new collection containing all the elements in reverse order.
 
 Example:
 ```
-enum["reverse"](queue(1,2,3,4,5)). // queue(5,4,3,2,1)
+Enum["reverse"](queue(1,2,3,4,5)). // queue(5,4,3,2,1)
 ```
 
-### enum["select"]
+### Enum["select"]
 
 Parameters:
   * elements (list/queue/stack) -- the elements you wish to match
@@ -334,10 +334,10 @@ Returns a new collection containing only the elements for which match_fn *did* r
 Example:
 ```
 function is_even { parameter n. return mod(n,2) = 0. }
-enum["select"](list(1,2,3,4,5), is_even@). // list(2,4)
+Enum["select"](list(1,2,3,4,5), is_even@). // list(2,4)
 ```
 
-### enum["sort"]
+### Enum["sort"]
 
 Parameters:
   * elements (list/queue/stack) -- the elements you wish to sort
@@ -348,12 +348,12 @@ Return Type:
 
 Returns a new collection containing the elements sorted according to the compare_fn. The compare_fn should accept two elements. If the first element belongs earlier in the list, the compare_fn should return a negative number. If the second element belongs earlier in the list, the value should be positive. If the values are equivalent, the compare_fn should return 0.
 
-*Note: `enum['sort"]` uses the [quicksort algorithm](https://www.wikiwand.com/en/Quicksort) to handle the actual sorting, relying on the Hoare partition scheme.*
+*Note: `Enum['sort"]` uses the [quicksort algorithm](https://www.wikiwand.com/en/Quicksort) to handle the actual sorting, relying on the Hoare partition scheme.*
 
 Example:
 ```
 function compare_string_descending {
   parameter a, b. return b:length - a:length.
 }
-enum["sort"](list("foo","foobarbaz", "foobar"), compare_string_descending@). // list("foobarbaz","foobar","foo")
+Enum["sort"](list("foo","foobarbaz", "foobar"), compare_string_descending@). // list("foobarbaz","foobar","foo")
 ```

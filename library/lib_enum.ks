@@ -87,7 +87,7 @@ function sort{
   qs(r,0,r:length-1). return cast(r,l:typename).
 }
 
-global enum is lexicon(
+global Enum is lexicon(
 "version", "0.1.1",
 "all", all@,
 "any", any@,

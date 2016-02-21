@@ -8,13 +8,13 @@ function is_even { parameter n. return mod(n,2) = 0. }
 describe("lib_enum").
   it("exposes a global enum module", "test_module").
     function test_module {
-      enum. assert(true).
+      Enum. assert(true).
     }
   end.
 
   it("has a version property equal to 0.1.1", "test_version").
     function test_version {
-      assert_equal(enum["version"], "0.1.1").
+      assert_equal(Enum["version"], "0.1.1").
     }
   end.
 
@@ -22,9 +22,9 @@ describe("lib_enum").
     context("when every element passes the condition").
       it("returns true", "test_all_true").
         function test_all_true {
-          assert(enum["all"](list(2,4,6), is_even@)).
-          assert(enum["all"](queue(2,4,6), is_even@)).
-          assert(enum["all"](stack(2,4,6), is_even@)).
+          assert(Enum["all"](list(2,4,6), is_even@)).
+          assert(Enum["all"](queue(2,4,6), is_even@)).
+          assert(Enum["all"](stack(2,4,6), is_even@)).
         }
       end.
     end.
@@ -32,9 +32,9 @@ describe("lib_enum").
     context("when one element fail the condition").
       it("returns false", "test_all_false").
         function test_all_false {
-          assert(not enum["all"](list(2,5,6), is_even@)).
-          assert(not enum["all"](queue(2,5,6), is_even@)).
-          assert(not enum["all"](stack(2,5,6), is_even@)).
+          assert(not Enum["all"](list(2,5,6), is_even@)).
+          assert(not Enum["all"](queue(2,5,6), is_even@)).
+          assert(not Enum["all"](stack(2,5,6), is_even@)).
         }
       end.
     end.
@@ -44,9 +44,9 @@ describe("lib_enum").
     context("when one element passes the condition").
       it("returns true", "test_any_true").
         function test_any_true {
-          assert(enum["any"](list(1,4,5), is_even@)).
-          assert(enum["any"](queue(1,4,5), is_even@)).
-          assert(enum["any"](stack(1,4,5), is_even@)).
+          assert(Enum["any"](list(1,4,5), is_even@)).
+          assert(Enum["any"](queue(1,4,5), is_even@)).
+          assert(Enum["any"](stack(1,4,5), is_even@)).
         }
       end.
     end.
@@ -54,9 +54,9 @@ describe("lib_enum").
     context("when all elements fail the condition").
       it("returns false", "test_any_false").
         function test_any_false {
-          assert(not enum["any"](list(1,3,5), is_even@)).
-          assert(not enum["any"](queue(1,3,5), is_even@)).
-          assert(not enum["any"](stack(1,3,5), is_even@)).
+          assert(not Enum["any"](list(1,3,5), is_even@)).
+          assert(not Enum["any"](queue(1,3,5), is_even@)).
+          assert(not Enum["any"](stack(1,3,5), is_even@)).
         }
       end.
     end.
@@ -65,9 +65,9 @@ describe("lib_enum").
   describe("count").
     it("returns the number of items that meet the condition", "test_count").
       function test_count {
-        assert_equal(enum["count"](list(1,2,3,4,5), is_even@), 2).
-        assert_equal(enum["count"](queue(1,2,3,4,5), is_even@), 2).
-        assert_equal(enum["count"](stack(1,2,3,4,5), is_even@), 2).
+        assert_equal(Enum["count"](list(1,2,3,4,5), is_even@), 2).
+        assert_equal(Enum["count"](queue(1,2,3,4,5), is_even@), 2).
+        assert_equal(Enum["count"](stack(1,2,3,4,5), is_even@), 2).
       }
     end.
   end.
@@ -78,7 +78,7 @@ describe("lib_enum").
         // List
         local yielded is list().
         function yield { parameter i. yielded:add(i). }
-        enum["each"](list(2,4,7), yield@).
+        Enum["each"](list(2,4,7), yield@).
         assert_equal(yielded[0], 2).
         assert_equal(yielded[1], 4).
         assert_equal(yielded[2], 7).
@@ -86,7 +86,7 @@ describe("lib_enum").
         // Queue
         local yielded is list().
         function yield { parameter i. yielded:add(i). }
-        enum["each"](queue(2,4,7), yield@).
+        Enum["each"](queue(2,4,7), yield@).
         assert_equal(yielded[0], 2).
         assert_equal(yielded[1], 4).
         assert_equal(yielded[2], 7).
@@ -94,7 +94,7 @@ describe("lib_enum").
         // Stack
         local yielded is list().
         function yield { parameter i. yielded:add(i). }
-        enum["each"](stack(2,4,7), yield@).
+        Enum["each"](stack(2,4,7), yield@).
         assert_equal(yielded[0], 7).
         assert_equal(yielded[1], 4).
         assert_equal(yielded[2], 2).
@@ -108,7 +108,7 @@ describe("lib_enum").
         // List
         local yielded is list().
         function yield { parameter i. yielded:add(i). }
-        enum["each_slice"](list(1,2,3,4,5), 2, yield@).
+        Enum["each_slice"](list(1,2,3,4,5), 2, yield@).
         assert_equal(yielded[0][0], 1).
         assert_equal(yielded[0][1], 2).
         assert_equal(yielded[1][0], 3).
@@ -118,7 +118,7 @@ describe("lib_enum").
         // Queue
         local yielded is list().
         function yield { parameter i. yielded:add(i). }
-        enum["each_slice"](queue(1,2,3,4,5), 2, yield@).
+        Enum["each_slice"](queue(1,2,3,4,5), 2, yield@).
         assert_equal(yielded[0]:pop(), 1).
         assert_equal(yielded[0]:pop(), 2).
         assert_equal(yielded[1]:pop(), 3).
@@ -128,7 +128,7 @@ describe("lib_enum").
         // Stack
         local yielded is list().
         function yield { parameter i. yielded:add(i). }
-        enum["each_slice"](stack(5,4,3,2,1), 2, yield@).
+        Enum["each_slice"](stack(5,4,3,2,1), 2, yield@).
         assert_equal(yielded[0]:pop(), 1).
         assert_equal(yielded[0]:pop(), 2).
         assert_equal(yielded[1]:pop(), 3).
@@ -144,7 +144,7 @@ describe("lib_enum").
         // List
         local yielded is list().
         function yield { parameter s, i. yielded:add(i + ": " + s). }
-        enum["each_with_index"](list("foo","bar","baz"), yield@).
+        Enum["each_with_index"](list("foo","bar","baz"), yield@).
         assert_equal(yielded[0], "1: foo").
         assert_equal(yielded[1], "2: bar").
         assert_equal(yielded[2], "3: baz").
@@ -152,7 +152,7 @@ describe("lib_enum").
         // Queue
         local yielded is list().
         function yield { parameter s, i. yielded:add(i + ": " + s). }
-        enum["each_with_index"](queue("foo","bar","baz"), yield@).
+        Enum["each_with_index"](queue("foo","bar","baz"), yield@).
         assert_equal(yielded[0], "1: foo").
         assert_equal(yielded[1], "2: bar").
         assert_equal(yielded[2], "3: baz").
@@ -160,7 +160,7 @@ describe("lib_enum").
         // Stack
         local yielded is list().
         function yield { parameter s, i. yielded:add(i + ": " + s). }
-        enum["each_with_index"](stack("baz","bar","foo"), yield@).
+        Enum["each_with_index"](stack("baz","bar","foo"), yield@).
         assert_equal(yielded[0], "1: foo").
         assert_equal(yielded[1], "2: bar").
         assert_equal(yielded[2], "3: baz").
@@ -171,9 +171,9 @@ describe("lib_enum").
   describe("find").
     it("returns the first element which matches the delegate", "test_find").
       function test_find {
-        assert_equal(enum["find"](list(1,2,3), is_even@), 2).
-        assert_equal(enum["find"](queue(1,2,3), is_even@), 2).
-        assert_equal(enum["find"](stack(1,2,3), is_even@), 2).
+        assert_equal(Enum["find"](list(1,2,3), is_even@), 2).
+        assert_equal(Enum["find"](queue(1,2,3), is_even@), 2).
+        assert_equal(Enum["find"](stack(1,2,3), is_even@), 2).
       }
     end.
   end.
@@ -182,9 +182,9 @@ describe("lib_enum").
     context("when no such element exists").
       it("returns -1", "test_find_index_fail").
         function test_find_index_fail {
-          assert_equal(enum["find_index"](list(1,3,5), is_even@), -1).
-          assert_equal(enum["find_index"](queue(1,3,5), is_even@), -1).
-          assert_equal(enum["find_index"](stack(1,3,5), is_even@), -1).
+          assert_equal(Enum["find_index"](list(1,3,5), is_even@), -1).
+          assert_equal(Enum["find_index"](queue(1,3,5), is_even@), -1).
+          assert_equal(Enum["find_index"](stack(1,3,5), is_even@), -1).
         }
       end.
     end.
@@ -192,9 +192,9 @@ describe("lib_enum").
     context("when the element exists").
       it("returns the index", "test_find_index_match").
         function test_find_index_match {
-          assert_equal(enum["find_index"](list(1,3,4), is_even@), 2).
-          assert_equal(enum["find_index"](queue(1,3,4), is_even@), 2).
-          assert_equal(enum["find_index"](stack(4,3,1), is_even@), 2).
+          assert_equal(Enum["find_index"](list(1,3,4), is_even@), 2).
+          assert_equal(Enum["find_index"](queue(1,3,4), is_even@), 2).
+          assert_equal(Enum["find_index"](stack(4,3,1), is_even@), 2).
         }
       end.
     end.
@@ -206,7 +206,7 @@ describe("lib_enum").
         function even_or_odd { parameter n. if mod(n,2) = 0 return "even". return "odd". }
 
         // List
-        local result is enum["group_by"](list(1,2,3,4,5), even_or_odd@).
+        local result is Enum["group_by"](list(1,2,3,4,5), even_or_odd@).
         assert_equal(result["even"][0], 2).
         assert_equal(result["even"][1], 4).
         assert_equal(result["odd"][0], 1).
@@ -214,7 +214,7 @@ describe("lib_enum").
         assert_equal(result["odd"][2], 5).
 
         // Queue
-        local result is enum["group_by"](queue(1,2,3,4,5), even_or_odd@).
+        local result is Enum["group_by"](queue(1,2,3,4,5), even_or_odd@).
         assert_equal(result["even"]:pop(), 2).
         assert_equal(result["even"]:pop(), 4).
         assert_equal(result["odd"]:pop(), 1).
@@ -222,7 +222,7 @@ describe("lib_enum").
         assert_equal(result["odd"]:pop(), 5).
 
         // Stack
-        local result is enum["group_by"](stack(5,4,3,2,1), even_or_odd@).
+        local result is Enum["group_by"](stack(5,4,3,2,1), even_or_odd@).
         assert_equal(result["even"]:pop(), 2).
         assert_equal(result["even"]:pop(), 4).
         assert_equal(result["odd"]:pop(), 1).
@@ -236,21 +236,21 @@ describe("lib_enum").
     it("returns a transformed enumerable", "test_map").
       function test_map {
         // List
-        local result is enum["map"](list(1,2,3), is_even@).
+        local result is Enum["map"](list(1,2,3), is_even@).
         assert_equal(result:dump:split(" ")[0], "LIST").
         assert_equal(result[0], false).
         assert_equal(result[1], true).
         assert_equal(result[2], false).
 
         // Queue
-        local result is enum["map"](queue(1,2,3), is_even@).
+        local result is Enum["map"](queue(1,2,3), is_even@).
         assert_equal(result:dump:split(" ")[0], "QUEUE").
         assert_equal(result:pop(), false).
         assert_equal(result:pop(), true).
         assert_equal(result:pop(), false).
 
         // Stack
-        local result is enum["map"](stack(3,2,1), is_even@).
+        local result is Enum["map"](stack(3,2,1), is_even@).
         assert_equal(result:dump:split(" ")[0], "STACK").
         assert_equal(result:pop(), false).
         assert_equal(result:pop(), true).
@@ -265,21 +265,21 @@ describe("lib_enum").
         function enumerate { parameter s, i. return i + ": " + s. }
 
         // List
-        local result is enum["map_with_index"](list("foo","bar","baz"), enumerate@).
+        local result is Enum["map_with_index"](list("foo","bar","baz"), enumerate@).
         assert_equal(result:dump:split(" ")[0], "LIST").
         assert_equal(result[0], "1: foo").
         assert_equal(result[1], "2: bar").
         assert_equal(result[2], "3: baz").
 
         // Queue
-        local result is enum["map_with_index"](queue("foo","bar","baz"), enumerate@).
+        local result is Enum["map_with_index"](queue("foo","bar","baz"), enumerate@).
         assert_equal(result:dump:split(" ")[0], "QUEUE").
         assert_equal(result:pop(), "1: foo").
         assert_equal(result:pop(), "2: bar").
         assert_equal(result:pop(), "3: baz").
 
         // Stack
-        local result is enum["map_with_index"](stack("baz","bar","foo"), enumerate@).
+        local result is Enum["map_with_index"](stack("baz","bar","foo"), enumerate@).
         assert_equal(result:dump:split(" ")[0], "STACK").
         assert_equal(result:pop(), "1: foo").
         assert_equal(result:pop(), "2: bar").
@@ -291,9 +291,9 @@ describe("lib_enum").
   describe("max").
     it("returns the largest value in the collection", "test_max").
       function test_max {
-        assert_equal(enum["max"](list(1,5,2)), 5).
-        assert_equal(enum["max"](queue(1,5,2)), 5).
-        assert_equal(enum["max"](stack(1,5,2)), 5).
+        assert_equal(Enum["max"](list(1,5,2)), 5).
+        assert_equal(Enum["max"](queue(1,5,2)), 5).
+        assert_equal(Enum["max"](stack(1,5,2)), 5).
       }
     end.
   end.
@@ -301,9 +301,9 @@ describe("lib_enum").
   describe("min").
     it("returns the smallest value in the collection", "test_min").
       function test_min {
-        assert_equal(enum["min"](list(3,5,2)), 2).
-        assert_equal(enum["min"](queue(3,5,2)), 2).
-        assert_equal(enum["min"](stack(3,5,2)), 2).
+        assert_equal(Enum["min"](list(3,5,2)), 2).
+        assert_equal(Enum["min"](queue(3,5,2)), 2).
+        assert_equal(Enum["min"](stack(3,5,2)), 2).
       }
     end.
   end.
@@ -312,7 +312,7 @@ describe("lib_enum").
     it("returns a passing and failing list", "test_partition").
       function test_partition {
         // List
-        local result is enum["partition"](list(1,2,3,4,5), is_even@).
+        local result is Enum["partition"](list(1,2,3,4,5), is_even@).
         assert_equal(result[0]:dump:split(" ")[0], "LIST").
         assert_equal(result[1]:dump:split(" ")[0], "LIST").
         assert_equal(result[0][0], 2).
@@ -322,7 +322,7 @@ describe("lib_enum").
         assert_equal(result[1][2], 5).
 
         // Queue
-        local result is enum["partition"](queue(1,2,3,4,5), is_even@).
+        local result is Enum["partition"](queue(1,2,3,4,5), is_even@).
         assert_equal(result[0]:dump:split(" ")[0], "QUEUE").
         assert_equal(result[1]:dump:split(" ")[0], "QUEUE").
         assert_equal(result[0]:pop(), 2).
@@ -332,7 +332,7 @@ describe("lib_enum").
         assert_equal(result[1]:pop(), 5).
 
         // Stack
-        local result is enum["partition"](stack(5,4,3,2,1), is_even@).
+        local result is Enum["partition"](stack(5,4,3,2,1), is_even@).
         assert_equal(result[0]:dump:split(" ")[0], "STACK").
         assert_equal(result[1]:dump:split(" ")[0], "STACK").
         assert_equal(result[0]:pop(), 2).
@@ -348,9 +348,9 @@ describe("lib_enum").
     it("applied the reduction delegate to each pair and returns the result", "test_reduce").
       function test_reduce {
         function sum { parameter memo, i. return memo + i. }
-        assert_equal(enum["reduce"](list(1,2,3,4,5), 0, sum@), 15).
-        assert_equal(enum["reduce"](queue(1,2,3,4,5), 0, sum@), 15).
-        assert_equal(enum["reduce"](stack(5,4,3,2,1), 0, sum@), 15).
+        assert_equal(Enum["reduce"](list(1,2,3,4,5), 0, sum@), 15).
+        assert_equal(Enum["reduce"](queue(1,2,3,4,5), 0, sum@), 15).
+        assert_equal(Enum["reduce"](stack(5,4,3,2,1), 0, sum@), 15).
       }
     end.
   end.
@@ -359,21 +359,21 @@ describe("lib_enum").
     it("returns a collection of items which fail the delegate", "test_reject").
       function test_reject {
         // List
-        local result is enum["reject"](list(1,2,3,4,5), is_even@).
+        local result is Enum["reject"](list(1,2,3,4,5), is_even@).
         assert_equal(result:dump:split(" ")[0], "LIST").
         assert_equal(result[0], 1).
         assert_equal(result[1], 3).
         assert_equal(result[2], 5).
 
         // Queue
-        local result is enum["reject"](queue(1,2,3,4,5), is_even@).
+        local result is Enum["reject"](queue(1,2,3,4,5), is_even@).
         assert_equal(result:dump:split(" ")[0], "QUEUE").
         assert_equal(result:pop(), 1).
         assert_equal(result:pop(), 3).
         assert_equal(result:pop(), 5).
 
         // Stack
-        local result is enum["reject"](stack(5,4,3,2,1), is_even@).
+        local result is Enum["reject"](stack(5,4,3,2,1), is_even@).
         assert_equal(result:dump:split(" ")[0], "STACK").
         assert_equal(result:pop(), 1).
         assert_equal(result:pop(), 3).
@@ -386,21 +386,21 @@ describe("lib_enum").
     it("returns a reversed copy of the list", "test_reverse").
       function test_reverse {
         // List
-        local result is enum["reverse"](list(1,2,3)).
+        local result is Enum["reverse"](list(1,2,3)).
         assert_equal(result:dump:split(" ")[0], "LIST").
         assert_equal(result[0], 3).
         assert_equal(result[1], 2).
         assert_equal(result[2], 1).
 
         // Queue
-        local result is enum["reverse"](queue(1,2,3)).
+        local result is Enum["reverse"](queue(1,2,3)).
         assert_equal(result:dump:split(" ")[0], "QUEUE").
         assert_equal(result:pop(), 3).
         assert_equal(result:pop(), 2).
         assert_equal(result:pop(), 1).
 
         // Stack
-        local result is enum["reverse"](stack(1,2,3)).
+        local result is Enum["reverse"](stack(1,2,3)).
         assert_equal(result:dump:split(" ")[0], "STACK").
         assert_equal(result:pop(), 1).
         assert_equal(result:pop(), 2).
@@ -413,19 +413,19 @@ describe("lib_enum").
     it("returns a list of items which pass the delegate", "test_select").
       function test_select {
         // List
-        local result is enum["select"](list(1,2,3,4,5), is_even@).
+        local result is Enum["select"](list(1,2,3,4,5), is_even@).
         assert_equal(result:dump:split(" ")[0], "LIST").
         assert_equal(result[0], 2).
         assert_equal(result[1], 4).
 
         // Queue
-        local result is enum["select"](queue(1,2,3,4,5), is_even@).
+        local result is Enum["select"](queue(1,2,3,4,5), is_even@).
         assert_equal(result:dump:split(" ")[0], "QUEUE").
         assert_equal(result:pop(), 2).
         assert_equal(result:pop(), 4).
 
         // Stack
-        local result is enum["select"](stack(5,4,3,2,1), is_even@).
+        local result is Enum["select"](stack(5,4,3,2,1), is_even@).
         assert_equal(result:dump:split(" ")[0], "STACK").
         assert_equal(result:pop(), 2).
         assert_equal(result:pop(), 4).
@@ -442,8 +442,8 @@ describe("lib_enum").
 
         // List
         local collection is list("foobar", "foo", "foobarbaz").
-        local sorted_desc is enum["sort"](collection, str_len_comp_desc@).
-        local sorted_asc  is enum["sort"](collection, str_len_comp_asc@).
+        local sorted_desc is Enum["sort"](collection, str_len_comp_desc@).
+        local sorted_asc  is Enum["sort"](collection, str_len_comp_asc@).
 
         assert_equal(sorted_desc:dump:split(" ")[0], "LIST").
         assert_equal(sorted_asc:dump:split(" ")[0], "LIST").
@@ -458,8 +458,8 @@ describe("lib_enum").
 
         // Queue
         local collection is queue("foobar", "foo", "foobarbaz").
-        local sorted_desc is enum["sort"](collection, str_len_comp_desc@).
-        local sorted_asc  is enum["sort"](collection, str_len_comp_asc@).
+        local sorted_desc is Enum["sort"](collection, str_len_comp_desc@).
+        local sorted_asc  is Enum["sort"](collection, str_len_comp_asc@).
 
         assert_equal(sorted_desc:dump:split(" ")[0], "QUEUE").
         assert_equal(sorted_asc:dump:split(" ")[0], "QUEUE").
@@ -474,8 +474,8 @@ describe("lib_enum").
 
         // Stack
         local collection is stack("foobarbaz", "foo", "foobar").
-        local sorted_desc is enum["sort"](collection, str_len_comp_desc@).
-        local sorted_asc  is enum["sort"](collection, str_len_comp_asc@).
+        local sorted_desc is Enum["sort"](collection, str_len_comp_desc@).
+        local sorted_asc  is Enum["sort"](collection, str_len_comp_asc@).
 
         assert_equal(sorted_desc:dump:split(" ")[0], "STACK").
         assert_equal(sorted_asc:dump:split(" ")[0], "STACK").
