@@ -1,7 +1,30 @@
 // This file is distributed under the terms of the MIT license, (c) the KSLib
 // team
 
-{local y is true. local n is false.
+{global Enum is lexicon(
+"version", "0.1.1",
+"all", all@,
+"any", any@,
+"count", count@,
+"each", each@,
+"each_slice", each_slice@,
+"each_with_index", each_with_index@,
+"find", find@,
+"find_index", find_index@,
+"group_by", group_by@,
+"map", map@,
+"map_with_index", map_with_index@,
+"max", _max@,
+"min", _min@,
+"partition", partition@,
+"reduce", reduce@,
+"reject", reject@,
+"reverse", reverse@,
+"select", select@,
+"sort", sort@
+).
+
+local y is true. local n is false.
 
 function cast{
   parameter a,b,r is 0.
@@ -85,27 +108,4 @@ function sort{
     }
   }
   qs(r,0,r:length-1). return cast(r,l:typename).
-}
-
-global Enum is lexicon(
-"version", "0.1.1",
-"all", all@,
-"any", any@,
-"count", count@,
-"each", each@,
-"each_slice", each_slice@,
-"each_with_index", each_with_index@,
-"find", find@,
-"find_index", find_index@,
-"group_by", group_by@,
-"map", map@,
-"map_with_index", map_with_index@,
-"max", _max@,
-"min", _min@,
-"partition", partition@,
-"reduce", reduce@,
-"reject", reject@,
-"reverse", reverse@,
-"select", select@,
-"sort", sort@
-).}
+}}
