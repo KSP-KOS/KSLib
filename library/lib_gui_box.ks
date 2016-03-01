@@ -1,6 +1,5 @@
 // This file is distributed under the terms of the MIT license, (c) the KSLib team
 // This file is based on lib_window.ks from akrOS by akrasuski1.
-run spec_char.
 
 function draw_custom_gui_box {
  parameter
