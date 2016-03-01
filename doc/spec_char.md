@@ -3,12 +3,10 @@
 ## spec_char
 
 `spec_char.ksm` was a small "hack" to insert quote character and next line character into strings.
-It is no longer needed thanks the the new [char()](http://ksp-kos.github.io/KOS_DOC//math/basic.html?#function:CHAR) function added to kOS.
+
 **important:**
   * This library is a .ksm file and is placed in the library_ksm folder.
-  * This solution is temporary. A way to get these symbols in kerboscript
-    will be introduced soon.
-  * Because it is .ksm file it might stop working in some future versions of kOS.
+  * This solution is no longer needed thanks the the new [char()](http://ksp-kos.github.io/KOS_DOC//math/basic.html?#function:CHAR) function added to kOS.
 
 ### quote
 
