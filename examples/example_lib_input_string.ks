@@ -4,7 +4,6 @@
 
 run lib_input_string.
 run lib_file_exists.
-run spec_char.
 
 if not file_exists("account.ksm") {
  set newuser to true.
@@ -44,8 +43,8 @@ if not newuser {
  log "" to account.ks.
  delete account.ks.
  log "@LAZYGLOBAL off." to account.ks.
- log "function user_check { parameter user. return user = "+quote+username+quote+". }." to account.ks.
- log "function password_check { parameter pass. return pass = "+quote+password+quote+". }." to account.ks.
+ log "function user_check { parameter user. return user = "+char(34)+username+char(34)+". }." to account.ks.
+ log "function password_check { parameter pass. return pass = "+char(34)+password+char(34)+". }." to account.ks.
  compile account.ks.
  delete account.ks.
 }
