@@ -1,5 +1,9 @@
 // This file is distributed under the terms of the MIT license, (c) the KSLib team
 
+# Notice:
+
+Unfortunately this library file was a workaround that made use of some loopholes in the main kOS code that no longer exist which means that this library no longer functions.
+
 ## lib_exec
 
 This library is a powerful tool for unhardcoding program's behavior.
