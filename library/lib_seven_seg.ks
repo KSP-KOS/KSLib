@@ -77,4 +77,5 @@ function seven_seg {
  //} else if num = // add more special cases here.
  } else {
   hudtext("ERROR: [lib_seven_seg.ks] unrecognised parameter: " +num, 10, 2, 30, RED, FALSE).
+ }
 }
