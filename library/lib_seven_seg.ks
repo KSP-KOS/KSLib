@@ -5,61 +5,63 @@ function seven_seg {
   num,
   col,
   ln.
- if num > -1 {
-  if num < 5 {
-   if num < 2 {
-    if num < 1 {
-     print  "_" at (col+1,ln).
-     print "| |" at (col,ln+1).
-     print "|_|" at (col,ln+2).
-    } else {
-     print  " " at (col+1,ln).
-     print "  |" at (col,ln+1).
-     print "  |" at (col,ln+2).
-    }
-   } else {
-    if num < 4 {
-     if num < 3 {
+ if num:istype("scalar") { 
+  if num > -1 {
+   if num < 5 {
+    if num < 2 {
+     if num < 1 {
       print  "_" at (col+1,ln).
-      print " _|" at (col,ln+1).
-      print "|_ " at (col,ln+2).
+      print "| |" at (col,ln+1).
+      print "|_|" at (col,ln+2).
      } else {
-      print  "_" at (col+1,ln).
-      print " _|" at (col,ln+1).
-      print " _|" at (col,ln+2).
-     }
-    } else {
-     print  " " at (col+1,ln).
-     print "|_|" at (col,ln+1).
-     print "  |" at (col,ln+2).
-    }
-   }
-  } else {
-   if num < 7 {
-    if num < 6 {
-     print  "_" at (col+1,ln).
-     print "|_ " at (col,ln+1).
-     print " _|" at (col,ln+2).
-    } else {
-     print  "_" at (col+1,ln).
-     print "|_ " at (col,ln+1).
-     print "|_|" at (col,ln+2).
-    }
-   } else {
-    if num < 9 {
-     if num < 8 {
-      print  "_" at (col+1,ln).
+      print  " " at (col+1,ln).
       print "  |" at (col,ln+1).
       print "  |" at (col,ln+2).
+     }
+    } else {
+     if num < 4 {
+      if num < 3 {
+       print  "_" at (col+1,ln).
+       print " _|" at (col,ln+1).
+       print "|_ " at (col,ln+2).
+      } else {
+       print  "_" at (col+1,ln).
+       print " _|" at (col,ln+1).
+       print " _|" at (col,ln+2).
+      }
+     } else {
+      print  " " at (col+1,ln).
+      print "|_|" at (col,ln+1).
+      print "  |" at (col,ln+2).
+     }
+    }
+   } else {
+    if num < 7 {
+     if num < 6 {
+      print  "_" at (col+1,ln).
+      print "|_ " at (col,ln+1).
+      print " _|" at (col,ln+2).
      } else {
       print  "_" at (col+1,ln).
-      print "|_|" at (col,ln+1).
+      print "|_ " at (col,ln+1).
       print "|_|" at (col,ln+2).
      }
     } else {
-     print  "_" at (col+1,ln).
-     print "|_|" at (col,ln+1).
-     print "  |" at (col,ln+2).
+     if num < 9 {
+      if num < 8 {
+       print  "_" at (col+1,ln).
+       print "  |" at (col,ln+1).
+       print "  |" at (col,ln+2).
+      } else {
+       print  "_" at (col+1,ln).
+       print "|_|" at (col,ln+1).
+       print "|_|" at (col,ln+2).
+      }
+     } else {
+      print  "_" at (col+1,ln).
+      print "|_|" at (col,ln+1).
+      print "  |" at (col,ln+2).
+     }
     }
    }
   }
@@ -72,5 +74,7 @@ function seven_seg {
   print  " " at (col+1,ln).
   print " _ " at (col,ln+1).
   print "   " at (col,ln+2).
- }// else if num = // add more special cases here.
+ //} else if num = // add more special cases here.
+ } else {
+  hudtext("ERROR: [lib_seven_seg.ks] unrecognised parameter: " +num, 10, 2, 30, RED, FALSE).
 }
