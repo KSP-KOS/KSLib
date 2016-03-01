@@ -41,7 +41,7 @@ function input_string
    print "+---+---+---+---+---+---+---+---+---+---+---+---+" at (0,line+8).
   } else if shift = 1 {
    print "+---+---+---+---+---+---+---+---+---+---+---+---+---+" at (0,line).
-   print "|N/A| ! | "+quote+" |N/A| $ | % | ^ | & | * | ( | ) | _ | + |" at (0,line+1).
+   print "|N/A| ! | "+char(34)+" |N/A| $ | % | ^ | & | * | ( | ) | _ | + |" at (0,line+1).
    print "+---+---+---+---+---+---+---+---+---+---+---+---+---+" at (0,line+2).
    print "| Q | W | E | R | T | Y | U | I | O | P | { | } |Ent|" at (0,line+3).
    print "+---+---+---+---+---+---+---+---+---+---+---+---+---+" at (0,line+4).
@@ -115,10 +115,6 @@ function input_string
  local oldT is 0.
  local blink is false.
 
- local quote is " ".
- if file_exists(spec_char.ksm) {
-  run spec_char.
- }.
 
  local keyboard is list(
   list( //lower case.
@@ -128,7 +124,7 @@ function input_string
    list("\","z","x","c","v","b","n","m",",",".","/"," ")
   ),
   list( //upper case.
-   list("¬","!",quote,"£","$","%","^","&","*","(",")","_","+"),
+   list("¬","!",char(34),"£","$","%","^","&","*","(",")","_","+"),
    list("Q","W","E","R","T","Y","U","I","O","P","{","}","Ent"),
    list("A","S","D","F","G","H","J","K","L",":","@","~","Cap"),
    list("|","Z","X","C","V","B","N","M","<",">","?"," ")
