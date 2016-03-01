@@ -10,6 +10,10 @@
 
 @LAZYGLOBAL OFF.
 
+clearscreen.
+print "ERROR: [lib_exec.ks] - lib_exec is broken at this time. If you have an in script workaround then please feel free to submit a PR on the KSLib github page.".
+print 1/0.
+
 log "" to _execute.internal.
 delete _execute.internal.
 log "" to _execute.tmp.
