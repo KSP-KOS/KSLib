@@ -1,7 +1,7 @@
 // This file is distributed under the terms of the MIT license, (c) the KSLib
 // team
 
-{global Enum is lexicon(
+{global Enum is lex(
 "version", "0.1.1",
 "all", all@,
 "any", any@,
@@ -61,7 +61,7 @@ function find_index{
   parameter l,c,i is 0. for j in to_l(l) {if c(j) return i. set i to i+1.}
   return -1.}
 
-function group_by{parameter l,t,r is lexicon(). for i in l{
+function group_by{parameter l,t,r is lex(). for i in l{
   local u is t(i). if r:haskey(u) r[u]:add(i). else set r[u] to list(i).}
   for k in r:keys set r[k] to cast(r[k],l:typename). return r.}
 
