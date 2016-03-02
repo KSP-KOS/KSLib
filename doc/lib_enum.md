@@ -78,7 +78,7 @@ Calls the match_fn with each element in the collection, and returns the number o
 Example:
 ```
 function is_even { parameter n. return mod(n,2) = 0. }
-Enum_count(queue(1,2,3,4,5), is_even@). // 2
+Enum["count"](queue(1,2,3,4,5), is_even@). // 2
 ```
 
 ### Enum["each"]
@@ -147,7 +147,7 @@ Returns the first element in the collection for which match_fn returns `true`.
 Example:
 ```
 function is_even { parameter n. return mod(n,2) = 0. }
-Enum_find(list(1,2,3,4,5), is_even@). // 2
+Enum["find"](list(1,2,3,4,5), is_even@). // 2
 ```
 
 ### Enum["find_index"]
@@ -164,7 +164,7 @@ Returns the index of the first element in the collection for which match_fn retu
 Example:
 ```
 function is_even { parameter n. return mod(n,2) = 0. }
-Enum_find_index(list(1,2,3,4,5), is_even@). // 1
+Enum["find_index"](list(1,2,3,4,5), is_even@). // 1
 ```
 
 ### Enum["group_by"]
