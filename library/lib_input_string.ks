@@ -2,10 +2,7 @@
 
 @LAZYGLOBAL off.
 
-run lib_file_exists.
-
-function input_string
-{
+function input_string {
  parameter
   line,   // top edge of the keyboard
   x0, y0, // where to display the input on screen
@@ -14,21 +11,8 @@ function input_string
 
 ////////////////// internal functions ////////////////////////////////
 
- function dep_check {
-  parameter fileName.
-  local fileList is list().
-  local found is false.
-  list files in fileList.
-  for file in fileList {
-   if file = fileName {
-    set found to true.
-   }
-  }
-  return found.
- }
-
- function refresh_board // this is done as 1 large print as drawing the boxes individually lags.
- {
+ function refresh_board {// this is done as 1 large print as drawing the boxes individually lags.
+ 
   if shift = 0 {
    print "+---+---+---+---+---+---+---+---+---+---+---+---+---+" at (0,line).
    print "| ` | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 0 | - | = |" at (0,line+1).
@@ -53,9 +37,9 @@ function input_string
   refresh_position("N/A",0).
  }
 
- function refresh_position
- {
+ function refresh_position {
   parameter dir, increment.
+  
   if dir = "row" {
    set row to mod(row+increment+keyboard[shift]:length, keyboard[shift]:length).
    set col to mod(col+keyboard[shift][row]:length, keyboard[shift][row]:length).
@@ -145,8 +129,7 @@ function input_string
   Print "keys to add and remove characters respectively." at (3,line-2).
  }.
 
- until Enter
- {
+ until Enter {
   if oldt + 0.3 < time {
    if blink {
     print " " at (x0+string:length+3,y0).
@@ -157,8 +140,7 @@ function input_string
    }
    set oldT to time.
   }.
-  if (controlMap:PILOTTOP <>  oldTop) or (controlMap:PILOTSTARBOARD <> oldStar) or (controlMap:PILOTFORE <> oldFore)
-  {
+  if (controlMap:PILOTTOP <>  oldTop) or (controlMap:PILOTSTARBOARD <> oldStar) or (controlMap:PILOTFORE <> oldFore) {
    if help {
     print "                                             " at (3,line-3).
     print "                                               " at (3,line-2).
