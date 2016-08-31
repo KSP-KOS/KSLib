@@ -3,9 +3,8 @@
 // This is intended to be run as a boot script.
 
 run lib_input_string.
-run lib_file_exists.
 
-if not file_exists("account.ksm") {
+if not core:currentvolume:exists("account.ksm") {
  set newuser to true.
 } else {
  set newuser to false.
@@ -41,12 +40,12 @@ if not newuser {
  }
 } else {
  log "" to account.ks.
- delete account.ks.
+ deletepath("account.ks").
  log "@LAZYGLOBAL off." to account.ks.
  log "function user_check { parameter user. return user = "+char(34)+username+char(34)+". }." to account.ks.
- log "function password_check { parameter pass. return pass = "+char(34)+password+char(34)+". }." to account.ks.
+ log "function password_check { parameter pass. return pass = "+Char(34)+password+char(34)+". }." to account.ks.
  compile account.ks.
- delete account.ks.
+ deletepath("account.ks").
 }
 clearscreen.
 print "welcome "+username.
