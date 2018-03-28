@@ -24,8 +24,9 @@ LOCAL FUNCTION time_converter {
   RETURN returnList.
 }
 
+lib_formating_lex:ADD("leading0List",LIST(2,2,2,3,3)).
 LOCAL FUNCTION time_string {
-  PARAMETER timeSec, places, stringList, leading0List, roundingList, tMinus.
+  PARAMETER timeSec, places, stringList, roundingList, tMinus.
   LOCAL timeList IS time_converter(ABS(timeSec)).
   LOCAL returnString IS "".
 
@@ -40,7 +41,7 @@ LOCAL FUNCTION time_string {
   }
 
   FROM {LOCAL i IS maxLength - (places).} UNTIL i >= maxLength STEP {SET i TO i + 1.} DO {
-    SET returnString TO padding(timeList[i],leading0List[i],roundingList[i],FALSE) + stringList[i] + returnString.
+    SET returnString TO padding(timeList[i],lib_formating_lex["leading0List"][i],roundingList[i],FALSE) + stringList[i] + returnString.
   }
 
   IF timeSec < 0 {
@@ -71,22 +72,21 @@ FUNCTION time_formating {
   formatType IS 0,    //what type of format
   rounding IS 0,    //what rounding on the seconds
   tMinus IS FALSE.    //had a T- or T+ at the start of the formated time
-  LOCAL leading0List IS LIST(2,2,2,3,3).
   LOCAL roundingList IS LIST(MIN(rounding,2),0,0,0,0).
   IF formatType = 0 {
-    RETURN time_string(timeSec,0,lib_formating_lex["timeFormat0"],leading0List,roundingList,tMinus).
+    RETURN time_string(timeSec,0,lib_formating_lex["timeFormat0"],roundingList,tMinus).
   } ELSE IF formatType = 1 {
-    RETURN time_string(timeSec,0,lib_formating_lex["timeFormat1"],leading0List,roundingList,tMinus).
+    RETURN time_string(timeSec,0,lib_formating_lex["timeFormat1"],roundingList,tMinus).
   } ELSE IF formatType = 2 {
-    RETURN time_string(timeSec,0,lib_formating_lex["timeFormat2"],leading0List,roundingList,tMinus).
+    RETURN time_string(timeSec,0,lib_formating_lex["timeFormat2"],roundingList,tMinus).
   } ELSE IF formatType = 3 {
-    RETURN time_string(timeSec,0,lib_formating_lex["timeFormat3"],leading0List,roundingList,tMinus).
+    RETURN time_string(timeSec,0,lib_formating_lex["timeFormat3"],roundingList,tMinus).
   } ELSE IF formatType = 4 {
-    RETURN time_string(timeSec,3,lib_formating_lex["timeFormat3"],leading0List,roundingList,tMinus).
+    RETURN time_string(timeSec,3,lib_formating_lex["timeFormat3"],roundingList,tMinus).
   } ELSE IF formatType = 5 {
-    RETURN time_string(timeSec,2,lib_formating_lex["timeFormat0"],leading0List,roundingList,tMinus).
+    RETURN time_string(timeSec,2,lib_formating_lex["timeFormat0"],roundingList,tMinus).
   } ELSE IF formatType = 6 {
-    RETURN time_string(timeSec,2,lib_formating_lex["timeFormat6"],leading0List,roundingList,tMinus).
+    RETURN time_string(timeSec,2,lib_formating_lex["timeFormat6"],roundingList,tMinus).
   }
 }
 
