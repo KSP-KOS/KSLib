@@ -1,3 +1,5 @@
+// This file is distributed under the terms of the MIT license, (c) the KSLib team
+
 RUN lib_number_to_formated_string.
 CLEARSCREEN.
 ABORT OFF.
