@@ -58,6 +58,14 @@ LOCAL FUNCTION time_string {
   }
 }
 
+lib_formating_lex:ADD("timeFormat0",LIST("s  ","m  ","h  ","d ","y ")).
+lib_formating_lex:ADD("timeFormat1",LIST("",":",":"," Days, "," Years, ")).
+lib_formating_lex:ADD("timeFormat2",LIST(" Seconds"," Minutes, "," Hours, "," Days, "," Years, ")).
+lib_formating_lex:ADD("timeFormat3",LIST("",":",":")).
+//format 4 uses the same list as format 3
+//format 5 uses the same list as format 0
+lib_formating_lex:ADD("timeFormat6",LIST(" Seconds  "," Minutes  "," Hours    "," Days    "," Years   ")).
+
 FUNCTION time_formating {
   PARAMETER timeSec,  //the time in seconds to format
   formatType IS 0,    //what type of format
@@ -66,28 +74,23 @@ FUNCTION time_formating {
   LOCAL leading0List IS LIST(2,2,2,3,3).
   LOCAL roundingList IS LIST(MIN(rounding,2),0,0,0,0).
   IF formatType = 0 {
-    LOCAL stringList IS LIST("s  ","m  ","h  ","d ","y ").
-    RETURN time_string(timeSec,0,stringList,leading0List,roundingList,tMinus).
+    RETURN time_string(timeSec,0,lib_formating_lex["timeFormat0"],leading0List,roundingList,tMinus).
   } ELSE IF formatType = 1 {
-    LOCAL stringList IS LIST("",":",":"," Days, "," Years, ").
-    RETURN time_string(timeSec,0,stringList,leading0List,roundingList,tMinus).
+    RETURN time_string(timeSec,0,lib_formating_lex["timeFormat1"],leading0List,roundingList,tMinus).
   } ELSE IF formatType = 2 {
-    LOCAL stringList IS LIST(" Seconds"," Minutes, "," Hours, "," Days, "," Years, ").
-    RETURN time_string(timeSec,0,stringList,leading0List,roundingList,tMinus).
+    RETURN time_string(timeSec,0,lib_formating_lex["timeFormat2"],leading0List,roundingList,tMinus).
   } ELSE IF formatType = 3 {
-    LOCAL stringList IS LIST("",":",":").
-    RETURN time_string(timeSec,0,stringList,leading0List,roundingList,tMinus).
+    RETURN time_string(timeSec,0,lib_formating_lex["timeFormat3"],leading0List,roundingList,tMinus).
   } ELSE IF formatType = 4 {
-    LOCAL stringList IS LIST("",":",":").
-    RETURN time_string(timeSec,3,stringList,leading0List,roundingList,tMinus).
+    RETURN time_string(timeSec,3,lib_formating_lex["timeFormat3"],leading0List,roundingList,tMinus).
   } ELSE IF formatType = 5 {
-    LOCAL stringList IS LIST("s  ","m  ","h  ","d ","y ").
-    RETURN time_string(timeSec,2,stringList,leading0List,LIST(0,0,0,0,0),tMinus).
+    RETURN time_string(timeSec,2,lib_formating_lex["timeFormat0"],leading0List,roundingList,tMinus).
   } ELSE IF formatType = 6 {
-    LOCAL stringList IS LIST(" Seconds  "," Minutes  "," Hours    "," Days    "," Years   ").
-    RETURN time_string(timeSec,2,stringList,leading0List,LIST(0,0,0,0,0),tMinus).
+    RETURN time_string(timeSec,2,lib_formating_lex["timeFormat6"],leading0List,roundingList,tMinus).
   }
 }
+
+lib_formating_lex:ADD("siPrefixList",LIST(" y"," z"," a"," f"," p"," n"," μ"," m","  "," k"," M"," G"," T"," P"," E"," Z"," Y")).
 
 FUNCTION si_formating {
   PARAMETER num,//number to format,
@@ -98,7 +101,7 @@ FUNCTION si_formating {
     LOCAL powerOfTen IS MAX(MIN(FLOOR(LOG10(ABS(num))),26),-24).
     LOCAL SIfactor IS FLOOR(powerOfTen / 3).
     LOCAL trailingLength IS 3 - MOD(powerOfTen,3).
-    LOCAL prefix IS LIST(" y"," z"," a"," f"," p"," n"," μ"," m","  "," k"," M"," G"," T"," P"," E"," Z"," Y")[SIfactor + 8].
+    LOCAL prefix IS lib_formating_lex["siPrefixList"][SIfactor + 8].
     RETURN padding(num/1000^SIfactor,1,trailingLength) + prefix + unit.
   }
 }

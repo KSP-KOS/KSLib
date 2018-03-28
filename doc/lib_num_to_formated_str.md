@@ -2,7 +2,7 @@
 
 ## lib_number_to_formated_string.ks
 
-``lib_number_to_formated_string.ks`` provides several functions for changing numbers (scalers) into strings with a specified format
+``lib_number_to_formated_string.ks`` provides several functions for changing numbers (scalers) into strings with specified formats
 
 ### padding
 
@@ -68,9 +68,9 @@ Args:
   2. A number (scaler), Selects type of format to be used, Range from 0 to 6
     * Defaulted to 0
   3. A number (scaler), The rounding for the seconds place, Range from 0 to 2
-    * Defaulted to 0
+       * Defaulted to 0
   4. A boolean,         If True the return uses "T+" or "T-" to denote positive or negative else it will use " " or "-"
-    * Defaulted to False
+       * Defaulted to False
 
 Returns:
   * Returns a String of arg 1 formated based on args 2,3, and 4
@@ -90,9 +90,9 @@ Description:
     time_formating(-120,0,2,true). will return the string "T- 02m 00.00s"
     time_formating(120,0,2,true).  will return the string "T+ 02m 00.00s"
 
-the 7 format types have different results
+The 7 format types have different results
 
-formats 0,1,2 will not show higher units than are what is needed for the given input
+Formats 0,1,2 will not show higher units than are what is needed for the given input
 
     time_formating(1,0).   will return the string " 01s"
     time_formating(100,0). will return the string " 1m 40s"
@@ -102,11 +102,11 @@ formats 0,1,2 will not show higher units than are what is needed for the given i
     time_formating(31536000,1). will return the string " 001 Years, 000 Days, 00:00:00"
     time_formating(31536000,2). will return the string " 001 Years, 000 Days, 00 Hours, 00 Minutes, 00 Seconds"
 
-format 3,4 will only display hours, minutes, and seconds,
+Format 3,4 will only display hours, minutes, and seconds,
 
-format 3 will truncate the length in the same way as formats 0,1,2,
+Format 3 will truncate the length in the same way as formats 0,1,2,
 
-format 4 will always display the hour, minute, second places
+Format 4 will always display the hour, minute, second places
 
     time_formating(3600,3). will return the string " 01:00:00"
     time_formating(60,3).   will return the string " 01:00"
@@ -114,7 +114,7 @@ format 4 will always display the hour, minute, second places
     time_formating(3600,4). will return the string " 01:00:00"
     time_formating(60,4).   will return the string " 00:01:00"
 
-format 5,6 will display only the 2 highest units for the passed in time they also try to keep the return string the exact same length regardless of input.  Parameter 3 is set to 0 for theses formats and can't be change with out editing the code
+Format 5,6 will display only the 2 highest units for the passed in time they also try to keep the return string the exact same length regardless of input.  Parameter 3 is set to 0 for theses formats and can't be change with out editing the code
 
     time_formating(31536000,5). will return the string " 001y 000d "
     time_formating(86400,5).    will return the string " 001d 00h  "
