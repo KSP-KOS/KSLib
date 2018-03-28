@@ -66,11 +66,11 @@ Description:
 Args:
   1. A number (scaler), The number be formated
   2. A number (scaler), Selects type of format to be used, Range from 0 to 6
-    * Defaulted to 0
+      * Defaulted to 0
   3. A number (scaler), The rounding for the seconds place, Range from 0 to 2
-       * Defaulted to 0
+      * Defaulted to 0
   4. A boolean,         If True the return uses "T+" or "T-" to denote positive or negative else it will use " " or "-"
-       * Defaulted to False
+      * Defaulted to False
 
 Returns:
   * Returns a String of arg 1 formated based on args 2,3, and 4
