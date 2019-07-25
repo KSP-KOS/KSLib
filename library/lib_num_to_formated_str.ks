@@ -39,8 +39,8 @@ LOCAL FUNCTION time_string {
   IF places > 0 {
     UNTIL timeList:LENGTH >= places {
       timeList:ADD(0).
-      SET maxLength TO MIN(timeList:LENGTH, stringList:LENGTH).
     }
+    SET maxLength TO MIN(timeList:LENGTH, stringList:LENGTH).
   } ELSE {
     SET places TO maxLength.
   }

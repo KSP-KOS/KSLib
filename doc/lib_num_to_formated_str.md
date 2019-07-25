@@ -13,6 +13,8 @@ Args:
   3. A number (scaler), The number of digits to the right of the decimal point.
   4. A boolean,         If True there will be a space at the front of the returned string when the number to be formated is positive
       * defaulted to True
+  5. A number (scaler), Sets if function will round, floor, or ceiling the number to be formated. 0 = rounding, 1 = floor, 2 = ceiling, NOTE: if not one of the 3 expected values cieling will be used
+      * defaulted to 0
 
 Returns:
   * a String of arg 1 formated based on args 2,3, and 4
@@ -34,13 +36,21 @@ Description:
     results of parameter 3
     padding(1,2,1).   // will return the string " 01.0"
     padding(1.1,2,2). // will return the string " 01.10"
-    padding(1.1,2,0). // will return the string " 01"    NOTE: if there are more decimal points than specified by parameter 3 then function will round the number
+    padding(1.1,2,0). // will return the string " 01"    NOTE: if there are more decimal points than specified by parameter 3 then function will shorten the number using the method spesfied by parameter 5
 
     results of parameter 4
     padding(1,2,2,TRUE).   // will return the string " 01.00"
     padding(1,2,2,FALSE).  // will return the string "01.00"
     padding(-1,2,2,TRUE).  // will return the string "-01.00"
     padding(-1,2,2,FALSE). // will return the string "-01.00"
+
+    results of parameter 5
+	padding(1.1,2,2,TRUE,0).   // will return the string " 01.00"
+	padding(1.9,2,2,TRUE,0).   // will return the string " 02.00"
+	padding(1.1,2,2,TRUE,1).   // will return the string " 01.00"
+	padding(1.9,2,2,TRUE,1).   // will return the string " 01.00"
+	padding(1.1,2,2,TRUE,2).   // will return the string " 02.00"
+	padding(1.9,2,2,TRUE,2).   // will return the string " 02.00"
 
 ### si_formating
 
