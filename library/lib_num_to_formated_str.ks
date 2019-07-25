@@ -43,7 +43,7 @@ LOCAL FUNCTION time_string {
   }
 
   FROM {LOCAL i IS maxLength - (places).} UNTIL i >= maxLength STEP {SET i TO i + 1.} DO {
-    SET returnString TO padding(timeList[i],lib_formating_lex["leading0List"][i],roundingList[i],FALSE) + stringList[i] + returnString.
+    SET returnString TO padding(timeList[i],lib_formating_lex["leading0List"][i],roundingList[i],FALSE,1) + stringList[i] + returnString.
   }
 
   IF timeSec < 0 {
@@ -72,10 +72,10 @@ lib_formating_lex["timeFormats"]:ADD(LIST(2,LIST("s  ","m  ","h  ","d ","y "))).
 lib_formating_lex["timeFormats"]:ADD(LIST(2,LIST(" Seconds  "," Minutes  "," Hours    "," Days    "," Years   "))).
 
 FUNCTION time_formating {
-  PARAMETER timeSec,	//the time in seconds to format
-  formatType IS 0,		//what type of format
-  rounding IS 0,		//what rounding on the seconds
-  tMinus IS FALSE.		//had a T- or T+ at the start of the formated time
+  PARAMETER timeSec,  //the time in seconds to format
+  formatType IS 0,   //what type of format
+  rounding IS 0,      //what rounding on the seconds
+  tMinus IS FALSE.   //had a T- or T+ at the start of the formated time
   LOCAL roundingList IS LIST(MIN(rounding,2),0,0,0,0).
   LOCAL formatData IS lib_formating_lex["timeFormats"][formatType].
   RETURN time_string(timeSec,formatData[0],formatData[1],roundingList,tMinus).
@@ -93,34 +93,55 @@ FUNCTION si_formating {
     LOCAL SIfactor IS FLOOR(powerOfTen / 3).
     LOCAL trailingLength IS 3 - (powerOfTen - SIfactor * 3).
     LOCAL prefix IS lib_formating_lex["siPrefixList"][SIfactor + 8].
-    RETURN padding(num/1000^SIfactor,1,trailingLength) + prefix + unit.
+    RETURN padding(num/1000^SIfactor,1,trailingLength,TRUE,1) + prefix + unit.
   }
 }
 
 FUNCTION padding {
-  PARAMETER num,  //number to pad
-  leadingLenght,  //min length to the left of the decimal point
-  trailingLength,  // length to the right of the decimal point
-  positiveLeadingSpace IS TRUE.//if when positive should there be a space before the returned string
-  LOCAL returnString IS ABS(ROUND(num,trailingLength)):TOSTRING.
+	PARAMETER num,	//number to pad
+	leadingLenght,	//min length to the left of the decimal point
+	trailingLength,	// length to the right of the decimal point
+	positiveLeadingSpace IS TRUE,//if when positive should there be a space before the returned string
+	roundType IS 0.	// 0 for normal rounding, 1 for floor, 2 for cieling
+	LOCAL returnString IS "".
+	//LOCAL returnString IS ABS(ROUND(num,trailingLength)):TOSTRING.
+	IF roundType = 0 {
+		SET returnString TO ABS(ROUND(num,trailingLength)):TOSTRING.
+	} ELSE IF roundType = 1 {
+		SET returnString TO ABS(adv_floor(num,trailingLength)):TOSTRING.
+	} ELSE {
+		SET returnString TO ABS(adv_ceiling(num,trailingLength)):TOSTRING.
+	}
 
-  IF trailingLength > 0 {
-    IF NOT returnString:CONTAINS(".") {
-      SET returnString TO returnString + ".0".
-    }
-    UNTIL returnString:SPLIT(".")[1]:LENGTH >= trailingLength { SET returnString TO returnString + "0". }
-    UNTIL returnString:SPLIT(".")[0]:LENGTH >= leadingLenght { SET returnString TO "0" + returnString. }
-  } ELSE {
-    UNTIL returnString:LENGTH >= leadingLenght { SET returnString TO "0" + returnString. }
-  }
+	IF trailingLength > 0 {
+		IF NOT returnString:CONTAINS(".") {
+			SET returnString TO returnString + ".0".
+		}
+		UNTIL returnString:SPLIT(".")[1]:LENGTH >= trailingLength { SET returnString TO returnString + "0". }
+		UNTIL returnString:SPLIT(".")[0]:LENGTH >= leadingLenght { SET returnString TO "0" + returnString. }
+	} ELSE {
+		UNTIL returnString:LENGTH >= leadingLenght { SET returnString TO "0" + returnString. }
+	}
 
-  IF num < 0 {
-    RETURN "-" + returnString.
-  } ELSE {
-    IF positiveLeadingSpace {
-      RETURN " " + returnString.
-    } ELSE {
-      RETURN returnString.
-    }
-  }
+	IF num < 0 {
+		RETURN "-" + returnString.
+	} ELSE {
+		IF positiveLeadingSpace {
+			RETURN " " + returnString.
+		} ELSE {
+			RETURN returnString.
+		}
+	}
+}
+
+LOCAL FUNCTION adv_floor {
+	PARAMETER num,dp.
+	LOCAL multiplier IS 10^dp.
+	RETURN FLOOR(num * multiplier)/multiplier.
+}
+
+LOCAL FUNCTION adv_ceiling {
+	PARAMETER num,dp.
+	LOCAL multiplier IS 10^dp.
+	RETURN CEILING(num * multiplier)/multiplier.
 }
