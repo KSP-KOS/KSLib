@@ -21,6 +21,9 @@ LOCAL FUNCTION time_converter {
 
     SET localTime TO FLOOR(localTime / modValue).
     IF localTime = 0 { BREAK. }
+    SET place TO place + 1.
+    IF place = places { BREAK. }
+
   }
   IF localTime > 0 { returnList:ADD(localTime). }
   RETURN returnList.
@@ -98,50 +101,50 @@ FUNCTION si_formating {
 }
 
 FUNCTION padding {
-	PARAMETER num,	//number to pad
-	leadingLenght,	//min length to the left of the decimal point
-	trailingLength,	// length to the right of the decimal point
-	positiveLeadingSpace IS TRUE,//if when positive should there be a space before the returned string
-	roundType IS 0.	// 0 for normal rounding, 1 for floor, 2 for cieling
-	LOCAL returnString IS "".
-	//LOCAL returnString IS ABS(ROUND(num,trailingLength)):TOSTRING.
-	IF roundType = 0 {
-		SET returnString TO ABS(ROUND(num,trailingLength)):TOSTRING.
-	} ELSE IF roundType = 1 {
-		SET returnString TO ABS(adv_floor(num,trailingLength)):TOSTRING.
-	} ELSE {
-		SET returnString TO ABS(adv_ceiling(num,trailingLength)):TOSTRING.
-	}
+  PARAMETER num,  //number to pad
+  leadingLenght,   //min length to the left of the decimal point
+  trailingLength,  // length to the right of the decimal point
+  positiveLeadingSpace IS TRUE,//if when positive should there be a space before the returned string
+  roundType IS 0.  // 0 for normal rounding, 1 for floor, 2 for cieling
+  LOCAL returnString IS "".
+  //LOCAL returnString IS ABS(ROUND(num,trailingLength)):TOSTRING.
+  IF roundType = 0 {
+    SET returnString TO ABS(ROUND(num,trailingLength)):TOSTRING.
+  } ELSE IF roundType = 1 {
+    SET returnString TO ABS(adv_floor(num,trailingLength)):TOSTRING.
+  } ELSE {
+    SET returnString TO ABS(adv_ceiling(num,trailingLength)):TOSTRING.
+  }
 
-	IF trailingLength > 0 {
-		IF NOT returnString:CONTAINS(".") {
-			SET returnString TO returnString + ".0".
-		}
-		UNTIL returnString:SPLIT(".")[1]:LENGTH >= trailingLength { SET returnString TO returnString + "0". }
-		UNTIL returnString:SPLIT(".")[0]:LENGTH >= leadingLenght { SET returnString TO "0" + returnString. }
-	} ELSE {
-		UNTIL returnString:LENGTH >= leadingLenght { SET returnString TO "0" + returnString. }
-	}
+  IF trailingLength > 0 {
+    IF NOT returnString:CONTAINS(".") {
+      SET returnString TO returnString + ".0".
+    }
+    UNTIL returnString:SPLIT(".")[1]:LENGTH >= trailingLength { SET returnString TO returnString + "0". }
+    UNTIL returnString:SPLIT(".")[0]:LENGTH >= leadingLenght { SET returnString TO "0" + returnString. }
+  } ELSE {
+    UNTIL returnString:LENGTH >= leadingLenght { SET returnString TO "0" + returnString. }
+  }
 
-	IF num < 0 {
-		RETURN "-" + returnString.
-	} ELSE {
-		IF positiveLeadingSpace {
-			RETURN " " + returnString.
-		} ELSE {
-			RETURN returnString.
-		}
-	}
+  IF num < 0 {
+    RETURN "-" + returnString.
+  } ELSE {
+    IF positiveLeadingSpace {
+      RETURN " " + returnString.
+    } ELSE {
+      RETURN returnString.
+    }
+  }
 }
 
 LOCAL FUNCTION adv_floor {
-	PARAMETER num,dp.
-	LOCAL multiplier IS 10^dp.
-	RETURN FLOOR(num * multiplier)/multiplier.
+  PARAMETER num,dp.
+  LOCAL multiplier IS 10^dp.
+  RETURN FLOOR(num * multiplier)/multiplier.
 }
 
 LOCAL FUNCTION adv_ceiling {
-	PARAMETER num,dp.
-	LOCAL multiplier IS 10^dp.
-	RETURN CEILING(num * multiplier)/multiplier.
+  PARAMETER num,dp.
+  LOCAL multiplier IS 10^dp.
+  RETURN CEILING(num * multiplier)/multiplier.
 }
