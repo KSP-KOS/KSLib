@@ -123,9 +123,11 @@ can still resolve this manually, with the following:
     that had the conflict(s) and mark them with some extra text that
     shows where it needs the help of a human (you).  Those sections are
     marked with text like this:
+
     - ``<<<<<<< branch_A``
     - ``=======``
     - ``>>>>>>> branch_B``
+
     (Where the words "branch_A" and "branch_B" appear above, that's replaced
     with the actual names of the branches.)
     These sections show you what the two different branches had for this
