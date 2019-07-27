@@ -15,6 +15,7 @@ LOCAL FUNCTION time_converter {
   LOCAL returnList IS LIST().
   LOCAL localTime IS timeValue.
 
+  LOCAL place IS 1.
   FOR modValue IN lib_formating_lex["timeModList"] {
     LOCAL returnValue IS MOD(localTime,modValue).
     returnList:ADD(returnValue).
