@@ -1,8 +1,8 @@
 // This file is distributed under the terms of the MIT license, (c) the KSLib team
 
-## lib_number_to_formated_string.ks
+## lib_number_to_formated_str.ks
 
-``lib_number_to_formated_string.ks`` provides several functions for changing numbers (scalers) into strings with specified formats
+``lib_number_to_formated_str.ks`` provides several functions for changing numbers (scalers) into strings with specified formats
 
 ### padding
 
