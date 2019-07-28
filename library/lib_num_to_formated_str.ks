@@ -2,12 +2,12 @@
 
 @LAZYGLOBAL OFF.
 
-LOCAL lib_formating_lex IS LEX().
+LOCAL lib_formatting_lex IS LEX().
 {
   LOCAL hoursInDay IS KUNIVERSE:HOURSPERDAY.
   LOCAL daysInYear IS 365.
   IF hoursInDay = 6 { SET daysInYear TO 426. }
-  lib_formating_lex:ADD("timeModList",LIST(60,60,hoursInDay,daysInYear)).
+  lib_formatting_lex:ADD("timeModList",LIST(60,60,hoursInDay,daysInYear)).
 }
 
 LOCAL FUNCTION time_converter {
@@ -16,7 +16,7 @@ LOCAL FUNCTION time_converter {
   LOCAL localTime IS timeValue.
 
   LOCAL place IS 1.
-  FOR modValue IN lib_formating_lex["timeModList"] {
+  FOR modValue IN lib_formatting_lex["timeModList"] {
     LOCAL returnValue IS MOD(localTime,modValue).
     returnList:ADD(returnValue).
 
@@ -30,7 +30,7 @@ LOCAL FUNCTION time_converter {
   RETURN returnList.
 }
 
-lib_formating_lex:ADD("leading0List",LIST(2,2,2,3,3)).
+lib_formatting_lex:ADD("leading0List",LIST(2,2,2,3,3)).
 LOCAL FUNCTION time_string {
   PARAMETER timeSec, fixedPlaces, stringList, roundingList, tMinus.
   LOCAL places IS stringList:LENGTH.
@@ -49,7 +49,7 @@ LOCAL FUNCTION time_string {
   }
 
   FROM {LOCAL i IS maxLength - fixedPlaces.} UNTIL i >= maxLength STEP {SET i TO i + 1.} DO {
-    SET returnString TO padding(timeList[i],lib_formating_lex["leading0List"][i],roundingList[i],FALSE,1) + stringList[i] + returnString.
+    SET returnString TO padding(timeList[i],lib_formatting_lex["leading0List"][i],roundingList[i],FALSE,1) + stringList[i] + returnString.
   }
 
   IF timeSec < 0 {
@@ -68,28 +68,28 @@ LOCAL FUNCTION time_string {
 }
 
 //adding list of format types
-lib_formating_lex:ADD("timeFormats",LIST()).
-lib_formating_lex["timeFormats"]:ADD(LIST(0,LIST("s","m ","h ","d ","y "))).
-lib_formating_lex["timeFormats"]:ADD(LIST(0,LIST("",":",":"," Days, "," Years, "))).
-lib_formating_lex["timeFormats"]:ADD(LIST(0,LIST(" Seconds"," Minutes, "," Hours, "," Days, "," Years, "))).
-lib_formating_lex["timeFormats"]:ADD(LIST(0,LIST("",":",":"))).
-lib_formating_lex["timeFormats"]:ADD(LIST(3,lib_formating_lex["timeFormats"][3][1])).
-lib_formating_lex["timeFormats"]:ADD(LIST(2,LIST("s  ","m  ","h  ","d ","y "))).
-lib_formating_lex["timeFormats"]:ADD(LIST(2,LIST(" Seconds  "," Minutes  "," Hours    "," Days    "," Years   "))).
+lib_formatting_lex:ADD("timeFormats",LIST()).
+lib_formatting_lex["timeFormats"]:ADD(LIST(0,LIST("s","m ","h ","d ","y "))).
+lib_formatting_lex["timeFormats"]:ADD(LIST(0,LIST("",":",":"," Days, "," Years, "))).
+lib_formatting_lex["timeFormats"]:ADD(LIST(0,LIST(" Seconds"," Minutes, "," Hours, "," Days, "," Years, "))).
+lib_formatting_lex["timeFormats"]:ADD(LIST(0,LIST("",":",":"))).
+lib_formatting_lex["timeFormats"]:ADD(LIST(3,lib_formatting_lex["timeFormats"][3][1])).
+lib_formatting_lex["timeFormats"]:ADD(LIST(2,LIST("s  ","m  ","h  ","d ","y "))).
+lib_formatting_lex["timeFormats"]:ADD(LIST(2,LIST(" Seconds  "," Minutes  "," Hours    "," Days    "," Years   "))).
 
-FUNCTION time_formating {
+FUNCTION time_formatting {
   PARAMETER timeSec,  //the time in seconds to format
   formatType IS 0,   //what type of format
   rounding IS 0,      //what rounding on the seconds
-  tMinus IS FALSE.   //had a T- or T+ at the start of the formated time
+  tMinus IS FALSE.   //had a T- or T+ at the start of the formatted time
   LOCAL roundingList IS LIST(MIN(rounding,2),0,0,0,0).
-  LOCAL formatData IS lib_formating_lex["timeFormats"][formatType].
+  LOCAL formatData IS lib_formatting_lex["timeFormats"][formatType].
   RETURN time_string(timeSec,formatData[0],formatData[1],roundingList,tMinus).
 }
 
-lib_formating_lex:ADD("siPrefixList",LIST(" y"," z"," a"," f"," p"," n"," μ"," m","  "," k"," M"," G"," T"," P"," E"," Z"," Y")).
+lib_formatting_lex:ADD("siPrefixList",LIST(" y"," z"," a"," f"," p"," n"," μ"," m","  "," k"," M"," G"," T"," P"," E"," Z"," Y")).
 
-FUNCTION si_formating {
+FUNCTION si_formatting {
   PARAMETER num,//number to format,
   unit IS "".//unit of number
   IF num = 0 {
@@ -105,7 +105,7 @@ FUNCTION si_formating {
     SET SIfactor TO FLOOR(powerOfTen / 3).
     SET trailingLength TO 3 - (powerOfTen - SIfactor * 3).
 
-    LOCAL prefix IS lib_formating_lex["siPrefixList"][SIfactor + 8].
+    LOCAL prefix IS lib_formatting_lex["siPrefixList"][SIfactor + 8].
     RETURN padding(num/1000^SIfactor,1,trailingLength,TRUE,0) + prefix + unit.
   }
 }
