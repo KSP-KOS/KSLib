@@ -22,7 +22,7 @@ cases.
 
 ### File I/O
 1. lib_file_exists.ks : checks whether a given file exists or not on the 
-   current volume. This functionality has been superseeded by kOS built-in 
+   current volume. This functionality has been superseded by kOS built-in 
    `VOLUME:EXISTS()`.
 
 ### Maths and Statistics
@@ -33,7 +33,7 @@ cases.
 1. lib_navball.ks : provides various state values of a vessel like compass 
    heading, pitch, roll etc.
 2. lib_pid.ks : provides functions for creating a PID controller. This 
-   functionality has been superseeded by kOS buil-in `PIDLoop()`.
+   functionality has been superseded by kOS buil-in `PIDLoop()`.
 
 ### Space Navigation
 1. lib_lazcalc.ks : does launch azimuth calculation.
@@ -52,7 +52,7 @@ cases.
 8. lib_seven_seg.ks : creates a seven segment display to show single digit 
    numbers.
 9. lib_str_to_num.ks : converts numerical strings into numbers. This has been 
-    superseeded by kOS built-in `STRING:TONUMBER()`.
+    superseded by kOS built-in `STRING:TONUMBER()`.
 10. lib_term.ks : a primitive terminal ASCII graphics library. Helps with 
     drawing straight lines, circles and elliptical arcs.
 11. spec_char.ksm : inserts a new line character in a string. This is probably 
