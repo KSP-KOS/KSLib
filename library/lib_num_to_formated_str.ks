@@ -11,7 +11,7 @@ LOCAL lib_formating_lex IS LEX().
 }
 
 LOCAL FUNCTION time_converter {
-  PARAMETER timeValue.
+  PARAMETER timeValue,places.
   LOCAL returnList IS LIST().
   LOCAL localTime IS timeValue.
 
@@ -32,21 +32,23 @@ LOCAL FUNCTION time_converter {
 
 lib_formating_lex:ADD("leading0List",LIST(2,2,2,3,3)).
 LOCAL FUNCTION time_string {
-  PARAMETER timeSec, places, stringList, roundingList, tMinus.
-  LOCAL timeList IS time_converter(ABS(timeSec)).
+  PARAMETER timeSec, fixedPlaces, stringList, roundingList, tMinus.
+  LOCAL places IS stringList:LENGTH.
+  LOCAL timeList IS time_converter(ABS(timeSec),places).
   LOCAL returnString IS "".
 
-  LOCAL maxLength IS MIN(timeList:LENGTH, stringList:LENGTH).
-  IF places > 0 {
-    UNTIL timeList:LENGTH >= places {
+  LOCAL maxLength IS MIN(timeList:LENGTH, places).
+
+  IF fixedPlaces > 0 {
+    UNTIL timeList:LENGTH >= fixedPlaces {
       timeList:ADD(0).
     }
-    SET maxLength TO MIN(timeList:LENGTH, stringList:LENGTH).
+    SET maxLength TO MIN(timeList:LENGTH, places).
   } ELSE {
-    SET places TO maxLength.
+    SET fixedPlaces TO maxLength.
   }
 
-  FROM {LOCAL i IS maxLength - (places).} UNTIL i >= maxLength STEP {SET i TO i + 1.} DO {
+  FROM {LOCAL i IS maxLength - fixedPlaces.} UNTIL i >= maxLength STEP {SET i TO i + 1.} DO {
     SET returnString TO padding(timeList[i],lib_formating_lex["leading0List"][i],roundingList[i],FALSE,1) + stringList[i] + returnString.
   }
 
@@ -96,13 +98,13 @@ FUNCTION si_formating {
     LOCAL powerOfTen IS MAX(MIN(FLOOR(LOG10(ABS(num))),26),-24).
     LOCAL SIfactor IS FLOOR(powerOfTen / 3).
     LOCAL trailingLength IS 3 - (powerOfTen - SIfactor * 3).
-	
-	SET num TO ROUND(num/1000^SIfactor,trailingLength).
-	
+
+    SET num TO ROUND(num/1000^SIfactor,trailingLength) * 1000^SIfactor.
+
     SET powerOfTen TO MAX(MIN(FLOOR(LOG10(ABS(num))),26),-24).
     SET SIfactor TO FLOOR(powerOfTen / 3).
     SET trailingLength TO 3 - (powerOfTen - SIfactor * 3).
-	
+
     LOCAL prefix IS lib_formating_lex["siPrefixList"][SIfactor + 8].
     RETURN padding(num/1000^SIfactor,1,trailingLength,TRUE,0) + prefix + unit.
   }
