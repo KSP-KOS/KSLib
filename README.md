@@ -6,7 +6,7 @@ with the [kOS (Kerbal Operating System) mod](https://github.com/KSP-KOS/KOS)
 for Kerbal Space Program.
 
 The scripts are written in the Kerboscript language, which is described
-on the [main documenation page for kOS](http://ksp-kos.github.io/KOS_DOC/).
+on the [main documenation page for kOS](https://ksp-kos.github.io/KOS_DOC/).
 
 The goal of this repository is twofold:
 
@@ -17,6 +17,9 @@ The goal of this repository is twofold:
 
 Please see the file: HOWTO.md to see how to use the files in this
 repository.
+
+Please see the file: SUMMARY.md about the available libraries and what type of 
+functionality they provide.
 
 ## Licensing:
 
@@ -51,4 +54,3 @@ of kerboscript, and the purpose to which it is put, makes the extra
 verbose terms and conditions of the GPL3 rather overkill for the
 task at hand.  For casual new kerboscripters who just want to do
 something small and simple, the GPL3 can be a bit intimidating.
-
