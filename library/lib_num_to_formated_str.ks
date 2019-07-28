@@ -96,8 +96,15 @@ FUNCTION si_formating {
     LOCAL powerOfTen IS MAX(MIN(FLOOR(LOG10(ABS(num))),26),-24).
     LOCAL SIfactor IS FLOOR(powerOfTen / 3).
     LOCAL trailingLength IS 3 - (powerOfTen - SIfactor * 3).
+	
+	SET num TO ROUND(num/1000^SIfactor,trailingLength).
+	
+    SET powerOfTen TO MAX(MIN(FLOOR(LOG10(ABS(num))),26),-24).
+    SET SIfactor TO FLOOR(powerOfTen / 3).
+    SET trailingLength TO 3 - (powerOfTen - SIfactor * 3).
+	
     LOCAL prefix IS lib_formating_lex["siPrefixList"][SIfactor + 8].
-    RETURN padding(num/1000^SIfactor,1,trailingLength,TRUE,1) + prefix + unit.
+    RETURN padding(num/1000^SIfactor,1,trailingLength,TRUE,0) + prefix + unit.
   }
 }
 
