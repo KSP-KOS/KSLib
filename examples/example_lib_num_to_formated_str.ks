@@ -1,6 +1,6 @@
 // This file is distributed under the terms of the MIT license, (c) the KSLib team
 
-RUN lib_number_to_formated_str.
+RUN lib_num_to_formated_str.
 CLEARSCREEN.
 ABORT OFF.
 LOCAL scriptStart IS TIME:SECONDS.
