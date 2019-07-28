@@ -55,5 +55,5 @@ cases.
     superseded by kOS built-in `STRING:TONUMBER()`.
 10. lib_term.ks : a primitive terminal ASCII graphics library. Helps with 
     drawing straight lines, circles and elliptical arcs.
-11. spec_char.ksm : inserts a new line character in a string. This is probably 
-    broken.
+11. spec_char.ksm : provides a way to insert a new line, a quote mark and a 
+    beep into strings. This is now unnecessary and probably broken.
