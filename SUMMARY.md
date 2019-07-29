@@ -82,18 +82,21 @@ cases.
 6. [lib_num_to_str.ks](https://github.com/KSP-KOS/KSLib/master/library/lib_num_to_str.ks)
    / [docs](https://github.com/KSP-KOS/KSLib/blob/master/doc/lib_num_to_str.md)
 : formats numbers to specified number of digits.
-7. [lib_seven_seg.ks](https://github.com/KSP-KOS/KSLib/master/library/lib_seven_seg.ks)
+7. [lib_number_dialog.ks](https://github.com/KSP-KOS/KSLib/master/library/lib_number_dialog.ks)
+   / [docs](https://github.com/KSP-KOS/KSLib/blob/master/doc/lib_number_dialog.md)
+   : draws a dialog box for numerical input in the terminal.
+8. [lib_seven_seg.ks](https://github.com/KSP-KOS/KSLib/master/library/lib_seven_seg.ks)
    / [docs](https://github.com/KSP-KOS/KSLib/blob/master/doc/lib_seven_seg.md) 
    : creates a seven segment display to show single digit numbers.
-8. [lib_str_to_num.ks](https://github.com/KSP-KOS/KSLib/master/library/lib_str_to_num.ks)
+9. [lib_str_to_num.ks](https://github.com/KSP-KOS/KSLib/master/library/lib_str_to_num.ks)
    / [docs](https://github.com/KSP-KOS/KSLib/blob/master/doc/lib_str_to_num.md)
    : converts numerical strings into numbers. This has been superseded by kOS 
    built-in `STRING:TONUMBER()`.
-9. [lib_term.ks](https://github.com/KSP-KOS/KSLib/master/library/lib_term.ks)
+10. [lib_term.ks](https://github.com/KSP-KOS/KSLib/master/library/lib_term.ks)
    / [docs](https://github.com/KSP-KOS/KSLib/blob/master/doc/lib_term.md) : a 
    primitive terminal ASCII graphics library. Helps with drawing straight lines,
    circles and elliptical arcs.
-10. [spec_char.ksm](https://github.com/KSP-KOS/KSLib/master/library/spec_char.ks)
+11. [spec_char.ksm](https://github.com/KSP-KOS/KSLib/master/library_ksm/spec_char.ksm)
    / [docs](https://github.com/KSP-KOS/KSLib/blob/master/doc/spec_char.md) : 
    provides a way to insert a new line, a quote mark and a beep into strings. 
    This is now unnecessary and probably broken.
