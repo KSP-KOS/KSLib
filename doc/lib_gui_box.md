@@ -11,6 +11,9 @@ This library contains functions to draw boxes like this:
 ```
 in the terminal.
 
+dependencies:
+  * spec_char.ksm
+
 ### draw_gui_box
 
 args:

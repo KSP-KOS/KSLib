@@ -5,6 +5,11 @@
 ``lib_input_string.ks`` provides a method of inputting custom strings while a script is running via an on-screen keyboard.
 
 
+dependencies:
+  * lib_file_exists.ks
+  * spec_char.ksm
+
+
 ###input_string
 
 args:

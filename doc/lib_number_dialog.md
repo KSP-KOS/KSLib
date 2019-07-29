@@ -4,6 +4,9 @@
 
 A dialog where the user can enter any number (including negative and fractional).
 
+dependencies:
+  * lib_gui_box
+
 ### open_number_dialog
 
 args:

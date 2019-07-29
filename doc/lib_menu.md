@@ -4,6 +4,9 @@
 
 Use this library when you want to display a menu on the screen.
 
+dependencies:
+  * lib_gui_box
+
 ### open_menu
 
 args:
