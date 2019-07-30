@@ -4,6 +4,9 @@
 
 A dialog where the user can enter any number (including negative and fractional).
 
+Dependencies:
+  * [lib_gui_box.ks](https://github.com/KSP-KOS/KSLib/blob/master/library/lib_gui_box.ks)
+
 ### open_number_dialog
 
 args:

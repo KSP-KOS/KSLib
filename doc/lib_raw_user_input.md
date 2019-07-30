@@ -5,8 +5,8 @@
 A low level library to do user input via action groups.
 I believe it supports AGX to.
 
-dependencies:
-  * lib_exec library
+Dependencies:
+  * [lib_exec.ks](https://github.com/KSP-KOS/KSLib/blob/master/library/lib_exec.ks)
 
 ### wait_for_action_groups
 

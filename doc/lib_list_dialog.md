@@ -4,8 +4,8 @@
 
 This library helps when you want the user to choose a value from a long list.
 
-dependencies:
-  * lib_menu
+Dependencies:
+  * [lib_menu.ks](https://github.com/KSP-KOS/KSLib/blob/master/library/lib_menu.ks)
 
 ### open_list_dialog
 
