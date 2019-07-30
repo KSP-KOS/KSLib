@@ -4,8 +4,8 @@
 
 Use this library when you want to display a menu on the screen.
 
-dependencies:
-  * lib_gui_box
+Dependencies:
+  * [lib_gui_box.ks](https://github.com/KSP-KOS/KSLib/blob/master/library/lib_gui_box.ks)
 
 ### open_menu
 
