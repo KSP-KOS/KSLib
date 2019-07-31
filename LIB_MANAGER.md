@@ -49,20 +49,20 @@ a pull request from before, then you need to do this:
 
 (Be sure you've done step _4_ above for this user once already.)
 
-- 5 - Before you do a pull request, always ensure your local copy
-    of the main Repo branch is up to date with what's in the
-    repo just in case someone else has merged something into
-    the main repo since the last time you worked on it.  In
-    KSLib, if you have set up your local copy the way the steps
-    above tell you to, then you do this with:
-    - ``git pull upstream master``
+- 5 - Make sure you are on the master branch to begin with:
+    - ``git checkout master``
     (Note, in KSLib, the main default branch is called "master", which is 
     a common name when using github.  In kOS itself, we use "develop"
     as the dev's default branch and only copy that to "master" when there's
     an actual release.  Because KSLib doesn't have "releases", it doesn't
     need this extra step so it just uses "master" directly.)
-- 6 - Make sure you are on the master branch to begin with:
-    - ``git checkout master``
+- 6 - Before you do a pull request, always ensure your local copy
+    of the master branch is up to date with what's in the main
+    repo just in case someone else has merged something into
+    the main repo since the last time you worked on it.  In
+    KSLib, if you have set up your local copy the way the steps
+    above tell you to, then you do this with:
+    - ``git pull upstream master``
 - 7 - Make a branch from master that you will use to do the merge and
     test it out (that way if you don't like it you can just throw that
     work away rather than having to revert anything in your master branch)
