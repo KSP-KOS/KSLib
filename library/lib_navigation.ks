@@ -173,3 +173,25 @@ function greatCircleHeading {
     local head is mod(arctan2(headN, headD) + 360, 360).
     return head.
 }
+
+// Burn time from rocket equation
+function burnTime {
+    parameter deltaV.
+    
+    if deltaV:typename() = "Vector" {
+        set deltaV to deltaV:mag.
+    }
+    local burnEngines is list().
+    list engines in burnEngines.
+    local massBurnRate is 0.
+    local g0 is 9.80665.
+    for e in burnEngines {
+        if e:ignition {
+            set massBurnRate to massBurnRate + e:availableThrust/(e:ISP * g0).
+        }
+    }
+    local isp is ship:availablethrust / massBurnRate.
+    
+    local burnTime is ship:mass * (1 - CONSTANT:E ^ (-deltaV / isp)) / massBurnRate.
+    return burnTime.
+}

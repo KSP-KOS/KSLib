@@ -147,3 +147,13 @@ returns:
 
 description:
   * Returns the instantaneous heading required to go from current position to point's position along the great circle joining the two positions.
+
+### burnTime
+args:
+  * deltaV: One of `Scalar`, `Vector`
+
+returns:
+  * `Scalar`
+
+description:
+  * Returns the amount of time required to get `deltaV` from active engines. Does not consider fuel requirements.
