@@ -1,77 +1,75 @@
 // This file is distributed under the terms of the MIT license, (c) the KSLib team
 @LAZYGLOBAL OFF.
 
-// Same as orbital prograde vector
+// Same as orbital prograde vector for ves
 function orbitTangent {
-    return ship:velocity:orbit:normalized.
+    parameter ves is ship.
+
+    return ves:velocity:orbit:normalized.
 }
 
-// In the direction of orbital angular momentum
+// In the direction of orbital angular momentum of ves
 function orbitBinormal {
-    return vcrs(-body:position, orbitTangent()):normalized.
+    parameter ves is ship.
+
+    return vcrs(ves:position - ves:body:position, orbitTangent(ves)):normalized.
 }
 
 // Perpendicular to both tangent and binormal, typically radially inward
 function orbitNormal {
-    return vcrs(orbitBinormal(), orbitTangent()):normalized.
+    parameter ves is ship.
+
+    return vcrs(orbitBinormal(ves), orbitTangent(ves)):normalized.
 }
 
 // Vector pointing in the direction of longitude of ascending node
 function orbitLAN {
-    return angleAxis(orbit:LAN, body:angularVel) * solarPrimeVector.
+    parameter ves is ship.
+
+    return angleAxis(ves:orbit:LAN, ves:body:angularVel) * solarPrimeVector.
 }
 
-// Same as surface prograde vector
+// Same as surface prograde vector for ves
 function surfaceTangent {
-    return ship:velocity:surface:normalized.
+    parameter ves is ship.
+
+    return ves:velocity:surface:normalized.
 }
 
-// In the direction of surface angular momentum
+// In the direction of surface angular momentum of ves
 function surfaceBinormal {
-    return vcrs(-body:position, surfaceTangent()):normalized.
+    parameter ves is ship.
+
+    return vcrs(ves:position - ves:body:position, surfaceTangent(ves)):normalized.
 }
 
 // Perpedicular to  both tangent and binormal, typically radially inward
 function surfaceNormal {
-    return vcrs(surfaceBinormal(), surfaceTangent()):normalized.
+    parameter ves is ship.
+
+    return vcrs(surfaceBinormal(ves), surfaceTangent(ves)):normalized.
 }
 
 // Vector pointing in the direction of longitude of ascending node
 function surfaceLAN {
-    return angleAxis(orbit:LAN - 90, body:angularVel) * solarPrimeVector.
+    parameter ves is ship.
+
+    return angleAxis(ves:orbit:LAN - 90, ves:body:angularVel) * solarPrimeVector.
 }
 
-// Vector directly away from the body at this point
+// Vector directly away from the body at ves' position
 function localVertical {
-    return up:vector.
-}
+    parameter ves is ship.
 
-// Same as orbital prograde vector, assumes target is set
-function targetTangent {
-    return target:velocity:orbit:normalized.
-}
-
-// In the direction of orbital angular momentum, assumes target is set
-function targetBinormal {
-    return vcrs(target:position - target:body:position, targetTangent()):normalized.
-}
-
-// Perpendicular to both tangent and binormal, typically radially inward
-// Assumes target is set
-function targetNormal {
-    return vcrs(targetBinormal(), targetTangent()):normalized.
-}
-
-// Vector pointing in the direction of longitude of ascending node
-// Assumes target is set
-function targetLAN {
-    return angleAxis(target:orbit:LAN, target:body:angularVel) * solarPrimeVector.
+    return ves:up:vector.
 }
 
 // Angle to ascending node with respect to current body's equator
 function angleToBodyAscendingNode {
-    local angle is vang(-body:position, orbitLAN()).
-    if ship:status = "LANDED" {
+    parameter ves is ship.
+
+    local angle is vang(ves:position - ves:body:position, orbitLAN(ves)).
+    if ves:status = "LANDED" {
         return angle - 90.
     }
     else {
@@ -81,8 +79,10 @@ function angleToBodyAscendingNode {
 
 // Angle to descending node with respect to current body's equator
 function angleToBodyDescendingNode {
-    local angle is vang(-body:position, -orbitLAN()).
-    if ship:status = "LANDED" {
+    parameter ves is ship.
+
+    local angle is vang(ves:position - ves:body:position, -orbitLAN(ves)).
+    if ves:status = "LANDED" {
         return angle - 90.
     }
     else {

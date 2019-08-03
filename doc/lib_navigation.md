@@ -5,20 +5,29 @@
 `lib_navigation.ks` provides a plethora of useful functions to aid in writing navigational scripts, whether it's space navigation or surface navigation.
 
 ### orbitTangent
+args:
+  * ves: `Orbitable` defaults to `ship`
+
 returns:
   * `Vector`
 
 description:
-  * Returns a unit vector in the direction of orbital velocity
+  * Returns a unit vector in the direction of orbital velocity ves.
 
 ### orbitBinormal
+args:
+  * ves: `Orbitable` defaults to `ship`
+
 returns:
   * `Vector`
 
 description:
-  * Returns a unit vector in the direction of orbital angular momentum
+  * Returns a unit vector in the direction of orbital angular momentum of ves.
 
 ### orbitNormal
+args:
+  * ves: `Orbitable` defaults to `ship`
+
 returns:
   * `Vector`
 
@@ -26,6 +35,9 @@ description:
   * Returns a unit vector that is perpendicular to both orbitTangent and orbitBinormal in a left handed system.
 
 ### orbitLAN
+args:
+  * ves: `Orbitable` defaults to `ship`
+
 returns:
   * `Vector`
 
@@ -33,20 +45,29 @@ description:
   * Returns a unit vector along the line joining descending and ascending node, pointed towards the ascending node.
 
 ### surfaceTangent
+args:
+  * ves: `Orbitable` defaults to `ship`
+
 returns:
   * `Vector`
 
 description:
-  * Returns a unit vector in the direction of surface velocity
+  * Returns a unit vector in the direction of surface velocity of ves.
 
 ### surfaceBinormal
+args:
+  * ves: `Orbitable` defaults to `ship`
+
 returns:
   * `Vector`
 
 description:
-  * Returns a unit vector in the direction of surface angular momentum
+  * Returns a unit vector in the direction of surface angular momentum of ves.
 
 ### surfaceNormal
+args:
+  * ves: `Orbitable` defaults to `ship`
+
 returns:
   * `Vector`
 
@@ -54,6 +75,9 @@ description:
   * Returns a unit vector that is perpendicular to both surfaceTangent and surfaceBinormal in a left handed system.
 
 ### surfaceLAN
+args:
+  * ves: `Orbitable` defaults to `ship`
+
 returns:
   * `Vector`
 
@@ -61,53 +85,34 @@ description:
   * Returns a unit vector along the line joining descending and ascending node, pointed towards the ascending node.
 
 ### localVertical
+args:
+  * ves: `Orbitable` defaults to `ship`
+
 returns:
   * `Vector`
 
 description:
-  * Returns a vector pointing directly away from the current body at current position.
-
-### targetTangent
-returns:
-  * `Vector`
-
-description:
-  * Returns a unit vector in the direction of target's orbital velocity. Assumes target is set.
-
-### targetBinormal
-returns:
-  * `Vector`
-
-description:
-  * Returns a unit vector in the direction of target's orbital angular momentum. Assumes target is set.
-
-### targetNormal
-returns:
-  * `Vector`
-
-description:
-  * Returns a unit vector perpendicular to both targetTangent and targetBinormal. Assumes target is set.
-
-### targetLAN
-returns:
-  * `Vector`
-
-description:
-  * Returns a unit vector along the line joining the target's descending and ascending node, pointed towards the ascending node. Assumes target is set.
+  * Returns a vector pointing directly away from the body of ves at ves' position.
 
 ### angleToBodyAscendingNode
+args:
+  * ves: `Orbitable` defaults to `ship`
+
 returns:
   * `Scalar`
 
 description:
-  * Returns the angle to the ascending node with respect to the current body's equator.
+  * Returns the angle to the ascending node of ves with respect to the ves' body's equator.
 
 ### angleToBodyDescendingNode
+args:
+  * ves: `Orbitable` defaults to `ship`
+
 returns:
   * `Scalar`
 
 description:
-  * Returns the angle to the descending node with respect to the current body's equator.
+  * Returns the angle to the descending node of ves with respect to the ves' body's equator.
 
 ### angleToRelativeAscendingNode
 args:
@@ -136,7 +141,7 @@ returns:
   * `Scalar`
 
 description:
-  * Assumes a target is set. Returns the phase angle between `SHIP` and `TARGET` with respect to the common parent body. It is positive when you're behind in the orbit, and negative when ahead.
+  * Assumes a `target` is set. Returns the phase angle between `SHIP` and `TARGET` with respect to the common parent body. It is positive when you're behind in the orbit, and negative when ahead.
 
 ### greatCircleHeading
 args:

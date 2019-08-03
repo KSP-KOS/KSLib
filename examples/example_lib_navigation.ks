@@ -28,5 +28,8 @@ until quit {
     set line to line + 1.
     print phaseAngle() at (23, line).
     set line to line + 1.
-    print angleToRelativeAscendingNode(orbitBinormal(), targetBinormal()) at (25, line). 
+    print angleToRelativeAscendingNode(
+        orbitBinormal(ship),
+        orbitBinormal(target)
+    ) at (25, line). 
 }
