@@ -175,7 +175,7 @@ function greatCircleHeading {
 }
 
 // Burn time from rocket equation
-function burnTime {
+function getBurnTime {
     parameter deltaV.
     
     if deltaV:typename() = "Vector" {
@@ -194,4 +194,28 @@ function burnTime {
     
     local burnTime is ship:mass * (1 - CONSTANT:E ^ (-deltaV / isp)) / massBurnRate.
     return burnTime.
+}
+
+// Instantaneous azimuth
+function azimuth {
+    parameter inclination.
+    parameter orbit_alt.
+
+    if inclination < ship:latitude {
+        print "Cannot launch to this inclination, too low.".
+        return false.
+    }
+
+    local head is arcsin(cos(inclination) / cos(ship:latitude)).
+    if inclination < 0 {
+        set head to 180 - head.
+    }
+    else if not(ship:status = "LANDED") and angleToBodyDescendingNode(ship) < angleToBodyAscendingNode(ship) {
+        set head to 180 - head.
+    }
+    local vOrbit is sqrt(body:mu / (orbit_alt + body:radius)).
+    local vRotX is vOrbit * sin(head) - vdot(ship:velocity:orbit, heading(90, 0):vector).
+    local vRotY is vOrbit * cos(head) - vdot(ship:velocity:orbit, heading(0, 0):vector).
+    set head to 90 - arctan2(vRotY, vRotX).
+    return mod(head + 360, 360).
 }

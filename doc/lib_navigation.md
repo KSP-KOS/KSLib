@@ -153,7 +153,7 @@ returns:
 description:
   * Returns the instantaneous heading required to go from current position to point's position along the great circle joining the two positions.
 
-### burnTime
+### getBurnTime
 args:
   * deltaV: One of `Scalar`, `Vector`
 
@@ -162,3 +162,14 @@ returns:
 
 description:
   * Returns the amount of time required to get `deltaV` from active engines. Does not consider fuel requirements.
+
+### azimuth
+args:
+  * inclination: `Scalar` target inclination
+  * orbit_alt: `Scalar` target orbital altitude
+
+returns:
+  * `Scalar`
+
+description:
+  * Returns the azimuth (navball heading) required to launch to inclined orbit, taking into consideration current orbital velocity.
