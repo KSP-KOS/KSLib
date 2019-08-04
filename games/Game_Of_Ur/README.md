@@ -1,0 +1,35 @@
+# Game Of Ur
+
+This is a 2 player race game where the first person to get all there pieces off the board is the winner.
+
+## Rules
+
+This is a two player game, one player is 'X' the other is 'O'.
+There are several AI options should you wish to play by your self.
+To play you roll dice to determine how far you move in a turn.
+The way to Win is to get all 7 of your pieces off the board.
+A player can send an opponents pieces back to the start by landing on them with there own piece.
+There are 5 areas on the board and players may only interact directly in the Main area.
+ 
+At the start of your turn you roll four sided dice.
+  Each die has 2 white and 2 black dots with one dot on each face.
+  The number of white dots are added together to get the number of spaces you will move.
+  As you can get no white on your roll it is possible to end up skipping your turn.
+  There are 5 tile that when landed on allow the player to roll again
+  The probability spread for all possible rolls are:
+    0: 1/16, 1: 2/8 2; 3/8, 3: 2/8, 4: 1/16
+ 
+To get a piece off the board you must roll The exact number.
+  Getting off the board must be done with an exact roll.
+  For instance if you are on the last tile then you must roll a 1.
+ 
+A player can only interact with there opponents pieces in the mainarea of the board.
+  To send an opponents piece back to the start a player must simplyland on the opponents piece.
+  The roll again tile in the main area is a save tile and a piece on the tile can't be sent back to the start.
+ 
+The 5 areas on the board are xStart, oStart, Main, xEnd, oEnd.
+  The tiles are numbered from -4 to 9 along the path of movement.
+  Some tiles have duplicate numbers because each player has there own start and end areas.
+  There are 2 hidden tiles for starting and ending places.
+    The starting area is numbered -5.
+    The ending area is numbered 10.
