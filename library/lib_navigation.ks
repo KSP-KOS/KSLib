@@ -165,7 +165,7 @@ function greatCircleHeading {
         set spot to point:geoPosition.
     }
     else if point:typename() = "Vessel" {
-        set spot to point:body:geoPositionOf(point).
+        set spot to point:geoPosition.
     }
     
     local headN is cos(spot:lat) * sin(spot:lng - ship:longitude).
