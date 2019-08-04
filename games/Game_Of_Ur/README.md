@@ -1,6 +1,7 @@
 # Game Of Ur
 
-This is a 2 player race game where the first person to get all there pieces off the board is the winner.
+The Game of Ur is a guess of the rules played in ancient Mesopotamia.
+As there are no surviving direct descriptions of the rules this is a guess as to one rule set for the game.
 
 ## Rules
 
