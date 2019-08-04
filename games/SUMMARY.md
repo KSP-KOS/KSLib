@@ -8,4 +8,4 @@ This is a summary of all games found in KS-lib
     This is a 2 player race game where the first person to get all there pieces off the board is the winner.
 	Too allow for a single person to play there are several AI.
 	
-	[game](future link here)
+	[game](https://github.com/KSP-KOS/KSLib/blob/master/games/Game_Of_Ur/Game_of_Ur.ks)

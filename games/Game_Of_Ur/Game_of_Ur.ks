@@ -801,7 +801,7 @@ FUNCTION draw_help_rules {
 		PRINT "    skipping your turn.".
 		PRINT "  There are 5 tile that when landed on allow the player to roll again".
 		PRINT "  The probability spread for all possible rolls are:".
-		PRINT "    0: 1/16, 1: 2/8 2; 3/8, 3: 2/8, 4: 1/16".
+		PRINT "    0: 1/16, 1: 2/8 2: 3/8, 3: 2/8, 4: 1/16".
 		PRINT " ".
 		PRINT "To get a piece off the board you must roll The exact number.".
 		PRINT "  Getting off the board must be done with an exact roll.".
