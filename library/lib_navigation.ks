@@ -159,13 +159,20 @@ function phaseAngle {
 
 // Instantaneous heading to go from current postion to a final position along the geodesic
 function greatCircleHeading {
-    parameter point.    // Should be GeoCoordinates, a waypoint or a vessel
-    local spot is point.
-    if point:typename() = "Waypoint" {
+    parameter point.    // Should be GeoCoordinates, a waypoint, a vector or any orbitable
+    local spot is latlng(0, 0).
+
+    if point:typename() = "GeoCoordinates" {
+        set spot to point.
+    }
+    else if point:istype("Orbitable") or point:istype("Waypoint") {
         set spot to point:geoPosition.
     }
-    else if point:typename() = "Vessel" {
-        set spot to point:geoPosition.
+    else if point:typename() = "Vector" {
+        set spot to body:geoPositionOf(point).
+    }
+    else {
+        return -1.
     }
     
     local headN is cos(spot:lat) * sin(spot:lng - ship:longitude).

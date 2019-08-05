@@ -145,7 +145,7 @@ description:
 
 ### greatCircleHeading
 args:
-  * point: One of `GeoCoordinates`, `Waypoint`, `Vessel`
+  * point: `GeoCoordinates`, `Waypoint`, `Vector` or any `Orbitable`
 
 returns:
   * `Scalar`
