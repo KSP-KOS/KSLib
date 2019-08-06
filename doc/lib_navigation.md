@@ -167,9 +167,10 @@ description:
 args:
   * inclination: `Scalar` target inclination
   * orbit_alt: `Scalar` target orbital altitude
+  * auto_switch: `Boolean` whether to automatically switch between northward/southward azimuth
 
 returns:
   * `Scalar`
 
 description:
-  * Returns the azimuth (navball heading) required to launch to inclined orbit, taking into consideration current orbital velocity.
+  * Returns the azimuth (navball heading) required to launch to inclined orbit, taking into consideration current orbital velocity. If `auto_switch` is set, the function will check the ship's proximity with ascending and descending node to return a northward or southward azimuth, respectively.

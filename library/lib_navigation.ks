@@ -64,7 +64,7 @@ function localVertical {
     return ves:up:vector.
 }
 
-// Angle to ascending node with respect to current body's equator
+// Angle to ascending node with respect to ves' body's equator
 function angleToBodyAscendingNode {
     parameter ves is ship.
 
@@ -77,7 +77,7 @@ function angleToBodyAscendingNode {
     }
 }
 
-// Angle to descending node with respect to current body's equator
+// Angle to descending node with respect to ves' body's equator
 function angleToBodyDescendingNode {
     parameter ves is ship.
 
@@ -90,7 +90,7 @@ function angleToBodyDescendingNode {
     }
 }
 
-// Angle to relative ascending node with assumed target
+// Angle to relative ascending node determined from args
 function angleToRelativeAscendingNode {
     parameter orbitBinormal.
     parameter targetBinormal.
@@ -99,7 +99,7 @@ function angleToRelativeAscendingNode {
     return vang(-body:position, joinVector).
 }
 
-// Angle to relative descending node with assumed target
+// Angle to relative descending node determined from args
 function angleToRelativeDescendingNode {
     parameter orbitBinormal.
     parameter targetBinormal.
@@ -159,7 +159,7 @@ function phaseAngle {
 
 // Instantaneous heading to go from current postion to a final position along the geodesic
 function greatCircleHeading {
-    parameter point.    // Should be GeoCoordinates, a waypoint, a vector or any orbitable
+    parameter point.    // Should be GeoCoordinates, a Waypoint, a Vector or any Orbitable
     local spot is latlng(0, 0).
 
     if point:typename() = "GeoCoordinates" {
@@ -207,6 +207,7 @@ function getBurnTime {
 function azimuth {
     parameter inclination.
     parameter orbit_alt.
+    parameter auto_switch is false.
 
     if inclination < ship:latitude {
         print "Cannot launch to this inclination, too low.".
@@ -214,10 +215,12 @@ function azimuth {
     }
 
     local head is arcsin(cos(inclination) / cos(ship:latitude)).
-    if inclination < 0 {
-        set head to 180 - head.
+    if auto_switch {
+        if angleToBodyDescendingNode(ship) < angleToBodyAscendingNode(ship) {
+            set head to 180 - head.
+        }
     }
-    else if not(ship:status = "LANDED") and angleToBodyDescendingNode(ship) < angleToBodyAscendingNode(ship) {
+    else if inclination < 0 {
         set head to 180 - head.
     }
     local vOrbit is sqrt(body:mu / (orbit_alt + body:radius)).
