@@ -12,7 +12,7 @@ returns:
   * `Vector`
 
 description:
-  * Returns a unit vector in the direction of orbital velocity ves.
+  * Returns a unit vector in the direction of orbital velocity of ves. Typically same as Prograde in KSP.
 
 ### orbitBinormal
 args:
@@ -22,7 +22,7 @@ returns:
   * `Vector`
 
 description:
-  * Returns a unit vector in the direction of orbital angular momentum of ves.
+  * Returns a unit vector in the direction of orbital angular momentum of ves. Typically same as Normal in KSP.
 
 ### orbitNormal
 args:
@@ -32,7 +32,7 @@ returns:
   * `Vector`
 
 description:
-  * Returns a unit vector that is perpendicular to both orbitTangent and orbitBinormal in a left handed system.
+  * Returns a unit vector that is perpendicular to both orbitTangent and orbitBinormal in a left handed system. Typically same as Radial In in KSP.
 
 ### orbitLAN
 args:
@@ -52,7 +52,7 @@ returns:
   * `Vector`
 
 description:
-  * Returns a unit vector in the direction of surface velocity of ves.
+  * Returns a unit vector in the direction of surface velocity of ves. Typically same as surface Prograde in KSP.
 
 ### surfaceBinormal
 args:
@@ -62,7 +62,7 @@ returns:
   * `Vector`
 
 description:
-  * Returns a unit vector in the direction of surface angular momentum of ves.
+  * Returns a unit vector in the direction of surface angular momentum of ves. Typically same as surface Normal in KSP.
 
 ### surfaceNormal
 args:
@@ -72,7 +72,7 @@ returns:
   * `Vector`
 
 description:
-  * Returns a unit vector that is perpendicular to both surfaceTangent and surfaceBinormal in a left handed system.
+  * Returns a unit vector that is perpendicular to both surfaceTangent and surfaceBinormal in a left handed system. Typically same as surface Radial In in KSP.
 
 ### surfaceLAN
 args:

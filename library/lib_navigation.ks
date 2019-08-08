@@ -9,13 +9,15 @@ function orbitTangent {
 }
 
 // In the direction of orbital angular momentum of ves
+// Typically same as Normal
 function orbitBinormal {
     parameter ves is ship.
 
     return vcrs((ves:position - ves:body:position):normalized, orbitTangent(ves)):normalized.
 }
 
-// Perpendicular to both tangent and binormal, typically radially inward
+// Perpendicular to both tangent and binormal
+// Typically same as Radial In
 function orbitNormal {
     parameter ves is ship.
 
@@ -37,13 +39,15 @@ function surfaceTangent {
 }
 
 // In the direction of surface angular momentum of ves
+// Typically same as Normal
 function surfaceBinormal {
     parameter ves is ship.
 
     return vcrs((ves:position - ves:body:position):normalized, surfaceTangent(ves)):normalized.
 }
 
-// Perpedicular to  both tangent and binormal, typically radially inward
+// Perpedicular to  both tangent and binormal
+// Typically same as Radial In
 function surfaceNormal {
     parameter ves is ship.
 
