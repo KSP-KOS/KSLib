@@ -12,7 +12,7 @@ function orbitTangent {
 function orbitBinormal {
     parameter ves is ship.
 
-    return vcrs(ves:position - ves:body:position, orbitTangent(ves)):normalized.
+    return vcrs((ves:position - ves:body:position):normalized, orbitTangent(ves)):normalized.
 }
 
 // Perpendicular to both tangent and binormal, typically radially inward
@@ -26,7 +26,7 @@ function orbitNormal {
 function orbitLAN {
     parameter ves is ship.
 
-    return angleAxis(ves:orbit:LAN, ves:body:angularVel) * solarPrimeVector.
+    return angleAxis(ves:orbit:LAN, ves:body:angularVel:normalized) * solarPrimeVector.
 }
 
 // Same as surface prograde vector for ves
@@ -40,7 +40,7 @@ function surfaceTangent {
 function surfaceBinormal {
     parameter ves is ship.
 
-    return vcrs(ves:position - ves:body:position, surfaceTangent(ves)):normalized.
+    return vcrs((ves:position - ves:body:position):normalized, surfaceTangent(ves)):normalized.
 }
 
 // Perpedicular to  both tangent and binormal, typically radially inward
@@ -54,7 +54,7 @@ function surfaceNormal {
 function surfaceLAN {
     parameter ves is ship.
 
-    return angleAxis(ves:orbit:LAN - 90, ves:body:angularVel) * solarPrimeVector.
+    return angleAxis(ves:orbit:LAN - 90, ves:body:angularVel:normalized) * solarPrimeVector.
 }
 
 // Vector directly away from the body at ves' position
@@ -68,26 +68,46 @@ function localVertical {
 function angleToBodyAscendingNode {
     parameter ves is ship.
 
-    local angle is vang(ves:position - ves:body:position, orbitLAN(ves)).
+    local joinVector is orbitLAN(ves).
+    local angle is vang((ves:position - ves:body:position):normalized, joinVector).
     if ves:status = "LANDED" {
-        return angle - 90.
+        set angle to angle - 90.
     }
     else {
-        return angle.
+        local signVector is vcrs(-body:position, joinVector).
+        local sign is vdot(orbitBinormal(ves), signVector).
+        if sign < 0 {
+            set angle to angle * -1.
+        }
     }
+    return angle.
 }
 
 // Angle to descending node with respect to ves' body's equator
 function angleToBodyDescendingNode {
     parameter ves is ship.
 
-    local angle is vang(ves:position - ves:body:position, -orbitLAN(ves)).
+    local joinVector is -orbitLAN(ves).
+    local angle is vang((ves:position - ves:body:position):normalized, joinVector).
     if ves:status = "LANDED" {
-        return angle - 90.
+        set angle to angle - 90.
     }
     else {
-        return angle.
+        local signVector is vcrs(-body:position, joinVector).
+        local sign is vdot(orbitBinormal(ves), signVector).
+        if sign < 0 {
+            set angle to angle * -1.
+        }
     }
+    return angle.
+}
+
+// Vector directed from the relative descending node to the ascending node
+function relativeNodalVector {
+    parameter orbitBinormal.
+    parameter targetBinormal.
+
+    return vcrs(orbitBinormal, targetBinormal):normalized.
 }
 
 // Angle to relative ascending node determined from args
@@ -95,8 +115,14 @@ function angleToRelativeAscendingNode {
     parameter orbitBinormal.
     parameter targetBinormal.
 
-    local joinVector is vcrs(orbitBinormal, targetBinormal).
-    return vang(-body:position, joinVector).
+    local joinVector is relativeNodalVector(orbitBinormal, targetBinormal).
+    local angle is vang(-body:position:normalized, joinVector).
+    local signVector is vcrs(-body:position, joinVector).
+    local sign is vdot(orbitBinormal, signVector).
+    if sign < 0 {
+        set angle to angle * -1.
+    }
+    return angle.
 }
 
 // Angle to relative descending node determined from args
@@ -104,8 +130,14 @@ function angleToRelativeDescendingNode {
     parameter orbitBinormal.
     parameter targetBinormal.
 
-    local joinVector is -vcrs(orbitBinormal, targetBinormal).
-    return vang(-body:position, joinVector).
+    local joinVector is -relativeNodalVector(orbitBinormal, targetBinormal).
+    local angle is vang(-body:position:normalized, joinVector).
+    local signVector is vcrs(-body:position, joinVector).
+    local sign is vdot(orbitBinormal, signVector).
+    if sign < 0 {
+        set angle to angle * -1.
+    }
+    return angle.
 }
 
 // Orbital phase angle with assumed target
@@ -119,7 +151,7 @@ function phaseAngle {
     until not(my_ancestors[my_ancestors:length-1]:hasBody) {
         my_ancestors:add(my_ancestors[my_ancestors:length-1]:body).
     }
-    your_ancestors:add(ship:body).
+    your_ancestors:add(target:body).
     until not(your_ancestors[your_ancestors:length-1]:hasBody) {
         your_ancestors:add(your_ancestors[your_ancestors:length-1]:body).
     }
@@ -144,10 +176,16 @@ function phaseAngle {
         set vel to vel + my_ancestor:velocity:orbit.
         set my_ancestor to my_ancestor:body.
     }
-    local binormal is vcrs(-common_ancestor:position, vel):normalized.
+    local binormal is vcrs(-common_ancestor:position:normalized, vel:normalized):normalized.
 
-    local phase is vang(-common_ancestor:position, target:position - common_ancestor:position).
-    local signVector is vcrs(-common_ancestor:position, target:position - common_ancestor:position).
+    local phase is vang(
+        -common_ancestor:position:normalized,
+        vxcl(binormal, target:position - common_ancestor:position):normalized
+    ).
+    local signVector is vcrs(
+        -common_ancestor:position:normalized,
+        target:position - common_ancestor:position:normalized
+    ).
     local sign is vdot(binormal, signVector).
     if sign < 0 {
         return -phase.
@@ -157,49 +195,39 @@ function phaseAngle {
     }
 }
 
-// Instantaneous heading to go from current postion to a final position along the geodesic
-function greatCircleHeading {
-    parameter point.    // Should be GeoCoordinates, a Waypoint, a Vector or any Orbitable
-    local spot is latlng(0, 0).
-
-    if point:typename() = "GeoCoordinates" {
-        set spot to point.
+// Average Isp calculation
+function _avg_isp {
+    local burnEngines is list().
+    list engines in burnEngines.
+    local massBurnRate is 0.
+    for e in burnEngines {
+        if e:ignition {
+            set massBurnRate to massBurnRate + e:availableThrust/(e:ISP * constant:g0).
+        }
     }
-    else if point:istype("Orbitable") or point:istype("Waypoint") {
-        set spot to point:geoPosition.
+    local isp is -1.
+    if massBurnRate <> 0 {
+        set isp to ship:availablethrust / massBurnRate.
     }
-    else if point:typename() = "Vector" {
-        set spot to body:geoPositionOf(point).
-    }
-    else {
-        return -1.
-    }
-    
-    local headN is cos(spot:lat) * sin(spot:lng - ship:longitude).
-    local headD is cos(ship:latitude) * sin(spot:lat) - sin(ship:latitude) * cos(spot:lat) * cos(spot:lng - ship:longitude).
-    local head is mod(arctan2(headN, headD) + 360, 360).
-    return head.
+    return isp.
 }
 
 // Burn time from rocket equation
 function getBurnTime {
     parameter deltaV.
+    parameter isp is 0.
     
     if deltaV:typename() = "Vector" {
         set deltaV to deltaV:mag.
     }
-    local burnEngines is list().
-    list engines in burnEngines.
-    local massBurnRate is 0.
-    local g0 is 9.80665.
-    for e in burnEngines {
-        if e:ignition {
-            set massBurnRate to massBurnRate + e:availableThrust/(e:ISP * g0).
-        }
+    if isp = 0 {
+        set isp to _avg_isp().
     }
-    local isp is ship:availablethrust / massBurnRate.
     
-    local burnTime is ship:mass * (1 - CONSTANT:E ^ (-deltaV / isp)) / massBurnRate.
+    local burnTime is -1.
+    if ship:availablethrust <> 0 {
+        set burnTime to ship:mass * (1 - CONSTANT:E ^ (-deltaV / isp)) / (ship:availablethrust / isp).
+    }
     return burnTime.
 }
 

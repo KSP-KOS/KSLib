@@ -102,7 +102,7 @@ returns:
   * `Scalar`
 
 description:
-  * Returns the angle to the ascending node of ves with respect to the ves' body's equator.
+  * Returns the angle to the ascending node of ves with respect to the ves' body's equator. Positive if the node is ahead of you, negative otherwise.
 
 ### angleToBodyDescendingNode
 args:
@@ -112,7 +112,7 @@ returns:
   * `Scalar`
 
 description:
-  * Returns the angle to the descending node of ves with respect to the ves' body's equator.
+  * Returns the angle to the descending node of ves with respect to the ves' body's equator. Positive if the node is ahead of you, negative otherwise.
 
 ### angleToRelativeAscendingNode
 args:
@@ -123,7 +123,7 @@ returns:
   * `Scalar`
 
 description:
-  * Returns the angle to the relative ascending node calculated from the args.
+  * Returns the angle to the relative ascending node calculated from the args. Positive if the node is ahead of you, negative otherwise.
 
 ### angleToRelativeDescendingNode
 args:
@@ -134,7 +134,7 @@ returns:
   * `Scalar`
 
 description:
-  * Returns the angle to the relative descending node calculated from the args.
+  * Returns the angle to the relative descending node calculated from the args. Positive if the node is ahead of you, negative otherwise.
 
 ### phaseAngle
 returns:
@@ -143,25 +143,23 @@ returns:
 description:
   * Assumes a `target` is set. Returns the phase angle between `SHIP` and `TARGET` with respect to the common parent body. It is positive when you're behind in the orbit, and negative when ahead.
 
-### greatCircleHeading
-args:
-  * point: `GeoCoordinates`, `Waypoint`, `Vector` or any `Orbitable`
-
+### _avg_isp
 returns:
   * `Scalar`
 
 description:
-  * Returns the instantaneous heading required to go from current position to point's position along the great circle joining the two positions.
+  * Returns the average specific impulse of the active engines or -1 if no active engine is detected. Although the function can be used by the end user, it is meant primarily for internal calculations.
 
 ### getBurnTime
 args:
   * deltaV: One of `Scalar`, `Vector`
+  * isp: `Scalar` defaults to 0
 
 returns:
   * `Scalar`
 
 description:
-  * Returns the amount of time required to get `deltaV` from active engines. Does not consider fuel requirements.
+  * Returns the amount of time required to get `deltaV` from active engines, -1 if no active engine is present. Does not consider fuel requirements. Calculation is done using the average specific impulse (arg `isp`) or calculates the Isp if left at the default.
 
 ### azimuth
 args:
