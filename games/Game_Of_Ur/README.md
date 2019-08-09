@@ -1,6 +1,6 @@
 # Game Of Ur
 
-The Game of Ur is a guess of the rules played in ancient Mesopotamia.
+The Game of Ur is a game played in ancient Mesopotamia.
 As there are no surviving direct descriptions of the rules this is a guess as to one rule set for the game.
 
 ## Rules
