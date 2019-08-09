@@ -188,7 +188,7 @@ function phaseAngle {
     ).
     local signVector is vcrs(
         -common_ancestor:position:normalized,
-        target:position - common_ancestor:position:normalized
+        (target:position - common_ancestor:position):normalized
     ).
     local sign is vdot(binormal, signVector).
     if sign < 0 {
