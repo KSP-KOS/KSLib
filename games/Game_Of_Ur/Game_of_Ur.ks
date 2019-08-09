@@ -1,5 +1,5 @@
 SET TERMINAL:WIDTH TO 70.
-SET TERMINAL:HEIGHT TO 30.
+SET TERMINAL:HEIGHT TO 35.
 
 //init of the various needed variables
 LOCAL boardPos IS LIST(5,5).
@@ -58,7 +58,7 @@ FOR key IN helpBoardData["blank"]:KEYS {
 }
 
 LOCAL gameData IS LEX("inProgres",FALSE, "curentTurn","X", "showOptions",TRUE,
-"X",LEX("isHuman",FALSE,"AItype","tmap","AIstate",LIST(0,0)),
+"X",LEX("isHuman",TRUE,"AItype","tmap","AIstate",LIST(0,0)),
 "O",LEX("isHuman",FALSE,"AItype","tmap","AIstate",LIST(0,0))).
 
 LOCAL aiMoveMap IS LEX(
@@ -115,8 +115,9 @@ UNTIL quitGame {//(gamePieceData["xEnd"] >= 7) OR (gamePieceData["oEnd"] >= 7) {
 		} ELSE {
 			ui_congratulation("O").
 		}
-		draw_board(boardPos[0],boardPos[1]).
-		draw_picses(boardPos[0],boardPos[1],gameBoardData,gamePieceData).
+		clear_board(gameBoardData,gamePieceData).
+		//draw_board(boardPos[0],boardPos[1]).
+		//draw_picses(boardPos[0],boardPos[1],gameBoardData,gamePieceData).
 		SET gameData["inProgres"] TO FALSE.
 		IF gameData["showOptions"] {
 			SET interrupt TO "o".
@@ -124,11 +125,10 @@ UNTIL quitGame {//(gamePieceData["xEnd"] >= 7) OR (gamePieceData["oEnd"] >= 7) {
 			IF quitGame { BREAK. }
 			draw_board(boardPos[0],boardPos[1]).
 		}
+		draw_picses(boardPos[0],boardPos[1],gameBoardData,gamePieceData).
 		set_player_move_first().
-		clear_board(gameBoardData,gamePieceData).
 		SET gameData["X"]["AIstate"] TO LIST(0,0).
 		SET gameData["O"]["AIstate"] TO LIST(0,0).
-		draw_picses(boardPos[0],boardPos[1],gameBoardData,gamePieceData).
 		SET gameData["inProgres"] TO TRUE.
 	}
 	IF ui_interrupt_handler() {
@@ -159,12 +159,12 @@ UNTIL quitGame {//(gamePieceData["xEnd"] >= 7) OR (gamePieceData["oEnd"] >= 7) {
 			PRINT "X" AT(col + 1,row+selectedMove).
 			//SET RCS TO SAS.
 			//WAIT UNTIL RCS OR is_enter_key().
-			//WAIT 1.
+			WAIT 1.
 		}
 		SET rollAgain TO move_piece(pType,moveList[selectedMove],gameBoardData,gamePieceData).
 	} ELSE {
 		PRINT "No Valid Move"AT(col,row).
-		//WAIT 1.
+		WAIT 1.
 	}
 	draw_picses(boardPos[0],boardPos[1],gameBoardData,gamePieceData).
 	IF NOT rollAgain {
@@ -172,7 +172,7 @@ UNTIL quitGame {//(gamePieceData["xEnd"] >= 7) OR (gamePieceData["oEnd"] >= 7) {
 		SET gameData["curentTurn"] TO otherPlayer[gameData["curentTurn"]].
 		PRINT "             " AT (col,row - 1).
 	} ELSE {
-		PRINT "Rolling Again" AT (col,row - 1).
+		//PRINT "Rolling Again" AT (col,row - 1).
 	}
 	//SET RCS TO SAS.
 	//WAIT UNTIL RCS.
@@ -204,10 +204,10 @@ FUNCTION ui_interrupt_handler {
 
 FUNCTION ui_game_options {
 	LOCAL col IS 0.
-	LOCAL row IS 1.
+	LOCAL row IS 0.
 	LOCAL aiNumbers IS aiMoveMap:KEYS:LENGTH.
 	LOCAL level0Offset IS LIST().
-	level0Offset:ADD(0).
+	level0Offset:ADD(row + 1).
 	level0Offset:ADD(level0Offset[0] + 4 + aiNumbers).
 	level0Offset:ADD(level0Offset[1] + 4 + aiNumbers).
 	level0Offset:ADD(level0Offset[2] + 4).
@@ -259,6 +259,8 @@ FUNCTION ui_game_options {
 					SET level TO level + 1.
 				} ELSE IF l0i = 3 {
 					clear_board(gameBoardData,gamePieceData).
+					SET gameData["X"]["AIstate"] TO LIST(0,0).
+					SET gameData["O"]["AIstate"] TO LIST(0,0).
 					SET done TO TRUE.
 				} ELSE IF l0i = 4 {
 					SET done TO TRUE.
@@ -270,11 +272,11 @@ FUNCTION ui_game_options {
 						PRINT "X" AT(1,row + level0Offset[l0i]).
 					} ELSE {
 						SET level TO level + 1.
-						draw_game_restart(col + 2,row + level0Offset[l0i] + 1,"X").
+						draw_player_setttings(col,row + level0Offset[l0i],pType,level).
 					}
 				} ELSE IF l0i = 2 {
 					SET level TO 0.
-					draw_game_restart(col + 2,row + level0Offset[l0i] + 1,"-").
+					draw_game_restart(col + 2,row + level0Offset[l0i] + 1,"X").
 					PRINT "X" AT(1,row + level0Offset[l0i]).
 				}
 			} ELSE {
@@ -336,6 +338,14 @@ FUNCTION ui_game_options {
 		}
 		WAIT 0.
 	}
+}
+
+FUNCTION ui_congratulation {
+	PARAMETER pType,delayTime IS 5.
+	CLEARSCREEN.
+	PRINT "Congratulation Player " + pType + " On winning this match".
+	WAIT delayTime.
+	RETURN TRUE.
 }
 
 FUNCTION ui_quit {
@@ -598,6 +608,7 @@ FUNCTION ui_move {
 			draw_board(boardPos[0],boardPos[1]).
 			draw_picses(boardPos[0],boardPos[1],boardData,pieceData).
 			draw_move_list(col,row,moveList).
+			PRINT "X" AT(col + 1,row + move).
 		}
 		IF is_enter_key() {
 			SET done TO TRUE.
@@ -622,14 +633,6 @@ FUNCTION ui_move {
 	}
 	
 	RETURN move.
-}
-
-FUNCTION ui_congratulation {
-	PARAMETER pType,delayTime IS 5.
-	CLEARSCREEN.
-	PRINT "Congratulation Player " + pType + " On winning this match".
-	WAIT delayTime.
-	RETURN TRUE.
 }
 
 FUNCTION is_up_key {
@@ -671,8 +674,9 @@ FUNCTION is_key {
 FUNCTION draw_game_options {
 	PARAMETER col,row.
 	CLEARSCREEN.
-	draw_human_ai_options(col,row,"X").
-	SET row TO row + 10.
+	PRINT "                          ---Game Options---                          " AT(col,row).
+	draw_human_ai_options(col,row + 1,"X").
+	SET row TO row + 11.
 	draw_human_ai_options(col,row,"O").
 	SET row TO row + 10.
 	PRINT "[ ]Bring up game options when a match ends" AT(col,row).
@@ -682,8 +686,11 @@ FUNCTION draw_game_options {
 	PRINT "[ ]Start New Game" AT(col,row).
 	IF gameData["inProgres"] {
 		PRINT "[ ]Resume Game" AT(col,row + 1).
-		PRINT "Press <Enter> to select [x]" AT(col,row + 3).
+		PRINT "This [-] marks the current setttings" AT(col,row + 3).
+		PRINT "Press <Enter> to select [x]" AT(col,row + 4).
+		PRINT "Any changes will take effect after the current turn ends." AT(col,row + 5).
 	} ELSE {
+		PRINT "This [-] marks the current setttings" AT(col,row + 1).
 		PRINT "Press <Enter> to select [x]" AT(col,row + 2).
 	}
 }
@@ -698,11 +705,12 @@ FUNCTION draw_human_ai_options {
 	PRINT "--[ ]Threat Aware"AT(col,Row + 5).
 	PRINT "--[ ]Random" AT(col,row + 6).
 	PRINT "--[ ]Mutating" AT(col,row + 7).
-	PRINT "--[ ]Very Random" AT(col,row + 8).
+	PRINT "--[ ]Random AI" AT(col,row + 8).
 }
 
 FUNCTION draw_current_settings {
 	PARAMETER col,row,pType,level.
+	SET row TO row + 1.
 	IF pType = "X" {
 		draw_player_setttings(col,row,"X",level).
 		draw_player_setttings(col,row + 4 + aiMoveMap:KEYS:LENGTH,"O",0).
@@ -801,7 +809,7 @@ FUNCTION draw_help_rules {
 		PRINT "    skipping your turn.".
 		PRINT "  There are 5 tile that when landed on allow the player to roll again".
 		PRINT "  The probability spread for all possible rolls are:".
-		PRINT "    0: 1/16, 1: 2/8 2: 3/8, 3: 2/8, 4: 1/16".
+		PRINT "    0: 1/16, 1: 2/8 2; 3/8, 3: 2/8, 4: 1/16".
 		PRINT " ".
 		PRINT "To get a piece off the board you must roll The exact number.".
 		PRINT "  Getting off the board must be done with an exact roll.".
@@ -883,7 +891,7 @@ FUNCTION draw_ai_types_list {
 
 FUNCTION draw_ai_types_info {
 	PARAMETER col,row,page.
-	draw_blank_lines(row,0,2).
+	draw_blank_lines(row,0,3).
 	IF page = 0 {
 		PRINT "The Hare AI will move it's piece closest to the end." AT(col,row).
 	} ELSE IF page = 1 {
@@ -894,10 +902,12 @@ FUNCTION draw_ai_types_info {
 	} ELSE IF page = 3 {
 		PRINT "The 'Random move' AI will move a piece at random." AT(col,row).
 	} ELSE IF page = 4 {
-		PRINT "The 'Mutating' AT will play as Hare,Tortoise,Threat Aware, or Random move" AT(col,row).
-		PRINT "  for between 1 and 5 turns befor changing to a different AI type" AT(col,row + 1).
+		PRINT "The 'Mutating' AT will play as Hare, Tortoise, Threat Aware, " AT(col,row).
+		PRINT "  or Random move AIs for between 1 and 5 turns befor changing" AT(col,row + 1).
+		PRINT "  to a different AI type" AT(col,row + 1).
 	} ELSE IF page = 5 {
-		PRINT "The 'Random AI' AI will pick one of the other 4 AIs at random." AT(col,row).
+		PRINT "The 'Random AI' AI will pick Hare, Tortoise, Threat Aware, or" AT(col,row).
+		PRINT "  Random move AIs to play as for the duration of the game" AT(col,row + 1).
 	}
 }
 
@@ -978,7 +988,7 @@ FUNCTION draw_h_line {
 	PARAMETER col,row,lineLength.
 	FROM { LOCAL i IS 0. } UNTIL i >= lineLength STEP { SET i TO i + 1. } DO {
 		PRINT "─" AT(col + i,row).
-		//WAIT 0.
+		WAIT 0.
 	}
 }
 
@@ -986,8 +996,8 @@ FUNCTION draw_v_line {
 	PARAMETER col,row,lineLength.
 	FROM { LOCAL i IS 0. } UNTIL i >= lineLength STEP { SET i TO i + 1. } DO {
 		PRINT "│" AT(col,row + i).
-		//WAIT 0.
-		//WAIT 0.
+		WAIT 0.
+		WAIT 0.
 	}
 }
 
@@ -1120,6 +1130,8 @@ FUNCTION player_move_list {
 
 FUNCTION ai_move {
 	PARAMETER pType,pData,moveList.
+	PRINT aiMoveMap:KEYS[pData["AIstate"][1]] AT(0,0).
+	PRINT pData["AIstate"][0] AT(0,1).
 	RETURN aiMoveMap[pData["AItype"]](pType,pData,moveList).
 }
 
@@ -1137,7 +1149,7 @@ FUNCTION ai_random_ai {
 	PARAMETER pType,pData,moveList.
 	LOCAL aiState IS pData["AIstate"].
 	IF aiState[0] = 0 {
-		LOCAL maxType IS aiMoveMap:KEYS:LENGTH - 2.
+		LOCAL maxType IS 4.
 		SET aiState[1] TO FLOOR(RANDOM() * maxType).
 		UNTIL aiState[1] < maxType {
 			SET aiState[1] TO FLOOR(RANDOM() * maxType).
@@ -1150,7 +1162,7 @@ FUNCTION ai_random_ai {
 FUNCTION ai_mutating {
 	PARAMETER pType,pData,moveList.
 	LOCAL aiState IS pData["AIstate"].
-	IF aiState[0] >= 0 {
+	IF aiState[0] <= 0 {
 		LOCAL maxType IS aiMoveMap:KEYS:LENGTH - 3.
 		SET aiState[1] TO FLOOR(RANDOM() * maxType).
 		UNTIL aiState[1] < maxType {
@@ -1189,24 +1201,51 @@ FUNCTION ai_threat_map {
 			LOCAL score IS currentThreat - futureThreat.
 			
 			IF gameBoardData[moveEnd] = otherPlayer[pType] {
-				SET score to score + 0.515 * pos_to_num(moveEnd) + 0.76.
+				SET score to score + 0.622 * pos_to_num(moveEnd) + 0.579.
 			}
 			
-			IF moveStart:CONTAINS("start -5") {
-				SET score TO score + 0.066.
-			}//ss,sm,mm,me,ee
+			IF moveStart:CONTAINS("start") {//score based on area
+				SET score TO score - 0.5.
+				IF moveStart:CONTAINS("start -5") {
+					SET score TO score + 0.215.
+				}
+				IF moveEnd:CONTAINS("start") {
+					SET score TO score + 0.02.
+				} ELSE {
+					SET score TO score - 0.294.
+				}
+			} ELSE IF moveStart:CONTAINS("main") {
+				SET score TO score - 0.742.
+				IF moveEnd:CONTAINS("main") {
+					SET score TO score + 0.021.
+				} ELSE {
+					IF moveEnd:CONTAINS("end 10") {
+						SET score TO score + -0.041.
+					}
+					SET score TO score + 0.459.
+				}
+			} ELSE {
+				IF moveEnd:CONTAINS("end 10") {
+					SET score TO score + -0.041.
+				}
+				SET score TO score + 0.007.
+			}
+			
+			//IF moveStart:CONTAINS("start -5") {
+			//	SET score TO score + 0.066.
+			//}//ss,sm,mm,me,ee
 			
 			IF rollAgainSpots:CONTAINS(moveStart) {
-				SET score TO score - 0.044.
+				SET score TO score + 0.033.
 			}
 			
 			IF rollAgainSpots:CONTAINS(moveEnd) {
-				SET score TO score + 0.664.
+				SET score TO score + 0.52.
 			}
 			
-			IF moveEnd:CONTAINS("end 10") {
-				SET score TO score + 0.353.
-			}
+			//IF moveEnd:CONTAINS("end 10") {
+			//	SET score TO score + 0.353.
+			//}
 			
 			IF score >= greatistScore {
 				SET greatistScore TO score.
