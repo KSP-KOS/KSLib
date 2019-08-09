@@ -116,8 +116,6 @@ UNTIL quitGame {//(gamePieceData["xEnd"] >= 7) OR (gamePieceData["oEnd"] >= 7) {
 			ui_congratulation("O").
 		}
 		clear_board(gameBoardData,gamePieceData).
-		//draw_board(boardPos[0],boardPos[1]).
-		//draw_picses(boardPos[0],boardPos[1],gameBoardData,gamePieceData).
 		SET gameData["inProgres"] TO FALSE.
 		IF gameData["showOptions"] {
 			SET interrupt TO "o".
@@ -143,8 +141,6 @@ UNTIL quitGame {//(gamePieceData["xEnd"] >= 7) OR (gamePieceData["oEnd"] >= 7) {
 	LOCAL row IS boardPos[1] + 15.
 	LOCAL validMove IS moveList:LENGTH > 0.
 	PRINT pType + " rolled: " + newRoll AT(col,row - 2).
-	//SET RCS TO SAS.
-	//WAIT UNTIL RCS.
 	draw_move_list(col,row,moveList).
 	LOCAL pData IS gameData[pType].
 	LOCAL rollAgain IS FALSE.
@@ -157,8 +153,6 @@ UNTIL quitGame {//(gamePieceData["xEnd"] >= 7) OR (gamePieceData["oEnd"] >= 7) {
 		} ELSE {
 			SET selectedMove TO ai_move(pType,pData,moveList).
 			PRINT "X" AT(col + 1,row+selectedMove).
-			//SET RCS TO SAS.
-			//WAIT UNTIL RCS OR is_enter_key().
 			WAIT 1.
 		}
 		SET rollAgain TO move_piece(pType,moveList[selectedMove],gameBoardData,gamePieceData).
@@ -168,14 +162,9 @@ UNTIL quitGame {//(gamePieceData["xEnd"] >= 7) OR (gamePieceData["oEnd"] >= 7) {
 	}
 	draw_picses(boardPos[0],boardPos[1],gameBoardData,gamePieceData).
 	IF NOT rollAgain {
-		//IF pType = "X" { SET gameData["curentTurn"] TO "O". } ELSE { SET gameData["curentTurn"] TO "X". }
 		SET gameData["curentTurn"] TO otherPlayer[gameData["curentTurn"]].
 		PRINT "             " AT (col,row - 1).
-	} ELSE {
-		//PRINT "Rolling Again" AT (col,row - 1).
 	}
-	//SET RCS TO SAS.
-	//WAIT UNTIL RCS.
 }
 
 //UI
@@ -789,7 +778,6 @@ FUNCTION draw_help_menue {
 FUNCTION draw_help_rules {
 	PARAMETER pageNum.
 	CLEARSCREEN.
-		//     1234567890123456789012345678901234567890123456789012345678901234567890
 	IF pageNum = 1 {
 		PRINT "This is the Royal Game Of Ur made using the simpler race rule set.".
 		PRINT "This is a two player game, one player is 'X' the other is 'O'.".
@@ -845,7 +833,6 @@ FUNCTION draw_help_rules {
 FUNCTION draw_help_board {
 	PARAMETER col,row,boardData.
 	CLEARSCREEN.
-	//clear_board(boardData,helpPieceData).
 	draw_board(col,row).
 	draw_picses(col,row,boardData,helpPieceData,FALSE).
 	SET row TO row + 14.
@@ -940,7 +927,6 @@ FUNCTION draw_picses {
 	PARAMETER col,row,boardData,pieceData,drawData IS TRUE.
 	FOR space IN validSpaces {
 		LOCAL spaceData IS spacePos[space].
-		//PRINT spaceData  + "     "AT(0,18).
 		IF spaceData[0] <> 0 {
 			PRINT boardData[space] AT(col + spaceData[0],row + spaceData[1]).
 		}
@@ -1130,8 +1116,6 @@ FUNCTION player_move_list {
 
 FUNCTION ai_move {
 	PARAMETER pType,pData,moveList.
-	PRINT aiMoveMap:KEYS[pData["AIstate"][1]] AT(0,0).
-	PRINT pData["AIstate"][0] AT(0,1).
 	RETURN aiMoveMap[pData["AItype"]](pType,pData,moveList).
 }
 
@@ -1231,10 +1215,6 @@ FUNCTION ai_threat_map {
 				SET score TO score + 0.007.
 			}
 			
-			//IF moveStart:CONTAINS("start -5") {
-			//	SET score TO score + 0.066.
-			//}//ss,sm,mm,me,ee
-			
 			IF rollAgainSpots:CONTAINS(moveStart) {
 				SET score TO score + 0.033.
 			}
@@ -1243,15 +1223,9 @@ FUNCTION ai_threat_map {
 				SET score TO score + 0.52.
 			}
 			
-			//IF moveEnd:CONTAINS("end 10") {
-			//	SET score TO score + 0.353.
-			//}
-			
 			IF score >= greatistScore {
 				SET greatistScore TO score.
 			}
-			//PRINT ROUND(score,4) + "      " AT(40,20 + moveNum).
-			//SET moveNum TO moveNum + 1.
 			moveScore:ADD(score).
 		}
 		LOCAL shouldMove IS LIST().
