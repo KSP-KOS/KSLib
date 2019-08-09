@@ -34,4 +34,4 @@ There are 2 hidden tiles for starting and ending places.
 The starting area is numbered -5.
 The ending area is numbered 10.
 
-Several Examples of varous rules as well as a copy can also be found in the help menue with in the game it's self.
+Several Examples of various rules as well as a copy can also be found in the help menu with in the game it's self.
