@@ -32,7 +32,7 @@ If newuser {
 }
 global username is input_string(24,12,7,false,true).
 local password is input_string(24,12,14,true,false).
-CLEARSCREEN.
+
 if not newuser {
  if user_check(username) = false or password_check(password) = false {
   Print "Username or Password incorect" at (5,18).
