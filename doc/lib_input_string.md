@@ -7,7 +7,6 @@
 
 Dependencies:
   * [lib_file_exists.ks](https://github.com/KSP-KOS/KSLib/blob/master/library/lib_file_exists.ks)
-  * [spec_char.ksm](https://github.com/KSP-KOS/KSLib/blob/master/library_ksm/spec_char.ksm)
 
 
 ###input_string
