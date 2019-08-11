@@ -2,8 +2,6 @@
 
 @LAZYGLOBAL off.
 
-run lib_file_exists.
-
 function input_string
 {
  parameter
@@ -13,19 +11,6 @@ function input_string
   help.   //true or false (the info above the keyboard).
 
 ////////////////// internal functions ////////////////////////////////
-
- function dep_check {
-  parameter fileName.
-  local fileList is list().
-  local found is false.
-  list files in fileList.
-  for file in fileList {
-   if file = fileName {
-    set found to true.
-   }
-  }
-  return found.
- }
 
  function refresh_board // this is done as 1 large print as drawing the boxes individually lags.
  {
@@ -114,7 +99,6 @@ function input_string
  local char is 0.
  local oldT is 0.
  local blink is false.
-
  local quote is char(34).
 
  local keyboard is list(
