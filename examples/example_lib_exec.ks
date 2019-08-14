@@ -7,7 +7,7 @@ execute("set " + "x" + " to " + "42" + "." + "print x."). // set x to 42. print 
 print evaluate("2 * 2 = 5"). // false
 print evaluate("2 * 2 = 4"). // true
 
-lock expr to 0. // othervise compiler won't rialize that expr is lock
+lock expr to 0. // otherwise compiler won't realize that expr is lock
 
 set str_expr to "x * x + 2 * x - 10".
 

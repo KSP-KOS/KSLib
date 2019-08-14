@@ -80,9 +80,9 @@ function seven_seg {
    print " _ " at (col,ln+1).
    print "   " at (col,ln+2).
   } else {// else if num = // add more special cases here.
-   hudtext("ERROR: [lib_seven_seg.ks] unrecognised string: " +num, 10, 2, 30, RED, FALSE).
+   hudtext("ERROR: [lib_seven_seg.ks] unrecognized string: " +num, 10, 2, 30, RED, FALSE).
   }
  } else {
-  hudtext("ERROR: [lib_seven_seg.ks] unrecognised type: " +num:typename, 10, 2, 30, RED, FALSE).
+  hudtext("ERROR: [lib_seven_seg.ks] unrecognized type: " +num:typename, 10, 2, 30, RED, FALSE).
  }
 }

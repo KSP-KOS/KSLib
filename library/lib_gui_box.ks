@@ -8,7 +8,7 @@ function draw_custom_gui_box {
   vertical_char,
   corner_char.
 
-// Start Input Sanitization
+// Start Input Sanitation
 
  if x < 0 or x >= terminal:width {
   set x to max(0,min(terminal:width - 1,x)).
@@ -30,7 +30,7 @@ function draw_custom_gui_box {
   HUDTEXT("Error: [draw_custom_gui_box] H value outside terminal.", 10, 2, 30, RED, FALSE).
  }
 
- // End Input Sanitization
+ // End Input Sanitation
 
  local horizontal_str is "".
  local i is 1.

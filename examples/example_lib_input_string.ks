@@ -35,7 +35,7 @@ local password is input_string(24,12,14,true,false).
 
 if not newuser {
  if user_check(username) = false or password_check(password) = false {
-  Print "Username or Password incorect" at (5,18).
+  Print "Username or Password incorrect" at (5,18).
   wait 2.
   reboot.
  }

@@ -46,7 +46,7 @@ function surfaceBinormal {
     return vcrs((ves:position - ves:body:position):normalized, surfaceTangent(ves)):normalized.
 }
 
-// Perpedicular to  both tangent and binormal
+// Perpendicular to  both tangent and binormal
 // Typically same as Radial In
 function surfaceNormal {
     parameter ves is ship.
