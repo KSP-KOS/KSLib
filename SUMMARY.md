@@ -1,7 +1,7 @@
 # Summary
 This repository is created from libraries submitted by multiple kOS users. All contributions are accepted as long as they satisfy the set requirements. As such there may be multiple libraries that provide the same functionality but take different approaches to it.
 
-This is an attempt at summarising and categorising the libraries by their use cases.
+This is an attempt at summarizing and categorizing the libraries by their use cases.
 
 ### Control
 1. [lib_pid.ks](https://github.com/KSP-KOS/KSLib/master/library/lib_pid.ks) / [docs](https://github.com/KSP-KOS/KSLib/blob/master/doc/lib_pid.md) : provides functions for creating a PID controller. This functionality has been superseded by kOS buil-in `PIDLoop()`.

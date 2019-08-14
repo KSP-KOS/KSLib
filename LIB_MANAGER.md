@@ -1,6 +1,6 @@
 ### Using git as a manager of the KSLib
 
-If you are taking on the role of being a KSLib mananager (being a person
+If you are taking on the role of being a KSLib manager (being a person
 who can approve and merge pull requests to the library, basically),
 then this file will help describe how to use git to do that.
 
@@ -45,7 +45,7 @@ a pull request from before, then you need to do this:
     in your ``git remote -v`` output, called ``username`` (for 
     whatever that person's username is).
 
-#### Each time you do a single pull reqeust
+#### Each time you do a single pull request
 
 (Be sure you've done step _4_ above for this user once already.)
 
@@ -86,7 +86,7 @@ a pull request from before, then you need to do this:
 - 10 - Test it out, decide if you like it, possibly make edits.  Do all this
     on your testing branch (the branch called ``merge_pr_NNNN`` in the
     example here.)
-- 11 - If you deciced it's good and want to merge it, then commit any edits
+- 11 - If you decided it's good and want to merge it, then commit any edits
     you made with this:
     - ``git commit -a``
     This commit might have nothing to do if you didn't need to edit anything.
@@ -109,13 +109,13 @@ a pull request from before, then you need to do this:
 Note there can be complications in step _9_ above.  You can get what are
 called "merge conflicts" if the pull request was made from an old copy
 of master and master has changed since then.  Generally what a
-"merge conflict" means is this: ``git`` sees that edits occured both in
+"merge conflict" means is this: ``git`` sees that edits occurred both in
 the branch and in the main repository to the *same* lines of the files,
 and it doesn't want to make a guess as to which version of those lines
 of text is right and which is wrong.  It wants a human to look at it and
 decide for it.
 
-There are programes called "merge tools" for git that can aid you in going
+There are programs called "merge tools" for git that can aid you in going
 through and picking the right version.  But if you don't have those, you
 can still resolve this manually, with the following:
 
@@ -143,8 +143,8 @@ can still resolve this manually, with the following:
     into the branch.  Then you can continue with the rest of the steps.
 
 If there are a LOT of merge conflicts so it's a mess to do the above steps,
-It is probably becasue the PR is very old and master has changed a lot since
-then.  In cases like this is can be considered acceptable github ettiquite to
+It is probably because the PR is very old and master has changed a lot since
+then.  In cases like this is can be considered acceptable github etiquette to
 ask the original submitter to re-base their branch on the newer copy of
 master. (which means THEY have to do the above steps A, B, and C, instead of
 you, and as the actual person who knows what their PR is about, they are more
