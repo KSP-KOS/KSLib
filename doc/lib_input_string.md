@@ -1,10 +1,10 @@
 // This file is distributed under the terms of the MIT license, (c) the KSLib team
 
-##lib_input_string.
+## lib_input_string.
 
 ``lib_input_string.ks`` provides a method of inputting custom strings while a script is running via an on-screen keyboard.
 
-###input_string
+### input_string
 
 args:
   * Line   -``number`` value for the top edge of the keyboard
