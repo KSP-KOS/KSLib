@@ -6,7 +6,7 @@ with the [kOS (Kerbal Operating System) mod](https://github.com/KSP-KOS/KOS)
 for Kerbal Space Program.
 
 The scripts are written in the Kerboscript language, which is described
-on the [main documenation page for kOS](https://ksp-kos.github.io/KOS_DOC/).
+on the [main documentation page for kOS](https://ksp-kos.github.io/KOS_DOC/).
 
 The goal of this repository is twofold:
 
@@ -31,7 +31,7 @@ MIT license.
 The entire text of the MIT license can be found in the LICENSE file
 alongside this README file.  The shorthand version is this: 
 
-  1. Don't plagerize.  (Give attribution where you got it from).
+  1. Don't plagiarize.  (Give attribution where you got it from).
   2. Don't sue. (No liability is promised).
 
 That's pretty much it, in a nutshell.  As long as you do that, we
