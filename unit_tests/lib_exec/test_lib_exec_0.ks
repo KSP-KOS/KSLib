@@ -5,11 +5,12 @@ run lib_testing.
 
 // test if it works
 
-unset x.
+IF DEFINED x { unset x. }
 execute("set x to 42.").
 assert(x = 42).
 
 assert(evaluate("2 * 2 = 4")).
+
 
 // lock command should work inside execute()
 // the implementation that uses `run on` breaks here
@@ -42,7 +43,7 @@ until not x_iter:next
 // it looks a bit weird but imagine a situation where you execute
 // a function that executes another function that executes something
 
-unset x.
+IF DEFINED x { unset x. }
 
 set cmd to "set x to -128.".
 execute("execute(cmd).").
@@ -65,7 +66,7 @@ assert(recursive(20) = 8).
 
 
 set expr to "12 * 3".
-assert(evaluate("evaluate(expr)")).
+assert(evaluate("evaluate(expr)") = (12 * 3)).
 
 // misc
 

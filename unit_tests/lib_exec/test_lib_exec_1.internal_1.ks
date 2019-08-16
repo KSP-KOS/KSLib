@@ -8,7 +8,7 @@ function foo1
   return evaluate("42 * 2 / 2").
 }
 
-unset x.
+IF DEFINED x { unset x. }
 execute("set x to 01234567.").
 assert(x = 1234567).
 execute("set x to 885.").
