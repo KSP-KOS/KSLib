@@ -14,10 +14,10 @@
 // Failing a collision between the hashes of two different commands and the execute function should work perfectly if slower than it once did.
 
 // nuggreat's notes about run/runpath as of kOS version (1.1.9.0)
-// When a file is run for the first time it gets stored in memory so that any addational calls to run the given file can be served a lot faster.
+// When a file is run for the first time it gets stored in memory so that any additional calls to run the given file can be served a lot faster.
 // This means that even if you delete a file and then recreate it with different stuff it that won't update the version kOS is storing as the user has no way to make kOS forget a stored instance of a file.
-// And as files are IDed by there name (and possably path haven't tested that) if the name doesn't change even if the contents do then kOS will run the version it stored.
-// The version kOS stors only leaves memory when kOS falls back to the termonal level.
+// And as files are IDed by there name (and possibly path haven't tested that) if the name doesn't change even if the contents do then kOS will run the version it stored.
+// The version kOS stores only leaves memory when kOS falls back to the terminal level.
 // Thus for a file to be runnable with different internal commands it must have a different name.
 // NOTE: This might change in the future but at least as of kOS version (1.1.9.0) this is the way run appears to work.
 
@@ -64,10 +64,10 @@ function execute_counter {//an implementation of execute using a counter
   local strStart is _exec_idString:LENGTH - 1.
   from { local i is strStart. } until i < 0 step { SET i to i - 1. } do {
     local tmpNum is unchar(_exec_idString[i]).
-	//print tmpNum.
+    //print tmpNum.
     if carry or (i = strStart) {
       set tmpNum to tmpNum + 1.
-	  set carry to false.
+      set carry to false.
     }
     if tmpNum > 255 {
       set tmpNum to tmpNum - 128.
