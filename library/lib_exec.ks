@@ -8,10 +8,9 @@
 // in KSLib/unit_tests/lib_exec to test your implementation.
 // See "run is weird" for more detailed information: [link is coming soon (tm)]
 
-// The execute function is now implemented using a version of the SHA-1 hashing algorithm.
+// The execute function is now implemented using an incrementing string so that each time the function is called there is a unique file name.
 // This modification was done in kOS version (1.1.9.0) and works as of that version.
-// This is not backwards compatible with earlier versions of kOS.
-// Failing a collision between the hashes of two different commands and the execute function should work perfectly if slower than it once did.
+// It should be backwards compatible with earlier versions of kOS but this has not been tested.
 
 // nuggreat's notes about run/runpath as of kOS version (1.1.9.0)
 // When a file is run for the first time it gets stored in memory so that any additional calls to run the given file can be served a lot faster.
@@ -23,40 +22,11 @@
 
 @LAZYGLOBAL OFF.
 
-run lib_hash.
-
-
-function execute_long_hash {//implemented using the full SHA-1 algorithm
-// expect it to take 9.2s for a command of 28 char or less
-// from char 29 on expect an additional 9.14s every 32 char
-// all times measured on an IPU of 2000 with no triggers running
-  parameter command.
-  //print command.
-  local filePath IS path("_execute_" + generate_hash(command) + ".tmp").
-  //print filePath.
-  if exists(filePath) { deletepath(filePath). }
-  log command to filePath.
-  wait 0.
-  runpath(filePath).
-  deletepath(filePath).
-}
-
-function execute_short_hash {//a modification of the SHA-1 algorithm that removes one of the steps and thus reduces the time needed by a factor of about 5.68
-  parameter command.
-  //print command.
-  local filePath IS path("_execute_" + generate_hash(command,true) + ".tmp").
-  //print filePath.
-  if exists(filePath) { deletepath(filePath). }
-  log command to filePath.
-  wait 0.
-  runpath(filePath).
-  deletepath(filePath).
-}
-
 if not (defined _exec_idString) {
-  global _exec_idString is char(127).//starts at char 127 to avoid reserved word in windows file names
+  global _exec_idString is char(127).//starts at char 127 to avoid reserved charters in windows file names
 }
-function execute_counter {//an implementation of execute using a counter
+function execute
+{
   parameter command.
   
   //start of string incrementing
@@ -79,11 +49,9 @@ function execute_counter {//an implementation of execute using a counter
     set _exec_idString to subStringLow + char(tmpNum) + subStringHigh.
     
   }
-  if carry { set _exec_idString to char(128) + _exec_idString. }//end of string incrementing
-  
-  //print command.
+  if carry { set _exec_idString to char(128) + _exec_idString. }
+  //end of string incrementing
   local filePath IS path("_execute_" + _exec_idString + ".tmp").
-  //print filePath.
   if exists(filePath) { deletepath(filePath). }
   log command to filePath.
   wait 0.
