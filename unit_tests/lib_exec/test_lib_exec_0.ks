@@ -68,6 +68,22 @@ assert(recursive(20) = 8).
 set expr to "12 * 3".
 assert(evaluate("evaluate(expr)") = (12 * 3)).
 
+// need to be able to run execute function many times thus this test checks you can.
+
+global i is 0.
+local y is 0.
+until i >= 500 {//this may take time
+  execute("set i to i + 1.").
+  if y > 3000 {
+    break.
+  } else {
+    set y to y + 1.
+  }
+}
+assert(i >= 500).
+IF DEFINED i { unset i. }
+IF DEFINED y { unset y. }
+
 // misc
 
 assert(evaluate("ship:mass") = ship:mass).

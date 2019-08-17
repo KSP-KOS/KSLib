@@ -78,7 +78,7 @@ example:
 ### useful tips
 
 * Compilation is a slow process. Each call of lib_exec's functions causes
-  a compilation. If you want to speed your main loop up try this techinque:
+  a compilation. If you want to speed your main loop up try this technique:
   ```
   lock my_expr to 0.  // or kOS compiler won't threat my_expr as locked
   execute("lock my_expr to x*x + x + 8."). // insert your expression here
