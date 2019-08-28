@@ -3,6 +3,10 @@
 The Game of Ur is a game played in ancient Mesopotamia.
 As there are no surviving direct descriptions of the rules this is a guess as to one rule set for the game.
 
+## To Use
+
+As there are no dependcies for this script you can simply copy it into your archive and run it.
+
 ## Rules
 
 This is a two player game, one player is 'X' the other is 'O'.
