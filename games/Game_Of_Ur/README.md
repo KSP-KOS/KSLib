@@ -5,7 +5,7 @@ As there are no surviving direct descriptions of the rules this is a guess as to
 
 ## To Use
 
-As there are no dependcies for this script you can simply copy it into your archive and run it.
+As there are no dependencies for this script you can simply copy it into your archive and run it.
 
 ## Rules
 
