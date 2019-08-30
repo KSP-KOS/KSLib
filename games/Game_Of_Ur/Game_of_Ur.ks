@@ -1,3 +1,6 @@
+// This file is distributed under the terms of the MIT license, (c) the KSLib team
+// Originally developed by nuggreat
+
 SET TERMINAL:WIDTH TO 70.
 SET TERMINAL:HEIGHT TO 35.
 
