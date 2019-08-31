@@ -55,19 +55,13 @@ function roll_for {
     }
   }
 
-  if vang(pointing:vector,ves:up:vector) < 0.2 { //this is the dead zone for roll when the vessel is vertical
+  local trig_x is vdot(pointing:topvector,ves:up:vector).
+  if abs(trig_x) < 0.0035 {//this is the dead zone for roll when within 0.2 degrees of vertical
     return 0.
   } else {
-    local raw is vang(vxcl(pointing:vector,ves:up:vector), pointing:starvector).
-    if vang(ves:up:vector, pointing:topvector) > 90 {
-      if raw > 90 {
-        return 270 - raw.
-      } else {
-        return -90 - raw.
-      }
-    } else {
-      return raw - 90.
-    }
+    local vec_y is vcrs(ves:up:vector,ves:facing:forevector).
+    local trig_y is vdot(pointing:topvector,vec_y).
+    return arctan2(trig_y,trig_x).
   }
 }
 
@@ -76,10 +70,10 @@ function type_to_vector {
   if thing:istype("vector") {
     return thing:normalized.
   } else if thing:istype("direction") {
-    return pointing:forevector.
-  } else if thing:istype("vessel") or pointing:istype("part") {
-    return pointing:facing:forevector.
-  } else if pointing:istype("geoposition") {
+    return thing:forevector.
+  } else if thing:istype("vessel") or thing:istype("part") {
+    return thing:facing:forevector.
+  } else if thing:istype("geoposition") {
     return thing:position - ves:position.
   } else {
     return thing.
