@@ -58,21 +58,21 @@ returns:
 description:
   * Returns the roll relative to the horizon of arg 2's "top" vector.
     Left roll gets a positive number, right roll a negative number.
-	
-### compass_and_pitch_for 
+
+### compass_and_pitch_for
 
 args:
   1) a Vessel, such as ``SHIP``.
   2) an optional argument defaulted to ``arg1:facing:vector``, can be a vector,direction,vessel,part,or geoposition.
     * if not a vector will arg 2 will be converted into a vector by the function ``type_to_vector``
-	
+
 returns:
   * a list with 2 items, a number of degrees in the range [0..360], a number of degrees in the range [-90..90]
-  
+
 description:
   * Returns the a list of 2 items the first being the compass heading, and the second being the pitch.
     The compass heading and pitch are calculated for arg2 from the perspective of the vessel passed in as arg1.
-	
+
 ### bearing_between
 
 args:
@@ -81,13 +81,13 @@ args:
     * if not a vector will arg 2 will be converted into a vector by the function ``type_to_vector``
   3) can be a vector,direction,vessel,part,or geoposition.
     * if not a vector will arg 3 will be converted into a vector by the function ``type_to_vector``
-	
+
 returns:
   *  a number of degrees in the range [-180..180]
-  
+
 description:
-  * Returns the relitave heaidng of arg 3, with arg 2 treated as north, with the horizon defined by arg 1.
-    Will be positave if arg 3 to the "east" of arg 2, and negitave if arg 3 is to the "west" of arg 2
+  * Returns the relative heading of arg 3, with arg 2 treated as north, with the horizon defined by arg 1.
+    Will be positive if arg 3 to the "east" of arg 2, and negative if arg 3 is to the "west" of arg 2
 
 
 ### type_to_vector
@@ -95,14 +95,14 @@ description:
 args:
   1) a Vessel, such as ``SHIP``.
   2) the type to be converted can be a vector,direction,vessel,part,or geoposition.
-  
+
 returns:
   * if arg 2 is of type "vector", will return the vector normalized.
   * if arg 2 is of type "direction", will return ``arg2:vector``.
   * if arg 2 is of type "vessel" or "part", will return ``arg2:facing:vector``.
   * if arg 2 is of type "geoposition", will return the normalized vector pointing from the position of arg 1 to the position of the geoposition.
   * if not of the above types, will return the passed in arg 2.
-  
+
 description
   * Will convert several types into vectors.
     Intended for internal use by the functions of this library.
