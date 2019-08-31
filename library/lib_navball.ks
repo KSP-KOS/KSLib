@@ -11,9 +11,13 @@ function east_for {
 }
 
 function compass_for {
-  parameter ves.
+  parameter ves,thing is "default".
 
   local pointing is ves:facing:forevector.
+  if not thing:istype("string") {
+    set pointing to type_to_vector(thing,ves).
+  }
+
   local east is east_for(ves).
 
   local trig_x is vdot(ves:north:vector, pointing).
@@ -21,7 +25,7 @@ function compass_for {
 
   local result is arctan2(trig_y, trig_x).
 
-  if result < 0 { 
+  if result < 0 {
     return 360 + result.
   } else {
     return result.
@@ -29,19 +33,33 @@ function compass_for {
 }
 
 function pitch_for {
-  parameter ves.
+  parameter ves,thing is "default".
 
-  return 90 - vang(ves:up:vector, ves:facing:forevector).
+  local pointing is ves:facing:forevector.
+  if not thing:istype("string") {
+    set pointing to type_to_vector(thing,ves).
+  }
+
+  return 90 - vang(ves:up:vector, pointing).
 }
 
 function roll_for {
-  parameter ves.
-  
-  if vang(ves:facing:vector,ves:up:vector) < 0.2 { //this is the dead zone for roll when the vessel is vertical
+  parameter ves,thing is "default".
+
+  local pointing is ves:facing.
+  if not thing:istype("string") {
+    if thing:istype("vessel") or pointing:istype("part") {
+      set pointing to thing:facing.
+    } else {
+      set pointing to thing.
+    }
+  }
+
+  if vang(pointing:vector,ves:up:vector) < 0.2 { //this is the dead zone for roll when the vessel is vertical
     return 0.
   } else {
-    local raw is vang(vxcl(ves:facing:vector,ves:up:vector), ves:facing:starvector).
-    if vang(ves:up:vector, ves:facing:topvector) > 90 {
+    local raw is vang(vxcl(pointing:vector,ves:up:vector), pointing:starvector).
+    if vang(ves:up:vector, pointing:topvector) > 90 {
       if raw > 90 {
         return 270 - raw.
       } else {
@@ -50,5 +68,20 @@ function roll_for {
     } else {
       return raw - 90.
     }
-  } 
-}.
+  }
+}
+
+function type_to_vector {
+  parameter thing,ves.
+  if thing:istype("vector") {
+    return thing:normalized.
+  } else if thing:istype("direction") {
+    return pointing:forevector.
+  } else if thing:istype("vessel") or pointing:istype("part") {
+    return pointing:facing:forevector.
+  } else if pointing:istype("geoposition") {
+    return thing:position - ves:position.
+  } else {
+    return thing.
+  }
+}
