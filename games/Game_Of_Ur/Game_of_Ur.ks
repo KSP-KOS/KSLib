@@ -787,8 +787,8 @@ FUNCTION draw_help_rules {
     PRINT "There are several AI options should you wish to play by your self.".
     PRINT "To play you roll dice to determine how far you move in a turn.".
     PRINT "The way to Win is to get all 7 of your pieces off the board.".
-    PRINT "A player can send an opponents pieces back to the start by landing on.".
-    PRINT "    them with there own piece.".
+    PRINT "A player can send an opponent's pieces back to the start by landing on".
+    PRINT "    it with there own piece.".
     PRINT "There are 5 areas on the board and players may only interact directly".
     PRINT "   in the main run area.".
     PRINT " ".
@@ -796,9 +796,9 @@ FUNCTION draw_help_rules {
     PRINT "  Each die has 2 white and 2 black dots with one dot on each face.".
     PRINT "  The number of white dots are added together to get the number of".
     PRINT "    spaces you will move.".
-    PRINT "  As you can get no white on your roll it is possible to end up".
+    PRINT "  As you can get zero white dots on your roll it is possible to end up".
     PRINT "    skipping your turn.".
-    PRINT "  There are 5 tile that when landed on allow the player to roll again".
+    PRINT "  There are 5 tiles that when landed on allow the player to roll again".
     PRINT "  The probability spread for all possible rolls are:".
     PRINT "    0: 1/16, 1: 2/8 2; 3/8, 3: 2/8, 4: 1/16".
     PRINT " ".
