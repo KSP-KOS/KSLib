@@ -803,15 +803,14 @@ FUNCTION draw_help_rules {
     PRINT "    0: 1/16, 1: 2/8 2; 3/8, 3: 2/8, 4: 1/16".
     PRINT " ".
     PRINT "To get a piece off the board you must roll The exact number.".
-    PRINT "  Getting off the board must be done with an exact roll.".
     PRINT "  For instance if you are on the last tile then you must roll a 1.".
     PRINT " ".
     PRINT "Press <Enter> to see page 2.".
   } ELSE {
     PRINT "A player can only interact with there opponents pieces in the main".
     PRINT "    area of the board.".
-    PRINT "  To send an opponents piece back to the start a player must simply".
-    PRINT "    land on the opponents piece.".
+    PRINT "  To send an opponent's piece back to the start a player must simply".
+    PRINT "    land on the piece they wish to send back.".
     PRINT "  The roll again tile in the main area is a save tile and a piece".
     PRINT "    on the tile can't be sent back to the start.".
     PRINT " ".
@@ -826,7 +825,7 @@ FUNCTION draw_help_rules {
     PRINT "For examples on piece moment, the area location, tile numbering,".
     PRINT "    roll again, and the save tile see the 'Board Examples'".
     PRINT "    option in help menu.".
-    PRINT "For a more detailed explination of the various AI types see ".
+    PRINT "For a more detailed explanation of the various AI types see ".
     PRINT "    the 'AI Types' option in help menu.".
     PRINT " ".
     PRINT "Press <Enter> to return to main help menu.".

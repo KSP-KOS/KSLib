@@ -1,8 +1,8 @@
 ## KS-lib/games
 
-This is a public repository for games written in kerboscript
+This is a public repository for games written in kerboscript.
 
-### basic layout
+### Basic layout
 
 Each game has it's own sub folder for ease of organization.
 Within each folder there will be a `game.ks` file that you can `RUN` to play the game and a README written using ascii text, or Github markdown files (.md) that contains some basic info about the game.
