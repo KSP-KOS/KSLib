@@ -788,16 +788,16 @@ FUNCTION draw_help_rules {
     PRINT "To play you roll dice to determine how far you move in a turn.".
     PRINT "The way to Win is to get all 7 of your pieces off the board.".
     PRINT "A player can send an opponent's pieces back to the start by landing on".
-    PRINT "    it with there own piece.".
+    PRINT "it with there own piece.".
     PRINT "There are 5 areas on the board and players may only interact directly".
-    PRINT "   in the main run area.".
+    PRINT "in the main run area.".
     PRINT " ".
     PRINT "At the start of your turn you roll four sided dice.".
     PRINT "  Each die has 2 white and 2 black dots with one dot on each face.".
     PRINT "  The number of white dots are added together to get the number of".
-    PRINT "    spaces you will move.".
+    PRINT "  spaces you will move.".
     PRINT "  As you can get zero white dots on your roll it is possible to end up".
-    PRINT "    skipping your turn.".
+    PRINT "  skipping your turn.".
     PRINT "  There are 5 tiles that when landed on allow the player to roll again".
     PRINT "  The probability spread for all possible rolls are:".
     PRINT "    0: 1/16, 1: 2/8 2; 3/8, 3: 2/8, 4: 1/16".
@@ -808,25 +808,25 @@ FUNCTION draw_help_rules {
     PRINT "Press <Enter> to see page 2.".
   } ELSE {
     PRINT "A player can only interact with there opponents pieces in the main".
-    PRINT "    area of the board.".
+    PRINT "area of the board.".
     PRINT "  To send an opponent's piece back to the start a player must simply".
-    PRINT "    land on the piece they wish to send back.".
-    PRINT "  The roll again tile in the main area is a save tile and a piece".
-    PRINT "    on the tile can't be sent back to the start.".
+    PRINT "  land on the piece they wish to send back.".
+    PRINT "  The roll again tile in the main area is a safe tile and a piece".
+    PRINT "  on the tile can't be sent back to the start.".
     PRINT " ".
     PRINT "The 5 areas on the board are xStart, oStart, Main, xEnd, oEnd.".
     PRINT "  The tiles are numbered from -4 to 9 along the path of movement.".
     PRINT "  Some tiles have duplicate numbers because each player has there own".
-    PRINT "    start and end areas.".
+    PRINT "  start and end areas.".
     PRINT "  There are 2 hidden tiles for starting and ending places.".
     PRINT "    The starting area is numbered -5.".
     PRINT "    The ending area is numbered 10.".
     PRINT " ".
     PRINT "For examples on piece moment, the area location, tile numbering,".
-    PRINT "    roll again, and the save tile see the 'Board Examples'".
-    PRINT "    option in help menu.".
+    PRINT "  roll again, and the save tile see the 'Board Examples'".
+    PRINT "  option in help menu.".
     PRINT "For a more detailed explanation of the various AI types see ".
-    PRINT "    the 'AI Types' option in help menu.".
+    PRINT "  the 'AI Types' option in help menu.".
     PRINT " ".
     PRINT "Press <Enter> to return to main help menu.".
   }
@@ -854,9 +854,9 @@ FUNCTION draw_help_board_info {
   } ELSE IF page = 1 {
     PRINT "The area marked 'm' is the Main area and is where player pieces can" AT(col,row).
     PRINT " interact with each other." AT(col,row + 1).
-    PRINT "The area marked 's' is the Starting area there is one for each player." AT(col,row + 2).
-    PRINT "The area marked 'e' is the End area there is one for each player." AT(col,row + 3).
-    PRINT "The the 'X' and 'O' show which area can only have that players pieces." AT(col,row + 4).
+    PRINT "The areas marked 's' are the Starting areas there is 1 for each player" AT(col,row + 2).
+    PRINT "The areas marked 'e' are the End areas there is 1 for each player." AT(col,row + 3).
+    PRINT "The the 'X' and 'O' show which area can only have that player's pieces" AT(col,row + 4).
   } ELSE IF page = 2 {
     PRINT "The displayed numbers are assigned number for each tile." AT(col,row).
     PRINT "There are 2 hidden tiles for each player for the start and end tiles." AT(col,row + 1).
@@ -892,11 +892,11 @@ FUNCTION draw_ai_types_info {
     PRINT "The 'Random move' AI will move a piece at random." AT(col,row).
   } ELSE IF page = 4 {
     PRINT "The 'Mutating' AT will play as Hare, Tortoise, Threat Aware, " AT(col,row).
-    PRINT "  or Random move AIs for between 1 and 5 turns befor changing" AT(col,row + 1).
-    PRINT "  to a different AI type" AT(col,row + 1).
+    PRINT "or Random Move AIs for between 1 and 5 turns befor changing" AT(col,row + 1).
+    PRINT "to a different AI type." AT(col,row + 2).
   } ELSE IF page = 5 {
     PRINT "The 'Random AI' AI will pick Hare, Tortoise, Threat Aware, or" AT(col,row).
-    PRINT "  Random move AIs to play as for the duration of the game" AT(col,row + 1).
+    PRINT "Random move AIs to play as for the duration of the game." AT(col,row + 1).
   }
 }
 
