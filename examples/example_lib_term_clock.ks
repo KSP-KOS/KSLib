@@ -5,7 +5,7 @@
 // routines to make a Kerbal clock showing the current
 // kerbin time.
 //
-// Designed to show off the circle and line drawing primities
+// Designed to show off the circle and line drawing primitives
 // of lib_term.
 
 run lib_term.

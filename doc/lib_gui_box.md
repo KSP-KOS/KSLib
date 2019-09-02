@@ -11,9 +11,6 @@ This library contains functions to draw boxes like this:
 ```
 in the terminal.
 
-Dependencies:
-  * [spec_char.ksm](https://github.com/KSP-KOS/KSLib/blob/master/library_ksm/spec_char.ksm)
-
 ### draw_gui_box
 
 args:

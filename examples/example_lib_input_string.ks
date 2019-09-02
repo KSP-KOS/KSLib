@@ -3,10 +3,9 @@
 // This is intended to be run as a boot script.
 
 run lib_input_string.
-run lib_file_exists.
-run spec_char.
+local quote is char(34).
 
-if not file_exists("account.ksm") {
+if not exists("account.ksm") {
  set newuser to true.
 } else {
  set newuser to false.
@@ -36,18 +35,18 @@ local password is input_string(24,12,14,true,false).
 
 if not newuser {
  if user_check(username) = false or password_check(password) = false {
-  Print "Username or Password incorect" at (5,18).
+  Print "Username or Password incorrect" at (5,18).
   wait 2.
   reboot.
  }
 } else {
- log "" to account.ks.
- delete account.ks.
+ log " " to account.ks.
+ deletepath("account.ks").
  log "@LAZYGLOBAL off." to account.ks.
  log "function user_check { parameter user. return user = "+quote+username+quote+". }." to account.ks.
  log "function password_check { parameter pass. return pass = "+quote+password+quote+". }." to account.ks.
- compile account.ks.
- delete account.ks.
+ compile account.ks to account.ksm.
+ deletepath("account.ks").
 }
 clearscreen.
 print "welcome "+username.

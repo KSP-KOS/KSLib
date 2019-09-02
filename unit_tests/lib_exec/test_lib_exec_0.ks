@@ -5,11 +5,12 @@ run lib_testing.
 
 // test if it works
 
-unset x.
+IF DEFINED x { unset x. }
 execute("set x to 42.").
 assert(x = 42).
 
 assert(evaluate("2 * 2 = 4")).
+
 
 // lock command should work inside execute()
 // the implementation that uses `run on` breaks here
@@ -42,7 +43,7 @@ until not x_iter:next
 // it looks a bit weird but imagine a situation where you execute
 // a function that executes another function that executes something
 
-unset x.
+IF DEFINED x { unset x. }
 
 set cmd to "set x to -128.".
 execute("execute(cmd).").
@@ -65,7 +66,23 @@ assert(recursive(20) = 8).
 
 
 set expr to "12 * 3".
-assert(evaluate("evaluate(expr)")).
+assert(evaluate("evaluate(expr)") = (12 * 3)).
+
+// need to be able to run execute function many times thus this test checks you can.
+
+global i is 0.
+local y is 0.
+until i >= 500 {//this may take time
+  execute("set i to i + 1.").
+  if y > 3000 {
+    break.
+  } else {
+    set y to y + 1.
+  }
+}
+assert(i >= 500).
+IF DEFINED i { unset i. }
+IF DEFINED y { unset y. }
 
 // misc
 

@@ -13,7 +13,7 @@ Args:
   3. A number (scaler), The number of digits to the right of the decimal point.
   4. A boolean,         If True there will be a space at the front of the returned string when the number to be formatted is positive
       * defaulted to True
-  5. A number (scaler), Sets if function will round, floor, or ceiling the number to be formatted. 0 = rounding, 1 = floor, 2 = ceiling, NOTE: if not one of the 3 expected values cieling will be used
+  5. A number (scaler), Sets if function will round, floor, or ceiling the number to be formatted. 0 = rounding, 1 = floor, 2 = ceiling, NOTE: if not one of the 3 expected values ceiling will be used
       * defaulted to 0
 
 Returns:

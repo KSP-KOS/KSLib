@@ -78,7 +78,7 @@ example:
 ### useful tips
 
 * Compilation is a slow process. Each call of lib_exec's functions causes
-  a compilation. If you want to speed your main loop up try this techinque:
+  a compilation. If you want to speed your main loop up try this technique:
   ```
   lock my_expr to 0.  // or kOS compiler won't threat my_expr as locked
   execute("lock my_expr to x*x + x + 8."). // insert your expression here
@@ -87,21 +87,3 @@ example:
     print my_expr.  // insert your main loop code here
   }
   ```
-
-* If for some weird reason you don't want to use this library, a simple mediator
-  helps in some simple cases (but fails in others):
-
-  mediator.ks:
-  ```
-  run foo.
-  ```
-  main.ks:
-  ```
-  run mediator.
-  delete foo.
-  rename bar to foo.
-  run mediator.  // actually runs the second version
-  ```
-
-  P.S. If the "mediator" above doesn't work for you, don't ask me why, just use
-  lib_exec.

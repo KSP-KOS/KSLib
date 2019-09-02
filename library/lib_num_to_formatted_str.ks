@@ -115,7 +115,7 @@ FUNCTION padding {
   leadingLenght,   //min length to the left of the decimal point
   trailingLength,  // length to the right of the decimal point
   positiveLeadingSpace IS TRUE,//if when positive should there be a space before the returned string
-  roundType IS 0.  // 0 for normal rounding, 1 for floor, 2 for cieling
+  roundType IS 0.  // 0 for normal rounding, 1 for floor, 2 for ceiling
   LOCAL returnString IS "".
   //LOCAL returnString IS ABS(ROUND(num,trailingLength)):TOSTRING.
   IF roundType = 0 {

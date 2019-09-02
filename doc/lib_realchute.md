@@ -1,10 +1,10 @@
 // This file is distributed under the terms of the MIT license, (c) the KSLib team
 
-##lib_realchute
+## lib_realchute
 
 ``lib_realchute.ks`` can be used to activate chutes when using the RealChute mod.
 
-###R_chutes
+### R_chutes
 
 args:
   * string.

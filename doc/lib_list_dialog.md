@@ -17,7 +17,7 @@ returns:
   * number, an index of option chosen by user
 
 description:
-  Open a multipage list dialog, return an index of option chosen by user.
+  Open a multi-page list dialog, return an index of option chosen by user.
 
 controlled by action groups:
   * AG 7 - move up
@@ -34,7 +34,7 @@ returns:
   * number, an index of option chosen by user or -1 if "Cancel" was chosen
 
 description:
-  Open a multipage list dialog, return an index of option chosen by user
+  Open a multi-page list dialog, return an index of option chosen by user
   or -1 if the dialog was canceled.
 
 ### _list_dialog
