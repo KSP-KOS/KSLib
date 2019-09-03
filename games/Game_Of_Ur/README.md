@@ -26,15 +26,16 @@ The probability spread for all possible rolls are:  0 = 1/16, 1 = 2/8 2 = 3/8, 3
 To get a piece off the board you must roll the exact number.
 For instance if you are on the last tile then you must roll a 1.
  
-A player can only interact with there opponent's pieces in the main area of the board.
+A player can only interact with their opponent's pieces in the main area of the board.
 To send an opponent's piece back to the start a player must simply land on the piece they wish to send back.
+A player can't land on there own pieces.
 The roll again tile in the main area is a save tile and a piece on the tile can't be sent back to the start.
 
 The 5 areas on the board are xStart, oStart, Main, xEnd, oEnd.
 The tiles are numbered from -4 to 9 along the path of movement.
-Some tiles have duplicate numbers because each player has there own start and end areas.
+Some tiles have duplicate numbers because each player has their own start and end areas.
 There are 2 hidden tiles for starting and ending places.
 The starting area is numbered -5.
 The ending area is numbered 10.
 
-Several examples of various rules as well as a copy of the rules can also be found in the help menu with in the game itsself.
+Several examples of various rules as well as a copy of the rules can also be found in the help menu with in the game itself.

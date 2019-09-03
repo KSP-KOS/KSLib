@@ -787,7 +787,7 @@ FUNCTION draw_help_rules {
     PRINT "There are several AI options should you wish to play by your self.".
     PRINT "To play you roll dice to determine how far you move in a turn.".
     PRINT "The way to Win is to get all 7 of your pieces off the board.".
-    PRINT "A player can send an opponent's pieces back to the start by landing on".
+    PRINT "A player can send an opponent's piece back to the start by landing on".
     PRINT "it with their own piece.".
     PRINT "There are 5 areas on the board and players may only interact directly".
     PRINT "in the main area.".
@@ -802,21 +802,22 @@ FUNCTION draw_help_rules {
     PRINT "  The probability spread for all possible rolls are:".
     PRINT "    0: 1/16, 1: 2/8 2; 3/8, 3: 2/8, 4: 1/16".
     PRINT " ".
-    PRINT "To get a piece off the board you must roll The exact number.".
+    PRINT "To get a piece off the board you must roll the exact number.".
     PRINT "  For instance if you are on the last tile then you must roll a 1.".
     PRINT " ".
     PRINT "Press <Enter> to see page 2.".
   } ELSE {
-    PRINT "A player can only interact with there opponents pieces in the main".
+    PRINT "A player can only interact with their opponent's pieces in the main".
     PRINT "area of the board.".
     PRINT "  To send an opponent's piece back to the start a player must simply".
     PRINT "  land on the piece they wish to send back.".
+	PRINT "  A player can't land on there own pieces.".
     PRINT "  The roll again tile in the main area is a safe tile and a piece".
     PRINT "  on the tile can't be sent back to the start.".
     PRINT " ".
     PRINT "The 5 areas on the board are xStart, oStart, Main, xEnd, oEnd.".
     PRINT "  The tiles are numbered from -4 to 9 along the path of movement.".
-    PRINT "  Some tiles have duplicate numbers because each player has there own".
+    PRINT "  Some tiles have duplicate numbers because each player has their own".
     PRINT "  start and end areas.".
     PRINT "  There are 2 hidden tiles for starting and ending places.".
     PRINT "    The starting area is numbered -5.".
