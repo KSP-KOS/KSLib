@@ -788,9 +788,9 @@ FUNCTION draw_help_rules {
     PRINT "To play you roll dice to determine how far you move in a turn.".
     PRINT "The way to Win is to get all 7 of your pieces off the board.".
     PRINT "A player can send an opponent's pieces back to the start by landing on".
-    PRINT "it with there own piece.".
+    PRINT "it with their own piece.".
     PRINT "There are 5 areas on the board and players may only interact directly".
-    PRINT "in the main run area.".
+    PRINT "in the main area.".
     PRINT " ".
     PRINT "At the start of your turn you roll four sided dice.".
     PRINT "  Each die has 2 white and 2 black dots with one dot on each face.".

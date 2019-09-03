@@ -13,7 +13,7 @@ This is a two player game, one player is 'X' the other is 'O'.
 There are several AI options should you wish to play by your self.
 To play you roll dice to determine how far you move in a turn.
 The way to Win is to get all 7 of your pieces off the board.
-A player can send an opponent's piece back to the start by landing on it with there own piece.
+A player can send an opponent's piece back to the start by landing on it with their own piece.
 There are 5 areas on the board and players may only interact directly in the Main area.
  
 At the start of your turn you roll four sided dice.
