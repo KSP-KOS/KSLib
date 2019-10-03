@@ -50,9 +50,11 @@ function roll_for {
   if not thing:istype("string") {
     if thing:istype("vessel") or pointing:istype("part") {
       set pointing to thing:facing.
-    } else {
+    } else if thing:istype("direction") {
       set pointing to thing.
-    }
+    } else {
+      print "type: " + thing:typename + " is not reconized by lib_navball".
+	}
   }
 
   local trig_x is vdot(pointing:topvector,ves:up:vector).
@@ -111,9 +113,9 @@ function type_to_vector {
     return thing:forevector.
   } else if thing:istype("vessel") or thing:istype("part") {
     return thing:facing:forevector.
-  } else if thing:istype("geoposition") {
-    return thing:position - ves:position.
+  } else if thing:istype("geoposition") or thing:istype("waypoint") {
+    return (thing:position - ves:position):normalized.
   } else {
-    return thing.
+    print "type: " + thing:typename + " is not reconized by lib_navball".
   }
 }
