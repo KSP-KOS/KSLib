@@ -35,6 +35,8 @@ general patterns:
   * doc/
     * A place for you to describe your library and how to use it, in
       textual form, using ascii text, or Github markdown files (.md).
+  * games/
+    * A place to find kOS games written in kerboscript, more detailed information can be found in the README.md file with in the games folder
   * library_ksm/
     * The place where the .ksm files of your library go.
       This directory **must not** contain files people can compile
