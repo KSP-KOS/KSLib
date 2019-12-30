@@ -106,7 +106,7 @@ function bearing_between {
 }
 
 function type_to_vector {
-  parameter thing,ves.
+  parameter ves,thing.
   if thing:istype("vector") {
     return thing:normalized.
   } else if thing:istype("direction") {
