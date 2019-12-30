@@ -36,7 +36,7 @@ description:
 args:
   1) a Vessel, such as ``SHIP``.
   2) an optional argument defaulted to ``arg1:facing:vector``, can be a vector,direction,vessel,part,or geoposition.
-    * if not a vector will arg_2 will be converted into a vector by the function ``type_to_vector``
+    * if not a vector arg_2 will be converted into a vector by the function ``type_to_vector``
 
 returns:
   * a number of degrees in the range [-90..90]
@@ -64,7 +64,7 @@ description:
 args:
   1) a Vessel, such as ``SHIP``.
   2) an optional argument defaulted to ``arg1:facing:vector``, can be a vector,direction,vessel,part,or geoposition.
-    * if not a vector will arg_2 will be converted into a vector by the function ``type_to_vector``
+    * if not a vector arg_2 will be converted into a vector by the function ``type_to_vector``
 
 returns:
   * a list with 2 items, a number of degrees in the range [0..360], a number of degrees in the range [-90..90]
@@ -78,9 +78,9 @@ description:
 args:
   1) a Vessel, such as ``SHIP``.
   2) can be a vector,direction,vessel,part,or geoposition.
-    * if not a vector will arg_2 will be converted into a vector by the function ``type_to_vector``
+    * if not a vector arg_2 will be converted into a vector by the function ``type_to_vector``
   3) can be a vector,direction,vessel,part,or geoposition.
-    * if not a vector will arg 3 will be converted into a vector by the function ``type_to_vector``
+    * if not a vector arg 3 will be converted into a vector by the function ``type_to_vector``
 
 returns:
   *  a number of degrees in the range [-180..180]

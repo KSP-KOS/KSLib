@@ -15,7 +15,7 @@ function compass_for {
 
   local pointing is ves:facing:forevector.
   if not thing:istype("string") {
-    set pointing to type_to_vector(thing,ves).
+    set pointing to type_to_vector(ves,thing).
   }
 
   local east is east_for(ves).
@@ -37,7 +37,7 @@ function pitch_for {
 
   local pointing is ves:facing:forevector.
   if not thing:istype("string") {
-    set pointing to type_to_vector(thing,ves).
+    set pointing to type_to_vector(ves,thing).
   }
 
   return 90 - vang(ves:up:vector, pointing).
@@ -72,7 +72,7 @@ function compass_and_pitch_for {
 
   local pointing is ves:facing:forevector.
   if not thing:istype("string") {
-    set pointing to type_to_vector(thing,ves).
+    set pointing to type_to_vector(ves,thing).
   }
 
   local east is east_for(ves).
@@ -93,8 +93,8 @@ function compass_and_pitch_for {
 function bearing_between {
   parameter ves,thing_1,thing_2.
 
-  local vec_1 is type_to_vector(thing_1,ves).
-  local vec_2 is type_to_vector(thing_2,ves).
+  local vec_1 is type_to_vector(ves,thing_1).
+  local vec_2 is type_to_vector(ves,thing_2).
 
   local fake_north is vxcl(ves:up:vector, vec_1).
   local fake_east is vcrs(ves:up:vector, fake_north).
@@ -116,6 +116,6 @@ function type_to_vector {
   } else if thing:istype("geoposition") or thing:istype("waypoint") {
     return (thing:position - ves:position):normalized.
   } else {
-    print "type: " + thing:typename + " is not reconized by lib_navball".
+    print "type: " + thing:typename + " is not recognized by lib_navball".
   }
 }
