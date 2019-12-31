@@ -5,13 +5,13 @@
 @lazyglobal off.
 
 function east_for {
-  parameter ves.
+  parameter ves is ship.
 
   return vcrs(ves:up:vector, ves:north:vector).
 }
 
 function compass_for {
-  parameter ves,thing is "default".
+  parameter ves is ship,thing is "default".
 
   local pointing is ves:facing:forevector.
   if not thing:istype("string") {
@@ -33,7 +33,7 @@ function compass_for {
 }
 
 function pitch_for {
-  parameter ves,thing is "default".
+  parameter ves is ship,thing is "default".
 
   local pointing is ves:facing:forevector.
   if not thing:istype("string") {
@@ -44,7 +44,7 @@ function pitch_for {
 }
 
 function roll_for {
-  parameter ves,thing is "default".
+  parameter ves is ship,thing is "default".
 
   local pointing is ves:facing.
   if not thing:istype("string") {
@@ -53,7 +53,7 @@ function roll_for {
     } else if thing:istype("direction") {
       set pointing to thing.
     } else {
-      print "type: " + thing:typename + " is not reconized by lib_navball".
+      print "type: " + thing:typename + " is not reconized by roll_for".
 	}
   }
 
@@ -68,7 +68,7 @@ function roll_for {
 }
 
 function compass_and_pitch_for {
-  parameter ves,thing is "default".
+  parameter ves is ship,thing is "default".
 
   local pointing is ves:facing:forevector.
   if not thing:istype("string") {
