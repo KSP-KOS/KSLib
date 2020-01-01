@@ -87,7 +87,7 @@ returns:
 
 description:
   * Returns the relative heading of arg_3, with arg_2 treated as north, with the horizon defined by arg_1.
-    Will be positive if arg_3 to the "east" of arg_2, and negative if arg_3 is to the "west" of arg_2
+    Will be positive if arg_3 is to the "east" of arg_2, and negative if arg_3 is to the "west" of arg_2
 
 
 ### type_to_vector
