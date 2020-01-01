@@ -49,7 +49,7 @@ description:
 
 args:
   1) an optional argument defaulted to ``SHIP``, must be of type: Vessel.
-  2) an optional argument defaulted to ``arg1:facing``, can be a direction,vessel, or part.
+  2) an optional argument defaulted to ``arg1:facing``, can be a direction, vessel, or part.
     * if a vessel or part will be turned into a direction using ``:facing``
 
 returns:
