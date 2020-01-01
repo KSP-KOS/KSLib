@@ -3,7 +3,7 @@
 ## lib_navball.
 
 ``lib_navball.ks`` provides useful routines to obtain information about
-a vessel's orientation in a navbal-centric way.
+a vessel's orientation in a navball-centric way.
 
 ### east_for
 
@@ -22,7 +22,7 @@ description:
 
 args:
   1) an optional argument defaulted to ``SHIP``, must be of type: Vessel.
-  2) an optional argument defaulted to ``arg1:facing:vector``, can be a vector, direction, vessel,part, eoposition, or waypoint.
+  2) an optional argument defaulted to ``arg1:facing:vector``, can be a vector, direction, vessel, part, geoposition, or waypoint.
     * if not a vector will arg_2 will be converted into a vector by the function ``type_to_vector``
 
 returns:
@@ -35,7 +35,7 @@ description:
 
 args:
   1) an optional argument defaulted to ``SHIP``, must be of type: Vessel.
-  2) an optional argument defaulted to ``arg1:facing:vector``, can be a vector, direction, vessel,part, eoposition, or waypoint.
+  2) an optional argument defaulted to ``arg1:facing:vector``, can be a vector, direction, vessel, part, geoposition, or waypoint.
     * if not a vector arg_2 will be converted into a vector by the function ``type_to_vector``
 
 returns:
@@ -63,7 +63,7 @@ description:
 
 args:
   1) an optional argument defaulted to ``SHIP``, must be of type: Vessel, such as ``SHIP``.
-  2) an optional argument defaulted to ``arg1:facing:vector``, can be a vector, direction, vessel,part, geoposition, or waypoint.
+  2) an optional argument defaulted to ``arg1:facing:vector``, can be a vector, direction, vessel, part, geoposition, or waypoint.
     * if not a vector arg_2 will be converted into a vector by the function ``type_to_vector``
 
 returns:
@@ -77,9 +77,9 @@ description:
 
 args:
   1) a Vessel, such as ``SHIP``.
-  2) can be a vector, direction, vessel,part, eoposition, or waypoint.
+  2) can be a vector, direction, vessel,part, geoposition, or waypoint.
     * if not a vector arg_2 will be converted into a vector by the function ``type_to_vector``
-  3) can be a vector, direction, vessel,part, eoposition, or waypoint.
+  3) can be a vector, direction, vessel,part, geoposition, or waypoint.
     * if not a vector arg_3 will be converted into a vector by the function ``type_to_vector``
 
 returns:
@@ -94,7 +94,7 @@ description:
 
 args:
   1) a Vessel, such as ``SHIP``.
-  2) the type to be converted can be a vector, direction, vessel,part, eoposition, or waypoint.
+  2) the type to be converted can be a vector, direction, vessel, part, geoposition, or waypoint.
 
 returns:
   * if arg_2 is of type "vector", will return the vector normalized.
