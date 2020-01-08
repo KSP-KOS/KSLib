@@ -1,6 +1,9 @@
 // This file is distributed under the terms of the MIT license, (c) the KSLib team
-
 @LAZYGLOBAL off.
+
+HUDTEXT("lib_pid.ks has been superseded by the kOS inbuilt PIDloop() function.", 10, 2, 30, RED, FALSE).
+wait 0.5.
+HUDTEXT("It is maintained for example purposes only, please see the kOS documentation for more.", 10, 4, 30, RED, FALSE).
 
 function PID_init {
   parameter

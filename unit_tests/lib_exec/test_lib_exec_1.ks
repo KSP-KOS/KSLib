@@ -16,7 +16,7 @@ assert(evaluate("230") = 230).
 
 run lib_exec.
 
-unset z.
+IF DEFINED z { unset z. }
 execute("set z to 640 * 480.").
 assert(z = 640 * 480).
 assert(evaluate("435") = 435).

@@ -1,11 +1,11 @@
 // This file is distributed under the terms of the MIT license, (c) the KSLib team
 
-##lib_file_exists.
+## lib_file_exists.
 
 ``lib_file_exists.ks`` Is a means of checking for optional dependencies. Or checking whether a file exists before attempting to run it. 
 
 
-###file_exists
+### file_exists
 
 args:
   * File name.

@@ -1,9 +1,10 @@
 //This file is distributed under the terms of the MIT license, (c) the KSLib team
 //=====LAUNCH AZIMUTH CALCULATOR=====
 //~~LIB_LAZcalc.ks~~
-//~~Version 2.1~~
+//~~Version 2.2~~
 //~~Created by space-is-hard~~
 //~~Updated by TDW89~~
+//~~Auto north/south switch by undercoveryankee~~
 
 //To use: RUN LAZcalc.ks. SET data TO LAZcalc_init([desired circular orbit altitude in meters],[desired orbital inclination; negative if launching from descending node, positive otherwise]). Then loop SET myAzimuth TO LAZcalc(data).
 
@@ -13,6 +14,11 @@ FUNCTION LAZcalc_init {
     PARAMETER
         desiredAlt, //Altitude of desired target orbit (in *meters*)
         desiredInc. //Inclination of desired target orbit
+
+    PARAMETER autoNodeEpsilon IS 10. // How many m/s north or south
+        // will be needed to cause a north/south switch. Pass zero to disable
+        // the feature.
+    SET autoNodeEpsilon to ABS(autoNodeEpsilon).
     
     //We'll pull the latitude now so we aren't sampling it multiple times
     LOCAL launchLatitude IS SHIP:LATITUDE.
@@ -53,6 +59,7 @@ FUNCTION LAZcalc_init {
     data:ADD(equatorialVel).    //[2]
     data:ADD(targetOrbVel).     //[3]
     data:ADD(launchNode).       //[4]
+    data:ADD(autoNodeEpsilon).  //[5]
     RETURN data.
 }.
 
@@ -65,6 +72,15 @@ FUNCTION LAZcalc {
     
     // This clamps the result to values between 0 and 360.
     LOCAL Azimuth IS MOD(ARCTAN2(VXRot, VYRot) + 360, 360).
+
+    IF data[5] {
+        LOCAL NorthComponent IS VDOT(SHIP:VELOCITY:ORBIT, SHIP:NORTH:VECTOR).
+        IF NorthComponent > data[5] {
+            SET data[4] TO "Ascending".
+        } ELSE IF NorthComponent < -data[5] {
+            SET data[4] to "Descending".
+        }.
+    }.
     
     //Returns northerly azimuth if launching from the ascending node
     IF data[4] = "Ascending" {

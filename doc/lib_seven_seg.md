@@ -1,6 +1,6 @@
 // This file is distributed under the terms of the MIT license, (c) the KSLib team
 
-###seven_seg
+### seven_seg
 
 args:
   * Input  ``Number``. This should be between 0 and 9 (or `"b"` to blank the display and `"-"` for minus).

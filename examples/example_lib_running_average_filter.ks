@@ -19,7 +19,7 @@ FROM {SET i TO 0.} UNTIL i = 24 STEP {SET i TO i + 1.} DO {
 PRINT testList.
 
 //Set up filter, length of three and an init value of 1
-LOCAL numFilter TO RA_filter_init(3,1).
+LOCAL numFilter TO running_average_filter_init(3,1).
 
 //Feed test list to filter
 FROM {SET i TO 0.} UNTIL i = 24 STEP {SET i TO i + 1.} DO {

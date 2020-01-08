@@ -1,6 +1,6 @@
 // This file is distributed under the terms of the MIT license, (c) the KSLib team
 
-##lib_str_to_num
+## lib_str_to_num
 
 ``lib_str_to_num.ks`` can be used to convert a stringified number back into a
 legitimate number for use in computation. It can handle integers, floats, and

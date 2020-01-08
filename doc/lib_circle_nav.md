@@ -1,11 +1,11 @@
 // This file is distributed under the terms of the MIT license, (c) the KSLib team
 
-##lib_circle_nav.
+## lib_circle_nav.
 
 ``lib_circle_nav.ks`` provides a set of functions that use Great Circle equations. On the surface of a sphere the shortest path between 2 points does not have a constant bearing. Use of these functions either on their own or combined can give you all sorts of details about the "as the crow flies" path between 2 points. Including which way you need to go, how far it is and what you will fly over.
 
 
-###circle_bearing
+### circle_bearing
 
 args:
   * A pair of ``GeoCoordinates``.
@@ -17,7 +17,7 @@ description:
   * This equation will give you the initial bearing along the great circle path from point 1 to point 2.
 Not overly useful when run once but by repeatedly running this with your current position as point 1 you will get a continuously updating bearing along the shortest path to point 2.
 
-###circle_destination
+### circle_destination
 
 args:
   * A initial location as a ``GeoCoordinates``.
@@ -31,7 +31,7 @@ returns:
 description:
   * This will tell you the ``GeoCoordinates`` of a point along a great circle path given a starting position, distance and initial bearing. It can be used for checking ``terrainheight`` up ahead. So no more crashing into that cliff because you can only track changes in terrain as you pass over it.
 
-###circle_distance
+### circle_distance
 
 args:
   * A pair of ``GeoCoordinates``.
@@ -55,7 +55,7 @@ PRINT distance.
 ```
 to give the distance total distance of your current rout.
 
-###circle_midpoint
+### circle_midpoint
 
 args:
   * A pair of ``GeoCoordinates``.
