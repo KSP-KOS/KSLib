@@ -11,7 +11,9 @@ LOCAL lib_formatting_lex IS LEX().
 }
 
 LOCAL FUNCTION time_converter {
-  PARAMETER timeValue,places.
+  PARAMETER timeValue,  // the time in seconds to convert
+  places.               // how many time places (e.g HH:MM:SS has 3 places)
+
   LOCAL returnList IS LIST().
   LOCAL localTime IS timeValue.
 
@@ -31,10 +33,15 @@ LOCAL FUNCTION time_converter {
 }
 
 lib_formatting_lex:ADD("leading0List",LIST(2,2,2,3,3)).
-LOCAL FUNCTION time_string {
-  PARAMETER timeSec, fixedPlaces, stringList, roundingList, tMinus.
+FUNCTION time_string {
+  PARAMETER timeSec,  // the time in seconds to format
+  fixedPlaces,        // number of required time places (e.g. HH:MM:SS has 3 fixedPlaces)
+  stringList,         // separators for each time place (must have at least fixedPlaces elements!)
+  roundingList,       // rounding factors for each time place (should match length of stringList)
+  tMinus.             // prepend a T- or T+ to format
+
   LOCAL places IS stringList:LENGTH.
-  LOCAL timeList IS time_converter(ABS(timeSec),places).
+  LOCAL timeList IS time_converter(ABS(timeSec), places).
   LOCAL returnString IS "".
 
   LOCAL maxLength IS MIN(timeList:LENGTH, places).
@@ -78,11 +85,12 @@ lib_formatting_lex["timeFormats"]:ADD(LIST(2,LIST("s  ","m  ","h  ","d ","y ")))
 lib_formatting_lex["timeFormats"]:ADD(LIST(2,LIST(" Seconds  "," Minutes  "," Hours    "," Days    "," Years   "))).
 
 FUNCTION time_formatting {
-  PARAMETER timeSec,  //the time in seconds to format
-  formatType IS 0,   //what type of format
-  rounding IS 0,      //what rounding on the seconds
-  tMinus IS FALSE.   //had a T- or T+ at the start of the formatted time
-  LOCAL roundingList IS LIST(MIN(rounding,2),0,0,0,0).
+  PARAMETER timeSec,  // the time in seconds to be formatted
+  formatType IS 0,    // type of format to use, range 0 to 6
+  rounding IS 0,      // rounding for the seconds place, range 0 to 2
+  tMinus IS FALSE.    // prepend a T- or T+ to format
+
+  LOCAL roundingList IS LIST(MIN(rounding,2), 0, 0, 0, 0).
   LOCAL formatData IS lib_formatting_lex["timeFormats"][formatType].
   RETURN time_string(timeSec,formatData[0],formatData[1],roundingList,tMinus).
 }
