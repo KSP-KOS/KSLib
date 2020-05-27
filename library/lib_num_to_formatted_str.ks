@@ -34,11 +34,12 @@ LOCAL FUNCTION time_converter {
 
 lib_formatting_lex:ADD("leading0List",LIST(2,2,2,3,3)).
 FUNCTION time_string {
-  PARAMETER timeSec,  // the time in seconds to format
-  fixedPlaces,        // number of required time places (e.g. HH:MM:SS has 3 fixedPlaces)
-  stringList,         // separators for each time place (must have at least fixedPlaces elements!)
-  roundingList,       // rounding factors for each time place (should match length of stringList)
-  tMinus.             // prepend a T- or T+ to format
+  PARAMETER timeSec,    // the time in seconds to format
+  fixedPlaces,          // number of required time places (e.g. HH:MM:SS has 3 fixedPlaces)
+  stringList,           // separators for each time place (must have at least fixedPlaces elements!)
+  roundingList,         // rounding factors for each time place (should match length of stringList)
+  prependT,             // prepend a T- or T+ to format (T- or T if showPlus is FALSE)
+  showPlus IS prependT. // by default only display "+" when prependT is TRUE
 
   LOCAL places IS stringList:LENGTH.
   LOCAL timeList IS time_converter(ABS(timeSec), places).
@@ -63,12 +64,23 @@ FUNCTION time_string {
   }
 
   IF timeSec < 0 {
-    IF tMinus RETURN returnString:INSERT(1, "T- ").
-    ELSE RETURN returnString:INSERT(0, "-").
+    IF prependT {
+      SET returnString TO returnString:INSERT(0, "T- ").
+    } ELSE {
+      SET returnString TO returnString:INSERT(0, "-").
+    }
   } ELSE {
-    IF tMinus RETURN returnString:INSERT(0, "T+ ").
-    ELSE RETURN returnString:INSERT(0, " ").
+    IF prependT {
+      SET returnString TO returnString:INSERT(0, "T+ ").
+    } ELSE IF showPlus {
+      SET returnString TO returnString:INSERT(0, "+").
+    } ELSE {
+      SET returnString TO returnString:INSERT(0, " ").
+    }
   }
+
+
+  RETURN returnString.
 }
 
 //adding list of format types
