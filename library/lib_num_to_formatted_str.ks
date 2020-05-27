@@ -16,18 +16,18 @@ LOCAL FUNCTION time_converter {
 
   LOCAL returnList IS LIST().
   LOCAL localTime IS timeValue.
-
   LOCAL place IS 1.
+
   FOR modValue IN lib_formatting_lex["timeModList"] {
-    LOCAL returnValue IS MOD(localTime,modValue).
+    LOCAL returnValue IS MOD(localTime, modValue).
     returnList:ADD(returnValue).
 
     SET localTime TO FLOOR(localTime / modValue).
     IF localTime = 0 { BREAK. }
     SET place TO place + 1.
     IF place = places { BREAK. }
-
   }
+
   IF localTime > 0 { returnList:ADD(localTime). }
   RETURN returnList.
 }
@@ -42,9 +42,8 @@ FUNCTION time_string {
 
   LOCAL places IS stringList:LENGTH.
   LOCAL timeList IS time_converter(ABS(timeSec), places).
-  LOCAL returnString IS "".
-
   LOCAL maxLength IS MIN(timeList:LENGTH, places).
+  LOCAL returnString IS "".
 
   IF fixedPlaces > 0 {
     UNTIL timeList:LENGTH >= fixedPlaces {
@@ -55,22 +54,20 @@ FUNCTION time_string {
     SET fixedPlaces TO maxLength.
   }
 
-  FROM {LOCAL i IS maxLength - fixedPlaces.} UNTIL i >= maxLength STEP {SET i TO i + 1.} DO {
-    SET returnString TO padding(timeList[i],lib_formatting_lex["leading0List"][i],roundingList[i],FALSE,1) + stringList[i] + returnString.
+  FROM {LOCAL i IS maxLength - fixedPlaces.}
+  UNTIL i >= maxLength STEP {SET i TO i + 1.} DO {
+    LOCAL leading0List IS lib_formatting_lex["leading0List"][i].
+    LOCAL number IS timeList[i].
+    LOCAL pad_str IS padding(number, leading0List, roundingList[i], FALSE, 1).
+    SET returnString TO pad_str + stringList[i] + returnString.
   }
 
   IF timeSec < 0 {
-    IF tMinus {
-      RETURN returnString:INSERT(0,"T- ").
-    } ELSE {
-      RETURN returnString:INSERT(0,"-").
-    }
+    IF tMinus RETURN returnString:INSERT(1, "T- ").
+    ELSE RETURN returnString:INSERT(0, "-").
   } ELSE {
-    IF tMinus {
-      RETURN returnString:INSERT(0,"T+ ").
-    } ELSE {
-      RETURN returnString:INSERT(0," ").
-    }
+    IF tMinus RETURN returnString:INSERT(0, "T+ ").
+    ELSE RETURN returnString:INSERT(0, " ").
   }
 }
 
@@ -92,7 +89,7 @@ FUNCTION time_formatting {
 
   LOCAL roundingList IS LIST(MIN(rounding,2), 0, 0, 0, 0).
   LOCAL formatData IS lib_formatting_lex["timeFormats"][formatType].
-  RETURN time_string(timeSec,formatData[0],formatData[1],roundingList,tMinus).
+  RETURN time_string(timeSec, formatData[0], formatData[1], roundingList, tMinus).
 }
 
 lib_formatting_lex:ADD("siPrefixList",LIST(" y"," z"," a"," f"," p"," n"," μ"," m","  "," k"," M"," G"," T"," P"," E"," Z"," Y")).
