@@ -57,7 +57,7 @@ FUNCTION time_string {
   FROM {LOCAL i IS maxLength - fixedPlaces.}
   UNTIL i >= maxLength STEP {SET i TO i + 1.} DO {
     LOCAL leading0List IS lib_formatting_lex["leading0List"][i].
-    LOCAL number IS timeList[i].
+    LOCAL number IS ROUND(timeList[i], roundingList[i]).
     LOCAL pad_str IS padding(number, leading0List, roundingList[i], FALSE, 1).
     SET returnString TO pad_str + stringList[i] + returnString.
   }
