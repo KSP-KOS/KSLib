@@ -12,16 +12,29 @@ LOCAL lib_formatting_lex IS LEX().
 
 LOCAL FUNCTION time_converter {
   PARAMETER timeValue,  // the time in seconds to convert
-  places.               // how many time places (e.g HH:MM:SS has 3 places)
+  places,               // how many time places (e.g HH:MM:SS has 3 places)
+  roundingList.         // rounding factors for each time place
 
   LOCAL returnList IS LIST().
   LOCAL localTime IS timeValue.
   LOCAL place IS 1.
 
   FOR modValue IN lib_formatting_lex["timeModList"] {
-    LOCAL returnValue IS MOD(localTime, modValue).
-    returnList:ADD(returnValue).
+    // extract remainder from localTime
+    LOCAL remainder IS MOD(localTime, modValue).
+    SET localTime TO localTime - remainder.
 
+    // round remainder and process overflow
+    SET remainder TO ROUND(remainder, roundingList[place]).
+    IF remainder >= modValue {
+      SET remainder TO remainder - modValue.
+      SET localTime TO localTime + modValue.
+    }
+
+    // add the rounded remainder to the output
+    returnList:ADD(remainder).
+
+    // move along to the next place
     SET localTime TO FLOOR(localTime / modValue).
     IF localTime = 0 { BREAK. }
     SET place TO place + 1.
@@ -42,7 +55,7 @@ LOCAL FUNCTION time_string {
   showPlus IS prependT. // by default only display "+" when prependT is TRUE
 
   LOCAL places IS stringList:LENGTH.
-  LOCAL timeList IS time_converter(ABS(timeSec), places).
+  LOCAL timeList IS time_converter(ABS(timeSec), places, roundingList).
   LOCAL maxLength IS MIN(timeList:LENGTH, places).
   LOCAL returnString IS "".
 
