@@ -33,7 +33,7 @@ LOCAL FUNCTION time_converter {
 }
 
 lib_formatting_lex:ADD("leading0List",LIST(2,2,2,3,3)).
-FUNCTION time_string {
+LOCAL FUNCTION time_string {
   PARAMETER timeSec,    // the time in seconds to format
   fixedPlaces,          // number of required time places (e.g. HH:MM:SS has 3 fixedPlaces)
   stringList,           // separators for each time place (must have at least fixedPlaces elements!)
