@@ -121,8 +121,9 @@ FUNCTION time_formatting {
 lib_formatting_lex:ADD("siPrefixList",LIST(" y"," z"," a"," f"," p"," n"," μ"," m","  "," k"," M"," G"," T"," P"," E"," Z"," Y")).
 
 FUNCTION si_formatting {
-  PARAMETER num,//number to format,
-  unit IS "".//unit of number
+  PARAMETER num,  // number to format, should be in range 10^-24 to 10^24
+  unit IS "".     // user supplied unit, output will prepend SI prefix
+
   IF num = 0 {
     RETURN padding(num,1,3) + "  " + unit.
   } ELSE {
@@ -142,11 +143,12 @@ FUNCTION si_formatting {
 }
 
 FUNCTION padding {
-  PARAMETER num,  //number to pad
-  leadingLenght,   //min length to the left of the decimal point
-  trailingLength,  // length to the right of the decimal point
-  positiveLeadingSpace IS TRUE,//if when positive should there be a space before the returned string
-  roundType IS 0.  // 0 for normal rounding, 1 for floor, 2 for ceiling
+  PARAMETER num,                // number to be formatted
+  leadingLength,                // minimum digits to the left of the decimal
+  trailingLength,               // digits to the right of the decimal
+  positiveLeadingSpace IS TRUE, // whether to prepend a single space to the output
+  roundType IS 0.               // 0 for normal rounding, 1 for floor, 2 for ceiling
+
   LOCAL returnString IS "".
   //LOCAL returnString IS ABS(ROUND(num,trailingLength)):TOSTRING.
   IF roundType = 0 {
@@ -162,9 +164,9 @@ FUNCTION padding {
       SET returnString TO returnString + ".0".
     }
     UNTIL returnString:SPLIT(".")[1]:LENGTH >= trailingLength { SET returnString TO returnString + "0". }
-    UNTIL returnString:SPLIT(".")[0]:LENGTH >= leadingLenght { SET returnString TO "0" + returnString. }
+    UNTIL returnString:SPLIT(".")[0]:LENGTH >= leadingLength { SET returnString TO "0" + returnString. }
   } ELSE {
-    UNTIL returnString:LENGTH >= leadingLenght { SET returnString TO "0" + returnString. }
+    UNTIL returnString:LENGTH >= leadingLength { SET returnString TO "0" + returnString. }
   }
 
   IF num < 0 {
