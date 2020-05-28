@@ -8,16 +8,16 @@
 
 Args:
 
-  1. A number (scaler), The number be formatted
-  2. A number (scaler), The minimum number of digits to the left of the decimal point.
-  3. A number (scaler), The number of digits to the right of the decimal point.
-  4. A boolean,         If True there will be a space at the front of the returned string when the number to be formatted is positive
+  1. A number (scaler), num             The number be formatted
+  2. A number (scaler), leadingLength   The minimum number of digits to the left of the decimal point.
+  3. A number (scaler), trailingLength  The number of digits to the right of the decimal point.
+  4. A boolean,         leadingSpace    If True there will be a space at the front of the returned string when the number to be formatted is positive
       * defaulted to True
-  5. A number (scaler), Sets if function will round, floor, or ceiling the number to be formatted. 0 = rounding, 1 = floor, 2 = ceiling, NOTE: if not one of the 3 expected values ceiling will be used
+  5. A number (scaler), roundType       Sets if function will round, floor, or ceiling the number to be formatted. 0 = rounding, 1 = floor, 2 = ceiling, NOTE: if not one of the 3 expected values ceiling will be used
       * defaulted to 0
 
 Returns:
-  * a String of arg 1 formatted based on args 2,3, and 4
+  * A String with num formatted based on the parameters
 
 Description:
   * This function will return a string matching the format defined by the parameters.
@@ -55,11 +55,11 @@ Description:
 ### si_formatting
 
 Args:
-  1. A number (scaler), the number be formatted,  Must be with the range of 10^-24 to 10^24 or else return will not be formatted correctly 
-  2. A string for the unit ("m", "m/s", "g")
+  1. A number (scaler), num   A number in the range of 10^-24 to 10^24 otherwise result will not be formatted correctly
+  2. A string,          unit  A unit for which the [SI prefixes](https://en.wikipedia.org/wiki/Metric_prefix#List_of_SI_prefixes) will be appended ("m", "m/s", "g")
 
 Returns:
-  * Returns a string in standard SI notation
+  * Returns A String in standard SI notation with 4 significant digits
 
 Description:
   * This function will return a string formatted to match standard SI notation with 4 significant digits.
@@ -74,16 +74,18 @@ Description:
 ### time_formatting
 
 Args:
-  1. A number (scaler), The number be formatted
-  2. A number (scaler), Selects type of format to be used, Range from 0 to 6
+  1. A number (scaler), timeSec     The number be formatted
+  2. A number (scaler), formatType  Selects type of format to be used, Range from 0 to 6
       * Defaulted to 0
-  3. A number (scaler), The rounding for the seconds place, Range from 0 to 2
+  3. A number (scaler), rounding    The rounding for the seconds place, Range from 0 to 2
       * Defaulted to 0
-  4. A boolean,         If True the return uses "T+" or "T-" to denote positive or negative else it will use " " or "-"
+  4. A boolean,         prependT    If True prepends a "T+ " or "T- " to the format ("T- " or "T  " if showPlus is False)
       * Defaulted to False
+  5. A boolean,         showPlus    If True positive values will show "+", otherwise " "
+      * Defaulted to prependT
 
 Returns:
-  * Returns a String of arg 1 formatted based on args 2,3, and 4
+  * Returns A String with timeSec formatted based on the paramters
 
 Description:
   * Converts number of seconds into a 1 of 7 formatted strings for time
@@ -94,11 +96,13 @@ Description:
 
 #### Examples of use for time_formatting:
 
-    time_formatting(120).           will return the string " 02m 00s"
-    time_formatting(120,0,2).       will return the string " 02m 00.00s"
-    time_formatting(-120,0,2).      will return the string "-02m 00.00s"
-    time_formatting(-120,0,2,true). will return the string "T- 02m 00.00s"
-    time_formatting(120,0,2,true).  will return the string "T+ 02m 00.00s"
+    time_formatting(120).                 will return the string " 02m 00s"
+    time_formatting(120,0,2).             will return the string " 02m 00.00s"
+    time_formatting(-120,0,2).            will return the string "-02m 00.00s"
+    time_formatting(-120,0,2,true).       will return the string "T- 02m 00.00s"
+    time_formatting(120,0,2,true).        will return the string "T+ 02m 00.00s"
+    time_formatting(120,0,2,false,true).  will return the string "+02m 00.00s"
+    time_formatting(120,0,2,false,false). will return the string " 02m 00.00s"
 
 The 7 format types have different results
 
