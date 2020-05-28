@@ -106,14 +106,16 @@ lib_formatting_lex["timeFormats"]:ADD(LIST(2,LIST("s  ","m  ","h  ","d ","y ")))
 lib_formatting_lex["timeFormats"]:ADD(LIST(2,LIST(" Seconds  "," Minutes  "," Hours    "," Days    "," Years   "))).
 
 FUNCTION time_formatting {
-  PARAMETER timeSec,  // the time in seconds to be formatted
-  formatType IS 0,    // type of format to use, range 0 to 6
-  rounding IS 0,      // rounding for the seconds place, range 0 to 2
-  tMinus IS FALSE.    // prepend a T- or T+ to format
+  PARAMETER timeSec,    // the time in seconds to be formatted
+  formatType IS 0,      // type of format to use, range 0 to 6
+  rounding IS 0,        // rounding for the seconds place, range 0 to 2
+  prependT IS FALSE,    // prepend a T- or T+ to format (T- or T if showPlus is FALSE)
+  showPlus IS prependT. // by default only display "+" when prependT is TRUE
+
 
   LOCAL roundingList IS LIST(MIN(rounding,2), 0, 0, 0, 0).
   LOCAL formatData IS lib_formatting_lex["timeFormats"][formatType].
-  RETURN time_string(timeSec, formatData[0], formatData[1], roundingList, tMinus).
+  RETURN time_string(timeSec, formatData[0], formatData[1], roundingList, prependT, showPlus).
 }
 
 lib_formatting_lex:ADD("siPrefixList",LIST(" y"," z"," a"," f"," p"," n"," μ"," m","  "," k"," M"," G"," T"," P"," E"," Z"," Y")).
