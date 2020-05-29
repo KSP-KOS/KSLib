@@ -46,7 +46,7 @@ LOCAL FUNCTION time_string {
 
   // start by rounding the input so we don't have to "carry the one" in time_converter
   LOCAL roundingList IS LIST(MIN(rounding,2), 0, 0, 0, 0).
-  SET timeSec TO ROUND(timeSec, rounding).
+  SET timeSec TO ROUND(timeSec, roundingList[0]).
 
   LOCAL places IS stringList:LENGTH.
   LOCAL timeList IS time_converter(ABS(timeSec), places).
