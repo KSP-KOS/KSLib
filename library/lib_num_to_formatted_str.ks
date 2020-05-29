@@ -59,6 +59,8 @@ LOCAL FUNCTION time_string {
   LOCAL maxLength IS MIN(timeList:LENGTH, places).
   LOCAL returnString IS "".
 
+  // fill in missing time places until format is reached
+  // e.g. for HH:MM:SS, given 4s, put 0 in HH and MM place
   IF fixedPlaces > 0 {
     UNTIL timeList:LENGTH >= fixedPlaces {
       timeList:ADD(0).
@@ -68,6 +70,7 @@ LOCAL FUNCTION time_string {
     SET fixedPlaces TO maxLength.
   }
 
+  // add padding to each element in timeList and prepend to returnString
   FROM {LOCAL i IS maxLength - fixedPlaces.}
   UNTIL i >= maxLength STEP {SET i TO i + 1.} DO {
     LOCAL leading0List IS lib_formatting_lex["leading0List"][i].
@@ -75,22 +78,19 @@ LOCAL FUNCTION time_string {
     SET returnString TO pad_str + stringList[i] + returnString.
   }
 
+  // the prependT strings have one space padding
+  IF prependT SET returnString TO returnString:INSERT(0, " ").
+
+  // all time_string formats have either '+','-', or ' ' for padding
   IF timeSec < 0 {
-    IF prependT {
-      SET returnString TO returnString:INSERT(0, "T- ").
-    } ELSE {
-      SET returnString TO returnString:INSERT(0, "-").
-    }
+    SET returnString TO returnString:INSERT(0, "-").
+  } ELSE IF showPlus {
+    SET returnString TO returnString:INSERT(0, "+").
   } ELSE {
-    IF prependT {
-      SET returnString TO returnString:INSERT(0, "T+ ").
-    } ELSE IF showPlus {
-      SET returnString TO returnString:INSERT(0, "+").
-    } ELSE {
-      SET returnString TO returnString:INSERT(0, " ").
-    }
+    SET returnString TO returnString:INSERT(0, " ").
   }
 
+  IF prependT SET returnString TO returnString:INSERT(0, "T").
 
   RETURN returnString.
 }
