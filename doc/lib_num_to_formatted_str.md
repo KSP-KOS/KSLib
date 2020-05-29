@@ -79,7 +79,8 @@ This function will return a time string formatted according to the following rul
   * Converts number of seconds into one of seven different time formats
   * Will detect if you are using the 6 hour KSP day or the 24 hour Earth day and change the day and year to match
     * For ease of calculation this function defines 1 year as 426 Kerbin days or 365 Earth days.
-    * NOTE: you will need to keep the return the same format or else you will break other functions
+      * If you with to change this consider modifying `FUNCTION time_converter`
+      * NOTE: you will need to keep the return the same format or else you will break other functions
 
 | parameter    | type    | default    | description                                                                     |
 |--------------|---------|------------|---------------------------------------------------------------------------------|
