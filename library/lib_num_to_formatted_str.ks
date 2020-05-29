@@ -40,9 +40,13 @@ LOCAL FUNCTION time_string {
   PARAMETER timeSec,    // the time in seconds to format
   fixedPlaces,          // number of required time places (e.g. HH:MM:SS has 3 fixedPlaces)
   stringList,           // separators for each time place (must have at least fixedPlaces elements!)
-  roundingList,         // rounding factors for each time place (should match length of stringList)
+  rounding,             // rounding for the seconds place, range 0 to 2
   prependT,             // prepend a T- or T+ to format (T- or T if showPlus is FALSE)
   showPlus IS prependT. // by default only display "+" when prependT is TRUE
+
+  // start by rounding the input so we don't have to "carry the one" in time_converter
+  LOCAL roundingList IS LIST(MIN(rounding,2), 0, 0, 0, 0).
+  SET timeSec TO ROUND(timeSec, rounding).
 
   LOCAL places IS stringList:LENGTH.
   LOCAL timeList IS time_converter(ABS(timeSec), places).
@@ -103,9 +107,8 @@ FUNCTION time_formatting {
   showPlus IS prependT. // by default only display "+" when prependT is TRUE
 
 
-  LOCAL roundingList IS LIST(MIN(rounding,2), 0, 0, 0, 0).
   LOCAL formatData IS lib_formatting_lex["timeFormats"][formatType].
-  RETURN time_string(timeSec, formatData[0], formatData[1], roundingList, prependT, showPlus).
+  RETURN time_string(timeSec, formatData[0], formatData[1], rounding, prependT, showPlus).
 }
 
 lib_formatting_lex:ADD("siPrefixList",LIST(" y"," z"," a"," f"," p"," n"," μ"," m","  "," k"," M"," G"," T"," P"," E"," Z"," Y")).
