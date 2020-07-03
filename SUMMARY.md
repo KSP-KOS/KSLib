@@ -5,7 +5,7 @@ This is an attempt at summarising and categorising the libraries by their use ca
 
 ### Control
 1. [lib_pid.ks](https://github.com/KSP-KOS/KSLib/blob/master/library/lib_pid.ks) / [docs](https://github.com/KSP-KOS/KSLib/blob/master/doc/lib_pid.md) : provides functions for creating a PID controller. This functionality has been superseded by kOS buil-in `PIDLoop()`.
-2. [lib_raw_user_input.ks](https://github.com/KSP-KOS/KSLib/blob/master/library/lib_raw_user_input.ks) / [docs](https://github.com/KSP-KOS/KSLib/blob/master/doc/lib_raw_user_input.md) : currently broken. Listens for action groups in a list and returns the index of the activated action group.
+2. [lib_raw_user_input.ks](https://github.com/KSP-KOS/KSLib/master/library/lib_raw_user_input.ks) / [docs](https://github.com/KSP-KOS/KSLib/blob/master/doc/lib_raw_user_input.md) : currently broken. Listens for action groups in a list and returns the index of the activated action group.
 
 ### Data Structures
 1. [lib_enum.ks](https://github.com/KSP-KOS/KSLib/blob/master/library/lib_enum.ks) / [docs](https://github.com/KSP-KOS/KSLib/blob/master/doc/lib_enum.md) : provides functions to manipulate structures like lists, stacks, queues etc.
@@ -21,11 +21,11 @@ This is an attempt at summarising and categorising the libraries by their use ca
 
 ### Navigation
 1. [lib_circle_nav.ks](https://github.com/KSP-KOS/KSLib/blob/master/library/lib_circle_nav.ks) / [docs](https://github.com/KSP-KOS/KSLib/blob/master/doc/lib_circle_nav.md) : provides functions to help with great circle / geodesic navigation while in atmosphere or the surface. For example, finding out the compass heading of a waypoint to fly there along the shortest path.
-2. [lib_navball.ks](https://github.com/KSP-KOS/KSLib/blob/master/library/lib_navball.ks) / [docs](https://github.com/KSP-KOS/KSLib/blob/master/doc/lib_navball.md) : provides various state values of a vessel like compass heading, pitch, roll etc.
+2. [lib_navball.ks](https://github.com/KSP-KOS/KSLib/blob/master/library/lib_navball.ks) / [docs](https://github.com/KSP-KOS/KSLib/blob/master/doc/lib_navball.md) : provides various navball state values (heading, pitch, roll, etc) of several kOS structures that can be considered to have such state.
 3. [lib_navigation.ks](https://github.com/KSP-KOS/KSLib/blob/master/library/lib_navigation.ks) / [docs](https://github.com/KSP-KOS/KSLib/blob/master/doc/lib_navigation.md) : provides a range of functions to used in calculations of both space, atmospheric and surface navigation.
 
 ### Programming Utilities
-1. [lib_exec.ks](https://github.com/KSP-KOS/KSLib/blob/master/library/lib_exec.ks) / [docs](https://github.com/KSP-KOS/KSLib/blob/master/doc/lib_exec.md) : allows executing commands and evaluating expressions from strings. This is possibly broken.
+1. [lib_exec.ks](https://github.com/KSP-KOS/KSLib/blob/master/library/lib_exec.ks) / [docs](https://github.com/KSP-KOS/KSLib/blob/master/doc/lib_exec.md) : allows executing commands and evaluating expressions from strings.
 
 ### Space Navigation
 1. [lib_lazcalc.ks](https://github.com/KSP-KOS/KSLib/blob/master/library/lib_lazcalc.ks) / [docs](https://github.com/KSP-KOS/KSLib/blob/master/doc/lib_lazcalc.md) : does launch azimuth calculation.
