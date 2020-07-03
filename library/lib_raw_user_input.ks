@@ -24,7 +24,7 @@ function wait_for_action_groups
       }
     }
     local result is iter_a:index.
-    if iter_a:atend and iter_b:atend
+    if iter_a:atend or iter_b:atend
     {
       set result to -1.
     }
@@ -48,6 +48,7 @@ function wait_for_action_groups
   until result <> -1
   {
     set result to first_diff(old_values, _raw_input_ag_list).
+	wait 0.
   }
 
   return result.
