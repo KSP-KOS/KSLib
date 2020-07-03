@@ -5,7 +5,7 @@ This is an attempt at summarising and categorising the libraries by their use ca
 
 ### Control
 1. [lib_pid.ks](https://github.com/KSP-KOS/KSLib/master/library/lib_pid.ks) / [docs](https://github.com/KSP-KOS/KSLib/blob/master/doc/lib_pid.md) : provides functions for creating a PID controller. This functionality has been superseded by kOS buil-in `PIDLoop()`.
-2. [lib_raw_user_input.ks](https://github.com/KSP-KOS/KSLib/master/library/lib_raw_user_input.ks) / [docs](https://github.com/KSP-KOS/KSLib/blob/master/doc/lib_raw_user_input.md) : currently broken. Listens for action groups in a list and returns the index of the activated action group.
+2. [lib_raw_user_input.ks](https://github.com/KSP-KOS/KSLib/master/library/lib_raw_user_input.ks) / [docs](https://github.com/KSP-KOS/KSLib/blob/master/doc/lib_raw_user_input.md) : Listens for action groups in a list and returns the index of the activated action group.
 
 ### Data Structures
 1. [lib_enum.ks](https://github.com/KSP-KOS/KSLib/blob/master/library/lib_enum.ks) / [docs](https://github.com/KSP-KOS/KSLib/blob/master/doc/lib_enum.md) : provides functions to manipulate structures like lists, stacks, queues etc.
