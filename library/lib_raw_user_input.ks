@@ -48,7 +48,7 @@ function wait_for_action_groups
   until result <> -1
   {
     set result to first_diff(old_values, _raw_input_ag_list).
-	wait 0.
+    wait 0.
   }
 
   return result.
