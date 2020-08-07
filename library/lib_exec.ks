@@ -25,33 +25,41 @@
 if not (defined _exec_idString) {
   global _exec_idString is char(127).//starts at char 127 to avoid reserved charters in windows file names
 }
+
+local pastCommands is lexicon().//stores previously executed commands and the associated path, intended to prevent increment of _exec_idString if calling the same command repeatedly.
 function execute
 {
   parameter command.
-  
-  //start of string incrementing
-  local carry is false.
-  local strStart is _exec_idString:LENGTH - 1.
-  from { local i is strStart. } until i < 0 step { SET i to i - 1. } do {
-    local tmpNum is unchar(_exec_idString[i]).
-    //print tmpNum.
-    if carry or (i = strStart) {
-      set tmpNum to tmpNum + 1.
-      set carry to false.
+
+  local filePath IS path().
+  if pastCommands:haskey(command) {//if we have already run a command recall the path used the old path
+    set filePath to pastCommands[command].
+  } else {
+    //start of string incrementing
+    local carry is false.
+    local strStart is _exec_idString:LENGTH - 1.
+    from { local i is strStart. } until i < 0 step { SET i to i - 1. } do {
+      local tmpNum is unchar(_exec_idString[i]).
+      //print tmpNum.
+      if carry or (i = strStart) {
+        set tmpNum to tmpNum + 1.
+        set carry to false.
+      }
+      if tmpNum > 255 {
+        set tmpNum to tmpNum - 128.
+        set carry to true.
+      }
+      local subStringHigh IS _exec_idString:substring(i,_exec_idString:LENGTH - i).
+      set subStringHigh to subStringHigh:remove(0,1).
+      local subStringLow is _exec_idString:substring(0,i).
+      set _exec_idString to subStringLow + char(tmpNum) + subStringHigh.
+
     }
-    if tmpNum > 255 {
-      set tmpNum to tmpNum - 128.
-      set carry to true.
-    }
-    local subStringHigh IS _exec_idString:substring(i,_exec_idString:LENGTH - i).
-    set subStringHigh to subStringHigh:remove(0,1).
-    local subStringLow is _exec_idString:substring(0,i).
-    set _exec_idString to subStringLow + char(tmpNum) + subStringHigh.
-    
+    if carry { set _exec_idString to char(128) + _exec_idString. }
+    //end of string incrementing
+    set filePath to path("1:/_execute_" + _exec_idString + ".tmp").
+    pastCommands:ADD(command,filePath).
   }
-  if carry { set _exec_idString to char(128) + _exec_idString. }
-  //end of string incrementing
-  local filePath IS path("1:/_execute_" + _exec_idString + ".tmp").
   log_run_del(command,filePath).
 }
 
