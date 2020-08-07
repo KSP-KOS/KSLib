@@ -51,12 +51,8 @@ function execute
   }
   if carry { set _exec_idString to char(128) + _exec_idString. }
   //end of string incrementing
-  local filePath IS path("_execute_" + _exec_idString + ".tmp").
-  if exists(filePath) { deletepath(filePath). }
-  log command to filePath.
-  wait 0.
-  runpath(filePath).
-  deletepath(filePath).
+  local filePath IS path("1:/_execute_" + _exec_idString + ".tmp").
+  log_run_del(command,filePath).
 }
 
 function evaluate
@@ -88,4 +84,19 @@ function evaluate_function
   set expression to function_name + "(" + expression + ")".
   unset _exec__param_list.
   return evaluate(expression).
+}
+
+local function log_run_del
+{
+  parameter
+    log_string,//the string to be executed
+    file_path. //the path to where the string should be stored temporarily so it can be executed.
+  if exists(file_path)
+  {
+    deletepath(file_path).
+  }
+  log log_string to file_path.
+  wait 0.
+  runpath(file_path).
+  deletepath(file_path).
 }
