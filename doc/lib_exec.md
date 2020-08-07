@@ -5,6 +5,9 @@
 This library is a powerful tool for unhardcoding program's behavior.
 As far as I know it works fine in all possible special cases.
 
+#### WARNING:
+  * this library can fail if there is insufficient free space on the local volume.
+
 ### execute
 
 args:
@@ -17,7 +20,7 @@ description:
 
 example:
   `execute("set x to 42. print x.").`
-  
+
 caveat #1:
   * run command in the current version of kOS works in a weird way:
 ```
@@ -43,6 +46,9 @@ caveat #2:
   execute("print my_example_var.").
 }
 ```
+
+caveat #3
+  * The limit on the size of a command that can be executed is how much free space you have on the local volume of the core
 
 ##### The same caveats apply to other functions from this library.
 
@@ -74,37 +80,40 @@ example:
   `print evaluate_function("foo", list(42, true, "hello")).`
   does exactly the same as:
   `print foo(42, true, "hello").`
-  
+
 ### get_suffix
 
 args:
   * structure - the structure to get the suffix of
   * suffix - the suffix to get
   * parameter_list - if a suffix is a function then this is the ordered list of parameters to be passed to the suffix 0th parameter maps to the 0th item in the list, will be ignored if not of type list, defaulted to `FALSE`
-  
+
 returns:
   * result - will be what ever the suffix returns
-  
+
 example:
 ```
-  print get_suffix(ship,"mass").
-  print get_suffix(body,"geopositionlatlng",list(1,2)).```
-  is equivalent to 
+print get_suffix(ship,"mass").
+print get_suffix(body,"geopositionlatlng",list(1,2)).
 ```
-  print ship:mass.
-  print body:geopositionlatlng(1,2).```
-  
+  is equivalent to
+```
+print ship:mass.
+print body:geopositionlatlng(1,2).
+```
+
 ### set_suffix
 
 args:
   * structure, the structure to set the suffix of
   * suffix, the suffix to set
   * val, the value to set the suffix to
-  
+
 example:
   `set_suffix(core,"tag","lib_exec").`
   is the same as
   `set core:tag to "lib_exec".
+
 
 ### useful tips
 
