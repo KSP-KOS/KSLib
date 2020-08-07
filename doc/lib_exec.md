@@ -85,7 +85,7 @@ args:
 returns:
   * result - will be what ever the suffix returns
   
-exmaple:
+example:
 ```
   print get_suffix(ship,"mass").
   print get_suffix(body,"geopositionlatlng",list(1,2)).```
@@ -93,6 +93,18 @@ exmaple:
 ```
   print ship:mass.
   print body:geopositionlatlng(1,2).```
+  
+### set_suffix
+
+args:
+  * structure, the structure to set the suffix of
+  * suffix, the suffix to set
+  * val, the value to set the suffix to
+  
+example:
+  `set_suffix(core,"tag","lib_exec").`
+  is the same as
+  `set core:tag to "lib_exec".
 
 ### useful tips
 

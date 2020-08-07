@@ -122,6 +122,18 @@ function get_suffix {
   return result.
 }
 
+function set_suffix {
+  parameter
+    structure, //the structure to set the suffix of
+    suffix,    //the suffix to set
+    val.       //the value to set the suffix to
+  local filePath is path("1:/_set_suffix" + suffix + ".tmp").
+  local logStr IS "global _exec__set_suffix_ is { parameter o,v. set o:" + suffix + " to v. }.".
+  log_run_del(logStr,filePath).
+  local result is _exec__set_suffix_:call(structure,val).
+  if defined unset _exec__set_suffix_.
+}
+
 local function log_run_del
 {
   parameter
