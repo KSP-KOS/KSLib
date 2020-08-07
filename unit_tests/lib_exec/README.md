@@ -12,6 +12,7 @@ run all three tests from the terminal.
 * copy all files from "unit_tests/lib_exec/" and "library/lib_exec.ks"
   to the archive ("<ksp_folder>/Ships/Script")
 * switch to 0.
+* run test_lib_exec_0.
 * run test_lib_exec_1.
 * run test_lib_exec_2.
 * run test_lib_exec_3.

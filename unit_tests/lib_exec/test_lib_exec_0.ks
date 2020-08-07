@@ -72,17 +72,34 @@ assert(evaluate("evaluate(expr)") = (12 * 3)).
 
 global i is 0.
 local y is 0.
-until i >= 500 {//this may take time
+until i >= 500 {//checks repetition of the same execution string,this may take time
   execute("set i to i + 1.").
-  if y > 3000 {
+  if y > 600 {
     break.
   } else {
     set y to y + 1.
   }
+  assert(i = y).
 }
-assert(i >= 500).
-IF DEFINED i { unset i. }
-IF DEFINED y { unset y. }
+assert(y = 500).
+
+set i to 0.
+set z to 0.
+
+until i >= 500 {//checks repetition of unique execution strings
+  if z >600 {
+    break.
+  } else {
+    set z to z + 1.
+  }
+  execute("set i to " + z + ".").
+  assert(i = z).
+}
+
+assert(z = 500).
+
+if defined i { unset i. }
+if defined y { unset y. }
 
 // misc
 
