@@ -94,6 +94,34 @@ function evaluate_function
   return evaluate(expression).
 }
 
+function get_suffix {
+  parameter
+    structure, //the structure to get the suffix of
+    suffix,    //the suffix to get
+    parameter_list IS false. //if the suffix is a function call this is the list of parameters for the suffix
+  local filePath is "1:/_get_suffix" + suffix.
+  local logStr IS "global _exec__get_suffix_ is { parameter o. return o:" + suffix.
+  if parameter_list:istype("list") {
+    set filePath to filePath + parameter_list:length.
+    local separator is "(".
+    global _exec__param_list IS parameter_list.
+    local i IS 0.
+    until i >= parameter_list:length
+    {
+      set logStr to logStr + separator + "_exec__param_list[" + i + "]".
+      set separator to ", ".
+      set i to i + 1.
+    }
+    set logStr to logStr + ")".
+  }
+  set filePath to path(filePath + ".tmp").
+  log_run_del(logStr + ". }.",filePath).
+  local result is _exec__get_suffix_:call(structure).
+  if defined unset _exec__param_list.
+  unset _exec__get_suffix_.
+  return result.
+}
+
 local function log_run_del
 {
   parameter

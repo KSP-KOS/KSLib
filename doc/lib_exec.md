@@ -74,6 +74,25 @@ example:
   `print evaluate_function("foo", list(42, true, "hello")).`
   does exactly the same as:
   `print foo(42, true, "hello").`
+  
+### get_suffix
+
+args:
+  * structure - the structure to get the suffix of
+  * suffix - the suffix to get
+  * parameter_list - if a suffix is a function then this is the ordered list of parameters to be passed to the suffix 0th parameter maps to the 0th item in the list, will be ignored if not of type list, defaulted to `FALSE`
+  
+returns:
+  * result - will be what ever the suffix returns
+  
+exmaple:
+```
+  print get_suffix(ship,"mass").
+  print get_suffix(body,"geopositionlatlng",list(1,2)).```
+  is equivalent to 
+```
+  print ship:mass.
+  print body:geopositionlatlng(1,2).```
 
 ### useful tips
 
