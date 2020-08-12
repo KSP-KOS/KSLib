@@ -68,6 +68,13 @@ assert(recursive(20) = 8).
 set expr to "12 * 3".
 assert(evaluate("evaluate(expr)") = (12 * 3)).
 
+// case sensitivity check of the caching
+
+execute("set s0 to " + char(34) + char(unchar("A")) + char(34) + ".").
+set s1 to s0.
+execute("set s0 to " + char(34) + char(unchar("a")) + char(34) + ".").
+assert(unchar(s0) <> unchar(s1)).
+
 // need to be able to run execute function many times thus this test checks you can.
 
 global i is 0.
