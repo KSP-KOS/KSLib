@@ -26,14 +26,18 @@ if not (defined _exec_idString) {
   global _exec_idString is char(127).//starts at char 127 to avoid reserved charters in windows file names
 }
 
-local pastCommands is lexicon().//stores previously executed commands and the associated path, intended to prevent increment of _exec_idString if calling the same command repeatedly.
+if not (defined _past_exec_strings) {
+  global _past_exec_strings is lexicon().//stores previously executed commands and the associated path, intended to prevent increment of _exec_idString if calling the same command repeatedly.
+  set _past_exec_strings:casesensitive to true.
+}
+
 function execute
 {
   parameter command.
 
   local filePath IS path().
-  if pastCommands:haskey(command) {//if we have already run a command recall the path used the old path
-    set filePath to pastCommands[command].
+  if _past_exec_strings:haskey(command) {//if we have already run a command recall the path used the old path
+    set filePath to _past_exec_strings[command].
   } else {
     //start of string incrementing
     local carry is false.
@@ -58,7 +62,7 @@ function execute
     if carry { set _exec_idString to char(128) + _exec_idString. }
     //end of string incrementing
     set filePath to path("1:/_execute_" + _exec_idString + ".tmp").
-    pastCommands:ADD(command,filePath).
+    _past_exec_strings:ADD(command,filePath).
   }
   log_run_del(command,filePath).
 }
@@ -100,7 +104,7 @@ function get_suffix {
     suffix,    //the suffix to get
     parameter_list IS false. //if the suffix is a function call this is the list of parameters for the suffix
   local filePath is "1:/_get_suffix" + suffix.
-  local logStr IS "global _exec__get_suffix_ is { parameter o. return o:" + suffix.
+  local logStr IS "global _evaluate_result is { parameter o. return o:" + suffix.
   if parameter_list:istype("list") {
     set filePath to filePath + parameter_list:length.
     local separator is "(".
@@ -116,9 +120,9 @@ function get_suffix {
   }
   set filePath to path(filePath + ".tmp").
   log_run_del(logStr + ". }.",filePath).
-  local result is _exec__get_suffix_:call(structure).
+  local result is _evaluate_result:call(structure).
   if defined unset _exec__param_list.
-  unset _exec__get_suffix_.
+  unset _evaluate_result.
   return result.
 }
 
@@ -128,10 +132,10 @@ function set_suffix {
     suffix,    //the suffix to set
     val.       //the value to set the suffix to
   local filePath is path("1:/_set_suffix" + suffix + ".tmp").
-  local logStr IS "global _exec__set_suffix_ is { parameter o,v. set o:" + suffix + " to v. }.".
+  local logStr IS "global _evaluate_result is { parameter o,v. set o:" + suffix + " to v. }.".
   log_run_del(logStr,filePath).
-  local result is _exec__set_suffix_:call(structure,val).
-  if defined unset _exec__set_suffix_.
+  local result is _evaluate_result:call(structure,val).
+  if defined unset _evaluate_result.
 }
 
 local function log_run_del
