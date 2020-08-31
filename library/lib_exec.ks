@@ -121,8 +121,9 @@ function get_suffix {
   set filePath to path(filePath + ".tmp").
   log_run_del(logStr + ". }.",filePath).
   local result is _evaluate_result:call(structure).
-  if defined unset _exec__param_list.
-  unset _evaluate_result.
+  if defined _exec__param_list {
+   unset _exec__param_list.
+  }
   return result.
 }
 
@@ -135,7 +136,7 @@ function set_suffix {
   local logStr IS "global _evaluate_result is { parameter o,v. set o:" + suffix + " to v. }.".
   log_run_del(logStr,filePath).
   local result is _evaluate_result:call(structure,val).
-  if defined unset _evaluate_result.
+  unset _evaluate_result.
 }
 
 local function log_run_del
@@ -143,8 +144,7 @@ local function log_run_del
   parameter
     log_string,//the string to be executed
     file_path. //the path to where the string should be stored temporarily so it can be executed.
-  if exists(file_path)
-  {
+  if exists(file_path) {
     deletepath(file_path).
   }
   log log_string to file_path.
