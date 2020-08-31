@@ -92,10 +92,11 @@ function evaluate_function {
     set index to index + 1.
   }
   set expression to function_name + "(" + expression + ")".
+  local result is evaluate(expression).
   if defined _exec__param_list {
     unset _exec__param_list.
   }
-  return evaluate(expression).
+  return result.
 }
 
 function get_suffix {
@@ -103,6 +104,7 @@ function get_suffix {
     structure, //the structure to get the suffix of
     suffix,    //the suffix to get
     parameter_list IS false. //if the suffix is a function call this is the list of parameters for the suffix
+	
   local filePath is "1:/_get_suffix" + suffix.
   local logStr IS "global _evaluate_result is { parameter o. return o:" + suffix.
   if parameter_list:istype("list") {
@@ -132,17 +134,20 @@ function set_suffix {
     structure, //the structure to set the suffix of
     suffix,    //the suffix to set
     val.       //the value to set the suffix to
+	
   local filePath is path("1:/_set_suffix" + suffix + ".tmp").
   local logStr IS "global _evaluate_result is { parameter o,v. set o:" + suffix + " to v. }.".
   log_run_del(logStr,filePath).
   local result is _evaluate_result:call(structure,val).
   unset _evaluate_result.
+  return result.
 }
 
 local function log_run_del{
   parameter
     log_string,//the string to be executed
     file_path. //the path to where the string should be stored temporarily so it can be executed.
+	
   if exists(file_path) {
     deletepath(file_path).
   }

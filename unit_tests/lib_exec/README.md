@@ -6,7 +6,7 @@ A unit test for all edge cases of lib_exec I know.
 
 **ATTENTION:** The test is split into several files for the purity of the experiment.
 **DO NOT** run them from one script and **DO NOT** merge them into one file.
-run all three tests from the terminal.
+run all four tests from the terminal.
 
 ### instructions:
 * copy all files from "unit_tests/lib_exec/" and "library/lib_exec.ks"

@@ -68,6 +68,38 @@ assert(recursive(20) = 8).
 set expr to "12 * 3".
 assert(evaluate("evaluate(expr)") = (12 * 3)).
 
+// checking evaluate_function
+
+function sqr {
+  parameter n.
+  return n * n.
+}
+
+assert(evaluate_function("sqr",list(5)) = sqr(5)).
+assert(evaluate_function("sqr",list(10)) = sqr(10)).
+
+//checking recursion
+
+function factorial_exec {
+  parameter n.
+  if n > 1 {
+    return n * evaluate_function("factorial_exec",list(n - 1)).
+  } else {
+    return n.
+  }
+}
+
+function factorial {
+  parameter n.
+  if n > 1 {
+    return n * factorial(n - 1).
+  } else {
+    return n.
+  }
+}
+
+assert(evaluate_function("factorial_exec",list(5)) = factorial(5)).
+
 // case sensitivity check of the caching
 
 execute("set s0 to " + char(34) + char(unchar("A")) + char(34) + ".").
