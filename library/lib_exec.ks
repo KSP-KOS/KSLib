@@ -71,7 +71,9 @@ function evaluate {
 
   execute("global _evaluate_result is " + expression + ".").
   local result is _evaluate_result.
-  unset _evaluate_result.
+  if defined _evaluate_result {
+    unset _evaluate_result.
+  }
   return result.
 }
 
