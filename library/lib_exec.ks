@@ -143,7 +143,7 @@ function set_suffix {
   return result.
 }
 
-local function log_run_del{
+local function log_run_del {
   parameter
     log_string,//the string to be executed
     file_path. //the path to where the string should be stored temporarily so it can be executed.
