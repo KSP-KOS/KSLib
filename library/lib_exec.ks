@@ -31,8 +31,7 @@ if not (defined _past_exec_strings) {
   set _past_exec_strings:casesensitive to true.
 }
 
-function execute
-{
+function execute {
   parameter command.
 
   local filePath IS path().
@@ -67,8 +66,7 @@ function execute
   log_run_del(command,filePath).
 }
 
-function evaluate
-{
+function evaluate {
   parameter expression.
 
   execute("global _evaluate_result is " + expression + ".").
@@ -77,8 +75,7 @@ function evaluate
   return result.
 }
 
-function evaluate_function
-{
+function evaluate_function {
   parameter
     function_name,
     parameter_list.
@@ -87,14 +84,15 @@ function evaluate_function
   local expression is "".
   local separator is "".
   local index is 0.
-  until index = parameter_list:length
-  {
+  until index = parameter_list:length {
     set expression to expression + separator + "_exec__param_list[" + index + "]".
     set separator to ", ".
     set index to index + 1.
   }
   set expression to function_name + "(" + expression + ")".
-  unset _exec__param_list.
+  if defined _exec__param_list {
+    unset _exec__param_list.
+  }
   return evaluate(expression).
 }
 
@@ -122,7 +120,7 @@ function get_suffix {
   log_run_del(logStr + ". }.",filePath).
   local result is _evaluate_result:call(structure).
   if defined _exec__param_list {
-   unset _exec__param_list.
+    unset _exec__param_list.
   }
   return result.
 }
@@ -139,8 +137,7 @@ function set_suffix {
   unset _evaluate_result.
 }
 
-local function log_run_del
-{
+local function log_run_del{
   parameter
     log_string,//the string to be executed
     file_path. //the path to where the string should be stored temporarily so it can be executed.
