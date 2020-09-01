@@ -56,7 +56,7 @@ caveat #3
 ### evaluate
 
 args:
-  * expression - an expression to evaluate. Unlike "command" parameter from function
+  * expression - string, an expression to evaluate. Unlike "command" parameter from function
     `execute` an expression should **not** end with dot: `evaluate("7 * a + 2").`.
 
 returns:
@@ -85,9 +85,9 @@ example:
 ### get_suffix
 
 args:
-  * structure - the structure to get the suffix of
-  * suffix - the suffix to get
-  * parameter_list - if a suffix is a function then this is the ordered list of parameters to be passed to the suffix 0th parameter maps to the 0th item in the list, will be ignored if not of type list, defaulted to `FALSE`
+  * structure - any structure, the structure to get the suffix of
+  * suffix - string, the suffix to get
+  * parameter_list - list of anything, if a suffix is a function then this is the ordered list of parameters to be passed to the suffix 0th parameter maps to the 0th item in the list, will be ignored if not of type list, defaulted to `FALSE`
 
 returns:
   * result - will be what ever the suffix returns
@@ -106,9 +106,9 @@ print body:geopositionlatlng(1,2).
 ### set_suffix
 
 args:
-  * structure, the structure to set the suffix of
-  * suffix, the suffix to set
-  * val, the value to set the suffix to
+  * structure - any structure, the structure to set the suffix of
+  * suffix - string, the suffix to set
+  * val - any structure, the value to set the suffix to
 
 example:
   `set_suffix(core,"tag","lib_exec").`
