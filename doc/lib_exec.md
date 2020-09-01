@@ -7,7 +7,7 @@ As far as I know it works fine in all possible special cases.
 
 #### WARNINGS:
   * this library can fail if there is insufficient free space on the local volume.
-  * this library requires several global variables to work as a result any scripts making use of this library should not use to any of the following variable names: `_exec_idString` , `_evaluate_result` , `_exec__param_list` , `_past_exec_strings`
+  * this library requires several global variables to work. As a result, any scripts making use of this library should not use any of the following variable names: `_exec_idString` , `_evaluate_result` , `_exec__param_list` , `_past_exec_strings`
 
 ### execute
 
