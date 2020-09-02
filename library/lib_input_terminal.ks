@@ -2,135 +2,172 @@
 
 @LAZYGLOBAL OFF.
 
-LOCAL termIn IS TERMINAL:INPUT.
-LOCAL backChar IS termIn:BACKSPACE.
+LOCAL termIn IS TERMINAL:INPUT.     
+LOCAL backChar IS termIn:BACKSPACE. 
 LOCAL delChar IS termIn:DELETERIGHT.
-LOCAL enterChar IS termIn:ENTER.
+LOCAL enterChar IS termIn:ENTER.    
+LOCAL bellChar IS CHAR(7).          
 
-FUNCTION terminal_input {
+FUNCTION terminal_input_string {
   PARAMETER col,
-  row,
-  onlyNum,
-  maxStrLength,
-  returnString IS "",
-  cursorBlink IS TRUE.
-  LOCAL concatenator IS string_concatnation@.
-  IF returnString:ISTYPE("scalar") {
-    LOCAL signChar IS CHOOSE "-" IF returnString < 0 ELSE " ".
-    SET returnString TO ABS(returnString):TOSTRING().
-    IF returnString:CONTAINS("E") {
-      LOCAL strSplit IS returnString:SPLIT("E").
-      LOCAL mantissa IS strSplit[0].
-      LOCAL exponent IS strSplit[1]:TOSCALAR().
-      IF mantissa:MATCHESPATTERN(".") {
-        LOCAL splitMant IS mantissa:SPLIT(".").
-        SET mantissa TO splitMant[0] + splitMant[1].
-        SET exponent TO exponent - splitMant[1]:LENGTH.
-      }
-      IF exponent < 0 {
-        SET returnString TO "0." + (" ":PADRIGHT(ABS(exponent))):REPLACE(" ","0") + mantissa.
-      } ELSE IF exponent > 0 {
-        SET returnString TO mantissa + (" ":PADRIGHT(exponent)):REPLACE(" ","0").
-        print returnString.
-      } ELSE {
-        SET returnString TO mantissa.
-      }
-    }
-    SET returnString TO signChar + returnString.
+    row,
+    maxLength IS (termIn:WIDTH - col),
+    inValue IS "",
+    cursorBlink IS TRUE.
+  
+  IF inValue:ISTYPE("scalar") {
+    SET inValue TO scalar_to_string(inValue).
   }
-  print returnString.
-  IF returnString:LENGTH > maxStrLength {
-    SET returnString TO returnString:SUBSTRING(0,maxStrLength).
+  RETURN input_loop(col,row,maxLength,0,inValue,cursorBlink,string_concatnation@).
+}
+
+FUNCTION terminal_input_number {
+  PARAMETER col,
+    row,
+    maxLength IS (termIn:WIDTH - col),
+    inValue IS " ",
+    cursorBlink IS TRUE.
+  
+  IF inValue:ISTYPE("string") {
+    IF inValue:TOSCALAR(0) = 0 {
+	  SET inValue TO " ".
+	}
   }
-  IF onlyNum {
-    IF (returnString:LENGTH < 1) OR (NOT returnString[0]:MATCHESPATTERN("[ -]")) {
-      SET returnString TO " ".
-    }
-    SET concatenator TO number_concatnation@.
+  IF inValue:ISTYPE("scalar") {
+    SET inValue TO scalar_to_string(inValue).
   }
   
-  LOCAL blinkInter IS 0.5.
+  IF (inValue:LENGTH < 1) OR (NOT inValue[0]:MATCHESPATTERN("[ -]")) {
+    SET inValue TO " ".
+  }
+  RETURN number_protect(input_loop(col,row,maxLength,1,inValue,cursorBlink,number_concatnation@)).
+}
+
+FUNCTION input_loop {
+  PARAMETER col,
+    row,
+    maxLength,
+	minLength,
+    workingStr,
+    cursorBlink,
+    concatenator.
+
+  IF workingStr:LENGTH > maxLength {
+    SET workingStr TO workingStr:SUBSTRING(0,maxLength).
+  }
+  
+  LOCAL blinkInter IS CHOOSE 0.5 IF cursorBlink ELSE 1000.
   LOCAL blinkNextState IS TIME:SECONDS.
-  LOCAL blinkChar IS " ".
+  LOCAL blinkChar IS "_".
   
   LOCAL doPrint IS TRUE.
   LOCAL done IS FALSE.
   UNTIL done {
-    IF cursorBlink {
-      IF blinkNextState < TIME:SECONDS {
-        SET blinkNextState TO blinkNextState + blinkInter.
+    IF blinkNextState < TIME:SECONDS {
+      SET blinkNextState TO blinkNextState + blinkInter.
+      IF cursorBlink {
         SET blinkChar TO CHOOSE "█" IF blinkChar <> "█" ELSE "_".
         SET doPrint TO TRUE.
       }
     }
     IF termIn:HASCHAR {
       LOCAL cha IS termIn:GETCHAR().
-      IF cha <> enterChar {
-        SET returnString TO concatenator(returnString,cha,maxStrLength).
-        SET doPrint TO TRUE.
-      } ELSE {
+      SET doPrint TO TRUE.
+	  
+      IF cha = backChar {
+	    IF workingStr:LENGTH > minLength {
+          SET workingStr TO workingStr:REMOVE(workingStr:LENGTH - 1,1).
+		} ELSE {
+		  PRINT bellChar.
+		}
+      } ELSE IF cha = delChar {
+        SET workingStr TO "".
+		PRINT bellChar.
+      } ELSE IF cha = enterChar {
         SET done TO TRUE.
-        SET doPrint TO TRUE.
         SET blinkChar TO " ".
+      } ELSE {
+        SET workingStr TO concatenator(workingStr,cha,maxLength).
       }
     }
     IF doPrint {
       SET doPrint TO FALSE.
-      LOCAL padChar IS (CHOOSE blinkChar IF returnString:LENGTH < maxStrLength ELSE "").
-      PRINT (returnString + padChar):PADRIGHT(maxStrLength) AT(col,row).
+      LOCAL padChar IS (CHOOSE blinkChar IF workingStr:LENGTH < maxLength ELSE "").
+      PRINT (workingStr + padChar):PADRIGHT(maxLength) AT(col,row).
     }
-    WAIT 0.
+    WAIT UNTIL (termIn:HASCHAR) OR (blinkNextState < TIME:SECONDS) OR done.
   }
-  RETURN CHOOSE number_protect(returnString) IF onlyNum ELSE returnString.
+  RETURN workingStr.
+}
+
+LOCAL FUNCTION scalar_to_string {
+  PARAMETER scalar.
+  LOCAL signChar IS CHOOSE "-" IF scalar < 0 ELSE " ".
+  LOCAL returnStr TO ABS(scalar):TOSTRING().
+  IF returnStr:CONTAINS("E") {
+    LOCAL strSplit IS returnStr:SPLIT("E").
+    LOCAL mantissa IS strSplit[0].
+    LOCAL exponent IS strSplit[1]:TOSCALAR().
+    IF mantissa:MATCHESPATTERN(".") {
+      LOCAL splitMant IS mantissa:SPLIT(".").
+      SET mantissa TO splitMant[0] + splitMant[1].
+      SET exponent TO exponent - splitMant[1]:LENGTH.
+    }
+    IF exponent < 0 {
+      SET returnStr TO "0." + (" ":PADRIGHT(ABS(exponent))):REPLACE(" ","0") + mantissa.
+    } ELSE IF exponent > 0 {
+      SET returnStr TO mantissa + (" ":PADRIGHT(exponent)):REPLACE(" ","0").
+    } ELSE {
+      SET returnStr TO mantissa.
+    }
+  }
+  RETURN signChar + returnStr.
+}
+
+LOCAL FUNCTION number_protect {
+  PARAMETER curentStr.
+  IF curentStr:LENGTH <= 1 {
+    RETURN " 0".
+  }
+  IF curentStr[curentStr:LENGTH - 1] = "." {
+    RETURN number_protect(curentStr:REMOVE(curentStr:LENGTH - 1,1)).
+  }
+  RETURN curentStr.
 }
 
 LOCAL FUNCTION number_concatnation {
-  PARAMETER curentString,//expects " " as the base string to start with
+  PARAMETER curentStr,//expects " " as the base string to start with
   cha,
   maxLength.
-   IF (cha = backChar) AND (curentString:LENGTH > 1)  {
-    RETURN curentString:REMOVE(curentString:LENGTH - 1,1).
-  }
-  IF cha = delChar {
-    SET curentString TO " ".
+  IF curentStr:LENGTH < 1 {
+    SET curentStr TO " ".
   }
   IF cha:MATCHESPATTERN("[0-9-.+]") {
-    IF curentString:LENGTH < maxLength {
+    IF curentStr:LENGTH < maxLength {
       IF cha:MATCHESPATTERN("[0-9]") {
-        RETURN curentString + cha.
+        RETURN curentStr + cha.
       } ELSE IF cha = "." {
-        IF curentString:CONTAINS(".") {
-          RETURN curentString.
-        } ELSE {
-          RETURN curentString + cha.
+        IF NOT curentStr:CONTAINS(".") {
+          RETURN curentStr + cha.
         }
       }
     }
     IF cha = "-" OR cha = "+" {
-      IF curentString:CONTAINS("-") OR cha = "+" {
-        RETURN " " + curentString:REMOVE(0,1).
+      IF curentStr:CONTAINS("-") OR cha = "+" {
+        RETURN " " + curentStr:REMOVE(0,1).
       } ELSE {
-        RETURN cha + curentString:REMOVE(0,1).
+        RETURN cha + curentStr:REMOVE(0,1).
       }
     }
   }
-  PRINT CHAR(7).
-  RETURN curentString.
-}
-
-FUNCTION number_protect {
-  PARAMETER curentString.
-  IF curentString:LENGTH <= 1 {
-    RETURN " 0".
-  }
-  IF curentString[curentString:LENGTH - 1] = "." {
-    RETURN number_protect(curentString:REMOVE(curentString:LENGTH - 1,1)).
-  }
-  RETURN curentString.
+  PRINT bellChar.
+  RETURN curentStr.
 }
 
 LOCAL toIgnore IS LIST(
   CHAR(127),
+  delChar,
+  backChar,
   termIn:UPCURSORONE,
   termIn:DOWNCURSORONE,
   termIn:LEFTCURSORONE,
@@ -141,20 +178,14 @@ LOCAL toIgnore IS LIST(
   termIn:PAGEUPCURSOR
 ).
 LOCAL FUNCTION string_concatnation {
-  PARAMETER curentString,
+  PARAMETER curentStr,
   cha,
   maxLength.
-  IF (cha = backChar) AND (curentString:LENGTH > 0) {
-    RETURN curentString:REMOVE(curentString:LENGTH - 1,1).
-  }
-  IF cha = delChar {
-    SET curentString TO "".
-  }
   IF (UNCHAR(cha) > 31) AND (NOT toIgnore:CONTAINS(cha)) {
-    IF curentString:LENGTH < maxLength {
-      RETURN curentString + cha.
+    IF curentStr:LENGTH < maxLength {
+      RETURN curentStr + cha.
     }
   }
-  PRINT CHAR(7).
-  RETURN curentString.
+  PRINT bellChar.
+  RETURN curentStr.
 }

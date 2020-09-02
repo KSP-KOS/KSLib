@@ -32,10 +32,10 @@ PRINT "|the 'number0' field after enter is pressed.|".
 PRINT "+-------------------------------------------+".
 
 LOCAL fields IS LEXICON(
-	"number0",LEXICON("maxLength",5,"col",10,"row",1,"str"," 1","isNum",TRUE),
-	"number1",LEXICON("maxLength",9,"col",10,"row",3,"str"," 2","isNum",TRUE),
-	"string0",LEXICON("maxLength",9,"col",10,"row",2,"str","Hello","isNum",FALSE),
-	"string1",LEXICON("maxLength",32,"col",10,"row",4,"str","World","isNum",FALSE)
+	"number0",LEXICON("maxLength",5,"col",10,"row",1,"str"," 1","isNum",TRUE,"inFunction",terminal_input_number@),
+	"number1",LEXICON("maxLength",9,"col",10,"row",3,"str"," 2","isNum",TRUE,"inFunction",terminal_input_number@),
+	"string0",LEXICON("maxLength",9,"col",10,"row",2,"str","Hello","isNum",FALSE,"inFunction",terminal_input_string@),
+	"string1",LEXICON("maxLength",32,"col",10,"row",4,"str","World","isNum",FALSE,"inFunction",terminal_input_string@)
 ).
 LOCAL exitWords IS LIST(
 	"quit",
@@ -48,9 +48,9 @@ LOCAL terminalData IS LIST(prompt).
 LOCAL terminalRowStart IS 5.
 LOCAL termPos IS 0.
 LOCAL inField IS "".
+LOCAL inFunction IS terminal_input_string@.
 LOCAL fieldStr IS "".
 LOCAL maxIn IS 45.
-LOCAL isNum IS FALSE.
 FOR key IN fields:KEYS {
 	LOCAL field IS fields[key].
 	PRINT (field["str"]) AT(field["col"],field["row"]).
@@ -64,7 +64,7 @@ UNTIL quit OR RCS {
 		PRINT "|" + line:PADRIGHT(43) + "|" AT(0,terminalRowStart + termPos).
 	}
 	LOCAL indentation IS terminalData[terminalData:LENGTH - 1]:LENGTH + 1.
-	LOCAL inString IS terminal_input(indentation,terminalRowStart + termPos,isNum,MIN(44 - indentation,maxIn),fieldStr).
+	LOCAL inString IS inFunction(indentation,terminalRowStart + termPos,MIN(44 - indentation,maxIn),fieldStr).
 	SET terminalData[terminalData:LENGTH - 1] TO terminalData[terminalData:LENGTH - 1] + inString.
 	
 	IF inField <> "" {
@@ -73,14 +73,14 @@ UNTIL quit OR RCS {
 		PRINT (field["str"]):PADRIGHT(maxIn - 1) AT(field["col"],field["row"]).
 		terminalData:ADD(prompt).
 		SET inField TO "".
-		SET fieldStr TO "".
 		SET maxIn TO 45.
-		SET isNum TO FALSE.
+		SET inFunction TO terminal_input_string@.
+		SET fieldStr TO "".
 	} ELSE IF fields:HASKEY(inString) {
 		SET inField TO inString.
 		LOCAL field IS fields[inField].
 		SET maxIn TO field["maxLength"].
-		SET isNum TO field["isNum"].
+		SET inFunction TO field["inFunction"].
 		SET fieldStr TO field["str"].
 		terminalData:ADD(":" + inString + prompt).
 	} ELSE IF exitWords:CONTAINS(inString) {
