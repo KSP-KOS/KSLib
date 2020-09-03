@@ -108,13 +108,13 @@ LOCAL FUNCTION scalar_to_string {
     LOCAL strSplit IS returnStr:SPLIT("E").
     LOCAL mantissa IS strSplit[0].
     LOCAL exponent IS strSplit[1]:TOSCALAR().
-    IF mantissa:MATCHESPATTERN(".") {
+    IF mantissa:CONTAINS(".") {
       LOCAL splitMant IS mantissa:SPLIT(".").
       SET mantissa TO splitMant[0] + splitMant[1].
       SET exponent TO exponent - splitMant[1]:LENGTH.
     }
     IF exponent < 0 {
-      SET returnStr TO "0." + (" ":PADRIGHT(ABS(exponent))):REPLACE(" ","0") + mantissa.
+      SET returnStr TO "0." + (" ":PADRIGHT(ABS(exponent + 1))):REPLACE(" ","0") + mantissa.
     } ELSE IF exponent > 0 {
       SET returnStr TO mantissa + (" ":PADRIGHT(exponent)):REPLACE(" ","0").
     } ELSE {
