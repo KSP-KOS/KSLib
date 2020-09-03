@@ -11,7 +11,7 @@ LOCAL bellChar IS CHAR(7).
 FUNCTION terminal_input_string {
   PARAMETER col,
     row,
-    maxLength IS (termIn:WIDTH - col),
+    maxLength IS (TERMINAL:WIDTH - col),
     inValue IS "",
     cursorBlink IS TRUE.
   
@@ -24,14 +24,14 @@ FUNCTION terminal_input_string {
 FUNCTION terminal_input_number {
   PARAMETER col,
     row,
-    maxLength IS (termIn:WIDTH - col),
+    maxLength IS (TERMINAL:WIDTH - col),
     inValue IS " ",
     cursorBlink IS TRUE.
   
   IF inValue:ISTYPE("string") {
     IF inValue:TOSCALAR(0) = 0 {
-	  SET inValue TO " ".
-	}
+      SET inValue TO " ".
+    }
   }
   IF inValue:ISTYPE("scalar") {
     SET inValue TO scalar_to_string(inValue).
@@ -47,7 +47,7 @@ FUNCTION input_loop {
   PARAMETER col,
     row,
     maxLength,
-	minLength,
+    minLength,
     workingStr,
     cursorBlink,
     concatenator.
@@ -73,16 +73,16 @@ FUNCTION input_loop {
     IF termIn:HASCHAR {
       LOCAL cha IS termIn:GETCHAR().
       SET doPrint TO TRUE.
-	  
+      
       IF cha = backChar {
-	    IF workingStr:LENGTH > minLength {
+        IF workingStr:LENGTH > minLength {
           SET workingStr TO workingStr:REMOVE(workingStr:LENGTH - 1,1).
-		} ELSE {
-		  PRINT bellChar.
-		}
+        } ELSE {
+          PRINT bellChar.
+        }
       } ELSE IF cha = delChar {
         SET workingStr TO "".
-		PRINT bellChar.
+        PRINT bellChar.
       } ELSE IF cha = enterChar {
         SET done TO TRUE.
         SET blinkChar TO " ".
