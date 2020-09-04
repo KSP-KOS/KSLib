@@ -126,11 +126,14 @@ LOCAL FUNCTION scalar_to_string {
 
 LOCAL FUNCTION number_protect {
   PARAMETER curentStr.
-  IF curentStr:LENGTH <= 1 {
+  IF curentStr:LENGTH <= 1 { 
     RETURN " 0".
   }
   IF curentStr[curentStr:LENGTH - 1] = "." {
     RETURN number_protect(curentStr:REMOVE(curentStr:LENGTH - 1,1)).
+  }
+  IF curentStr:TOSCALAR(0) = 0 { 
+    RETURN " 0".
   }
   RETURN curentStr.
 }
