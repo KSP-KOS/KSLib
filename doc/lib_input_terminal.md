@@ -46,7 +46,7 @@ returns:
 description:
   This function takes key presses on the kOS terminal and adds them into a single string for displaying a number.  As such this function only works with a limited set of keys. The keys it will add to the string are "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", and "." with "+" and "-" for denoting sign.
   While the string is being added to it will be printed on the terminal at the location set by the arguments.
-  On return there is the function will try to format the string so that is should be directly usable by the `:TOSCALAR()` suffix should the string fail it defaults to returning " 0"
+  The function will also try to format the string so that it can be directly converted into a scalar by the `:TOSCALAR()` suffix. Should the formatting fail, " 0" is returned by default.
   There is only allowed to be one "." character in a string at a time if a second "." is entered it will be ignored.
   The control keys that are recognized by this function are "+", "-", backspace, delete, and enter/return.
     Pressing "-" will change the first character of the string from "-" to " " or " " to "-".
