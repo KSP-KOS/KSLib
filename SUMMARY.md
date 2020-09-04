@@ -33,7 +33,8 @@ This is an attempt at summarising and categorising the libraries by their use ca
 ### Terminal Utilities
 1. [lib_gui_box.ks](https://github.com/KSP-KOS/KSLib/blob/master/library/lib_gui_box.ks) / [docs](https://github.com/KSP-KOS/KSLib/blob/master/doc/lib_gui_box.md) : draws ASCII boxes in the terminal.
 2. [lib_input_string.ks](https://github.com/KSP-KOS/KSLib/blob/master/library/lib_input_string.ks) / [docs](https://github.com/KSP-KOS/KSLib/blob/master/doc/lib_input_string.md) : creates an on-screen keyboard inside the terminal.
-3. [lib_input_terminal](https://github.com/KSP-KOS/KSLib/blob/master/library/lib_input_terminal.ks) / [docks](https://github.com/KSP-KOS/KSLib/blob/master/doc/lib_input_terminal.md) : for string input by typing in the terminal.
+3. [lib_input_terminal](https://github.com/KSP-KOS/KSLib/blob/master/library/lib_input_terminal.ks) / [docs](https://github.com/KSP-KOS/KSLib/blob/master/doc/lib_input_terminal.md) : for string input by typing in the terminal.
+
 4. [lib_list_dialog.ks](https://github.com/KSP-KOS/KSLib/blob/master/library/lib_list_dialog.ks) / [docs](https://github.com/KSP-KOS/KSLib/blob/master/doc/lib_list_dialog.md) : helps with long list navigation.
 5. [lib_menu.ks](https://github.com/KSP-KOS/KSLib/blob/master/library/lib_menu.ks) / [docs](https://github.com/KSP-KOS/KSLib/blob/master/doc/lib_menu.md) : draws an interactive menu in the terminal.
 6. [lib_num_to_formatted_str.ks](https://github.com/KSP-KOS/KSLib/blob/master/library/lib_num_to_formatted_str.ks) / [docs](https://github.com/KSP-KOS/KSLib/blob/master/doc/lib_num_to_formatted_str.md) : provides functions to format numbers and date-time values in standard formats. For example, numbers with given digit precision and SI unit, time broken into years, months, days etc.
