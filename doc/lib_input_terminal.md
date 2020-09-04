@@ -73,7 +73,7 @@ description:
   This function reads the key presses and stores the current string until the loop is ended by pressing enter.
   While the current string is being added to it will be printed on the terminal at the location set by the arguments.
   The concatenator function gets passed the current string, non-control key presses, and maxLength.
-    It is responsible for the rules of what a given key press will do do the current string and keeping the string from getting larger than maxLength.  It is expected to return the result of applying a key press back to `input_loop` to be stored as the current string.
+    It is responsible for the rules of what a given key press will do to the current string and keeping the string from getting larger than maxLength.  It is expected to return the processed string back to `input_loop` - to be stored as the current string.
   The control keys that are recognized by this function are backspace, delete, and enter/return.
     Pressing enter/return ends the loop and returns the current string.
     Pressing backspace removes the last character from the current string until the string length is less than or equal to minLength
