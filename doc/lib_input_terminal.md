@@ -20,7 +20,7 @@ returns:
   A string
   
 description:
-  This function takes key presses on the kOS terminal and adds them into a single string until the user presses enter to end return the string.
+  This function takes key presses on the kOS terminal and adds them into a single string until the user presses enter to stop and return the string.
   While the string is being added to it will be printed on the terminal at the location set by the arguments.
   The control keys that are recognized by this function are backspace, delete, and enter/return.
     Pressing enter/return ends the loop and returns the current string.
