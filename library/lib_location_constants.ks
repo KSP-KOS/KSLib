@@ -1,6 +1,6 @@
 @LAZYGLOBAL off.
 
-Global LocationConstants is lex(
+global LocationConstants is lex(
   // vertical landing locations
   "launchpad", Kerbin:GeoPositionLatLng(-0.0972, -74.5577),
   "woomerang_launchpad", Kerbin:GeoPositionLatLng(45.2896, 136.1100),
@@ -23,12 +23,12 @@ Global LocationConstants is lex(
 ).
 
 // aliases
-Set LocationConstants["runway_start"] to LocationConstants["runway_09_start"].
-Set LocationConstants["reverse_runway_start"] to LocationConstants["runway_27_start"].
+set LocationConstants["runway_start"] to LocationConstants["runway_09_start"].
+set LocationConstants["reverse_runway_start"] to LocationConstants["runway_27_start"].
 
-For key in LocationConstants:keys {
-  If key:contains("desert") {
-    Local alias to key:replace("desert", "dessert").
-    Set LocationConstants[alias] to LocationConstants[key].
+for key in LocationConstants:keys {
+  if key:contains("desert") {
+    local alias to key:replace("desert", "dessert").
+    set LocationConstants[alias] to LocationConstants[key].
   }.
 }.
