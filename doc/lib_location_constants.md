@@ -5,7 +5,7 @@ would be relatively easy to locate for players flying manually (i.e., without
 the use of scripting mods such as kOS). The locations in this file are not
 authoritative; feel free to submit updates if you find them inaccurate.
 Additions (new locations, including on bodies other than Kerbin or even
-non-stock bodies) are welcome,
+on non-stock bodies such as Earth or Gael) are welcome,
 but you are advised to check with the KSLib developers (e.g., by submitting a
 feature request) before adding locations of easter eggs that were originally
 intended to be difficult to locate.
@@ -23,7 +23,7 @@ intended to be difficult to locate.
   (although the same could be said for playing KSP). Warning: landing here will
   **not** allow you to recover 100% funds.
 
-#### Runway naming convention
+### Runway naming convention
 
 **tl;dr** `runway_start` is where airplanes normally spawn;
 `reverse_runway_start` is where you want to land if you are heading west
@@ -34,6 +34,8 @@ For more details, consider the relevant
 as of 6 Sept 2020:
 
 >  A runway numbered 09 points east (90°), runway 18 is south (180°), runway 27 points west (270°) and runway 36 points to the north (360° rather than 0°). When taking off from or landing on runway 09, a plane is heading around 90° (east). A runway can normally be used in both directions, and is named for each direction separately: e.g., "runway 15" in one direction is "runway 33" when used in the other. The two numbers differ by 18 (= 180°).
+
+### Horizontal landing locations
 
 * `LocationConstants:dessert_runway_18_start`: alias for
   `desert_runway_18_start`
