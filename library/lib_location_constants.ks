@@ -12,6 +12,7 @@ if bodyexists("kerbin") and bodyexists("mun") and bodyexists("minmus") {//check 
   kerbinLocations:add("woomerang_launchpad", Kerbin:GeoPositionLatLng(45.2896, 136.1100)).
   kerbinLocations:add("desert_launchpad", Kerbin:GeoPositionLatLng(-6.5604, -143.9500)).
   kerbinLocations:add("VAB", Kerbin:GeoPositionLatLng(-0.0968, -74.6187)).
+  location_constants:add("launchpad",kerbinLocations["launchpad"]).
 
   // horizontal landing locations
   kerbinLocations:add("runway_09_start", Kerbin:GeoPositionLatLng(-0.0486, -74.7247)).

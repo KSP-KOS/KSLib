@@ -5,12 +5,15 @@ The locations in this file are not authoritative; feel free to submit updates if
 Additions (new locations, including on bodies other than Kerbin or even on non-stock bodies such as Earth or Gael) are welcome,
 but you are advised to check with the KSLib developers (e.g., by submitting a feature request) before adding locations of easter eggs that were originally intended to be difficult to locate.
 
-### Runway naming conventions
+### default names
 
 If there is a defined default location for your solar system in the lib then 
 
 * `location_constants:runway_start` is the default location where airplanes normally spawn.
 * `location_constants:reverse_runway_start` is the other end of the runway where airplanes normally spawn.
+* `location_constants:launchpad` is the default location where rockets normallly spawn.
+
+### Runway naming conventions
 
 More detailed locations are described using the runway heading standards.
 [Wikipedia passage](https://en.wikipedia.org/wiki/Runway#Runway_headings)
@@ -20,10 +23,11 @@ as of 6 Sept 2020:
 
 ### Kerbin locations
 
-If using the stock KSP solar system then the default runway locations are on kerbin the exact location is defined in the **horizontal landing locations** section below
+If using the stock KSP solar system then the default locations are on kerbin the exact location is defined below as `location_constants:launchpad`,`location_constants:runway_start`, and `location_constants:reverse_runway_start`
 
 #### Vertical landing locations
 
+* `location_constants:launchpad`: alias for `launchpad`
 * `location_constants:kerbin:launchpad`: the geolocation of the launchpad
 * `location_constants:kerbin:woomerang_launchpad`: the geolocation of the Woomerang launchpad (northern launchpad surrounded by mountains)
 * `location_constants:kerbin:dessert_launchpad`: alias for `desert_launchpad`
