@@ -11,7 +11,7 @@ If there is a defined default location for your solar system in the lib then
 
 * `location_constants:runway_start` is the default location where airplanes normally spawn.
 * `location_constants:reverse_runway_start` is the other end of the runway where airplanes normally spawn.
-* `location_constants:launchpad` is the default location where rockets normallly spawn.
+* `location_constants:launchpad` is the default location where rockets normally spawn.
 
 ### Runway naming conventions
 

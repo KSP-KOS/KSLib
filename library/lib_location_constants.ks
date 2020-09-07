@@ -35,7 +35,7 @@ if bodyexists("kerbin") and bodyexists("mun") and bodyexists("minmus") {//check 
 }
 
 // aliases
-until not aliasing(location_constants).
+until not aliasing(location_constants) {}.
 
 local function aliasing {
   parameter locationConstants.
