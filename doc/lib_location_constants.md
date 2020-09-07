@@ -9,8 +9,8 @@ but you are advised to check with the KSLib developers (e.g., by submitting a fe
 
 If there is a defined default location for your solar system in the lib then 
 
-`location_constants:runway_start` is the default location where airplanes normally spawn.
-`location_constants:reverse_runway_start` is the other end of the runway where airplanes normally spawn.
+* `location_constants:runway_start` is the default location where airplanes normally spawn.
+* `location_constants:reverse_runway_start` is the other end of the runway where airplanes normally spawn.
 
 More detailed locations are described using the runway heading standards.
 [Wikipedia passage](https://en.wikipedia.org/wiki/Runway#Runway_headings)
