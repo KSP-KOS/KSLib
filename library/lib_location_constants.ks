@@ -54,17 +54,17 @@ local function aliasing {
         }
 
         if currentKey:matchespattern("runway_\d{1,2}_start$") {//runway_##_end aliasing
-          local splitKey is currentKey:split("_").
-          local currentNum is splitKey[splitKey:length - 2].
-          local reverseNum is MOD(currentNum:toscalar(0) + 18,36):tostring.
-          if reverseNum = "0" { set reverseNum to "36". }
-          local reverseStr is currentKey:replace(currentNum,reverseNum).
-          if not bodyLex:haskey(reverseStr) {
-            set reverseStr to currentKey:replace(currentNum,"0" + reverseNum).
-          }
-          if bodyLex:haskey(reverseStr) {
-            local alias is currentKey:replace("start", "end").
-            if not bodyLex:haskey(alias) {
+          local alias is currentKey:replace("start", "end").
+          if not bodyLex:haskey(alias) {
+            local splitKey is currentKey:split("_").
+            local currentNum is splitKey[splitKey:length - 2].
+            local reverseNum is MOD(currentNum:toscalar(0) + 18,36):tostring.
+            if reverseNum = "0" { set reverseNum to "36". }
+            local reverseStr is currentKey:replace(currentNum,reverseNum).
+            if not bodyLex:haskey(reverseStr) {
+              set reverseStr to currentKey:replace(currentNum,"0" + reverseNum).
+            }
+            if bodyLex:haskey(reverseStr) {
               bodyLex:add(alias,bodyLex[reverseStr]).
               set didChange to true.
             }
