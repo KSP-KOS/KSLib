@@ -1,6 +1,8 @@
 @LAZYGLOBAL off.
 
 global location_constants is lex().
+//runways should be added in this pattern "name_runway_##_start" where name is the name of the runway and ## is the runway number
+//  If not added with this pattern then the automatic alias creation that add an end position based on the start of the same name but opposite number will fail
 
 if bodyexists("kerbin") and bodyexists("mun") and bodyexists("minmus") {//check for if the craft is in the stock solar system
   local kerbinLocations is lex().
@@ -40,6 +42,22 @@ for key in location_constants:keys {
       local alias to currentKey:replace("desert", "dessert").
       if not bodyLex:haskey(alias) {
         bodyLex:add(alias,bodyLex[currentKey]).
+      }
+    }
+
+    if currentKey:matchespattern(".*runway_\d{1,2}_start$") {//runway_##_end aliasing
+      local splitKey is currentKey:split("_").
+      local currentNum is splitKey[splitKey:length - 2].
+      local reverseNum is MOD(currentNum:toscalar(0) + 18,36):tostring.
+      local reverseStr is currentKey:replace(currentNum,reverseNum).
+      if not bodyLex:haskey(reverseStr) {
+        set reverseStr to currentKey:replace(currentNum,reverseNum:padleft(2):replace(" ","0")).
+      }
+      if bodyLex:haskey(reverseStr) {
+        local alias is currentKey:replace("start", "end").
+        if not bodyLex:haskey(alias) {
+          bodyLex:add(alias,bodyLex[reverseStr]).
+        }
       }
     }
   }
