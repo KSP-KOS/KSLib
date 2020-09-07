@@ -26,8 +26,8 @@ if bodyexists("kerbin") and bodyexists("mun") and bodyexists("minmus") {//check 
   kerbinLocations:add("desert_runway_36_start", Kerbin:GeoPositionLatLng(-6.5998, -144.0409)).
   kerbinLocations:add("desert_runway_18_start", Kerbin:GeoPositionLatLng(-6.4480, -144.0383)).
   
-  kerbinLocations:add("runway_start",kerbinLocations["runway_09_start"]).
-  kerbinLocations:add("reverse_runway_start",kerbinLocations["runway_27_start"]).
+  location_constants:add("runway_start",kerbinLocations["runway_09_start"]).
+  location_constants:add("reverse_runway_start",kerbinLocations["runway_27_start"]).
   
   location_constants:ADD("kerbin",kerbinLocations).
 }
@@ -38,7 +38,7 @@ for key in location_constants:keys {
   from { local i is 0. } until i >= bodyLex:keys:length step { set i to i + 1. } do {
     local currentKey is bodyLex:keys[i].
     
-    if currentKey:contains("desert") {// desert to dessert aliasing 
+    if currentKey:contains("desert") {//desert to dessert aliasing 
       local alias to currentKey:replace("desert", "dessert").
       if not bodyLex:haskey(alias) {
         bodyLex:add(alias,bodyLex[currentKey]).
