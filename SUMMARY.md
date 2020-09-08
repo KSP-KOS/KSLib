@@ -21,8 +21,9 @@ This is an attempt at summarising and categorising the libraries by their use ca
 
 ### Navigation
 1. [lib_circle_nav.ks](https://github.com/KSP-KOS/KSLib/blob/master/library/lib_circle_nav.ks) / [docs](https://github.com/KSP-KOS/KSLib/blob/master/doc/lib_circle_nav.md) : provides functions to help with great circle / geodesic navigation while in atmosphere or the surface. For example, finding out the compass heading of a waypoint to fly there along the shortest path.
-2. [lib_navball.ks](https://github.com/KSP-KOS/KSLib/blob/master/library/lib_navball.ks) / [docs](https://github.com/KSP-KOS/KSLib/blob/master/doc/lib_navball.md) : provides various navball state values (heading, pitch, roll, etc) of several kOS structures that can be considered to have such state.
-3. [lib_navigation.ks](https://github.com/KSP-KOS/KSLib/blob/master/library/lib_navigation.ks) / [docs](https://github.com/KSP-KOS/KSLib/blob/master/doc/lib_navigation.md) : provides a range of functions to used in calculations of both space, atmospheric and surface navigation.
+2. [lib_location_constants.ks](https://github.com/KSP-KOS/KSLib/blob/master/library/lib_location_constants.ks) / [docs](https://github.com/KSP-KOS/KSLib/blob/master/doc/lib_location_constants.md) : provides latitude longitude values for various locations on some bodies.
+3. [lib_navball.ks](https://github.com/KSP-KOS/KSLib/blob/master/library/lib_navball.ks) / [docs](https://github.com/KSP-KOS/KSLib/blob/master/doc/lib_navball.md) : provides various navball state values (heading, pitch, roll, etc) of several kOS structures that can be considered to have such state.
+4. [lib_navigation.ks](https://github.com/KSP-KOS/KSLib/blob/master/library/lib_navigation.ks) / [docs](https://github.com/KSP-KOS/KSLib/blob/master/doc/lib_navigation.md) : provides a range of functions to used in calculations of both space, atmospheric and surface navigation.
 
 ### Programming Utilities
 1. [lib_exec.ks](https://github.com/KSP-KOS/KSLib/blob/master/library/lib_exec.ks) / [docs](https://github.com/KSP-KOS/KSLib/blob/master/doc/lib_exec.md) : allows executing commands and evaluating expressions from strings.
