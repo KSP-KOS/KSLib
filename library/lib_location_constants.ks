@@ -55,6 +55,7 @@ local function aliasing {
 
         if currentKey:matchespattern("runway_\d{1,2}_start$") {//runway_##_end aliasing
           local alias is currentKey:replace("start", "end").
+          // now find the key that `alias` is an alias of
           if not bodyLex:haskey(alias) {
             local splitKey is currentKey:split("_").
             local currentNum is splitKey[splitKey:length - 2].
