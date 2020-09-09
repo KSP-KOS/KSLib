@@ -5,7 +5,7 @@ global location_constants is lex().
 //runways should be added in this pattern "name_runway_##_start" where name is the name of the runway and ## is the runway number
 //  If not added with this pattern then the automatic alias creation that add an end position based on the start of the same name but opposite number will fail
 
-if bodyexists("Sun") and body("Sun"):radius = 261_600_000 {//check for if the craft is in the stock solar system
+if bodyexists("Sun") and body("Sun"):radius = 261_600_000 and bodyexists("Kerbin") {//check for if the craft is in the stock solar system
   local kerbinLocations is lex().
   // vertical landing locations
   kerbinLocations:add("launchpad", Kerbin:GeoPositionLatLng(-0.0972, -74.5577)).
@@ -35,7 +35,7 @@ if bodyexists("Sun") and body("Sun"):radius = 261_600_000 {//check for if the cr
 }
 
 // JNSQ locations
-if bodyexists("Sun") and body("Sun"):radius = 175_750_000 {
+if bodyexists("Sun") and body("Sun"):radius = 175_750_000 and bodyexists("Kerbin") {
   local kerbinLocations is lex().
   // vertical landing locations
   kerbinLocations:add("launchpad", Kerbin:GeoPositionLatLng(-1.75133971218638E-08,-91.7839867917987)).
@@ -65,8 +65,9 @@ if bodyexists("Sun") and body("Sun"):radius = 175_750_000 {
 }
 
 // RealSolarSystem locations
-if bodyexists("Sun") and body("Sun"):radius = 696_342_000 {
-  local earthLocations is lex().
+if bodyexists("Sun") and body("Sun"):radius = 696_342_000 and bodyexists("Earth") {
+  // local earthLocations is lex().
+  // TODO: populate at least the most commonly used of the RealSolarSystem locations.
 }
 
 // aliases
