@@ -5,7 +5,7 @@ The locations in this file are not authoritative; feel free to submit updates if
 Additions (new locations, including on bodies other than Kerbin or even on non-stock bodies such as Earth or Gael) are welcome,
 but you are advised to check with the KSLib developers (e.g., by submitting a feature request) before adding locations of easter eggs that were originally intended to be difficult to locate.
 
-### default names
+### Default names
 
 If there is a defined default location for your solar system in the lib then 
 
@@ -23,7 +23,7 @@ as of 6 Sept 2020:
 
 ### Kerbin locations
 
-If using the stock KSP solar system then the default locations are on kerbin the exact location is defined below as `location_constants:launchpad`,`location_constants:runway_start`, and `location_constants:reverse_runway_start`
+If using the stock KSP solar system or the JNSQ system, the default locations are on Kerbin. The exact locations are defined below as `location_constants:launchpad`, `location_constants:runway_start` and `location_constants:reverse_runway_start`.
 
 #### Vertical landing locations
 
@@ -42,11 +42,11 @@ If using the stock KSP solar system then the default locations are on kerbin the
 * `location_constants:reverse_runway_start`: alias for `runway_27_start`.
 
 * `location_constants:kerbin:dessert_runway_18_start`: alias for `desert_runway_18_start`
-* `location_constants:kerbin:desert_runway_18_start`: start of the desert runway when heading north. Roughly where planes spawn when "Dessert Airfield" is selected (only possible if you have the Making History DLC and have adjusted your difficulty settings to allow spawning in other sites).
+* `location_constants:kerbin:desert_runway_18_start`: start of the desert runway when heading south. Roughly where planes spawn when "Dessert Airfield" is selected (only possible if you have the Making History DLC and have adjusted your difficulty settings to allow spawning in other sites).
 * `location_constants:kerbin:dessert_runway_18_end`: alias for `desert_runway_36_start`
 * `location_constants:kerbin:desert_runway_18_end`: alias for `desert_runway_36_start`
 * `location_constants:kerbin:dessert_runway_36_start`: alias for `desert_runway_36_start`
-* `location_constants:kerbin:desert_runway_36_start`: start of the desert runway when heading south.
+* `location_constants:kerbin:desert_runway_36_start`: start of the desert runway when heading north.
 * `location_constants:kerbin:desert_runway_36_end`: alias for `desert_runway_18_start`
 * `location_constants:kerbin:dessert_runway_36_end`: alias for `desert_runway_18_start`
 * `location_constants:kerbin:island_runway_09_start`: start of the island runway when heading east.
@@ -66,7 +66,7 @@ If using the stock KSP solar system then the default locations are on kerbin the
 * `location_constants:kerbin:l2_runway_27_end`: alias for `l2_runway_09_start`
 * `location_constants:kerbin:runway_09_start`: start of the fully upgraded KSC runway.
 * `location_constants:kerbin:runway_09_end`: alias for `runway_27_start`
-* `location_constants:kerbin:runway_27_start`: start of the KSC runway when headed
+* `location_constants:kerbin:runway_27_start`: start of the KSC runway when heading west.
 * `location_constants:kerbin:runway_27_end`: alias for `runway_09_start` west (toward the mountains).
 * `location_constants:kerbin:runway_09_overrun`: The "lip" of the fully-upgraded KSC runway. Certain plane designs that can maintain level flight but cannot pitch up while landed should start pitching up when their wheels pass `runway_09_end`, since the lip will leave them airborne for a moment.
 * `location_constants:kerbin:runway_27_overrun`: The lip of the fully-upgraded KSC runway when headed toward the mountains. Mostly included for symmetry.
