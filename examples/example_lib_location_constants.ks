@@ -1,6 +1,6 @@
 @LAZYGLOBAL off.
 
-runpath("0:/KSLib/library/lib_location_constants").
+runpath("lib_location_constants.ks").
 
 // Compute the distance from the launch pad to the middle of the runway.
 
