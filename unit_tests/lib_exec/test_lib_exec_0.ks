@@ -68,21 +68,77 @@ assert(recursive(20) = 8).
 set expr to "12 * 3".
 assert(evaluate("evaluate(expr)") = (12 * 3)).
 
+// checking evaluate_function
+
+function sqr {
+  parameter n.
+  return n * n.
+}
+
+assert(evaluate_function("sqr",list(5)) = sqr(5)).
+assert(evaluate_function("sqr",list(10)) = sqr(10)).
+
+//checking recursion
+
+function factorial_exec {
+  parameter n.
+  if n > 1 {
+    return n * evaluate_function("factorial_exec",list(n - 1)).
+  } else {
+    return n.
+  }
+}
+
+function factorial {
+  parameter n.
+  if n > 1 {
+    return n * factorial(n - 1).
+  } else {
+    return n.
+  }
+}
+
+assert(evaluate_function("factorial_exec",list(5)) = factorial(5)).
+
+// case sensitivity check of the caching
+
+execute("set s0 to " + char(34) + char(unchar("A")) + char(34) + ".").
+set s1 to s0.
+execute("set s0 to " + char(34) + char(unchar("a")) + char(34) + ".").
+assert(unchar(s0) <> unchar(s1)).
+
 // need to be able to run execute function many times thus this test checks you can.
 
 global i is 0.
 local y is 0.
-until i >= 500 {//this may take time
+until i >= 500 {//checks repetition of the same execution string,this may take time
   execute("set i to i + 1.").
-  if y > 3000 {
+  if y > 600 {
     break.
   } else {
     set y to y + 1.
   }
+  assert(i = y).
 }
-assert(i >= 500).
-IF DEFINED i { unset i. }
-IF DEFINED y { unset y. }
+assert(y = 500).
+
+set i to 0.
+set z to 0.
+
+until i >= 500 {//checks repetition of unique execution strings
+  if z >600 {
+    break.
+  } else {
+    set z to z + 1.
+  }
+  execute("set i to " + z + ".").
+  assert(i = z).
+}
+
+assert(z = 500).
+
+if defined i { unset i. }
+if defined y { unset y. }
 
 // misc
 

@@ -25,52 +25,59 @@
 if not (defined _exec_idString) {
   global _exec_idString is char(127).//starts at char 127 to avoid reserved charters in windows file names
 }
-function execute
-{
-  parameter command.
-  
-  //start of string incrementing
-  local carry is false.
-  local strStart is _exec_idString:LENGTH - 1.
-  from { local i is strStart. } until i < 0 step { SET i to i - 1. } do {
-    local tmpNum is unchar(_exec_idString[i]).
-    //print tmpNum.
-    if carry or (i = strStart) {
-      set tmpNum to tmpNum + 1.
-      set carry to false.
-    }
-    if tmpNum > 255 {
-      set tmpNum to tmpNum - 128.
-      set carry to true.
-    }
-    local subStringHigh IS _exec_idString:substring(i,_exec_idString:LENGTH - i).
-    set subStringHigh to subStringHigh:remove(0,1).
-    local subStringLow is _exec_idString:substring(0,i).
-    set _exec_idString to subStringLow + char(tmpNum) + subStringHigh.
-    
-  }
-  if carry { set _exec_idString to char(128) + _exec_idString. }
-  //end of string incrementing
-  local filePath IS path("_execute_" + _exec_idString + ".tmp").
-  if exists(filePath) { deletepath(filePath). }
-  log command to filePath.
-  wait 0.
-  runpath(filePath).
-  deletepath(filePath).
+
+if not (defined _past_exec_strings) {
+  global _past_exec_strings is lexicon().//stores previously executed commands and the associated path, intended to prevent increment of _exec_idString if calling the same command repeatedly.
+  set _past_exec_strings:casesensitive to true.
 }
 
-function evaluate
-{
+function execute {
+  parameter command.
+
+  local filePath IS path().
+  if _past_exec_strings:haskey(command) {//if we have already run a command recall the path used the old path
+    set filePath to _past_exec_strings[command].
+  } else {
+    //start of string incrementing
+    local carry is false.
+    local strStart is _exec_idString:LENGTH - 1.
+    from { local i is strStart. } until i < 0 step { SET i to i - 1. } do {
+      local tmpNum is unchar(_exec_idString[i]).
+      //print tmpNum.
+      if carry or (i = strStart) {
+        set tmpNum to tmpNum + 1.
+        set carry to false.
+      }
+      if tmpNum > 255 {
+        set tmpNum to tmpNum - 128.
+        set carry to true.
+      }
+      local subStringHigh IS _exec_idString:substring(i,_exec_idString:LENGTH - i).
+      set subStringHigh to subStringHigh:remove(0,1).
+      local subStringLow is _exec_idString:substring(0,i).
+      set _exec_idString to subStringLow + char(tmpNum) + subStringHigh.
+
+    }
+    if carry { set _exec_idString to char(128) + _exec_idString. }
+    //end of string incrementing
+    set filePath to path("1:/_execute_" + _exec_idString + ".tmp").
+    _past_exec_strings:ADD(command,filePath).
+  }
+  log_run_del(command,filePath).
+}
+
+function evaluate {
   parameter expression.
 
   execute("global _evaluate_result is " + expression + ".").
   local result is _evaluate_result.
-  unset _evaluate_result.
+  if defined _evaluate_result {
+    unset _evaluate_result.
+  }
   return result.
 }
 
-function evaluate_function
-{
+function evaluate_function {
   parameter
     function_name,
     parameter_list.
@@ -79,13 +86,73 @@ function evaluate_function
   local expression is "".
   local separator is "".
   local index is 0.
-  until index = parameter_list:length
-  {
+  until index = parameter_list:length {
     set expression to expression + separator + "_exec__param_list[" + index + "]".
     set separator to ", ".
     set index to index + 1.
   }
   set expression to function_name + "(" + expression + ")".
-  unset _exec__param_list.
-  return evaluate(expression).
+  local result is evaluate(expression).
+  if defined _exec__param_list {
+    unset _exec__param_list.
+  }
+  return result.
+}
+
+function get_suffix {
+  parameter
+    structure, //the structure to get the suffix of
+    suffix,    //the suffix to get
+    parameter_list IS false. //if the suffix is a function call this is the list of parameters for the suffix
+	
+  local filePath is "1:/_get_suffix" + suffix.
+  local logStr IS "global _evaluate_result is { parameter o. return o:" + suffix.
+  if parameter_list:istype("list") {
+    set filePath to filePath + parameter_list:length.
+    local separator is "(".
+    global _exec__param_list IS parameter_list.
+    local i IS 0.
+    until i >= parameter_list:length
+    {
+      set logStr to logStr + separator + "_exec__param_list[" + i + "]".
+      set separator to ", ".
+      set i to i + 1.
+    }
+    set logStr to logStr + ")".
+  }
+  set filePath to path(filePath + ".tmp").
+  log_run_del(logStr + ". }.",filePath).
+  local result is _evaluate_result:call(structure).
+  if defined _exec__param_list {
+    unset _exec__param_list.
+  }
+  return result.
+}
+
+function set_suffix {
+  parameter
+    structure, //the structure to set the suffix of
+    suffix,    //the suffix to set
+    val.       //the value to set the suffix to
+	
+  local filePath is path("1:/_set_suffix" + suffix + ".tmp").
+  local logStr IS "global _evaluate_result is { parameter o,v. set o:" + suffix + " to v. }.".
+  log_run_del(logStr,filePath).
+  local result is _evaluate_result:call(structure,val).
+  unset _evaluate_result.
+  return result.
+}
+
+local function log_run_del {
+  parameter
+    log_string,//the string to be executed
+    file_path. //the path to where the string should be stored temporarily so it can be executed.
+	
+  if exists(file_path) {
+    deletepath(file_path).
+  }
+  log log_string to file_path.
+  wait 0.
+  runpath(file_path).
+  deletepath(file_path).
 }
