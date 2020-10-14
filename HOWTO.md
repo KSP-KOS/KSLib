@@ -4,12 +4,7 @@ The KSlib repository is a place you can obtain useful examples
 created by past contributors, be they users of the kOS mod,
 or in some cases the original developers of the kOS mod.
 
-Due to a limitation in the current implementation of kOS, all
-kerboscript files have to live in the same directory, so when
-you copy these files you'll have to put them all in the same
-place with no hierarchy.
-
-For the time being, just read the examples and copy the files
+Read the examples and copy the files
 you want to use into your Ships/Scripts directory of your
 Kerbal Space Program installation and use them from there.
 

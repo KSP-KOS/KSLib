@@ -20,7 +20,7 @@ Make sure your local repository is set up like this before you merge a PR:
     ``origin`` be your personal fork (from _1_ above), and NOT be
     the main KSP-KOS/KSLib repository.)  This means you need to have
     first made it with this:
-    - ``git clone git@github:YourAccountNameHere/KSLib.git``
+    - ``git clone git@github.com:YourAccountNameHere/KSLib.git``
 - 3 - Now you ADD the main repo (KSP-KOS/KSLib) as an additional
     remote, called ``upstream`` to your local copy.  This means
     running:
