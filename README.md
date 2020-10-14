@@ -41,6 +41,4 @@ the entire attribution fit in a single short comment line.
 The main kOS mod has been released under version 3 of the [GNU General Public License (GPLv3)](https://www.gnu.org/licenses/gpl-3.0.html), but KSLib has chosen the [MIT License](LICENSE) instead.  Why?
 
   1. MOSTLY THIS ONE -> The GNU GPL is verbose.  Applying it significantly increases the size of each Kerboscript source code file, unnecessarily occupying precious kOS disk capacity.
-  2. The MIT License is compatible with the GPL.
-  3. Kerboscript programs and libraries almost always (arguably) qualify as a derivative work of kOS.  Therefore, KSLib inherits the additional protections provided by the GPL anyway.
-  4. Casual Kerboscript programmers who just want to do something small and simple may find the GNU GPL intimidating.
+  2. Casual Kerboscript programmers who just want to do something small and simple may find the GNU GPL intimidating.
