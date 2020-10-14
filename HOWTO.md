@@ -41,7 +41,7 @@ general patterns:
       to minimize the amount of code placed in here because:
       * Backwards compatibility for .ksm files is not guarantied
         (e.g. some significant parser changes might break all old .ksm files).
-      * It is a lot more difficult to modify and improve .ksm files when .ks scripts.
+      * It is a lot more difficult to modify and improve .ksm files when compared to .ks scripts.
 
 ## Credit:
 
