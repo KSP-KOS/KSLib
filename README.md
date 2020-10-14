@@ -21,36 +21,26 @@ repository.
 Please see the file: SUMMARY.md about the available libraries and what type of 
 functionality they provide.
 
-## Licensing:
+## Licensing
+These programs, libraries, program code, and examples of program code are free software.  Permission is granted to change, share, and use them (with minor restrictions), even privately or commercially, under the terms of the [MIT license](LICENSE).  Also, per this License:
 
-Code contributed here will be under the MIT license, and the act of
-submitting content to this repository will constitute implied
-consent to have the content you are submitting be placed under the
-MIT license.
+* Don't plagiarize.  **You must, include the copyright and license notices in all copies or substantial uses of the work.**
+* Don't sue.  **This work is provided "as is". You may not hold the author nor the KSLib team liable.**
 
-The entire text of the MIT license can be found in the LICENSE file
-alongside this README file.  The shorthand version is this: 
+Otherwise, we don't care what you do with it.
 
-  1. Don't plagiarize.  (Give attribution where you got it from).
-  2. Don't sue. (No liability is promised).
-
-That's pretty much it, in a nutshell.  As long as you do that, we
-don't care what you do with these script examples and libraries.
+### Contributing
+To contribute programs, libraries, program code, or examples of program code to this repository you must license the work under the [MIT license](LICENSE).  The act of contributing implies your consent to this stipulation.
 
 For the **attribution** requirement of the license, you need only
 attribute the KSLib team as a single group.  You will not have to
 attribute each individual member.  The intent is to have
 the entire attribution fit in a single short comment line.
 
-### Why MIT License?
+### Why the MIT License?
+The main kOS mod has been released under version 3 of the [GNU General Public License (GPLv3)](https://www.gnu.org/licenses/gpl-3.0.html), but KSLib has chosen the [MIT License](LICENSE) instead.  Why?
 
-The main kOS mod's code is released under the Gnu Public License, version
-3, (GPL3), and you may wonder why the MIT license was chosen for this
-repository instead.
-
-The shorthand answer is: "GPL3 is verbose" and "The edge cases it
-covers just aren't going to come up".  The small lightweight nature 
-of kerboscript, and the purpose to which it is put, makes the extra
-verbose terms and conditions of the GPL3 rather overkill for the
-task at hand.  For casual new kerboscripters who just want to do
-something small and simple, the GPL3 can be a bit intimidating.
+  1. MOSTLY THIS ONE -> The GNU GPL is verbose.  Applying it significantly increases the size of each Kerboscript source code file, unnecessarily occupying precious kOS disk capacity.
+  2. The MIT License is compatible with the GPL.
+  3. Kerboscript programs and libraries almost always (arguably) qualify as a derivative work of kOS.  Therefore, KSLib inherits the additional protections provided by the GPL anyway.
+  4. Casual Kerboscript programmers who just want to do something small and simple may find the GNU GPL intimidating.
