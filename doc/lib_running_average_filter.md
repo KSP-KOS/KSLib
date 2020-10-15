@@ -29,6 +29,7 @@ returns:
   
 description:
   * Outputs the running average of the latest input value and all of the historical values in the list
+
 ---
 Copyright © 2015 KSLib team
 

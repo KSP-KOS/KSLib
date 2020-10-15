@@ -27,6 +27,7 @@ returns:
 
 description:
   * Converts the cartesian coordinates into geocoordinates and altitude. The 3 items of the return list are to be interpreted as latitude, longitude and altitude, in that order.
+
 ---
 Copyright © 2019 KSLib team
 

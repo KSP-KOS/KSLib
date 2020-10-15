@@ -16,6 +16,7 @@ returns:
 
 description:
   * Open number dialog, return a number entered by  the user.
+
 ---
 Copyright © 2015,2019 KSLib team
 

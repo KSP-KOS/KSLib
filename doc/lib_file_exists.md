@@ -13,6 +13,7 @@ returns:
   
 description:
   * This is intended to be used as a means to check if an attempt to run a file will succeed or fail before attempting do do so. Example uses are optional dependencies (adding options to a menu if relevant scripts are available) and checking if log files that only exist in certain events are present (can be used to pass instructions between cores or for saved variables in the event of a reboot). 
+
 ---
 Copyright © 2015,2019 KSLib team
 

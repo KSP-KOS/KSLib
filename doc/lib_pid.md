@@ -49,6 +49,7 @@ description:
     a number back to you that you should immediately set the control
     that influences that property to.  An example showing it being
     used exists in the examples directory, to create a hovering rocket.
+
 ---
 Copyright © 2015,2019 KSLib team
 

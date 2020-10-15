@@ -39,3 +39,8 @@ The starting area is numbered -5.
 The ending area is numbered 10.
 
 Several examples of various rules as well as a copy of the rules can also be found in the help menu with in the game itself.
+
+---
+Copyright © 2019 KSLib team
+
+This work and any code samples presented herein are licensed under the [MIT license](../LICENSE).

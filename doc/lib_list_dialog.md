@@ -39,6 +39,7 @@ description:
 
 description:
   This function is internal and should not be used outside of lib_list_dialog.
+
 ---
 Copyright © 2015,2019 KSLib team
 

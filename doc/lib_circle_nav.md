@@ -63,6 +63,7 @@ returns:
 
 description:
   * Gives you the midpoint between point 1 and 2 along a great circle path.
+
 ---
 Copyright © 2015,2019 KSLib team
 

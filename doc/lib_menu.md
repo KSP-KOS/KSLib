@@ -30,6 +30,7 @@ returns:
 
 description:
   * Identical to open_menu() but returns option index (an index in list_of_names list).
+
 ---
 Copyright © 2015,2019 KSLib team
 

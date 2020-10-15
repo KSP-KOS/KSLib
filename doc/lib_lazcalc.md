@@ -34,6 +34,7 @@ description:
   * To use:
     * First `SET `[stored data]` TO LAZcalc_init(`[target orbit]`,`[target inclination]`.`
     * Then loop `SET `[heading]` TO LAZcalc(`[stored data]`).` to continuously update your target heading.
+
 ---
 Copyright © 2015,2017,2019 KSLib team
 

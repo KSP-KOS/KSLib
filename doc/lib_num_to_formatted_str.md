@@ -134,6 +134,7 @@ Format 5,6 will display only the 2 highest units for the passed in time they als
     time_formatting(31536000,6). will return the string " 001 Years   000 Days    "
     time_formatting(86400,6).    will return the string " 001 Days    00 Hours    "
     time_formatting(3600,6).     will return the string " 01 Hours    00 Minutes  "
+
 ---
 Copyright © 2015,2019,2020 KSLib team
 

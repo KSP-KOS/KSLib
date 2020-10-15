@@ -104,6 +104,7 @@ returns:
 description
   * Will convert several types into vectors.
     Intended for internal use by the functions of this library.
+
 ---
 Copyright © 2015,2019,2020 KSLib team
 

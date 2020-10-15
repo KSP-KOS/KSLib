@@ -15,6 +15,7 @@ returns:
 description:
   * This returns a string containing the number fed to it with the decimal point always in the same position in the string.
     so it can be printed at the same location in the terminal without having to worry about it moving as the number becomes larger or smaller. 
+
 ---
 Copyright © 2015,2019 KSLib team
 

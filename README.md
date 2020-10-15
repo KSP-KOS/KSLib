@@ -42,6 +42,7 @@ The main kOS mod has been released under version 3 of the [GNU General Public Li
 
   1. MOSTLY THIS ONE -> The GNU GPL is verbose.  Applying it significantly increases the size of each Kerboscript source code file, unnecessarily occupying precious kOS disk capacity.
   2. Casual Kerboscript programmers who just want to do something small and simple may find the GNU GPL intimidating.
+
 ---
 Copyright © 2015,2019,2020 KSLib team
 

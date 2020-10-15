@@ -25,6 +25,7 @@ description:
     * pop-up windows requesting docking passwords.
     * Used in conjunction with `lib_exec` as a script selector.
     * As part of a larger set of scripts to provide script writing in the terminal window.
+
 ---
 Copyright © 2015,2019 KSLib team
 

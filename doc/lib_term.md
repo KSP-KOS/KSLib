@@ -90,3 +90,8 @@ description:
     GOTCHAS: Be aware that on the terminal screen, positive Y is DOWN,
     not UP, which may yield confusing results about which way is
     positive degrees of the arc, if you're not taking it into account.
+
+---
+Copyright © 2015,2020 KSLib team
+
+This work and any code samples presented herein are licensed under the [MIT license](../LICENSE).

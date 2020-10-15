@@ -17,6 +17,7 @@ returns:
 description:
   * Wait until user activates one of the action groups from ag_list,
     return the name of the activated action group.
+
 ---
 Copyright © 2015,2019 KSLib team
 

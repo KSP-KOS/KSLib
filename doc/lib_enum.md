@@ -355,6 +355,7 @@ function compare_string_descending {
 }
 Enum["sort"](list("foo","foobarbaz", "foobar"), compare_string_descending@). // list("foobarbaz","foobar","foo")
 ```
+
 ---
 Copyright © 2015,2016 KSLib team
 
