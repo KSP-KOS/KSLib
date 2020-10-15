@@ -1,4 +1,6 @@
-// This file is distributed under the terms of the MIT license, (c) the KSLib team
+// example_lib_input_terminal_complex.ks 
+// Copyright © 2020 KSLib team 
+// Lic. MIT
 
 @LAZYGLOBAL OFF.
 

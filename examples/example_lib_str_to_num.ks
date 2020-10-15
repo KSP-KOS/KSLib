@@ -1,4 +1,6 @@
-// This file is distributed under the terms of the MIT license, (c) the KSLib team
+// example_lib_str_to_num.ks 
+// Copyright © 2015 KSLib team 
+// Lic. MIT
 
 run lib_str_to_num.
 

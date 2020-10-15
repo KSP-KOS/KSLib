@@ -1,6 +1,6 @@
-//LIB_LAZcalc.ks testing example
-//This file is distributed under the terms of the MIT license, (c) the KSLib team
-
+// example_lib_lazcalc.ks is a LIB_LAZcalc.ks testing example
+// Copyright © 2015 KSLib team 
+// Lic. MIT
 SWITCH TO 0.
 RUN lib_lazcalc.ks.
 CLEARSCREEN.

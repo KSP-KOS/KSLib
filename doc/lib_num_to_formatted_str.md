@@ -1,5 +1,3 @@
-// This file is distributed under the terms of the MIT license, (c) the KSLib team
-
 ## lib_num_to_formatted_str.ks
 
 ``lib_num_to_formatted_str.ks`` provides several functions for changing numbers (scalers) into strings with specified formats
@@ -10,7 +8,7 @@ This function will return a string matching the format defined by the parameters
 
 
 | parameter        | type    | default | description                                                                                                                                                                     |
-|------------------|---------|---------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| ---------------- | ------- | ------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | *num*            | Scalar  |         | The number to be formatted.                                                                                                                                                     |
 | *leadingLength*  | Scalar  |         | The minimum number of digits to the right of the decimal point.                                                                                                                 |
 | *trailingLength* | Scalar  |         | The number of digits to the right of the decimal point.                                                                                                                         |
@@ -57,7 +55,7 @@ This function will return a string matching the format defined by the parameters
 This function will return a string formatted to match standard SI notation with 4 significant digits.
 
 | parameter | type   | default | description                                                                                                                            |
-|-----------|--------|---------|----------------------------------------------------------------------------------------------------------------------------------------|
+| --------- | ------ | ------- | -------------------------------------------------------------------------------------------------------------------------------------- |
 | *num*     | Scalar |         | A number in the range 10^-24 to 10^24 (otherwise result will not be formatted correctly)                                               |
 | *unit*    | String |         | A unit for which the [SI prefixes](https://en.wikipedia.org/wiki/Metric_prefix#List_of_SI_prefixes) will be appended ("m", "m/s", "g") |
 
@@ -83,7 +81,7 @@ This function will return a time string formatted according to the following rul
       * NOTE: you will need to keep the return the same format or else you will break other functions
 
 | parameter    | type    | default    | description                                                                     |
-|--------------|---------|------------|---------------------------------------------------------------------------------|
+| ------------ | ------- | ---------- | ------------------------------------------------------------------------------- |
 | *timeSec*    | Scalar  |            | The number to be formatted                                                      |
 | *formatType* | Scalar  |            | Selects type of format to be used, Range from 0 to 6                            |
 | *rounding*   | Scalar  | 0          | The rounding used for the seconds place, Range from 0 to 2                      |
@@ -136,3 +134,7 @@ Format 5,6 will display only the 2 highest units for the passed in time they als
     time_formatting(31536000,6). will return the string " 001 Years   000 Days    "
     time_formatting(86400,6).    will return the string " 001 Days    00 Hours    "
     time_formatting(3600,6).     will return the string " 01 Hours    00 Minutes  "
+---
+Copyright © 2015,2019,2020 KSLib team
+
+This work and any code samples presented herein are licensed under the [MIT license](../LICENSE).

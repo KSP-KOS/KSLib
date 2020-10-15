@@ -1,4 +1,6 @@
-// This file is distributed under the terms of the MIT license, (c) the KSLib team
+// lib_geodec.ks provides two functions to convert between geographic coordinates (latitude, longitude) and cartesian coordinates (x, y, z).
+// Copyright © 2015,2019 KSLib team 
+// Lic. MIT
 @LAZYGLOBAL off.
 
 function geo2dec {

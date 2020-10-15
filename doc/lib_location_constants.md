@@ -70,3 +70,7 @@ If using the stock KSP solar system or the JNSQ system, the default locations ar
 * `location_constants:kerbin:runway_27_end`: alias for `runway_09_start` west (toward the mountains).
 * `location_constants:kerbin:runway_09_overrun`: The "lip" of the fully-upgraded KSC runway. Certain plane designs that can maintain level flight but cannot pitch up while landed should start pitching up when their wheels pass `runway_09_end`, since the lip will leave them airborne for a moment.
 * `location_constants:kerbin:runway_27_overrun`: The lip of the fully-upgraded KSC runway when headed toward the mountains. Mostly included for symmetry.
+---
+Copyright © 2020 KSLib team
+
+This work and any code samples presented herein are licensed under the [MIT license](../LICENSE).

@@ -1,4 +1,6 @@
-// This file is distributed under the terms of the MIT license, (c) the KSLib team
+// example_lib_gui_box.ks 
+// Copyright © 2015 KSLib team 
+// Lic. MIT
 
 run lib_gui_box.
 

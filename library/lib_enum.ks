@@ -1,5 +1,6 @@
-// This file is distributed under the terms of the MIT license, (c) the KSLib
-// team
+// lib_enum.ks provides a set of functions for manipulating lists, queues, and stacks using the new delegates syntax introduced in kOS version 0.19.0.
+// Copyright © 2015,2016 KSLib team 
+// Lic. MIT
 
 {global Enum is lex(
 "version", "0.1.1",

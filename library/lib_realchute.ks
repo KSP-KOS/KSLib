@@ -1,6 +1,7 @@
-// This file is distributed under the terms of the MIT license, (c) the KSLib team
+// lib_realchute.ks - adds support for RealChute 
+// Copyright © 2015 KSLib team 
+// Lic. MIT
 
-// adds support for RealChute 
 @LAZYGLOBAL OFF.
 declare function R_chutes {
  parameter event.

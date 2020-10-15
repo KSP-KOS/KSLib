@@ -1,4 +1,6 @@
-// This file is distributed under the terms of the MIT license, (c) the KSLib team
+// example_lib_input_string.ks 
+// Copyright © 2015,2019 KSLib team 
+// Lic. MIT
 
 // This is intended to be run as a boot script.
 

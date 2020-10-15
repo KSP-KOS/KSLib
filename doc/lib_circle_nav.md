@@ -1,5 +1,3 @@
-// This file is distributed under the terms of the MIT license, (c) the KSLib team
-
 ## lib_circle_nav.
 
 ``lib_circle_nav.ks`` provides a set of functions that use Great Circle equations. On the surface of a sphere the shortest path between 2 points does not have a constant bearing. Use of these functions either on their own or combined can give you all sorts of details about the "as the crow flies" path between 2 points. Including which way you need to go, how far it is and what you will fly over.
@@ -65,3 +63,7 @@ returns:
 
 description:
   * Gives you the midpoint between point 1 and 2 along a great circle path.
+---
+Copyright © 2015,2019 KSLib team
+
+This work and any code samples presented herein are licensed under the [MIT license](../LICENSE).

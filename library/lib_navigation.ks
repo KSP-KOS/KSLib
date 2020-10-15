@@ -1,4 +1,6 @@
-// This file is distributed under the terms of the MIT license, (c) the KSLib team
+// lib_navigation.ks provides a plethora of useful functions to aid in writing navigational scripts, whether it's space navigation or surface navigation.
+// Copyright © 2019,2020 KSLib team 
+// Lic. MIT
 @LAZYGLOBAL OFF.
 
 // Same as orbital prograde vector for ves

@@ -1,4 +1,6 @@
-// This file is distributed under the terms of the MIT license, (c) the KSLib team
+// example_lib_pid.ks 
+// Copyright © 2015,2016 KSLib team 
+// Lic. MIT
 clearscreen.
 SAS on.
 set seekAlt to 25.

@@ -1,4 +1,3 @@
-//This file is distributed under the terms of the MIT license, (c) the KSLib team
 //Authored by space_is_hard
 
 ## lib_running_average_filter
@@ -30,3 +29,7 @@ returns:
   
 description:
   * Outputs the running average of the latest input value and all of the historical values in the list
+---
+Copyright © 2015 KSLib team
+
+This work and any code samples presented herein are licensed under the [MIT license](../LICENSE).

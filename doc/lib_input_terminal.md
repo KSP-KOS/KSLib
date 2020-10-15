@@ -1,5 +1,3 @@
-// This file is distributed under the terms of the MIT license, (c) the KSLib team
-
 ## lib_input_terminal.
 
 `lib_input_terminal` provides functions for getting user entered strings or numbers though terminal inputs.
@@ -79,3 +77,7 @@ description:
     Pressing backspace removes the last character from the current string until the string length is less than or equal to minLength
     Pressing delete sets the current string to an empty string.
   
+---
+Copyright © 2020 KSLib team
+
+This work and any code samples presented herein are licensed under the [MIT license](../LICENSE).

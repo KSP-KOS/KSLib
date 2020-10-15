@@ -1,4 +1,6 @@
-// This file is distributed under the terms of the MIT license, (c) the KSLib team
+// lib_num_to_formatted_str.ks provides several functions for changing numbers (scalers) into strings with specified formats
+// Copyright © 2018,2019,2020 KSLib team 
+// Lic. MIT
 
 @LAZYGLOBAL OFF.
 

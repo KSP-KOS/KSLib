@@ -1,4 +1,6 @@
-// This file is distributed under the terms of the MIT license, (c) the KSLib team
+// example_lib_num_to_formatted_str.ks 
+// Copyright © 2018,2019 KSLib team 
+// Lic. MIT
 
 RUN lib_num_to_formated_str.
 CLEARSCREEN.

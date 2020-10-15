@@ -1,5 +1,3 @@
-// This file is distributed under the terms of the MIT license, (c) the KSLib team
-
 ## lib_raw_user_input
 
 A low level library to do user input via action groups.
@@ -19,3 +17,7 @@ returns:
 description:
   * Wait until user activates one of the action groups from ag_list,
     return the name of the activated action group.
+---
+Copyright © 2015,2019 KSLib team
+
+This work and any code samples presented herein are licensed under the [MIT license](../LICENSE).

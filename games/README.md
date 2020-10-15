@@ -15,3 +15,7 @@ A short summary of each game can be found [HERE](https://github.com/KSP-KOS/KSLi
 If you wish to contribute a game it must be something that is in the public domain.
 
 All contributed games fall under the same licensing as all other code in this repository as out lined [HERE](https://github.com/KSP-KOS/KSLib/blob/master/README.md#licensing)
+---
+Copyright © 2019 KSLib team
+
+This work and any code samples presented herein are licensed under the [MIT license](../LICENSE).

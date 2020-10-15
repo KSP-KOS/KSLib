@@ -1,5 +1,3 @@
-// This file is distributed under the terms of the MIT license, (c) the KSLib team
-
 ## lib_str_to_num
 
 ``lib_str_to_num.ks`` can be used to convert a stringified number back into a
@@ -17,3 +15,7 @@ returns:
 
 description:
   * This is intended for cases where operating with various modules, tags, or other data necessitates pulling out numeric information from a string. In conjunction with [string manipulation](http://ksp-kos.github.io/KOS_DOC/structures/misc/string.html) tools, you can extract the numeric component, and then use this function to convert to the number itself.
+---
+Copyright © 2015,2019 KSLib team
+
+This work and any code samples presented herein are licensed under the [MIT license](../LICENSE).

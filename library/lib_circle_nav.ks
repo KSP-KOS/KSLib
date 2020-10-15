@@ -1,6 +1,6 @@
-// This file is distributed under the terms of the MIT license, (c) the KSLib team
-
-
+// lib_circle_nav.ks provides a set of functions that use Great Circle equations.
+// Copyright © 2015,2019 KSLib team 
+// Lic. MIT
 @LAZYGLOBAL OFF.
 
 //use to find the initial bearing for the shortest path around a sphere from...

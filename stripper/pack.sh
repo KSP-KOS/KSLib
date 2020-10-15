@@ -1,4 +1,8 @@
-# This file is distributed under the terms of the MIT license, (c) the KSLib team
+#!/bin/sh
+
+# pack.sh 
+# Copyright © 2015 KSLib team 
+# Lic. MIT
 
 # The purpose of this file is to decrease size of .ks files for the final flight. However, please upload 
 # UNPACKED versions of programs to KSLib.

@@ -1,5 +1,3 @@
-// This file is distributed under the terms of the MIT license, (c) the KSLib team
-
 ### seven_seg
 
 args:
@@ -9,3 +7,7 @@ args:
   
 description:
   * Prints a seven segment display on the terminal showing the input value at the location specified.
+---
+Copyright © 2015,2019 KSLib team
+
+This work and any code samples presented herein are licensed under the [MIT license](../LICENSE).

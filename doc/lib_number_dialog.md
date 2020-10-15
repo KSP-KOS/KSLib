@@ -1,5 +1,3 @@
-// This file is distributed under the terms of the MIT license, (c) the KSLib team
-
 ## lib_number_dialog
 
 A dialog where the user can enter any number (including negative and fractional).
@@ -18,3 +16,7 @@ returns:
 
 description:
   * Open number dialog, return a number entered by  the user.
+---
+Copyright © 2015,2019 KSLib team
+
+This work and any code samples presented herein are licensed under the [MIT license](../LICENSE).

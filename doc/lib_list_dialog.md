@@ -1,5 +1,3 @@
-// This file is distributed under the terms of the MIT license, (c) the KSLib team
-
 ## lib_list_dailog
 
 This library helps when you want the user to choose a value from a long list.
@@ -41,3 +39,7 @@ description:
 
 description:
   This function is internal and should not be used outside of lib_list_dialog.
+---
+Copyright © 2015,2019 KSLib team
+
+This work and any code samples presented herein are licensed under the [MIT license](../LICENSE).

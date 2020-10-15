@@ -44,3 +44,7 @@ This is an attempt at summarising and categorising the libraries by their use ca
 9. [lib_seven_seg.ks](https://github.com/KSP-KOS/KSLib/blob/master/library/lib_seven_seg.ks) / [docs](https://github.com/KSP-KOS/KSLib/blob/master/doc/lib_seven_seg.md) : creates a seven segment display to show single digit numbers.
 10. [lib_str_to_num.ks](https://github.com/KSP-KOS/KSLib/blob/master/library/lib_str_to_num.ks) / [docs](https://github.com/KSP-KOS/KSLib/blob/master/doc/lib_str_to_num.md) : converts numerical strings into numbers. This has been superseded by kOS built-in `STRING:TONUMBER()`.
 11. [lib_term.ks](https://github.com/KSP-KOS/KSLib/blob/master/library/lib_term.ks) / [docs](https://github.com/KSP-KOS/KSLib/blob/master/doc/lib_term.md) : a primitive terminal ASCII graphics library. Helps with drawing straight lines, circles and elliptical arcs.
+---
+Copyright © 2019,2020 KSLib team
+
+This work and any code samples presented herein are licensed under the [MIT license](../LICENSE).

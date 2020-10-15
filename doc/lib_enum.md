@@ -1,32 +1,30 @@
-// This file is distributed under the terms of the MIT license, (c) the KSLib team
-
 ## lib_enum
 
 ``lib_enum.ks`` provides a set of functions for manipulating lists, queues, and stacks using the new delegates syntax introduced in kOS version 0.19.0. It allows you to transform and execute on lists, queues, and stacks by passing in a delegate function, and is designed to contain all the core components of an enumerable library.
 
 Each of the functions is made available through the `Enum` [lexicon](http://ksp-kos.github.io/KOS_DOC/structures/misc/lexicon.html), to minimize the number of variables used in the global namespace. They can be called using the following syntax: `run lib_enum. Enum["max"](list(1,2,3)). // 3` All functions work on [Lists](http://ksp-kos.github.io/KOS_DOC/structures/misc/list.html), [Stacks](http://ksp-kos.github.io/KOS_DOC/structures/misc/stack.html), and [Queues](http://ksp-kos.github.io/KOS_DOC/structures/misc/queue.html), and when collections are returned, they will be of the same type as the original input.
 
-function        | arguments                     | return type   | description
-----------------| ----------------------------- | ------------- | -----------
-all             | elements, match_fn@           | bool          | Check if all elements return true when passed to the delegate function
-any             | elements, match_fn@           | bool          | Check if any elements return true when passed to the delegate function
-count           | elements, match_fn@           | integer       | Count how many elements return true when passed to the delegate function
-each            | elements, operation_fn@       |               | Call the delegate function with each element of the collection as an argument
-each_slice      | elements, size, operation_fn@ |               | Call the delegate function with fixed-size chunks of the collection passed as an argument
-each_with_index | elements, operation_fn@       |               | Call the delegate function with each element and its index passed as arguments
-find            | elements, match_fn@           | element       | Return the first item in the collection for which the delegate returns true
-find_index      | elements, match_fn@           | integer       | Return the index of the first item in the collection for which the delegate returns true
-group_by        | elements, transform_fn@       | Lexicon       | Return a lexicon that maps the return values of the delegate to each element in the collection
-map             | elements, transform_fn@       | collection    | Return a new collection  with the return values of the delegate called with each element
-map_with_index  | elements, transform_fn@       | collection    | Return a new collection  with the return values of the delegate called with each element and index
-max             | elements                      | element       | Return the largest value in the collection
-min             | elements                      | element       | Return the smallest value in the collection
-partition       | elements, match_fn@           | List          | Return a list of collections, splitting the original collection by the delegate's true/false result
-reduce          | elements, value, reduce_fn@   | final value   | Combine all the values of a collection via binary operations, seeded with the starting value
-reject          | elements, match_fn@           | collection    | Return a new collection with all items for which the delegate returns false
-reverse         | elements                      | collection    | Return a copy of the collection with elements reversed
-select          | elements, match_fn@           | collection    | Return a new collection with all items for which the delegate returns true
-sort            | elements, compare_fn@         | collection    | Return a new collection with the original elements sorted by the delegate
+| function        | arguments                     | return type | description                                                                                         |
+| --------------- | ----------------------------- | ----------- | --------------------------------------------------------------------------------------------------- |
+| all             | elements, match_fn@           | bool        | Check if all elements return true when passed to the delegate function                              |
+| any             | elements, match_fn@           | bool        | Check if any elements return true when passed to the delegate function                              |
+| count           | elements, match_fn@           | integer     | Count how many elements return true when passed to the delegate function                            |
+| each            | elements, operation_fn@       |             | Call the delegate function with each element of the collection as an argument                       |
+| each_slice      | elements, size, operation_fn@ |             | Call the delegate function with fixed-size chunks of the collection passed as an argument           |
+| each_with_index | elements, operation_fn@       |             | Call the delegate function with each element and its index passed as arguments                      |
+| find            | elements, match_fn@           | element     | Return the first item in the collection for which the delegate returns true                         |
+| find_index      | elements, match_fn@           | integer     | Return the index of the first item in the collection for which the delegate returns true            |
+| group_by        | elements, transform_fn@       | Lexicon     | Return a lexicon that maps the return values of the delegate to each element in the collection      |
+| map             | elements, transform_fn@       | collection  | Return a new collection  with the return values of the delegate called with each element            |
+| map_with_index  | elements, transform_fn@       | collection  | Return a new collection  with the return values of the delegate called with each element and index  |
+| max             | elements                      | element     | Return the largest value in the collection                                                          |
+| min             | elements                      | element     | Return the smallest value in the collection                                                         |
+| partition       | elements, match_fn@           | List        | Return a list of collections, splitting the original collection by the delegate's true/false result |
+| reduce          | elements, value, reduce_fn@   | final value | Combine all the values of a collection via binary operations, seeded with the starting value        |
+| reject          | elements, match_fn@           | collection  | Return a new collection with all items for which the delegate returns false                         |
+| reverse         | elements                      | collection  | Return a copy of the collection with elements reversed                                              |
+| select          | elements, match_fn@           | collection  | Return a new collection with all items for which the delegate returns true                          |
+| sort            | elements, compare_fn@         | collection  | Return a new collection with the original elements sorted by the delegate                           |
 
 ### Enum["all"]
 
@@ -357,3 +355,7 @@ function compare_string_descending {
 }
 Enum["sort"](list("foo","foobarbaz", "foobar"), compare_string_descending@). // list("foobarbaz","foobar","foo")
 ```
+---
+Copyright © 2015,2016 KSLib team
+
+This work and any code samples presented herein are licensed under the [MIT license](../LICENSE).

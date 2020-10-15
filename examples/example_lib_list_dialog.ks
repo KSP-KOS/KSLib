@@ -1,4 +1,6 @@
-// This file is distributed under the terms of the MIT license, (c) the KSLib team
+// example_lib_list_dialog.ks 
+// Copyright © 2015 KSLib team 
+// Lic. MIT
 
 run lib_list_dialog.
 set numbers to list("0", "1", "2", "3", "4", "5", "6", "7", "8", "9").

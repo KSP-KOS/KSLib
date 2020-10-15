@@ -1,4 +1,6 @@
-// This file is distributed under the terms of the MIT license, (c) the KSLib team
+// example_lib_navigation.ks 
+// Copyright © 2019 KSLib team 
+// Lic. MIT
 @LAZYGLOBAL OFF.
 
 runPath("lib_navigation.ks").

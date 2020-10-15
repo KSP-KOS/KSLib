@@ -1,6 +1,7 @@
-//This file is distributed under the terms of the MIT license, (c) the KSLib team
-//=====LAUNCH AZIMUTH CALCULATOR=====
-//~~LIB_LAZcalc.ks~~
+// lib_lazcalc.ks - provides the user with a launch azimuth based on a desired target orbit altitude and inclination and can continued to be used throughout ascent to update the heading. It bases this calculation on the vessel's launch and current geoposition.
+// Copyright © 2015,2017 KSLib team 
+// Lic. MIT
+
 //~~Version 2.2~~
 //~~Created by space-is-hard~~
 //~~Updated by TDW89~~

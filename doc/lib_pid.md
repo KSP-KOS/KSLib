@@ -1,5 +1,3 @@
-// This file is distributed under the terms of the MIT license, (c) the KSLib team
-
 ## Notice:
   lib_pid.ks has been superseded by the kOS inbuilt PIDloop() function.
   It is maintained for example purposes only, please see the kOS documentation for more.
@@ -51,3 +49,7 @@ description:
     a number back to you that you should immediately set the control
     that influences that property to.  An example showing it being
     used exists in the examples directory, to create a hovering rocket.
+---
+Copyright © 2015,2019 KSLib team
+
+This work and any code samples presented herein are licensed under the [MIT license](../LICENSE).

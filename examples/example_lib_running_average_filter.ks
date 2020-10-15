@@ -1,6 +1,6 @@
-//example_lib_running_average_filter
-//This file is distributed under the terms of the MIT license, (c) the KSLib team
-//Authored by space_is_hard
+// example_lib_running_average_filter.ks 
+// Copyright © 2015,2019 KSLib team 
+// Lic. MIT//Authored by space_is_hard
 
 SWITCH TO 0.
 RUN lib_running_average_filter.

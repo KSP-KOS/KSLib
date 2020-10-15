@@ -1,5 +1,3 @@
-// This file is distributed under the terms of the MIT license, (c) the KSLib team
-
 ## lib_gui_box
 
 This library contains functions to draw boxes like this:
@@ -76,3 +74,7 @@ description:
   v    v
   chhhhc
   ```
+---
+Copyright © 2015,2019 KSLib team
+
+This work and any code samples presented herein are licensed under the [MIT license](../LICENSE).

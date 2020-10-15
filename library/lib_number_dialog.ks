@@ -1,5 +1,6 @@
-// This file is distributed under the terms of the MIT license, (c) the KSLib team
-
+// lib_number_dialog.ks provides a dialog where the user can enter any number (including negative and fractional).
+// Copyright © 2015 KSLib team 
+// Lic. MIT
 run lib_gui_box.
 
 function open_number_dialog

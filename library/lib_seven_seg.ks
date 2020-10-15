@@ -1,5 +1,6 @@
-// This file is distributed under the terms of the MIT license, (c) the KSLib team
-
+// lib_seven_seg.ks prints a seven segment display on the terminal showing the input value at the location specified.
+// Copyright © 2015,2019 KSLib team 
+// Lic. MIT
 function seven_seg {
  parameter
   num,

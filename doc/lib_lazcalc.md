@@ -1,5 +1,3 @@
-// This file is distributed under the terms of the MIT license, (c) the KSLib team
-
 ## lib_LAZcalc.
 
 ``lib_LAZcalc.ks`` provides the user with a launch azimuth based on a desired target orbit altitude and
@@ -36,3 +34,7 @@ description:
   * To use:
     * First `SET `[stored data]` TO LAZcalc_init(`[target orbit]`,`[target inclination]`.`
     * Then loop `SET `[heading]` TO LAZcalc(`[stored data]`).` to continuously update your target heading.
+---
+Copyright © 2015,2017,2019 KSLib team
+
+This work and any code samples presented herein are licensed under the [MIT license](../LICENSE).

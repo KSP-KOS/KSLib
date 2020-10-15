@@ -1,5 +1,6 @@
-// This file is distributed under the terms of the MIT license,
-// (c) the KSLib team
+// lib_enum_spec.ks 
+// Copyright © 2015,2016 KSLib team 
+// Lic. MIT
 // Note: This requires KSpec - see https://github.com/gisikw/kspec
 
 RUN lib_enum.

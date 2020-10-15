@@ -1,5 +1,3 @@
-// This file is distributed under the terms of the MIT license, (c) the KSLib team
-
 ## lib_input_string.
 
 ``lib_input_string.ks`` provides a method of inputting custom strings while a script is running via an on-screen keyboard.
@@ -27,3 +25,7 @@ description:
     * pop-up windows requesting docking passwords.
     * Used in conjunction with `lib_exec` as a script selector.
     * As part of a larger set of scripts to provide script writing in the terminal window.
+---
+Copyright © 2015,2019 KSLib team
+
+This work and any code samples presented herein are licensed under the [MIT license](../LICENSE).

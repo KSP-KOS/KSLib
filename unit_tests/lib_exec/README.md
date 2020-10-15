@@ -1,5 +1,3 @@
-// This file is distributed under the terms of the MIT license, (c) the KSLib team
-
 ## unit_tests/lib_exec
 
 A unit test for all edge cases of lib_exec I know.
@@ -23,3 +21,7 @@ to the screen. If something is broken you'll get an exception.
 
 ### bonus:
 Check out lib_testing. It might help you write your own unit tests.
+---
+Copyright © 2015,2020 KSLib team
+
+This work and any code samples presented herein are licensed under the [MIT license](../LICENSE).

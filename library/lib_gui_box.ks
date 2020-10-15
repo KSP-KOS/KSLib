@@ -1,4 +1,6 @@
-// This file is distributed under the terms of the MIT license, (c) the KSLib team
+// lib_gui_box.ks contains functions to draw boxes in the terminal.
+// Copyright © 2015,2019 KSLib team 
+// Lic. MIT
 // This file is based on lib_window.ks from akrOS by akrasuski1.
 
 function draw_custom_gui_box {

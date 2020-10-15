@@ -1,5 +1,3 @@
-// This file is distributed under the terms of the MIT license, (c) the KSLib team
-
 ## lib_navigation
 
 `lib_navigation.ks` provides a plethora of useful functions to aid in writing navigational scripts, whether it's space navigation or surface navigation.
@@ -172,3 +170,7 @@ returns:
 
 description:
   * Returns the azimuth (navball heading) required to launch to inclined orbit, taking into consideration current orbital velocity. If `auto_switch` is set, the function will check the ship's proximity with ascending and descending node to return a northward or southward azimuth, respectively.
+---
+Copyright © 2019 KSLib team
+
+This work and any code samples presented herein are licensed under the [MIT license](../LICENSE).

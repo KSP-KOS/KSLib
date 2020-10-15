@@ -1,4 +1,6 @@
-// This file is distributed under the terms of the MIT license, (c) the KSLib team
+// test_lib_exec_1.internal_2.ks 
+// Copyright © 2015,2019 KSLib team 
+// Lic. MIT
 
 run lib_exec.
 run lib_testing.

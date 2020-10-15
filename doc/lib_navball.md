@@ -1,5 +1,3 @@
-// This file is distributed under the terms of the MIT license, (c) the KSLib team
-
 ## lib_navball.
 
 ``lib_navball.ks`` provides useful routines to obtain information about
@@ -106,3 +104,7 @@ returns:
 description
   * Will convert several types into vectors.
     Intended for internal use by the functions of this library.
+---
+Copyright © 2015,2019,2020 KSLib team
+
+This work and any code samples presented herein are licensed under the [MIT license](../LICENSE).

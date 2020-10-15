@@ -1,5 +1,6 @@
-// Testing the lib_navball functions.
-// This file is distributed under the terms of the MIT license, (c) the KSLib team
+// example_lib_navball.ks tests the lib_navball functions.
+// Copyright © 2015,2019 KSLib team 
+// Lic. MIT
 
 run lib_navball.
 

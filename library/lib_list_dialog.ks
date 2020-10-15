@@ -1,5 +1,6 @@
-// This file is distributed under the terms of the MIT license, (c) the KSLib team
-
+// lib_list_dialog.ks helps when you want the user to choose a value from a long list.
+// Copyright © 2015 KSLib team 
+// Lic. MIT
 @LAZYGLOBAL OFF.
 
 run lib_menu.

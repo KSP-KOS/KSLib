@@ -1,5 +1,3 @@
-// This file is distributed under the terms of the MIT license, (c) the KSLib team
-
 ## lib_menu
 
 Use this library when you want to display a menu on the screen.
@@ -32,3 +30,7 @@ returns:
 
 description:
   * Identical to open_menu() but returns option index (an index in list_of_names list).
+---
+Copyright © 2015,2019 KSLib team
+
+This work and any code samples presented herein are licensed under the [MIT license](../LICENSE).

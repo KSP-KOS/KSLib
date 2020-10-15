@@ -1,4 +1,6 @@
-// This file is distributed under the terms of the MIT license, (c) the KSLib team
+// example_lib_term_clock.ks 
+// Copyright © 2015,2019 KSLib team 
+// Lic. MIT
 // Original starting work by Github user: Dunbaratu
 
 // Example that uses some of the lib_term line drawing

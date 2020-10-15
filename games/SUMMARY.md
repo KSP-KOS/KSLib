@@ -9,3 +9,7 @@ This is a summary of all games found in KSlib
   To allow for a single person play, several AI are offered.
 	
 	[game](https://github.com/KSP-KOS/KSLib/blob/master/games/Game_Of_Ur/Game_of_Ur.ks)
+---
+Copyright © 2019 KSLib team
+
+This work and any code samples presented herein are licensed under the [MIT license](../LICENSE).

@@ -1,4 +1,6 @@
-// This file is distributed under the terms of the MIT license, (c) the KSLib team
+// lib_file_exists.ks is a means of checking for optional dependencies, or checking whether a file exists before attempting to run it.
+// Copyright © 2015 KSLib team 
+// Lic. MIT
 
 @LAZYGLOBAL off.
 

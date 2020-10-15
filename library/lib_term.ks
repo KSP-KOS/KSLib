@@ -1,8 +1,8 @@
-// This file is distributed under the terms of the MIT license, (c) the KSLib team
+// lib_term.ks - terminal manipulations
+// Copyright © 2015 KSLib team 
+// Lic. MIT
 // Original starting work by Github user: Dunbaratu
 
-// terminal manipulations
-//
 @lazyglobal off.
 
 // -----------

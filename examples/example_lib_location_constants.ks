@@ -1,3 +1,7 @@
+// example_lib_location_constants.ks 
+// Copyright © 2020 KSLib team 
+// Lic. MIT
+
 @LAZYGLOBAL off.
 
 runpath("lib_location_constants.ks").

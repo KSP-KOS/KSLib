@@ -1,4 +1,7 @@
-// This file is distributed under the terms of the MIT license, (c) the KSLib team
+// lib_exec.ks - executes a command from its string representation.
+// Copyright © 2015,2019,2020 KSLib team 
+// Lic. MIT
+
 // Originally developed by abenkovskii
 
 // The mess below declares a function execute that executes a command from it's string representation.

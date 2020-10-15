@@ -1,5 +1,6 @@
-// This file is distributed under the terms of the MIT license, (c) the KSLib team
-
+// lib_input_terminal.ks provides functions for getting user entered strings or numbers though terminal inputs.
+// Copyright © 2020 KSLib team 
+// Lic. MIT
 @LAZYGLOBAL OFF.
 
 LOCAL termIn IS TERMINAL:INPUT.     

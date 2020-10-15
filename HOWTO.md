@@ -56,3 +56,7 @@ although feel free to add your own, as long as it doesn't
 get out of hand with too many authors of the same file, in
 which case it may make more sense to just say it was edited
 by a consortium.
+---
+Copyright © 2015,2019 KSLib team
+
+This work and any code samples presented herein are licensed under the [MIT license](../LICENSE).

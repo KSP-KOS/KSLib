@@ -150,3 +150,7 @@ master. (which means THEY have to do the above steps A, B, and C, instead of
 you, and as the actual person who knows what their PR is about, they are more
 likely to understand the meaning of the conflicts and what the right choice
 is.)
+---
+Copyright © 2019 KSLib team
+
+This work and any code samples presented herein are licensed under the [MIT license](../LICENSE).

@@ -1,5 +1,3 @@
-// This file is distributed under the terms of the MIT license, (c) the KSLib team
-
 ## lib_exec
 
 This library is a powerful tool for unhardcoding program's behavior.
@@ -128,3 +126,7 @@ example:
     print my_expr.  // insert your main loop code here
   }
   ```
+---
+Copyright © 2015,2019,2020 KSLib team
+
+This work and any code samples presented herein are licensed under the [MIT license](../LICENSE).

@@ -1,4 +1,6 @@
-// This file is distributed under the terms of the MIT license, (c) the KSLib team
+// lib_raw_user_input.ks provides a low level library to do user input via action groups. I believe it supports AGX to.
+// Copyright © 2015,2020 KSLib team 
+// Lic. MIT
 // Originally developed by abenkovskii
 @LAZYGLOBAL OFF.
 

@@ -1,6 +1,6 @@
-//Running Average Filter
-//lib_running_average_filter.ks
-//This file is distributed under the terms of the MIT license, (c) the KSLib team
+// lib_running_average_filter.ks provides a function that will filter out noise from a dataset by storing a number of previous values of that dataset and outputting the average (mean) of those values.
+// Copyright © 2015 KSLib team 
+// Lic. MIT
 //Authored by space_is_hard
 
 //These functions will set up and implement a running
