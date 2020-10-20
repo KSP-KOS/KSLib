@@ -1,8 +1,3 @@
-// lib_term.md 
-// Copyright © 2015 KSLib team 
-// Lic. MIT
-// Original starting work by Github user: Dunbaratu
-
 ## lib_term
 
 ``lib_term.ks`` provides useful routines to let you paint character-cell
@@ -95,3 +90,5 @@ description:
 Copyright © 2015,2020 KSLib team
 
 This work and any code samples presented herein are licensed under the [MIT license](../LICENSE).
+
+Original starting work by Github user: Dunbaratu
