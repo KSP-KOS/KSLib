@@ -179,7 +179,7 @@ function phaseAngle {
     local vel is ship:velocity:orbit.
     local my_ancestor is my_ancestors[0].
     until my_ancestor = common_ancestor {
-        set vel to vel + my_ancestor:velocity:orbit.
+        set vel to vel + my_ancestor:orbit:velocity:orbit.
         set my_ancestor to my_ancestor:body.
     }
     local binormal is vcrs(-common_ancestor:position:normalized, vel:normalized):normalized.
