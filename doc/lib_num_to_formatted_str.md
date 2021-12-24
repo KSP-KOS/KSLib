@@ -13,7 +13,7 @@ This function will return a string matching the format defined by the parameters
 | *leadingLength*  | Scalar  |         | The minimum number of digits to the right of the decimal point.                                                                                                                 |
 | *trailingLength* | Scalar  |         | The number of digits to the right of the decimal point.                                                                                                                         |
 | *leadingSpace*   | Boolean | True    | If True there will be a space at the front of the returned string when the number to be formatted is positive                                                                   |
-| *roundType*      | Scalar  | 0       | Sets if function will round, floor, or ceiling the number to be formatted. 0 = rounding, 1 = floor, 2 = ceiling, NOTE: if not one of the 3 expected values ceiling will be used |
+| *roundType*      | Scalar  | 0       | Sets if function will round, floor, or ceiling the number to be formatted. 0 = rounding, 1 = floor, 2 = ceiling, NOTE: if not one of the 3 expected values the function will crash |
 
 **Returns** A String with num formatted based on the parameters
 

@@ -137,31 +137,25 @@ FUNCTION si_formatting {
   }
 }
 
+LOCAL roundingFunctions IS LIST(ROUND @,FLOOR @,CEILING @).
 FUNCTION padding {
   PARAMETER num,                // number to be formatted
   leadingLength,                // minimum digits to the left of the decimal
   trailingLength,               // digits to the right of the decimal
   positiveLeadingSpace IS TRUE, // whether to prepend a single space to the output
   roundType IS 0.               // 0 for normal rounding, 1 for floor, 2 for ceiling
-
-  LOCAL returnString IS "".
-  //LOCAL returnString IS ABS(ROUND(num,trailingLength)):TOSTRING.
-  IF roundType = 0 {
-    SET returnString TO ABS(ROUND(num,trailingLength)):TOSTRING.
-  } ELSE IF roundType = 1 {
-    SET returnString TO ABS(adv_floor(num,trailingLength)):TOSTRING.
-  } ELSE {
-    SET returnString TO ABS(adv_ceiling(num,trailingLength)):TOSTRING.
-  }
-
+  
+  LOCAL returnString IS ABS(roundingFunctions[roundType](num,trailingLength)):TOSTRING.
+  
   IF trailingLength > 0 {
-    IF NOT returnString:CONTAINS(".") {
-      SET returnString TO returnString + ".0".
+    IF returnString:CONTAINS(".") {
+      LOCAL splitString IS returnString:SPLIT(".").
+      SET returnString TO (splitString[0]:PADLEFT(leadingLength) + "." + splitString[1]:PADRIGHT(trailingLength)):REPLACE(" ","0").
+    } ELSE {
+      SET returnString TO (returnString:PADLEFT(leadingLength) + "." + "0":PADRIGHT(trailingLength)):REPLACE(" ","0").
     }
-    UNTIL returnString:SPLIT(".")[1]:LENGTH >= trailingLength { SET returnString TO returnString + "0". }
-    UNTIL returnString:SPLIT(".")[0]:LENGTH >= leadingLength { SET returnString TO "0" + returnString. }
-  } ELSE {
-    UNTIL returnString:LENGTH >= leadingLength { SET returnString TO "0" + returnString. }
+  } ELSE IF returnString:LENGTH < leadingLength {
+    SET returnString TO returnString:PADLEFT(leadingLength):REPLACE(" ","0").
   }
 
   IF num < 0 {
@@ -173,16 +167,4 @@ FUNCTION padding {
       RETURN returnString.
     }
   }
-}
-
-LOCAL FUNCTION adv_floor {
-  PARAMETER num,dp.
-  LOCAL multiplier IS 10^dp.
-  RETURN FLOOR(num * multiplier)/multiplier.
-}
-
-LOCAL FUNCTION adv_ceiling {
-  PARAMETER num,dp.
-  LOCAL multiplier IS 10^dp.
-  RETURN CEILING(num * multiplier)/multiplier.
 }
