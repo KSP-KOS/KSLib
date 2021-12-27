@@ -5,36 +5,27 @@
 @LAZYGLOBAL OFF.
 
 LOCAL lib_formatting_lex IS LEX().
-{
-  LOCAL hoursInDay IS KUNIVERSE:HOURSPERDAY.
-  LOCAL daysInYear IS 365.
-  IF hoursInDay = 6 { SET daysInYear TO 426. }
-  lib_formatting_lex:ADD("timeModList",LIST(60,60,hoursInDay,daysInYear)).
-}
 
 LOCAL FUNCTION time_converter {
   PARAMETER timeValue,  // the time in seconds to convert
   places.               // how many time places (e.g HH:MM:SS has 3 places)
-
-  LOCAL returnList IS LIST().
-  LOCAL localTime IS timeValue.
-  LOCAL place IS 1.
-
-  FOR modValue IN lib_formatting_lex["timeModList"] {
-    LOCAL remainder IS MOD(localTime, modValue).
-
-    // add the remainder to the output
-    returnList:ADD(remainder).
-
-    // move along to the next place
-    SET localTime TO FLOOR(localTime / modValue).
-    IF localTime = 0 { BREAK. }
-    SET place TO place + 1.
-    IF place = places { BREAK. }
+  SET timeValue TO TIMESPAN(timeValue).
+  
+  IF timeValue:MINUTES < 1 OR places = 1 {
+	RETURN LIST(ROUND(timeValue:SECONDS,2)).
+	
+  } ELSE IF timeValue:HOURS < 1 OR places = 2 {
+	RETURN LIST(ROUND(MOD(timeValue:SECONDS,60),2), timeValue:MINUTES).
+	
+  } ELSE IF timeValue:DAYS < 1 OR places = 3 {
+    RETURN LIST(ROUND(MOD(timeValue:SECONDS,60),2), timeValue:MINUTE, timeValue:HOURS).
+	
+  } ELSE IF timeValue:YEARS < 1 OR places = 4 {
+	RETURN LIST(ROUND(MOD(timeValue:SECONDS,60),2), timeValue:MINUTE, timeValue:HOUR, timeValue:DAYS).
+	
+  } ELSE {
+	RETURN LIST(ROUND(MOD(timeValue:SECONDS,60),2), timeValue:MINUTE, timeValue:HOUR, timeValue:DAY, timeValue:YEARS).
   }
-
-  IF localTime > 0 { returnList:ADD(localTime). }
-  RETURN returnList.
 }
 
 lib_formatting_lex:ADD("leading0List",LIST(2,2,2,3,3)).
