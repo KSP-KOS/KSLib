@@ -18,7 +18,7 @@ This is an attempt at summarising and categorising the libraries by their use ca
 
 ### Maths and Statistics
 1. [lib_running_average_filter.ks](https://github.com/KSP-KOS/KSLib/blob/master/library/lib_running_average_filter.ks) / [docs](https://github.com/KSP-KOS/KSLib/blob/master/doc/lib_running_average_filter.md) : gives a running average of a given list of numbers.
-1. [lib_hyperbolic_trigonometry](../library/lib_hyperbolic_trigonometry.ks) / [docs](../doc/lib_hyperbolic_trigonometry.md) : adds hyperbolic trig functions.
+1. [lib_hyperbolic_trigonometry](../master/library/lib_hyperbolic_trigonometry.ks) / [docs](../master/doc/lib_hyperbolic_trigonometry.md) : adds hyperbolic trig functions.
 
 ### Navigation
 1. [lib_circle_nav.ks](https://github.com/KSP-KOS/KSLib/blob/master/library/lib_circle_nav.ks) / [docs](https://github.com/KSP-KOS/KSLib/blob/master/doc/lib_circle_nav.md) : provides functions to help with great circle / geodesic navigation while in atmosphere or the surface. For example, finding out the compass heading of a waypoint to fly there along the shortest path.
@@ -47,6 +47,6 @@ This is an attempt at summarising and categorising the libraries by their use ca
 11. [lib_term.ks](https://github.com/KSP-KOS/KSLib/blob/master/library/lib_term.ks) / [docs](https://github.com/KSP-KOS/KSLib/blob/master/doc/lib_term.md) : a primitive terminal ASCII graphics library. Helps with drawing straight lines, circles and elliptical arcs.
 
 ---
-Copyright © 2019,2020 KSLib team
+Copyright © 2019,2020,2021 KSLib team
 
 This work and any code samples presented herein are licensed under the [MIT license](../LICENSE).
