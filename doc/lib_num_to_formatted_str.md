@@ -41,12 +41,12 @@ This function will return a string matching the format defined by the parameters
     padding(-1,2,2,FALSE). // will return the string "-01.00"
 
     results of parameter 5
-	padding(1.1,2,2,TRUE,0).   // will return the string " 01.00"
-	padding(1.9,2,2,TRUE,0).   // will return the string " 02.00"
-	padding(1.1,2,2,TRUE,1).   // will return the string " 01.00"
-	padding(1.9,2,2,TRUE,1).   // will return the string " 01.00"
-	padding(1.1,2,2,TRUE,2).   // will return the string " 02.00"
-	padding(1.9,2,2,TRUE,2).   // will return the string " 02.00"
+	padding(1.1,2,0,TRUE,0).   // will return the string " 01"
+	padding(1.9,2,0,TRUE,0).   // will return the string " 02"
+	padding(1.1,2,0,TRUE,1).   // will return the string " 01"
+	padding(1.9,2,0,TRUE,1).   // will return the string " 01"
+	padding(1.1,2,0,TRUE,2).   // will return the string " 02"
+	padding(1.9,2,0,TRUE,2).   // will return the string " 02"
 
 
 
@@ -95,18 +95,18 @@ This function will return a time string formatted according to the following rul
 
     time_formatting(120).                 will return the string " 02m 00s"
     time_formatting(120,0,2).             will return the string " 02m 00.00s"
-    time_formatting(-120,0,2).            will return the string "-02m 00.00s"
-    time_formatting(-120,0,2,true).       will return the string "T- 02m 00.00s"
+    time_formatting(-120,0,1).            will return the string "-02m 00.0s"
+    time_formatting(-120,0,0,true).       will return the string "T- 02m 00s"
     time_formatting(120,0,2,true).        will return the string "T+ 02m 00.00s"
-    time_formatting(120,0,2,false,true).  will return the string "+02m 00.00s"
-    time_formatting(120,0,2,false,false). will return the string " 02m 00.00s"
+    time_formatting(120,0,1,false,true).  will return the string "+02m 00.0s"
+    time_formatting(120,0,0,false,false). will return the string " 02m 00s"
 
 The 7 format types have different results
 
 Formats 0,1,2 will not show higher units than are what is needed for the given input
 
     time_formatting(1,0).   will return the string " 01s"
-    time_formatting(100,0). will return the string " 1m 40s"
+    time_formatting(100,0). will return the string " 01m 40s"
 
 
     time_formatting(31536000,0). will return the string " 001y 000d 00h 00m 00s"

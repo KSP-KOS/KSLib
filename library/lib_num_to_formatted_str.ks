@@ -33,15 +33,15 @@ LOCAL FUNCTION time_converter {
 //  the order is seconds, minutes, hours, days, years
 //  it must also be at least as long as the fixed places number
 LOCAL timeFormats IS LIST().
-timeFormats:ADD(LIST(0,LIST("s","m ","h ","d ","y "))).
-timeFormats:ADD(LIST(0,LIST("",":",":"," Days, "," Years, "))).
-timeFormats:ADD(LIST(0,LIST(" Seconds"," Minutes, "," Hours, "," Days, "," Years, "))).
-timeFormats:ADD(LIST(0,LIST("",":",":"))).
-timeFormats:ADD(LIST(3,timeFormats[3][1])).
-timeFormats:ADD(LIST(2,LIST("s  ","m  ","h  ","d ","y "))).
-timeFormats:ADD(LIST(2,LIST(" Seconds  "," Minutes  "," Hours    "," Days    "," Years   "))).
+timeFormats:ADD(LIST(0,LIST("s","m ","h ","d ","y "),2)).
+timeFormats:ADD(LIST(0,LIST("",":",":"," Days, "," Years, "),2)).
+timeFormats:ADD(LIST(0,LIST(" Seconds"," Minutes, "," Hours, "," Days, "," Years, "),2)).
+timeFormats:ADD(LIST(0,LIST("",":",":"),2)).
+timeFormats:ADD(LIST(3,timeFormats[3][1],2)).
+timeFormats:ADD(LIST(2,LIST("s  ","m  ","h  ","d ","y "),0)).
+timeFormats:ADD(LIST(2,LIST(" Seconds  "," Minutes  "," Hours    "," Days    "," Years   "),0)).
 
-LOCAL leading0List IS LIST(2,2,2,3,3)).//presumed maximum leading zeros applied to sec,min,hour,day,year values
+LOCAL leading0List IS LIST(2,2,2,3,3).//presumed maximum leading zeros applied to sec,min,hour,day,year values
 
 FUNCTION time_formatting {
   PARAMETER timeSec,    // the time in seconds to be formatted
@@ -50,11 +50,12 @@ FUNCTION time_formatting {
   prependT IS FALSE,    // prepend a T- or T+ to format (T- or T if showPlus is FALSE)
   showPlus IS prependT. // by default only display "+" when prependT is TRUE
 
-  LOCAL fixedPlaces IS timeFormats[0]. // number of required time places (e.g. HH:MM:SS has 3 fixedPlaces)
-  LOCAL stringList IS timeFormats[1].  // separators for each time place (must have at least fixedPlaces elements!)
+  LOCAL timeFormat IS timeFormats[formatType].
+  LOCAL fixedPlaces IS timeFormat[0]. // number of required time places (e.g. HH:MM:SS has 3 fixedPlaces)
+  LOCAL stringList IS timeFormat[1].  // separators for each time place (must have at least fixedPlaces elements!)
 
   // start by rounding the input so we don't have to "carry the one" in time_converter
-  LOCAL roundingList IS LIST(MIN(rounding,2), 0, 0, 0, 0).
+  LOCAL roundingList IS LIST(MIN(rounding,timeFormat[2]), 0, 0, 0, 0).
   SET timeSec TO ROUND(timeSec, roundingList[0]).
 
   LOCAL maxPlaces IS stringList:LENGTH.
@@ -98,7 +99,7 @@ FUNCTION time_formatting {
 }
 
 
-LOCAL siPrefixList IS LIST(" y"," z"," a"," f"," p"," n"," μ"," m","  "," k"," M"," G"," T"," P"," E"," Z"," Y")).
+LOCAL siPrefixList IS LIST(" y"," z"," a"," f"," p"," n"," μ"," m","  "," k"," M"," G"," T"," P"," E"," Z"," Y").
 
 FUNCTION si_formatting {
   PARAMETER num,  // number to format, should be in range 10^-24 to 10^24
