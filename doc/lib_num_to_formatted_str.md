@@ -136,6 +136,6 @@ Format 5,6 will display only the 2 highest units for the passed in time they als
     time_formatting(3600,6).     will return the string " 01 Hours    00 Minutes  "
 
 ---
-Copyright © 2015,2019,2020,2021 KSLib team
+Copyright © 2019,2020,2021 KSLib team
 
 This work and any code samples presented herein are licensed under the [MIT license](../LICENSE).
