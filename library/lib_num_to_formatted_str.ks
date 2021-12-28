@@ -4,8 +4,6 @@
 
 @LAZYGLOBAL OFF.
 
-LOCAL lib_formatting_lex IS LEX().
-
 LOCAL FUNCTION time_converter {
   PARAMETER timeValue,  // the time in seconds to convert
   places.               // how many time places (e.g HH:MM:SS has 3 places)
@@ -46,6 +44,7 @@ timeFormats:ADD(LIST(2,LIST(" Seconds  "," Minutes  "," Hours    "," Days    ","
 
 
 LOCAL leading0List IS LIST(2,2,2,3,3)).//presumed maximum leading zeros applied to sec,min,hour,day,year values
+
 FUNCTION time_formatting {
   PARAMETER timeSec,    // the time in seconds to be formatted
   formatType IS 0,      // type of format to use, range 0 to 6
@@ -100,7 +99,7 @@ FUNCTION time_formatting {
   RETURN returnString.
 }
 
-lib_formatting_lex:ADD("siPrefixList",LIST(" y"," z"," a"," f"," p"," n"," μ"," m","  "," k"," M"," G"," T"," P"," E"," Z"," Y")).
+LOCAL siPrefixList IS LIST(" y"," z"," a"," f"," p"," n"," μ"," m","  "," k"," M"," G"," T"," P"," E"," Z"," Y")).
 
 FUNCTION si_formatting {
   PARAMETER num,  // number to format, should be in range 10^-24 to 10^24
@@ -119,7 +118,7 @@ FUNCTION si_formatting {
     SET SIfactor TO FLOOR(powerOfTen / 3).
     SET trailingLength TO 3 - (powerOfTen - SIfactor * 3).
 
-    LOCAL prefix IS lib_formatting_lex["siPrefixList"][SIfactor + 8].
+    LOCAL prefix IS siPrefixList[SIfactor + 8].
     RETURN padding(num/1000^SIfactor,1,trailingLength,TRUE,0) + prefix + unit.
   }
 }
