@@ -13,7 +13,7 @@ This function will return a string matching the format defined by the parameters
 | *leadingLength*  | Scalar  |         | The minimum number of digits to the right of the decimal point.                                                                                                                 |
 | *trailingLength* | Scalar  |         | The number of digits to the right of the decimal point.                                                                                                                         |
 | *leadingSpace*   | Boolean | True    | If True there will be a space at the front of the returned string when the number to be formatted is positive                                                                   |
-| *roundType*      | Scalar  | 0       | Sets if function will round, floor, or ceiling the number to be formatted. 0 = rounding, 1 = floor, 2 = ceiling, NOTE: if not one of the 3 expected values ceiling will be used |
+| *roundType*      | Scalar  | 0       | Sets if function will round, floor, or ceiling the number to be formatted. 0 = rounding, 1 = floor, 2 = ceiling, NOTE: if not one of the 3 expected values the function will crash |
 
 **Returns** A String with num formatted based on the parameters
 
@@ -41,12 +41,12 @@ This function will return a string matching the format defined by the parameters
     padding(-1,2,2,FALSE). // will return the string "-01.00"
 
     results of parameter 5
-	padding(1.1,2,2,TRUE,0).   // will return the string " 01.00"
-	padding(1.9,2,2,TRUE,0).   // will return the string " 02.00"
-	padding(1.1,2,2,TRUE,1).   // will return the string " 01.00"
-	padding(1.9,2,2,TRUE,1).   // will return the string " 01.00"
-	padding(1.1,2,2,TRUE,2).   // will return the string " 02.00"
-	padding(1.9,2,2,TRUE,2).   // will return the string " 02.00"
+	padding(1.1,2,0,TRUE,0).   // will return the string " 01"
+	padding(1.9,2,0,TRUE,0).   // will return the string " 02"
+	padding(1.1,2,0,TRUE,1).   // will return the string " 01"
+	padding(1.9,2,0,TRUE,1).   // will return the string " 01"
+	padding(1.1,2,0,TRUE,2).   // will return the string " 02"
+	padding(1.9,2,0,TRUE,2).   // will return the string " 02"
 
 
 
@@ -95,18 +95,18 @@ This function will return a time string formatted according to the following rul
 
     time_formatting(120).                 will return the string " 02m 00s"
     time_formatting(120,0,2).             will return the string " 02m 00.00s"
-    time_formatting(-120,0,2).            will return the string "-02m 00.00s"
-    time_formatting(-120,0,2,true).       will return the string "T- 02m 00.00s"
+    time_formatting(-120,0,1).            will return the string "-02m 00.0s"
+    time_formatting(-120,0,0,true).       will return the string "T- 02m 00s"
     time_formatting(120,0,2,true).        will return the string "T+ 02m 00.00s"
-    time_formatting(120,0,2,false,true).  will return the string "+02m 00.00s"
-    time_formatting(120,0,2,false,false). will return the string " 02m 00.00s"
+    time_formatting(120,0,1,false,true).  will return the string "+02m 00.0s"
+    time_formatting(120,0,0,false,false). will return the string " 02m 00s"
 
 The 7 format types have different results
 
 Formats 0,1,2 will not show higher units than are what is needed for the given input
 
     time_formatting(1,0).   will return the string " 01s"
-    time_formatting(100,0). will return the string " 1m 40s"
+    time_formatting(100,0). will return the string " 01m 40s"
 
 
     time_formatting(31536000,0). will return the string " 001y 000d 00h 00m 00s"
@@ -136,6 +136,6 @@ Format 5,6 will display only the 2 highest units for the passed in time they als
     time_formatting(3600,6).     will return the string " 01 Hours    00 Minutes  "
 
 ---
-Copyright © 2015,2019,2020 KSLib team
+Copyright © 2019,2020,2021 KSLib team
 
 This work and any code samples presented herein are licensed under the [MIT license](../LICENSE).
