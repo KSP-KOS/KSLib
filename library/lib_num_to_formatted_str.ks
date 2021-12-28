@@ -1,5 +1,5 @@
 // lib_num_to_formatted_str.ks provides several functions for changing numbers (scalers) into strings with specified formats
-// Copyright © 2018,2019,2020 KSLib team 
+// Copyright © 2018,2019,2020 KSLib team
 // Lic. MIT
 
 @LAZYGLOBAL OFF.
@@ -8,24 +8,23 @@ LOCAL FUNCTION time_converter {
   PARAMETER timeValue,  // the time in seconds to convert
   places.               // how many time places (e.g HH:MM:SS has 3 places)
   SET timeValue TO TIMESPAN(timeValue).
-  
+
   IF timeValue:MINUTES < 1 OR places = 1 {
-	RETURN LIST(ROUND(timeValue:SECONDS,2)).
-	
+    RETURN LIST(ROUND(timeValue:SECONDS,2)).
+
   } ELSE IF timeValue:HOURS < 1 OR places = 2 {
-	RETURN LIST(ROUND(MOD(timeValue:SECONDS,60),2), timeValue:MINUTES).
-	
+    RETURN LIST(ROUND(MOD(timeValue:SECONDS,60),2), timeValue:MINUTES).
+
   } ELSE IF timeValue:DAYS < 1 OR places = 3 {
     RETURN LIST(ROUND(MOD(timeValue:SECONDS,60),2), timeValue:MINUTE, timeValue:HOURS).
-	
+
   } ELSE IF timeValue:YEARS < 1 OR places = 4 {
-	RETURN LIST(ROUND(MOD(timeValue:SECONDS,60),2), timeValue:MINUTE, timeValue:HOUR, timeValue:DAYS).
-	
+    RETURN LIST(ROUND(MOD(timeValue:SECONDS,60),2), timeValue:MINUTE, timeValue:HOUR, timeValue:DAYS).
+
   } ELSE {
-	RETURN LIST(ROUND(MOD(timeValue:SECONDS,60),2), timeValue:MINUTE, timeValue:HOUR, timeValue:DAY, timeValue:YEARS).
+    RETURN LIST(ROUND(MOD(timeValue:SECONDS,60),2), timeValue:MINUTE, timeValue:HOUR, timeValue:DAY, timeValue:YEARS).
   }
 }
-
 
 //adding list of format types
 //formats should be a list of two items
@@ -41,7 +40,6 @@ timeFormats:ADD(LIST(0,LIST("",":",":"))).
 timeFormats:ADD(LIST(3,timeFormats[3][1])).
 timeFormats:ADD(LIST(2,LIST("s  ","m  ","h  ","d ","y "))).
 timeFormats:ADD(LIST(2,LIST(" Seconds  "," Minutes  "," Hours    "," Days    "," Years   "))).
-
 
 LOCAL leading0List IS LIST(2,2,2,3,3)).//presumed maximum leading zeros applied to sec,min,hour,day,year values
 
@@ -99,6 +97,7 @@ FUNCTION time_formatting {
   RETURN returnString.
 }
 
+
 LOCAL siPrefixList IS LIST(" y"," z"," a"," f"," p"," n"," μ"," m","  "," k"," M"," G"," T"," P"," E"," Z"," Y")).
 
 FUNCTION si_formatting {
@@ -123,16 +122,18 @@ FUNCTION si_formatting {
   }
 }
 
+
 LOCAL roundingFunctions IS LIST(ROUND @,FLOOR @,CEILING @).
+
 FUNCTION padding {
   PARAMETER num,                // number to be formatted
   leadingLength,                // minimum digits to the left of the decimal
   trailingLength,               // digits to the right of the decimal
   positiveLeadingSpace IS TRUE, // whether to prepend a single space to the output
   roundType IS 0.               // 0 for normal rounding, 1 for floor, 2 for ceiling
-  
+
   LOCAL returnString IS ABS(roundingFunctions[roundType](num,trailingLength)):TOSTRING.
-  
+
   IF trailingLength > 0 {
     IF returnString:CONTAINS(".") {
       LOCAL splitString IS returnString:SPLIT(".").
