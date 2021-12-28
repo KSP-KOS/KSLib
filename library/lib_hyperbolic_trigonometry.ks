@@ -2,6 +2,8 @@
 // Copyright © 2021 KSLib team 
 // Lic. MIT
 
+@lazyglobal off.
+
 function cosh {
   parameter x.
   
