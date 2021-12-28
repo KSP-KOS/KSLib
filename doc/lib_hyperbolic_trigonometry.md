@@ -72,6 +72,6 @@ description:
   * This function calculates the inverse hyperbolic tangent of n
 
 ---
-Copyright © 2015,2021 KSLib team
+Copyright © 2021 KSLib team
 
 This work and any code samples presented herein are licensed under the [MIT license](../LICENSE).

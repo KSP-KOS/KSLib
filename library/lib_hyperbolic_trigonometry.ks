@@ -1,5 +1,5 @@
 // lib_hyperbolic_trigonometry.ks provides the usual hyperbolic functions and their inverses.
-// Copyright © 2015 KSLib team 
+// Copyright © 2021 KSLib team 
 // Lic. MIT
 
 function cosh {
