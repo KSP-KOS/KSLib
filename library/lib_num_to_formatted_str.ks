@@ -28,22 +28,41 @@ LOCAL FUNCTION time_converter {
   }
 }
 
-lib_formatting_lex:ADD("leading0List",LIST(2,2,2,3,3)).
-LOCAL FUNCTION time_string {
-  PARAMETER timeSec,    // the time in seconds to format
-  fixedPlaces,          // number of required time places (e.g. HH:MM:SS has 3 fixedPlaces)
-  stringList,           // separators for each time place (must have at least fixedPlaces elements!)
-  rounding,             // rounding for the seconds place, range 0 to 2
-  prependT,             // prepend a T- or T+ to format (T- or T if showPlus is FALSE)
+
+//adding list of format types
+//formats should be a list of two items
+// the first item is the fixed number of places to show ie a 2 will always show 2 places be it MM:SS or HH:MM or DDD:HH
+// the second item is a list of strings to include after the neumeric value of the place ie "s" to show after the number or seconds
+//  the order is seconds, minutes, hours, days, years
+//  it must also be at least as long as the fixed places number
+LOCAL timeFormats IS LIST().
+timeFormats:ADD(LIST(0,LIST("s","m ","h ","d ","y "))).
+timeFormats:ADD(LIST(0,LIST("",":",":"," Days, "," Years, "))).
+timeFormats:ADD(LIST(0,LIST(" Seconds"," Minutes, "," Hours, "," Days, "," Years, "))).
+timeFormats:ADD(LIST(0,LIST("",":",":"))).
+timeFormats:ADD(LIST(3,timeFormats[3][1])).
+timeFormats:ADD(LIST(2,LIST("s  ","m  ","h  ","d ","y "))).
+timeFormats:ADD(LIST(2,LIST(" Seconds  "," Minutes  "," Hours    "," Days    "," Years   "))).
+
+
+LOCAL leading0List IS LIST(2,2,2,3,3)).//presumed maximum leading zeros applied to sec,min,hour,day,year values
+FUNCTION time_formatting {
+  PARAMETER timeSec,    // the time in seconds to be formatted
+  formatType IS 0,      // type of format to use, range 0 to 6
+  rounding IS 0,        // rounding for the seconds place, range 0 to 2
+  prependT IS FALSE,    // prepend a T- or T+ to format (T- or T if showPlus is FALSE)
   showPlus IS prependT. // by default only display "+" when prependT is TRUE
+
+  LOCAL fixedPlaces IS timeFormats[0]. // number of required time places (e.g. HH:MM:SS has 3 fixedPlaces)
+  LOCAL stringList IS timeFormats[1].  // separators for each time place (must have at least fixedPlaces elements!)
 
   // start by rounding the input so we don't have to "carry the one" in time_converter
   LOCAL roundingList IS LIST(MIN(rounding,2), 0, 0, 0, 0).
   SET timeSec TO ROUND(timeSec, roundingList[0]).
 
-  LOCAL places IS stringList:LENGTH.
-  LOCAL timeList IS time_converter(ABS(timeSec), places).
-  LOCAL maxLength IS MIN(timeList:LENGTH, places).
+  LOCAL maxPlaces IS stringList:LENGTH.
+  LOCAL timeList IS time_converter(ABS(timeSec), maxPlaces).
+  LOCAL maxLength IS MIN(timeList:LENGTH, maxPlaces).
   LOCAL returnString IS "".
 
   // fill in missing time places until format is reached
@@ -52,7 +71,7 @@ LOCAL FUNCTION time_string {
     UNTIL timeList:LENGTH >= fixedPlaces {
       timeList:ADD(0).
     }
-    SET maxLength TO MIN(timeList:LENGTH, places).
+    SET maxLength TO MIN(timeList:LENGTH, maxPlaces).
   } ELSE {
     SET fixedPlaces TO maxLength.
   }
@@ -60,9 +79,8 @@ LOCAL FUNCTION time_string {
   // add padding to each element in timeList and prepend to returnString
   FROM {LOCAL i IS maxLength - fixedPlaces.}
   UNTIL i >= maxLength STEP {SET i TO i + 1.} DO {
-    LOCAL leading0List IS lib_formatting_lex["leading0List"][i].
-    LOCAL pad_str IS padding(timeList[i], leading0List, roundingList[i], FALSE, 1).
-    SET returnString TO pad_str + stringList[i] + returnString.
+    LOCAL paddedStr IS padding(timeList[i], leading0List[i], roundingList[i], FALSE, 1).
+    SET returnString TO paddedStr + stringList[i] + returnString.
   }
 
   // the prependT strings have one space padding
@@ -80,28 +98,6 @@ LOCAL FUNCTION time_string {
   IF prependT SET returnString TO returnString:INSERT(0, "T").
 
   RETURN returnString.
-}
-
-//adding list of format types
-lib_formatting_lex:ADD("timeFormats",LIST()).
-lib_formatting_lex["timeFormats"]:ADD(LIST(0,LIST("s","m ","h ","d ","y "))).
-lib_formatting_lex["timeFormats"]:ADD(LIST(0,LIST("",":",":"," Days, "," Years, "))).
-lib_formatting_lex["timeFormats"]:ADD(LIST(0,LIST(" Seconds"," Minutes, "," Hours, "," Days, "," Years, "))).
-lib_formatting_lex["timeFormats"]:ADD(LIST(0,LIST("",":",":"))).
-lib_formatting_lex["timeFormats"]:ADD(LIST(3,lib_formatting_lex["timeFormats"][3][1])).
-lib_formatting_lex["timeFormats"]:ADD(LIST(2,LIST("s  ","m  ","h  ","d ","y "))).
-lib_formatting_lex["timeFormats"]:ADD(LIST(2,LIST(" Seconds  "," Minutes  "," Hours    "," Days    "," Years   "))).
-
-FUNCTION time_formatting {
-  PARAMETER timeSec,    // the time in seconds to be formatted
-  formatType IS 0,      // type of format to use, range 0 to 6
-  rounding IS 0,        // rounding for the seconds place, range 0 to 2
-  prependT IS FALSE,    // prepend a T- or T+ to format (T- or T if showPlus is FALSE)
-  showPlus IS prependT. // by default only display "+" when prependT is TRUE
-
-
-  LOCAL formatData IS lib_formatting_lex["timeFormats"][formatType].
-  RETURN time_string(timeSec, formatData[0], formatData[1], rounding, prependT, showPlus).
 }
 
 lib_formatting_lex:ADD("siPrefixList",LIST(" y"," z"," a"," f"," p"," n"," μ"," m","  "," k"," M"," G"," T"," P"," E"," Z"," Y")).
