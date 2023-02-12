@@ -61,6 +61,6 @@ function char_ellipse_arc {
 function char_circle {
   parameter
     ch,
-    x0, y0, r.
-  char_ellipse_arc(ch, x0, y0, r, r, 0, 360).
+    x0, y0, rad.
+  char_ellipse_arc(ch, x0, y0, rad, rad, 0, 360).
 }.
