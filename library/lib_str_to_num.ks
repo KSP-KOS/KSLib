@@ -53,11 +53,11 @@ function str_to_num {
   }
 
   // Integers (match on tokens, and bit-shift)
-  local v is 0.
+  local val is 0.
   for i IN s:split(""):sublist(1,s:length) {
-    if num_lex:haskey(i) { set v to v + num_lex[i]. } else { return "NaN". }
-    set v TO v * 10.
+    if num_lex:haskey(i) { set val to val + num_lex[i]. } else { return "NaN". }
+    set val TO val * 10.
   }
-  return v / 10.
+  return val / 10.
 
 }
