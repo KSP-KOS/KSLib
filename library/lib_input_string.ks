@@ -98,7 +98,7 @@ function input_string
  local Enter is False.
  local string is list().
  local returnString is "".
- local char is 0.
+ local charr is 0.
  local oldT is 0.
  local blink is false.
  local quote is char(34).
@@ -175,8 +175,8 @@ function input_string
  print " " at (x0+string:length+3,y0).
  set terminal:width to oldWidth.
  set terminal:height to oldHeight.
- for char IN string {
-  set returnString to returnString + char.
+ for charr IN string {
+  set returnString to returnString + charr.
  }
  return returnString.
 }
