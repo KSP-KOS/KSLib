@@ -1,5 +1,5 @@
 // lib_lazcalc.ks - provides the user with a launch azimuth based on a desired target orbit altitude and inclination and can continued to be used throughout ascent to update the heading. It bases this calculation on the vessel's launch and current geoposition.
-// Copyright © 2015,2017 KSLib team 
+// Copyright © 2015,2017,2023 KSLib team 
 // Lic. MIT
 
 //~~Version 2.2~~
@@ -10,6 +10,7 @@
 //To use: RUN LAZcalc.ks. SET data TO LAZcalc_init([desired circular orbit altitude in meters],[desired orbital inclination; negative if launching from descending node, positive otherwise]). Then loop SET myAzimuth TO LAZcalc(data).
 
 @LAZYGLOBAL OFF.
+@CLOBBERBUILTINS OFF.
 
 FUNCTION LAZcalc_init {
     PARAMETER

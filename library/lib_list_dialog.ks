@@ -1,7 +1,8 @@
 // lib_list_dialog.ks helps when you want the user to choose a value from a long list.
-// Copyright © 2015 KSLib team 
+// Copyright © 2015,2023 KSLib team 
 // Lic. MIT
 @LAZYGLOBAL OFF.
+@CLOBBERBUILTINS OFF.
 
 run lib_menu.
 

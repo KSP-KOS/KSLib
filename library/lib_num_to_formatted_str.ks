@@ -1,8 +1,9 @@
 // lib_num_to_formatted_str.ks provides several functions for changing numbers (scalers) into strings with specified formats
-// Copyright © 2019,2020,2021 KSLib team
+// Copyright © 2019,2020,2021,2023 KSLib team
 // Lic. MIT
 
 @LAZYGLOBAL OFF.
+@CLOBBERBUILTINS OFF.
 
 LOCAL FUNCTION time_converter {
   PARAMETER timeValue,  // the time in seconds to convert

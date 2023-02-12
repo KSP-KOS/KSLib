@@ -1,8 +1,9 @@
 // lib_menu.ks - select one of the options and return it to calling script.
-// Copyright © 2015 KSLib team 
+// Copyright © 2015,2023 KSLib team 
 // Lic. MIT
 
 @lazyglobal off.
+@clobberbuiltins off.
 
 run lib_gui_box.
 

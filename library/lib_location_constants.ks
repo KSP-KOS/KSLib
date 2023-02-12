@@ -1,7 +1,8 @@
 // lib_location_constants.ks provides geolocations for places that would be relatively easy to locate for players flying manually (i.e., without the use of scripting mods such as kOS).
-// Copyright © 2020 KSLib team 
+// Copyright © 2020,2023 KSLib team 
 // Lic. MIT
 @LAZYGLOBAL off.
+@CLOBBERBUILTINS off.
 
 if not (defined location_constants) {
 global location_constants is lex().

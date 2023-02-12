@@ -1,9 +1,10 @@
 // lib_term.ks - terminal manipulations
-// Copyright © 2015 KSLib team 
+// Copyright © 2015,2023 KSLib team 
 // Lic. MIT
 // Original starting work by Github user: Dunbaratu
 
 @lazyglobal off.
+@clobberbuiltins off.
 
 // -----------
 // char_line

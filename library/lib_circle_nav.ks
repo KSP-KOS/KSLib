@@ -1,7 +1,8 @@
 // lib_circle_nav.ks provides a set of functions that use Great Circle equations.
-// Copyright © 2015,2019 KSLib team 
+// Copyright © 2015,2019,2023 KSLib team 
 // Lic. MIT
 @LAZYGLOBAL OFF.
+@CLOBBERBUILTINS OFF.
 
 //use to find the initial bearing for the shortest path around a sphere from...
 function circle_bearing {

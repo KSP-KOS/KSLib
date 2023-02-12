@@ -1,7 +1,8 @@
 // lib_input_string.ks provides a method of inputting custom strings while a script is running via an on-screen keyboard.
-// Copyright © 2015,2019 KSLib team 
+// Copyright © 2015,2019,2023 KSLib team 
 // Lic. MIT
 @LAZYGLOBAL off.
+@CLOBBERBUILTINS off.
 
 function input_string
 {

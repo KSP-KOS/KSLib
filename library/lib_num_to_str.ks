@@ -1,7 +1,8 @@
 // lib_num_to_str.ks can be used to to format a number in a string of constant length for use in a display.
-// Copyright © 2015 KSLib team 
+// Copyright © 2015,2023 KSLib team 
 // Lic. MIT
 @LAZYGLOBAL off.
+@CLOBBERBUILTINS off.
 
 function num_to_str {
  parameter

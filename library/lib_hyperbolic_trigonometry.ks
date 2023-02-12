@@ -1,8 +1,9 @@
 // lib_hyperbolic_trigonometry.ks provides the usual hyperbolic functions and their inverses.
-// Copyright © 2021 KSLib team 
+// Copyright © 2021,2023 KSLib team 
 // Lic. MIT
 
 @lazyglobal off.
+@clobberbuiltins off.
 
 function cosh {
   parameter x.

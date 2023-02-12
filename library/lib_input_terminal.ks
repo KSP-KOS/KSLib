@@ -1,7 +1,8 @@
 // lib_input_terminal.ks provides functions for getting user entered strings or numbers though terminal inputs.
-// Copyright © 2020 KSLib team 
+// Copyright © 2020,2023 KSLib team 
 // Lic. MIT
 @LAZYGLOBAL OFF.
+@CLOBBERBUILTINS OFF.
 
 LOCAL termIn IS TERMINAL:INPUT.     
 LOCAL backChar IS termIn:BACKSPACE. 

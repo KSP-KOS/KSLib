@@ -1,8 +1,9 @@
 // lib_navball.ks - A library of functions to calculate navball-based directions.
-// Copyright © 2015,2017,2019 KSLib team 
+// Copyright © 2015,2017,2019,2023 KSLib team 
 // Lic. MIT
 
 @lazyglobal off.
+@clobberbuiltins off.
 
 function east_for {
   parameter ves is ship.

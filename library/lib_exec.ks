@@ -1,5 +1,5 @@
 // lib_exec.ks - executes a command from its string representation.
-// Copyright © 2015,2019,2020 KSLib team 
+// Copyright © 2015,2019,2020,2023 KSLib team 
 // Lic. MIT
 
 // Originally developed by abenkovskii
@@ -24,6 +24,7 @@
 // NOTE: This might change in the future but at least as of kOS version (1.1.9.0) this is the way run appears to work.
 
 @LAZYGLOBAL OFF.
+@CLOBBERBUILTINS OFF.
 
 if not (defined _exec_idString) {
   global _exec_idString is char(127).//starts at char 127 to avoid reserved charters in windows file names

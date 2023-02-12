@@ -1,7 +1,8 @@
 // lib_pid.ks provides routines to implement a simple generic PID controller.
-// Copyright © 2015,2016,2019 KSLib team 
+// Copyright © 2015,2016,2019,2023 KSLib team 
 // Lic. MIT
 @LAZYGLOBAL off.
+@CLOBBERBUILTINS off.
 
 HUDTEXT("lib_pid.ks has been superseded by the kOS inbuilt PIDloop() function.", 10, 2, 30, RED, FALSE).
 wait 0.5.
