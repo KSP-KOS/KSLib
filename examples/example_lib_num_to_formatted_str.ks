@@ -2,7 +2,7 @@
 // Copyright © 2018,2019 KSLib team 
 // Lic. MIT
 
-RUN lib_num_to_formated_str.
+RUN lib_num_to_formatted_str.
 CLEARSCREEN.
 ABORT OFF.
 LOCAL scriptStart IS TIME:SECONDS.
