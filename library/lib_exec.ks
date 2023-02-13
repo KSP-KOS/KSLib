@@ -140,7 +140,7 @@ function set_suffix {
     val.       //the value to set the suffix to
 	
   local filePath is path("1:/_set_suffix" + suffix + ".tmp").
-  local logStr IS "global _evaluate_result is { parameter o,v. set o:" + suffix + " to v. }.".
+  local logStr IS "global _evaluate_result is { parameter o,s. set o:" + suffix + " to s. }.".
   log_run_del(logStr,filePath).
   local result is _evaluate_result:call(structure,val).
   unset _evaluate_result.
