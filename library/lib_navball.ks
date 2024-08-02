@@ -54,8 +54,8 @@ function roll_for {
     } else if thing:istype("direction") {
       set pointing to thing.
     } else {
-      print "type: " + thing:typename + " is not reconized by roll_for".
-	}
+      print "type: " + thing:typename + " is not recognized by roll_for".
+    }
   }
 
   if vang(pointing:topvector,ves:up:vector) < 0.2 {//this is the dead zone for roll when within 0.2 degrees of vertical
