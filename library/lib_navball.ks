@@ -58,10 +58,10 @@ function roll_for {
 	}
   }
 
-  local trig_x is vdot(pointing:topvector,ves:up:vector).
-  if abs(trig_x) < 0.0035 {//this is the dead zone for roll when within 0.2 degrees of vertical
+  if vang(pointing:topvector,ves:up:vector) < 0.2 {//this is the dead zone for roll when within 0.2 degrees of vertical
     return 0.
   } else {
+    local trig_x is vdot(pointing:topvector,ves:up:vector).
     local vec_y is vcrs(ves:up:vector,ves:facing:forevector).
     local trig_y is vdot(pointing:topvector,vec_y).
     return arctan2(trig_y,trig_x).
