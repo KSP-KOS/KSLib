@@ -28,11 +28,13 @@ LOCAL FUNCTION time_converter {
 }
 
 //adding list of format types
-//formats should be a list of two items
+//formats should be a list of three items
 // the first item is the fixed number of places to show ie a 2 will always show 2 places be it MM:SS or HH:MM or DDD:HH
 // the second item is a list of strings to include after the neumeric value of the place ie "s" to show after the number or seconds
 //  the order is seconds, minutes, hours, days, years
 //  it must also be at least as long as the fixed places number
+// the third item is type of rounding that should be used by the format
+//  see padding function in this library for the rounding options
 LOCAL timeFormats IS LIST().
 timeFormats:ADD(LIST(0,LIST("s","m ","h ","d ","y "),2)).
 timeFormats:ADD(LIST(0,LIST("",":",":"," Days, "," Years, "),2)).
