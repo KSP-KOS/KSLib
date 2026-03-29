@@ -4,7 +4,7 @@
 # Copyright © 2015 KSLib team 
 # Lic. MIT
 
-# The purpose of this file is to decrease size of .ks files for the final flight. However, please upload 
+# The purpose of this file is to decrease size of .ks files for the final flight. However, please upload
 # UNPACKED versions of programs to KSLib.
 
 # This version works in Unix environments.
@@ -16,11 +16,11 @@ FILES=`ls *.ks`
 echo $FILES
 for f in $FILES; do
 	sed \
-	-e 's/^\(\([^"]*\)\("[^"]*"[^"]*\)*\)\/\/.*/\1/g' \
-	-e 's/^\( \|\t\)*//g' \
-	-e 's/\( \|\t\)*$//g' \
+        -e 's|^\(\([^"]*\)\("[^"]*"[^"]*\)*\)\s*//.*$$|\1|g' -e 's|^\(\([^"]*\)\("[^"]*"[^"]*\)*\)\s*//.*$$|\1|g' \
+        -e 's|^\s*\(.*)\s*$|\1|g' \
+        -e '/^$/d'
 	$f > packed/$f;
-	# the first line strips comments
-	# the second line strips leading whitespace
-	# the third line strips trailing whitespace
+  # the first line strips comments (doubled to catch pesky URLs in comments)
+  # the second line strips leading and trailing whitespace
+  # the third line removes all empty lines (which should be stripped down by the second line)
 done
